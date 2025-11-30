@@ -1,6 +1,6 @@
 # Tests are defined here
-from ukp_project_template import BaseClass
-from ukp_project_template.subpackage import SubPackageClass
+from graph2counsel import BaseClass
+from graph2counsel.subpackage import SubPackageClass
 
 def test_template():
     assert True
