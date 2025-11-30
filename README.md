@@ -1,5 +1,5 @@
 <p  align="center">
-  <img src='img/Graph2Counsel_Diagram.png' width='200'>
+  <img src='img/Graph2Counsel_Diagram.png' width='600'>
 </p>
 
 # graph2counsel
