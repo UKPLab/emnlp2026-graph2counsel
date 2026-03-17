@@ -17,6 +17,23 @@ Contact person: [Aishik Mandal](mailto:aishik.mandal@tu-darmstadt.de)
 
 Don't hesitate to send us an e-mail or report an issue, if something is broken (and it shouldn't be) or if you have further questions.
 
+## Creating the environment
+
+To create the environment for Inference and Evaluation (i.e. run scripts in folder src/ and evaluation/) use:
+
+```
+python3 -m venv env
+source env/bin/activate
+pip install -r requirements_inf_eval.txt
+```
+
+To create the environment for Qlora Fine-tuning (i.e. run scripts in folder qlora/) use:
+
+```
+python3 -m venv env
+source env/bin/activate
+pip install -r requirements_qlora.txt
+```
 
 ## Getting Started
 
