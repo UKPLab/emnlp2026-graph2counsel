@@ -4,6 +4,25 @@
 
 # Graph2Counsel: Clinically Grounded Synthetic Counseling Dialogue Generation from Client Psychological Graphs
 
+## Summary
+This codebase provides the scripts used in the experiments of the 2026 Arxiv paper "**Graph2Counsel: Generating Synthetic Counseling Sessions from Client Psychological Graphs**". Here, we generate synthetic counseling session data using Graph2Counsel, a novel framework that grounds session generation in structured psychological representations of clients. Graph2Counsel experiments with three input representations and four prompting techniques. We experiment with the following input representations:
+* **Client Psychological Graphs (CPGs):** Structured knowledge graphs encoding relationships among a client's thoughts, emotions, and behaviors, represented as `(process_i, relation, process_j)` triples. CPGs ensure psychological consistency across the generated session.
+* **Client Profile:** Diverse client profiles are generated from CPGs to simulate a wide range of backgrounds, presenting issues, and counseling contexts.
+* **CPG+Profile:** Use both CPG and client profile.
+We experiment with the following prompting technques:
+* **Base:** Prompt the LLM to produce the counseling session using the given input.
+* **Guided Counseling (GC):** Extract counselor strategies using [paper](https://arxiv.org/abs/2512.05836) and prompt the LLM to produce the counseling session using the extracted counselor strategies and the given input.
+* **GC + Chain-of-Thought (GC+CoT):** Prompt the LLM to produce the counseling session using the extracted counselor strategies and the given input while generating reasoning grounded in guidelines, constraints and input for each dialogue turn.
+* **GC + Multi-Agent (GC+MA):**
+
+We find the optimal configuration (combination of input representation and prompting technique) using LLM-as-a-judge evaluation:
+* **CTRS:** Cognitive Therapy Rating Scale is a psychological scale used to measure general and CBT-specific counseling skills.
+* **WAI:** Working Alliance Inventory measures the therapeutic alliance between the client and the counselor.
+
+Once the optimal configuration is found we use the following evaluations:
+* **Faithfulness:** Measures how faithfully the generated session reflects the input CPG in terms of the client's thoughts, emotions, and behaviors.
+* **Downstream Evaluation:** We QLoRA fine-tune an open source model (Llama3-8B-Instruct in our case) and evaluate them on [CounselBench](https://arxiv.org/abs/2506.08584) and [CounselingBench](https://aclanthology.org/2025.findings-naacl.418/)
+
 > **Abstract:** Rising demand for mental health support has increased interest in using Large Language Models (LLMs) for counseling. However, adapting LLMs to this high-risk safety-critical domain is hindered by the scarcity of real-world counseling data due to privacy constraints. Synthetic datasets provide a promising alternative, but existing approaches often rely on unstructured or semi-structured text inputs and overlook structural dependencies between a client's cognitive, emotional, and behavioral states, often producing psychologically inconsistent interactions and reducing data realism and quality. We introduce Graph2Counsel, a framework for generating synthetic counseling sessions grounded in Client Psychological Graphs (CPGs) that encode relationships among clients’ thoughts, emotions, and behaviors. Graph2Counsel employs a structured prompting pipeline guided by counselor strategies and CPG, and explores prompting strategies including CoT and Multi-Agent Feedback. Graph2Counsel produces 760 sessions from 76 CPGs across diverse client profiles. In expert evaluation, our dataset outperforms prior datasets on specificity, counselor competence, authenticity, conversational flow, and safety, with substantial inter-annotator agreement (Krippendorff's $\alpha$ = 0.70). Fine-tuning an open-source model on this dataset improves performance on CounselingBench and CounselBench, showing downstream utility.
 
 Contact person: [Aishik Mandal](mailto:aishik.mandal@tu-darmstadt.de) 
@@ -39,10 +58,12 @@ graph2counsel/
 │
 ├── Graph_Dicts.ipynb                     # Build KG triples from CPGs
 │
+├── client_profile_generation/            # Scripts for generating client profiles
+│
+├── therapist_strategies_summary.csv      # csv file containing extracted counselor strategies from real counseling sessions
+│
 ├── configurations/                       # Generation configuration experiments
 │   └── gc_cpg_profile_expanded.py        # Final dataset generation (GC optimal config)
-│
-├── client_profile_generation/            # Scripts for generating client profiles
 │
 ├── LLM_judge_evaluation/                 # CTRS and WAI evaluation with LLM-as-a-judge
 │
@@ -91,30 +112,34 @@ Run `Graph_Dicts.ipynb` to create `(process_i, relation, process_j)` KG triples 
 
 See `client_profile_generation/` for instructions and scripts.
 
-**3. Run Configuration Experiments**
+**3. Extract Counselor Strategies**
+
+Follow this [paper](https://arxiv.org/abs/2512.05836) to extract counselor strategies.
+
+**4. Run Configuration Experiments**
 
 Use files in `configurations/` to experiment with different generation strategies. See the folder README for details. We found the **GC (CPG + Profile)** configuration to be optimal.
 
-**4. Evaluate Generated Sessions**
+**5. Evaluate Generated Sessions**
 
 Use files in `LLM_judge_evaluation/` to score sessions on CTRS and WAI metrics using LLM-as-a-judge. See the folder README for details.
 
-**5. Generate the Final Dataset**
+**6. Generate the Final Dataset**
 
 Using the optimal configuration:
 ```bash
 python configurations/gc_cpg_profile_expanded.py
 ```
 
-**6. Evaluate Faithfulness**
+**7. Evaluate Faithfulness**
 
 Use files in `faithfulness_evaluation/` to assess how faithfully generated sessions reflect their CPG and profile inputs.
 
-**7. Prepare Fine-tuning Datasets**
+**8. Prepare Fine-tuning Datasets**
 
 Run `create_qlora_fine-tuning_datasets.ipynb`, updating dataset paths to match your download locations.
 
-**8. Run QLoRA Fine-tuning**
+**9. Run QLoRA Fine-tuning**
 
 Update the base model path and output model path in the relevant script (we used `Llama3-8B-Instruct`), then run:
 ```bash
@@ -124,7 +149,7 @@ deepspeed --num_gpus=num_gpus qlora/sqpconv_qlora.py
 deepspeed --num_gpus=num_gpus qlora/magnet_qlora.py
 ```
 
-**9. Downstream Evaluation**
+**10. Downstream Evaluation**
 
 Use scripts in `CounselBench/` and `CounselingBench/` for benchmark evaluation. See each folder for details.
 
@@ -145,6 +170,18 @@ Please use the following citation:
   url       = {http://xxxx.xxx}
 }
 ```
+
+## References/Libraries
+
+- [DeepSpeed](https://www.deepspeed.ai/)
+- [vLLM](https://docs.vllm.ai/en/latest/)
+- [HuggingFace](https://huggingface.co/)
+- [LangChain](https://www.langchain.com/)
+- [CACTUS]
+- [SQPsychConv]
+- [MAGneT]
+- [CounselBench]
+- [CounselingBench]
 
 ## Disclaimer
 
