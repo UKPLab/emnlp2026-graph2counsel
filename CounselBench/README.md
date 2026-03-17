@@ -24,9 +24,9 @@ Generates responses to queries in CounselBench-Eval.
 | Argument | Description |
 |---|---|
 | `-m` | Path to the fine-tuned model |
-| `-o` | Path to the output directory to save responses |
+| `-o` | Path to the output file to save responses |
 ```bash
-python counselbench_eval.py -m path_to_model -o output_directory
+python counselbench_eval.py -m path_to_model -o output_file
 ```
 
 ---
@@ -37,9 +37,9 @@ Generates responses to queries in CounselBench-Adv.
 | Argument | Description |
 |---|---|
 | `-m` | Path to the fine-tuned model |
-| `-o` | Path to the output directory to save responses |
+| `-o` | Path to the output file to save responses |
 ```bash
-python counselbench_adv.py -m path_to_model -o output_directory
+python counselbench_adv.py -m path_to_model -o output_file
 ```
 
 ---
