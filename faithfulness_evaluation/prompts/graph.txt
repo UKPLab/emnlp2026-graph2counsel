@@ -1,0 +1,11 @@
+You are given a list of client utterances. Your task is to identify which utterances reflect the given underlying psychological process.
+
+Target Psychological Process:
+{psychological_process}
+
+Client Utterance List:
+{client_utt_list}
+
+Return only the client utterances that demonstrate the target psychological process. If none of the utterances demonstrate the target psychological process, return an empty list. Do not provide explanations or additional text. Format your answer as:
+
+["utterance 1", "utterance 2"]

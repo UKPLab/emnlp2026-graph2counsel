@@ -1,0 +1,15 @@
+You are given a list of client utterances. Your task is to identify which utterances contradict the given client profile.
+
+Client Profile:
+{profile}
+
+Client Utterance List:
+{client_utt_list}
+
+Some examples of contradictions include:
+- The profile states the client's name is Lisa, but the session refers to them as Alex.
+- The profile says the client is married, but during the session they mention being single.
+
+Return only the client utterances that contradict the profile. If none of the utterances contradict the profile, return an empty list. Do not provide explanations or additional text. Format your answer as:
+
+["utterance 1", "utterance 2"]
