@@ -6,5 +6,6 @@
   - ```-i```: This argument takes the path of the directory containing the sessions to be rated.
   - ```-o```: This argument takes the path of the output directory where the CTRS scores of the sessions will be stored.
   - ```-m_iter```: Number of times GPT-4o is run to score a particular criteria for a session. For multiple runs the average score is noted.
+  - ```-oai_key```: OpenAI API Key.
 
-To run this script use ```python ctrs-gpt4o.py -i "input_dir" -o "output_dir" -m_iter num```
+To run this script use ```python ctrs-gpt4o.py -i "input_dir" -o "output_dir" -m_iter num -oai_key openai_api_key```
