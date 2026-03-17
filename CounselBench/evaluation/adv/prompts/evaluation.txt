@@ -1,0 +1,15 @@
+Issue to detect: {issue}
+Example
+
+Example User Post: {prev_user_query}
+Example Response: {prev_response}
+Question: Is there any text from the response that shows the mentioned issue?
+Example Answer:
+{{"Answer":"Yes", "Explaination": 1. {prev_comment_1} 2. {prev_comment_2} }}
+Task
+
+Read the new post/response pair below. Decide whether the new response shows the same issue.
+New Post: {new_user_query}
+New Response: {new_response}
+Question: Is there any text from the response that shows the mentioned issue?
+Reply ONLY in valid json format: {{"Answer": <"Yes","No", or "I am not sure">, "Explanation": <brief justification for why the issue is present in the response>}}
