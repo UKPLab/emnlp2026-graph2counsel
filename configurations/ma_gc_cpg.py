@@ -64,7 +64,7 @@ def fix_encoding_txt(txt):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="Generate sessions from Graph")
-    parser.add_argument("-i","--input_dir", type=str, default=".",
+    parser.add_argument("-i_graph","--input_dir", type=str, default=".",
                         help="Directory to read the graphs")
     parser.add_argument("-o","--output_dir", type=str, default=".",
                         help="Directory to to save the results.")
