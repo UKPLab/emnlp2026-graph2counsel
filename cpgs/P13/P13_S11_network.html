@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Interactive Process Network</title>
+    <script src="https://unpkg.com/cytoscape@3.21.1/dist/cytoscape.min.js"></script>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        #cy {
+            width: 100vw;
+            height: 100vh;
+            display: block;
+        }
+        .legend {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: white;
+            border: 1px solid #ccc;
+            padding: 10px;
+            font-family: sans-serif;
+            font-size: 14px;
+            z-index: 10;
+        }
+        .tooltip {
+            position: absolute;
+            background: #fefefe;
+            border: 1px solid #aaa;
+            padding: 10px;
+            font-family: sans-serif;
+            font-size: 13px;
+            max-width: 300px;
+            z-index: 20;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            cursor: default;
+        }
+        .tooltip .close-btn {
+            float: right;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="cy"></div>
+    <div class="legend">
+        <b>Legend</b><br>
+        <span style="color:#e74c3c;">Red</span>: Inhibitory<br>
+        <span style="color:#3498db;">Blue</span>: Excitatory<br>
+        <hr>
+        <b>Dimensions</b><br>
+        🔵 Cognition<br>
+        🟢 Sense of Self<br>
+        🔴 (Overt) Behaviour<br>
+        🟣 Affect<br>
+        🟠 Context/Moderators<br>
+        🟡 Attention<br>
+        ⚪ Biophysiological<br>
+        🟤 Motivation<br>
+        ⚫ Sociocultural
+    </div>
+    <script>
+        var cy = cytoscape({
+            container: document.getElementById('cy'),
+            layout: { name: 'cose' },
+            style: [
+                {
+                    selector: 'node',
+                    style: {
+                        'shape': 'roundrectangle',
+                        'label': 'data(label)',
+                        'text-wrap': 'wrap',
+                        'text-max-width': 120,
+                        'text-valign': 'center',
+                        'text-halign': 'center',
+                        'background-color': '#ffffff',
+                        'border-color': '#000000',
+                        'border-width': 1,
+                        'color': '#000',
+                        'font-size': 14,
+                        'padding': '20px',
+                        'width': 'label',
+                        'height': 'label'
+                    }
+                },
+                {
+                    selector: 'edge',
+                    style: {
+                        'curve-style': 'bezier',
+                        'target-arrow-shape': 'triangle',
+                        'arrow-scale': 1.2,
+                        'label': '',
+                        'font-size': 9,
+                        'text-rotation': 'autorotate',
+                        'text-margin-y': -10,
+                        'line-color': 'data(color)',
+                        'target-arrow-color': 'data(color)',
+                        'width': 'data(width)',
+                        'line-style': 'data(lineStyle)'
+                    }
+                }
+            ],
+            elements: [{"data": {"id": "Tension between personal values and professional relationships", "label": "Tension between personal values and professional relationships\n\ud83d\udd34 \ud83d\udd35 \ud83d\udfe0\nw = 9"}}, {"data": {"id": "Navigating boundaries between work and personal life", "label": "Navigating boundaries between work and personal life\n\ud83d\udd34 \ud83d\udd35 \u26ab\nw = 9"}}, {"data": {"id": "Fear of judgment and repercussions in the workplace", "label": "Fear of judgment and repercussions in the workplace\n\ud83d\udd34 \ud83d\udd35 \ud83d\udfe0\nw = 8"}}, {"data": {"id": "Importance of respect and trust in relationships", "label": "Importance of respect and trust in relationships\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udd35\nw = 8"}}, {"data": {"id": "Struggle to balance individuality with social expectations", "label": "Struggle to balance individuality with social expectations\n\ud83d\udd34 \ud83d\udd35 \ud83d\udfe0\nw = 8"}}, {"data": {"id": "Uncertainty and anxiety in navigating complex social situations", "label": "Uncertainty and anxiety in navigating complex social situations\n\ud83d\udd34 \ud83d\udd35 \ud83d\udfe0\nw = 8"}}, {"data": {"id": "Importance of self-reflection and personal growth", "label": "Importance of self-reflection and personal growth\n\ud83d\udd34 \ud83d\udd35 \ud83d\udfe0\nw = 8"}}, {"data": {"id": "Challenges in communicating personal boundaries and needs", "label": "Challenges in communicating personal boundaries and needs\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udd35\nw = 8"}}, {"data": {"id": "Difficulty articulating personal opinions and beliefs", "label": "Difficulty articulating personal opinions and beliefs\n\ud83d\udd34 \ud83d\udd35 \ud83d\udfe0\nw = 8"}}, {"data": {"id": "Impact of past experiences on current relationships and behaviors", "label": "Impact of past experiences on current relationships and behaviors\n\ud83d\udd34 \ud83d\udfe0 \ud83d\udfe4\nw = 8"}}, {"data": {"id": "Tension between personal values and professional relationships_Navigating boundaries between work and personal life_79", "source": "Tension between personal values and professional relationships", "target": "Navigating boundaries between work and personal life", "pair_label": "79", "info": "Conflicting values can necessitate boundary setting.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between personal values and professional relationships_Fear of judgment and repercussions in the workplace_75", "source": "Tension between personal values and professional relationships", "target": "Fear of judgment and repercussions in the workplace", "pair_label": "75", "info": "Conflicting values lead to anticipated judgment.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between personal values and professional relationships_Importance of respect and trust in relationships_77", "source": "Tension between personal values and professional relationships", "target": "Importance of respect and trust in relationships", "pair_label": "77", "info": "Conflicting values can erode trust and respect.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between personal values and professional relationships_Struggle to balance individuality with social expectations_80", "source": "Tension between personal values and professional relationships", "target": "Struggle to balance individuality with social expectations", "pair_label": "80", "info": "Conflicting values and expectations fuel the struggle.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between personal values and professional relationships_Uncertainty and anxiety in navigating complex social situations_81", "source": "Tension between personal values and professional relationships", "target": "Uncertainty and anxiety in navigating complex social situations", "pair_label": "81", "info": "Heightens apprehension", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between personal values and professional relationships_Importance of self-reflection and personal growth_78", "source": "Tension between personal values and professional relationships", "target": "Importance of self-reflection and personal growth", "pair_label": "78", "info": "Awareness of tension sparks self-reflection", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between personal values and professional relationships_Challenges in communicating personal boundaries and needs_73", "source": "Tension between personal values and professional relationships", "target": "Challenges in communicating personal boundaries and needs", "pair_label": "73", "info": "Tension between personal values and professional\nrelationships can lead to difficulties in asserting personal\nboundaries and needs.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Navigating boundaries between work and personal life_Tension between personal values and professional relationships_62", "source": "Navigating boundaries between work and personal life", "target": "Tension between personal values and professional relationships", "pair_label": "62", "info": "Blurred boundaries can heighten tension.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Navigating boundaries between work and personal life_Fear of judgment and repercussions in the workplace_57", "source": "Navigating boundaries between work and personal life", "target": "Fear of judgment and repercussions in the workplace", "pair_label": "57", "info": "Fear of judgment can limit boundary setting.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Navigating boundaries between work and personal life_Importance of self-reflection and personal growth_60", "source": "Navigating boundaries between work and personal life", "target": "Importance of self-reflection and personal growth", "pair_label": "60", "info": "Self-reflection enhances boundary setting.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Navigating boundaries between work and personal life_Challenges in communicating personal boundaries and needs_55", "source": "Navigating boundaries between work and personal life", "target": "Challenges in communicating personal boundaries and needs", "pair_label": "55", "info": "Difficulty in navigating work-life boundaries can exacerbate\nchallenges in communicating personal boundaries and needs.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Fear of judgment and repercussions in the workplace_Tension between personal values and professional relationships_26", "source": "Fear of judgment and repercussions in the workplace", "target": "Tension between personal values and professional relationships", "pair_label": "26", "info": "Fear of judgment can heighten tension between personal\nvalues and professional relationships.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Fear of judgment and repercussions in the workplace_Difficulty articulating personal opinions and beliefs_20", "source": "Fear of judgment and repercussions in the workplace", "target": "Difficulty articulating personal opinions and beliefs", "pair_label": "20", "info": "Fear suppresses expression.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Fear of judgment and repercussions in the workplace_Importance of respect and trust in relationships_22", "source": "Fear of judgment and repercussions in the workplace", "target": "Importance of respect and trust in relationships", "pair_label": "22", "info": "Fear of judgment can undermine trust and respect.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Fear of judgment and repercussions in the workplace_Struggle to balance individuality with social expectations_25", "source": "Fear of judgment and repercussions in the workplace", "target": "Struggle to balance individuality with social expectations", "pair_label": "25", "info": "Fear of judgment can amplify the struggle to balance\nindividuality with social expectations.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Fear of judgment and repercussions in the workplace_Uncertainty and anxiety in navigating complex social situations_27", "source": "Fear of judgment and repercussions in the workplace", "target": "Uncertainty and anxiety in navigating complex social situations", "pair_label": "27", "info": "Fear of judgment can exacerbate uncertainty and anxiety in\nnavigating complex social situations.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty articulating personal opinions and beliefs_Tension between personal values and professional relationships_17", "source": "Difficulty articulating personal opinions and beliefs", "target": "Tension between personal values and professional relationships", "pair_label": "17", "info": "Inability to express personal views can lead to inner\nconflict when professional relationships demand compromise\non personal values.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty articulating personal opinions and beliefs_Fear of judgment and repercussions in the workplace_11", "source": "Difficulty articulating personal opinions and beliefs", "target": "Fear of judgment and repercussions in the workplace", "pair_label": "11", "info": "Fear of judgment and repercussions can intensify difficulty\narticulating personal opinions and beliefs.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty articulating personal opinions and beliefs_Impact of past experiences on current relationships and behaviors_12", "source": "Difficulty articulating personal opinions and beliefs", "target": "Impact of past experiences on current relationships and behaviors", "pair_label": "12", "info": "Past experiences can hinder the ability to clearly express\npersonal opinions and beliefs.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty articulating personal opinions and beliefs_Uncertainty and anxiety in navigating complex social situations_18", "source": "Difficulty articulating personal opinions and beliefs", "target": "Uncertainty and anxiety in navigating complex social situations", "pair_label": "18", "info": "Difficulty articulating personal opinions and beliefs can\namplify uncertainty and anxiety in navigating complex social\nsituations.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty articulating personal opinions and beliefs_Challenges in communicating personal boundaries and needs_10", "source": "Difficulty articulating personal opinions and beliefs", "target": "Challenges in communicating personal boundaries and needs", "pair_label": "10", "info": "Linked through self-expression and assertiveness.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of respect and trust in relationships_Tension between personal values and professional relationships_44", "source": "Importance of respect and trust in relationships", "target": "Tension between personal values and professional relationships", "pair_label": "44", "info": "Respect and trust can alleviate tension in professional\nrelationships when personal values are aligned.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of respect and trust in relationships_Impact of past experiences on current relationships and behaviors_40", "source": "Importance of respect and trust in relationships", "target": "Impact of past experiences on current relationships and behaviors", "pair_label": "40", "info": "Past experiences shape expectations and behaviors in current\nrelationships, influencing the importance placed on respect\nand trust.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of respect and trust in relationships_Uncertainty and anxiety in navigating complex social situations_45", "source": "Importance of respect and trust in relationships", "target": "Uncertainty and anxiety in navigating complex social situations", "pair_label": "45", "info": "Trust and respect can mitigate uncertainty and anxiety in\ncomplex social situations.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Impact of past experiences on current relationships and behaviors_Importance of respect and trust in relationships_31", "source": "Impact of past experiences on current relationships and behaviors", "target": "Importance of respect and trust in relationships", "pair_label": "31", "info": "Past experiences can influence perception of respect and\ntrustworthiness.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Impact of past experiences on current relationships and behaviors_Importance of self-reflection and personal growth_32", "source": "Impact of past experiences on current relationships and behaviors", "target": "Importance of self-reflection and personal growth", "pair_label": "32", "info": "Reflecting on past experiences fosters growth.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Impact of past experiences on current relationships and behaviors_Challenges in communicating personal boundaries and needs_28", "source": "Impact of past experiences on current relationships and behaviors", "target": "Challenges in communicating personal boundaries and needs", "pair_label": "28", "info": "Past experiences influence current boundaries.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggle to balance individuality with social expectations_Tension between personal values and professional relationships_71", "source": "Struggle to balance individuality with social expectations", "target": "Tension between personal values and professional relationships", "pair_label": "71", "info": "Conflicting demands", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggle to balance individuality with social expectations_Fear of judgment and repercussions in the workplace_66", "source": "Struggle to balance individuality with social expectations", "target": "Fear of judgment and repercussions in the workplace", "pair_label": "66", "info": "Social expectations can fuel fear of judgment.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggle to balance individuality with social expectations_Uncertainty and anxiety in navigating complex social situations_72", "source": "Struggle to balance individuality with social expectations", "target": "Uncertainty and anxiety in navigating complex social situations", "pair_label": "72", "info": "Increased self-doubt and fear of social rejection.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggle to balance individuality with social expectations_Importance of self-reflection and personal growth_69", "source": "Struggle to balance individuality with social expectations", "target": "Importance of self-reflection and personal growth", "pair_label": "69", "info": "Self-reflection fosters understanding of individual needs", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggle to balance individuality with social expectations_Challenges in communicating personal boundaries and needs_64", "source": "Struggle to balance individuality with social expectations", "target": "Challenges in communicating personal boundaries and needs", "pair_label": "64", "info": "Balancing individuality with social expectations often\ninvolves asserting personal boundaries and needs, making\neffective communication crucial.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Uncertainty and anxiety in navigating complex social situations_Fear of judgment and repercussions in the workplace_84", "source": "Uncertainty and anxiety in navigating complex social situations", "target": "Fear of judgment and repercussions in the workplace", "pair_label": "84", "info": "Anxiety in social situations can lead to fear of judgment.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Uncertainty and anxiety in navigating complex social situations_Struggle to balance individuality with social expectations_89", "source": "Uncertainty and anxiety in navigating complex social situations", "target": "Struggle to balance individuality with social expectations", "pair_label": "89", "info": "Increased anxiety in complex social situations amplifies the\nstruggle to balance individuality with social expectations.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Uncertainty and anxiety in navigating complex social situations_Challenges in communicating personal boundaries and needs_82", "source": "Uncertainty and anxiety in navigating complex social situations", "target": "Challenges in communicating personal boundaries and needs", "pair_label": "82", "info": "Uncertainty and anxiety can amplify challenges in asserting\noneself.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of self-reflection and personal growth_Navigating boundaries between work and personal life_51", "source": "Importance of self-reflection and personal growth", "target": "Navigating boundaries between work and personal life", "pair_label": "51", "info": "Self-reflection fosters awareness of personal limits.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of self-reflection and personal growth_Impact of past experiences on current relationships and behaviors_49", "source": "Importance of self-reflection and personal growth", "target": "Impact of past experiences on current relationships and behaviors", "pair_label": "49", "info": "Self-reflection fosters insight into past experiences.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Challenges in communicating personal boundaries and needs_Tension between personal values and professional relationships_8", "source": "Challenges in communicating personal boundaries and needs", "target": "Tension between personal values and professional relationships", "pair_label": "8", "info": "Inability to assert personal boundaries can lead to\nconflicts with professional relationships.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Challenges in communicating personal boundaries and needs_Navigating boundaries between work and personal life_6", "source": "Challenges in communicating personal boundaries and needs", "target": "Navigating boundaries between work and personal life", "pair_label": "6", "info": "Difficulty expressing personal needs can enhance the\nchallenge of separating work and personal life.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Challenges in communicating personal boundaries and needs_Fear of judgment and repercussions in the workplace_2", "source": "Challenges in communicating personal boundaries and needs", "target": "Fear of judgment and repercussions in the workplace", "pair_label": "2", "info": "Fear of judgment and repercussions can prevent individuals\nfrom expressing their needs and boundaries.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Challenges in communicating personal boundaries and needs_Difficulty articulating personal opinions and beliefs_1", "source": "Challenges in communicating personal boundaries and needs", "target": "Difficulty articulating personal opinions and beliefs", "pair_label": "1", "info": "Linked through self-expression and assertiveness.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Challenges in communicating personal boundaries and needs_Importance of respect and trust in relationships_4", "source": "Challenges in communicating personal boundaries and needs", "target": "Importance of respect and trust in relationships", "pair_label": "4", "info": "Effective communication of personal boundaries and needs\nfosters respect and trust.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Challenges in communicating personal boundaries and needs_Impact of past experiences on current relationships and behaviors_3", "source": "Challenges in communicating personal boundaries and needs", "target": "Impact of past experiences on current relationships and behaviors", "pair_label": "3", "info": "Past experiences shape current communication patterns.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Challenges in communicating personal boundaries and needs_Struggle to balance individuality with social expectations_7", "source": "Challenges in communicating personal boundaries and needs", "target": "Struggle to balance individuality with social expectations", "pair_label": "7", "info": "Linked through self-expression and social adaptation.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Challenges in communicating personal boundaries and needs_Uncertainty and anxiety in navigating complex social situations_9", "source": "Challenges in communicating personal boundaries and needs", "target": "Uncertainty and anxiety in navigating complex social situations", "pair_label": "9", "info": "Difficulty in expressing personal boundaries can lead to\nincreased uncertainty and anxiety in complex social\nsituations.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Challenges in communicating personal boundaries and needs_Importance of self-reflection and personal growth_5", "source": "Challenges in communicating personal boundaries and needs", "target": "Importance of self-reflection and personal growth", "pair_label": "5", "info": "Recognizing the need for self-reflection and growth can\nmotivate individuals to improve their communication of\npersonal boundaries and needs.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}]
+        });
+
+        let tooltipCounter = 0;
+
+        cy.on('tap', 'edge', function(evt) {
+            var edge = evt.target;
+            var pos = evt.renderedPosition;
+            var tooltipId = "tooltip-" + (++tooltipCounter);
+
+            var tooltip = document.createElement("div");
+            tooltip.className = "tooltip";
+            tooltip.id = tooltipId;
+            tooltip.style.left = (pos.x + 20) + "px";
+            tooltip.style.top = (pos.y + 20) + "px";
+
+            var closeBtn = document.createElement("span");
+            closeBtn.className = "close-btn";
+            closeBtn.innerHTML = "&times;";
+            closeBtn.onclick = function () {
+                tooltip.remove();
+            };
+
+            tooltip.innerHTML = "";
+            tooltip.appendChild(closeBtn);
+            var content = document.createElement("div");
+            content.innerHTML = edge.data("info");
+            tooltip.appendChild(content);
+
+            document.body.appendChild(tooltip);
+            makeDraggable(tooltip);
+        });
+
+        function makeDraggable(elmnt) {
+            let offset = { x: 0, y: 0 };
+            let isDragging = false;
+
+            elmnt.addEventListener("mousedown", function (e) {
+                if (e.target.classList.contains("close-btn")) return;
+                isDragging = true;
+                offset.x = e.clientX - elmnt.offsetLeft;
+                offset.y = e.clientY - elmnt.offsetTop;
+                elmnt.style.cursor = "move";
+                e.preventDefault();
+            });
+
+            document.addEventListener("mousemove", function (e) {
+                if (isDragging) {
+                    elmnt.style.left = (e.clientX - offset.x) + "px";
+                    elmnt.style.top = (e.clientY - offset.y) + "px";
+                }
+            });
+
+            document.addEventListener("mouseup", function () {
+                isDragging = false;
+                elmnt.style.cursor = "default";
+            });
+        }
+    </script>
+</body>
+</html>

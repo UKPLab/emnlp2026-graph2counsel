@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Interactive Process Network</title>
+    <script src="https://unpkg.com/cytoscape@3.21.1/dist/cytoscape.min.js"></script>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        #cy {
+            width: 100vw;
+            height: 100vh;
+            display: block;
+        }
+        .legend {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: white;
+            border: 1px solid #ccc;
+            padding: 10px;
+            font-family: sans-serif;
+            font-size: 14px;
+            z-index: 10;
+        }
+        .tooltip {
+            position: absolute;
+            background: #fefefe;
+            border: 1px solid #aaa;
+            padding: 10px;
+            font-family: sans-serif;
+            font-size: 13px;
+            max-width: 300px;
+            z-index: 20;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            cursor: default;
+        }
+        .tooltip .close-btn {
+            float: right;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="cy"></div>
+    <div class="legend">
+        <b>Legend</b><br>
+        <span style="color:#e74c3c;">Red</span>: Inhibitory<br>
+        <span style="color:#3498db;">Blue</span>: Excitatory<br>
+        <hr>
+        <b>Dimensions</b><br>
+        🔵 Cognition<br>
+        🟢 Sense of Self<br>
+        🔴 (Overt) Behaviour<br>
+        🟣 Affect<br>
+        🟠 Context/Moderators<br>
+        🟡 Attention<br>
+        ⚪ Biophysiological<br>
+        🟤 Motivation<br>
+        ⚫ Sociocultural
+    </div>
+    <script>
+        var cy = cytoscape({
+            container: document.getElementById('cy'),
+            layout: { name: 'cose' },
+            style: [
+                {
+                    selector: 'node',
+                    style: {
+                        'shape': 'roundrectangle',
+                        'label': 'data(label)',
+                        'text-wrap': 'wrap',
+                        'text-max-width': 120,
+                        'text-valign': 'center',
+                        'text-halign': 'center',
+                        'background-color': '#ffffff',
+                        'border-color': '#000000',
+                        'border-width': 1,
+                        'color': '#000',
+                        'font-size': 14,
+                        'padding': '20px',
+                        'width': 'label',
+                        'height': 'label'
+                    }
+                },
+                {
+                    selector: 'edge',
+                    style: {
+                        'curve-style': 'bezier',
+                        'target-arrow-shape': 'triangle',
+                        'arrow-scale': 1.2,
+                        'label': '',
+                        'font-size': 9,
+                        'text-rotation': 'autorotate',
+                        'text-margin-y': -10,
+                        'line-color': 'data(color)',
+                        'target-arrow-color': 'data(color)',
+                        'width': 'data(width)',
+                        'line-style': 'data(lineStyle)'
+                    }
+                }
+            ],
+            elements: [{"data": {"id": "Restricting oneself to one dessert a day is a way to establish a sense of control over overeating.", "label": "Restricting oneself to one dessert a day is a way to establish a sense of control over overeating.\n\ud83d\udd34 \ud83d\udd35 \ud83d\udfe2\nw = 3"}}, {"data": {"id": "Difficulty with self-regulation of sugar intake is connected to broader struggles with self-control and moderation.", "label": "Difficulty with self-regulation of sugar intake is connected to broader struggles with self-control and moderation.\n\ud83d\udd34 \ud83d\udfe0 \ud83d\udfe2\nw = 3"}}, {"data": {"id": "Procrastination is linked to indecision and rumination, which in turn strengthens the interpersonal wall.", "label": "Procrastination is linked to indecision and rumination, which in turn strengthens the interpersonal wall.\n\ud83d\udd34 \ud83d\udfe2\nw = 3"}}, {"data": {"id": "Critical thoughts about oneself and others are part of a self-critical cycle that maintains the interpersonal wall.", "label": "Critical thoughts about oneself and others are part of a self-critical cycle that maintains the interpersonal wall.\n\ud83d\udd35 \ud83d\udfe0 \u26ab\nw = 3"}}, {"data": {"id": "Accepting one's limitations and imperfections can help reduce self-blame and increase self-compassion.", "label": "Accepting one's limitations and imperfections can help reduce self-blame and increase self-compassion.\n\ud83d\udd35\nw = 3"}}, {"data": {"id": "Difficulty articulating feelings is a manifestation of unexpressed emotions from the past.", "label": "Difficulty articulating feelings is a manifestation of unexpressed emotions from the past.\n\ud83d\udfe3 \ud83d\udd35 \ud83d\udfe0\nw = 3"}}, {"data": {"id": "Self-blame is a coping mechanism for feelings of overwhelm and anxiety.", "label": "Self-blame is a coping mechanism for feelings of overwhelm and anxiety.\n\ud83d\udd35\nw = 3"}}, {"data": {"id": "Reflecting on past relationships and experiences can help identify patterns and themes that contribute to the formation of the interpersonal wall.", "label": "Reflecting on past relationships and experiences can help identify patterns and themes that contribute to the formation of the interpersonal wall.\n\ud83d\udd35 \ud83d\udfe0 \ud83d\udfe2\nw = 3"}}, {"data": {"id": "Exploring the impact of surprises on relationships is essential for building resilience and trust.", "label": "Exploring the impact of surprises on relationships is essential for building resilience and trust.\n\ud83d\udd34 \ud83d\udfe2 \u26ab\nw = 3"}}, {"data": {"id": "Restricting oneself to one dessert a day is a way to establish a sense of control over overeating._Difficulty with self-regulation of sugar intake is connected to broader struggles with self-control and moderation._96", "source": "Restricting oneself to one dessert a day is a way to establish a sense of control over overeating.", "target": "Difficulty with self-regulation of sugar intake is connected to broader struggles with self-control and moderation.", "pair_label": "96", "info": "Self-regulation strategies", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Procrastination is linked to indecision and rumination, which in turn strengthens the interpersonal wall._Critical thoughts about oneself and others are part of a self-critical cycle that maintains the interpersonal wall._74", "source": "Procrastination is linked to indecision and rumination, which in turn strengthens the interpersonal wall.", "target": "Critical thoughts about oneself and others are part of a self-critical cycle that maintains the interpersonal wall.", "pair_label": "74", "info": "Shared maintenance of the interpersonal wall.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Critical thoughts about oneself and others are part of a self-critical cycle that maintains the interpersonal wall._Procrastination is linked to indecision and rumination, which in turn strengthens the interpersonal wall._37", "source": "Critical thoughts about oneself and others are part of a self-critical cycle that maintains the interpersonal wall.", "target": "Procrastination is linked to indecision and rumination, which in turn strengthens the interpersonal wall.", "pair_label": "37", "info": "Shared maintenance of interpersonal wall", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Critical thoughts about oneself and others are part of a self-critical cycle that maintains the interpersonal wall._Accepting one's limitations and imperfections can help reduce self-blame and increase self-compassion._31", "source": "Critical thoughts about oneself and others are part of a self-critical cycle that maintains the interpersonal wall.", "target": "Accepting one's limitations and imperfections can help reduce self-blame and increase self-compassion.", "pair_label": "31", "info": "Counteracts self-blame.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Accepting one's limitations and imperfections can help reduce self-blame and increase self-compassion._Critical thoughts about oneself and others are part of a self-critical cycle that maintains the interpersonal wall._3", "source": "Accepting one's limitations and imperfections can help reduce self-blame and increase self-compassion.", "target": "Critical thoughts about oneself and others are part of a self-critical cycle that maintains the interpersonal wall.", "pair_label": "3", "info": "Self-compassion counters self-criticism.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty articulating feelings is a manifestation of unexpressed emotions from the past._Critical thoughts about oneself and others are part of a self-critical cycle that maintains the interpersonal wall._44", "source": "Difficulty articulating feelings is a manifestation of unexpressed emotions from the past.", "target": "Critical thoughts about oneself and others are part of a self-critical cycle that maintains the interpersonal wall.", "pair_label": "44", "info": "Represents a self-reinforcing cycle.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty articulating feelings is a manifestation of unexpressed emotions from the past._Self-blame is a coping mechanism for feelings of overwhelm and anxiety._50", "source": "Difficulty articulating feelings is a manifestation of unexpressed emotions from the past.", "target": "Self-blame is a coping mechanism for feelings of overwhelm and anxiety.", "pair_label": "50", "info": "Unexpressed emotions can lead to feelings of overwhelm,\nwhich may trigger self-blame as a maladaptive coping\nstrategy.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty articulating feelings is a manifestation of unexpressed emotions from the past._Reflecting on past relationships and experiences can help identify patterns and themes that contribute to the formation of the interpersonal wall._48", "source": "Difficulty articulating feelings is a manifestation of unexpressed emotions from the past.", "target": "Reflecting on past relationships and experiences can help identify patterns and themes that contribute to the formation of the interpersonal wall.", "pair_label": "48", "info": "Reflecting on past experiences can help articulate\nunexpressed emotions.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Exploring the impact of surprises on relationships is essential for building resilience and trust._Reflecting on past relationships and experiences can help identify patterns and themes that contribute to the formation of the interpersonal wall._68", "source": "Exploring the impact of surprises on relationships is essential for building resilience and trust.", "target": "Reflecting on past relationships and experiences can help identify patterns and themes that contribute to the formation of the interpersonal wall.", "pair_label": "68", "info": "Surprises can reveal patterns and themes in relationships.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Reflecting on past relationships and experiences can help identify patterns and themes that contribute to the formation of the interpersonal wall._Difficulty articulating feelings is a manifestation of unexpressed emotions from the past._85", "source": "Reflecting on past relationships and experiences can help identify patterns and themes that contribute to the formation of the interpersonal wall.", "target": "Difficulty articulating feelings is a manifestation of unexpressed emotions from the past.", "pair_label": "85", "info": "Reflecting on past experiences can uncover unexpressed\nemotions.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Self-blame is a coping mechanism for feelings of overwhelm and anxiety._Accepting one's limitations and imperfections can help reduce self-blame and increase self-compassion._101", "source": "Self-blame is a coping mechanism for feelings of overwhelm and anxiety.", "target": "Accepting one's limitations and imperfections can help reduce self-blame and increase self-compassion.", "pair_label": "101", "info": "Counteracts self-blame.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Accepting one's limitations and imperfections can help reduce self-blame and increase self-compassion._Self-blame is a coping mechanism for feelings of overwhelm and anxiety._10", "source": "Accepting one's limitations and imperfections can help reduce self-blame and increase self-compassion.", "target": "Self-blame is a coping mechanism for feelings of overwhelm and anxiety.", "pair_label": "10", "info": "Reduces self-blame", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Critical thoughts about oneself and others are part of a self-critical cycle that maintains the interpersonal wall._Self-blame is a coping mechanism for feelings of overwhelm and anxiety._40", "source": "Critical thoughts about oneself and others are part of a self-critical cycle that maintains the interpersonal wall.", "target": "Self-blame is a coping mechanism for feelings of overwhelm and anxiety.", "pair_label": "40", "info": "Reinforcing cycle", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Reflecting on past relationships and experiences can help identify patterns and themes that contribute to the formation of the interpersonal wall._Critical thoughts about oneself and others are part of a self-critical cycle that maintains the interpersonal wall._84", "source": "Reflecting on past relationships and experiences can help identify patterns and themes that contribute to the formation of the interpersonal wall.", "target": "Critical thoughts about oneself and others are part of a self-critical cycle that maintains the interpersonal wall.", "pair_label": "84", "info": "Recognizing patterns can challenge self-criticism.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}]
+        });
+
+        let tooltipCounter = 0;
+
+        cy.on('tap', 'edge', function(evt) {
+            var edge = evt.target;
+            var pos = evt.renderedPosition;
+            var tooltipId = "tooltip-" + (++tooltipCounter);
+
+            var tooltip = document.createElement("div");
+            tooltip.className = "tooltip";
+            tooltip.id = tooltipId;
+            tooltip.style.left = (pos.x + 20) + "px";
+            tooltip.style.top = (pos.y + 20) + "px";
+
+            var closeBtn = document.createElement("span");
+            closeBtn.className = "close-btn";
+            closeBtn.innerHTML = "&times;";
+            closeBtn.onclick = function () {
+                tooltip.remove();
+            };
+
+            tooltip.innerHTML = "";
+            tooltip.appendChild(closeBtn);
+            var content = document.createElement("div");
+            content.innerHTML = edge.data("info");
+            tooltip.appendChild(content);
+
+            document.body.appendChild(tooltip);
+            makeDraggable(tooltip);
+        });
+
+        function makeDraggable(elmnt) {
+            let offset = { x: 0, y: 0 };
+            let isDragging = false;
+
+            elmnt.addEventListener("mousedown", function (e) {
+                if (e.target.classList.contains("close-btn")) return;
+                isDragging = true;
+                offset.x = e.clientX - elmnt.offsetLeft;
+                offset.y = e.clientY - elmnt.offsetTop;
+                elmnt.style.cursor = "move";
+                e.preventDefault();
+            });
+
+            document.addEventListener("mousemove", function (e) {
+                if (isDragging) {
+                    elmnt.style.left = (e.clientX - offset.x) + "px";
+                    elmnt.style.top = (e.clientY - offset.y) + "px";
+                }
+            });
+
+            document.addEventListener("mouseup", function () {
+                isDragging = false;
+                elmnt.style.cursor = "default";
+            });
+        }
+    </script>
+</body>
+</html>

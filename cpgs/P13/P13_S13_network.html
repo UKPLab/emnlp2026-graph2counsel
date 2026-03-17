@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Interactive Process Network</title>
+    <script src="https://unpkg.com/cytoscape@3.21.1/dist/cytoscape.min.js"></script>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        #cy {
+            width: 100vw;
+            height: 100vh;
+            display: block;
+        }
+        .legend {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: white;
+            border: 1px solid #ccc;
+            padding: 10px;
+            font-family: sans-serif;
+            font-size: 14px;
+            z-index: 10;
+        }
+        .tooltip {
+            position: absolute;
+            background: #fefefe;
+            border: 1px solid #aaa;
+            padding: 10px;
+            font-family: sans-serif;
+            font-size: 13px;
+            max-width: 300px;
+            z-index: 20;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            cursor: default;
+        }
+        .tooltip .close-btn {
+            float: right;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="cy"></div>
+    <div class="legend">
+        <b>Legend</b><br>
+        <span style="color:#e74c3c;">Red</span>: Inhibitory<br>
+        <span style="color:#3498db;">Blue</span>: Excitatory<br>
+        <hr>
+        <b>Dimensions</b><br>
+        🔵 Cognition<br>
+        🟢 Sense of Self<br>
+        🔴 (Overt) Behaviour<br>
+        🟣 Affect<br>
+        🟠 Context/Moderators<br>
+        🟡 Attention<br>
+        ⚪ Biophysiological<br>
+        🟤 Motivation<br>
+        ⚫ Sociocultural
+    </div>
+    <script>
+        var cy = cytoscape({
+            container: document.getElementById('cy'),
+            layout: { name: 'cose' },
+            style: [
+                {
+                    selector: 'node',
+                    style: {
+                        'shape': 'roundrectangle',
+                        'label': 'data(label)',
+                        'text-wrap': 'wrap',
+                        'text-max-width': 120,
+                        'text-valign': 'center',
+                        'text-halign': 'center',
+                        'background-color': '#ffffff',
+                        'border-color': '#000000',
+                        'border-width': 1,
+                        'color': '#000',
+                        'font-size': 14,
+                        'padding': '20px',
+                        'width': 'label',
+                        'height': 'label'
+                    }
+                },
+                {
+                    selector: 'edge',
+                    style: {
+                        'curve-style': 'bezier',
+                        'target-arrow-shape': 'triangle',
+                        'arrow-scale': 1.2,
+                        'label': '',
+                        'font-size': 9,
+                        'text-rotation': 'autorotate',
+                        'text-margin-y': -10,
+                        'line-color': 'data(color)',
+                        'target-arrow-color': 'data(color)',
+                        'width': 'data(width)',
+                        'line-style': 'data(lineStyle)'
+                    }
+                }
+            ],
+            elements: [{"data": {"id": "Emotional intimacy is tied to vulnerability and openness in relationships.", "label": "Emotional intimacy is tied to vulnerability and openness in relationships.\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 83"}}, {"data": {"id": "Embarrassment and shame can serve as barriers to emotional intimacy.", "label": "Embarrassment and shame can serve as barriers to emotional intimacy.\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 83"}}, {"data": {"id": "Fear of emotional hurt can lead to self-protective behaviors.", "label": "Fear of emotional hurt can lead to self-protective behaviors.\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 83"}}, {"data": {"id": "Self-protection mechanisms hinder emotional connection and intimacy.", "label": "Self-protection mechanisms hinder emotional connection and intimacy.\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 83"}}, {"data": {"id": "The need for control can interfere with emotional vulnerability.", "label": "The need for control can interfere with emotional vulnerability.\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 83"}}, {"data": {"id": "Emotional vulnerability is a prerequisite for deeper connection and intimacy.", "label": "Emotional vulnerability is a prerequisite for deeper connection and intimacy.\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 83"}}, {"data": {"id": "Emotional intimacy requires a willingness to be vulnerable and open.", "label": "Emotional intimacy requires a willingness to be vulnerable and open.\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 83"}}, {"data": {"id": "Emotional connection is facilitated by mutual vulnerability and openness.", "label": "Emotional connection is facilitated by mutual vulnerability and openness.\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 83"}}, {"data": {"id": "Unaddressed emotional needs can create distance in relationships.", "label": "Unaddressed emotional needs can create distance in relationships.\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 83"}}, {"data": {"id": "Unresolved emotional issues can impact relationships and intimacy.", "label": "Unresolved emotional issues can impact relationships and intimacy.\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 83"}}, {"data": {"id": "Emotional intimacy is tied to vulnerability and openness in relationships._Embarrassment and shame can serve as barriers to emotional intimacy._19", "source": "Emotional intimacy is tied to vulnerability and openness in relationships.", "target": "Embarrassment and shame can serve as barriers to emotional intimacy.", "pair_label": "19", "info": "Emotional intimacy requires openness, which is hindered by\nfeelings of shame and embarrassment.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Emotional intimacy is tied to vulnerability and openness in relationships._Fear of emotional hurt can lead to self-protective behaviors._23", "source": "Emotional intimacy is tied to vulnerability and openness in relationships.", "target": "Fear of emotional hurt can lead to self-protective behaviors.", "pair_label": "23", "info": "Vulnerability in relationships can trigger fear of emotional\nhurt.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Self-protection mechanisms hinder emotional connection and intimacy._The need for control can interfere with emotional vulnerability._61", "source": "Self-protection mechanisms hinder emotional connection and intimacy.", "target": "The need for control can interfere with emotional vulnerability.", "pair_label": "61", "info": "Reinforcing Avoidance of Vulnerability", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Self-protection mechanisms hinder emotional connection and intimacy._Fear of emotional hurt can lead to self-protective behaviors._60", "source": "Self-protection mechanisms hinder emotional connection and intimacy.", "target": "Fear of emotional hurt can lead to self-protective behaviors.", "pair_label": "60", "info": "Mutual reinforcement", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Embarrassment and shame can serve as barriers to emotional intimacy._Emotional intimacy is tied to vulnerability and openness in relationships._2", "source": "Embarrassment and shame can serve as barriers to emotional intimacy.", "target": "Emotional intimacy is tied to vulnerability and openness in relationships.", "pair_label": "2", "info": "Barriers to emotional intimacy impede openness in\nrelationships.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Embarrassment and shame can serve as barriers to emotional intimacy._Self-protection mechanisms hinder emotional connection and intimacy._6", "source": "Embarrassment and shame can serve as barriers to emotional intimacy.", "target": "Self-protection mechanisms hinder emotional connection and intimacy.", "pair_label": "6", "info": "Mutually reinforcing defensive strategies.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Embarrassment and shame can serve as barriers to emotional intimacy._Emotional vulnerability is a prerequisite for deeper connection and intimacy._4", "source": "Embarrassment and shame can serve as barriers to emotional intimacy.", "target": "Emotional vulnerability is a prerequisite for deeper connection and intimacy.", "pair_label": "4", "info": "Embarrassment and shame can suppress emotional\nvulnerability.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Embarrassment and shame can serve as barriers to emotional intimacy._Emotional intimacy requires a willingness to be vulnerable and open._3", "source": "Embarrassment and shame can serve as barriers to emotional intimacy.", "target": "Emotional intimacy requires a willingness to be vulnerable and open.", "pair_label": "3", "info": "Embarrassment and shame can prevent openness.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Embarrassment and shame can serve as barriers to emotional intimacy._Emotional connection is facilitated by mutual vulnerability and openness._1", "source": "Embarrassment and shame can serve as barriers to emotional intimacy.", "target": "Emotional connection is facilitated by mutual vulnerability and openness.", "pair_label": "1", "info": "Barriers to intimacy hinder openness", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "The need for control can interfere with emotional vulnerability._Self-protection mechanisms hinder emotional connection and intimacy._70", "source": "The need for control can interfere with emotional vulnerability.", "target": "Self-protection mechanisms hinder emotional connection and intimacy.", "pair_label": "70", "info": "Mutual reinforcement of defensive strategies", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "The need for control can interfere with emotional vulnerability._Fear of emotional hurt can lead to self-protective behaviors._69", "source": "The need for control can interfere with emotional vulnerability.", "target": "Fear of emotional hurt can lead to self-protective behaviors.", "pair_label": "69", "info": "Mutual reinforcement of defensive strategies.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "The need for control can interfere with emotional vulnerability._Emotional connection is facilitated by mutual vulnerability and openness._65", "source": "The need for control can interfere with emotional vulnerability.", "target": "Emotional connection is facilitated by mutual vulnerability and openness.", "pair_label": "65", "info": "Control needs suppress openness", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Emotional vulnerability is a prerequisite for deeper connection and intimacy._Embarrassment and shame can serve as barriers to emotional intimacy._37", "source": "Emotional vulnerability is a prerequisite for deeper connection and intimacy.", "target": "Embarrassment and shame can serve as barriers to emotional intimacy.", "pair_label": "37", "info": "Negative emotions can hinder emotional openness.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Emotional vulnerability is a prerequisite for deeper connection and intimacy._Fear of emotional hurt can lead to self-protective behaviors._41", "source": "Emotional vulnerability is a prerequisite for deeper connection and intimacy.", "target": "Fear of emotional hurt can lead to self-protective behaviors.", "pair_label": "41", "info": "Vulnerability increases risk of hurt, triggering fear.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Fear of emotional hurt can lead to self-protective behaviors._Emotional intimacy is tied to vulnerability and openness in relationships._48", "source": "Fear of emotional hurt can lead to self-protective behaviors.", "target": "Emotional intimacy is tied to vulnerability and openness in relationships.", "pair_label": "48", "info": "Fear of hurt can prevent openness.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Fear of emotional hurt can lead to self-protective behaviors._Self-protection mechanisms hinder emotional connection and intimacy._51", "source": "Fear of emotional hurt can lead to self-protective behaviors.", "target": "Self-protection mechanisms hinder emotional connection and intimacy.", "pair_label": "51", "info": "Self-protection mechanisms reinforce avoidance of emotional\nhurt.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Fear of emotional hurt can lead to self-protective behaviors._Embarrassment and shame can serve as barriers to emotional intimacy._46", "source": "Fear of emotional hurt can lead to self-protective behaviors.", "target": "Embarrassment and shame can serve as barriers to emotional intimacy.", "pair_label": "46", "info": "Increases emotional protection", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Fear of emotional hurt can lead to self-protective behaviors._The need for control can interfere with emotional vulnerability._52", "source": "Fear of emotional hurt can lead to self-protective behaviors.", "target": "The need for control can interfere with emotional vulnerability.", "pair_label": "52", "info": "Mutual reinforcement of defensive strategies.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Fear of emotional hurt can lead to self-protective behaviors._Emotional vulnerability is a prerequisite for deeper connection and intimacy._50", "source": "Fear of emotional hurt can lead to self-protective behaviors.", "target": "Emotional vulnerability is a prerequisite for deeper connection and intimacy.", "pair_label": "50", "info": "Fear of hurt may suppress openness to intimacy.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Fear of emotional hurt can lead to self-protective behaviors._Emotional intimacy requires a willingness to be vulnerable and open._49", "source": "Fear of emotional hurt can lead to self-protective behaviors.", "target": "Emotional intimacy requires a willingness to be vulnerable and open.", "pair_label": "49", "info": "Fear of emotional hurt can prevent openness.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Fear of emotional hurt can lead to self-protective behaviors._Emotional connection is facilitated by mutual vulnerability and openness._47", "source": "Fear of emotional hurt can lead to self-protective behaviors.", "target": "Emotional connection is facilitated by mutual vulnerability and openness.", "pair_label": "47", "info": "Fear of hurt suppresses openness", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Emotional intimacy requires a willingness to be vulnerable and open._Embarrassment and shame can serve as barriers to emotional intimacy._28", "source": "Emotional intimacy requires a willingness to be vulnerable and open.", "target": "Embarrassment and shame can serve as barriers to emotional intimacy.", "pair_label": "28", "info": "Negative emotions", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Emotional intimacy requires a willingness to be vulnerable and open._Fear of emotional hurt can lead to self-protective behaviors._32", "source": "Emotional intimacy requires a willingness to be vulnerable and open.", "target": "Fear of emotional hurt can lead to self-protective behaviors.", "pair_label": "32", "info": "Vulnerability triggers fear.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Unaddressed emotional needs can create distance in relationships._Embarrassment and shame can serve as barriers to emotional intimacy._73", "source": "Unaddressed emotional needs can create distance in relationships.", "target": "Embarrassment and shame can serve as barriers to emotional intimacy.", "pair_label": "73", "info": "Both contribute to emotional barriers.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Emotional connection is facilitated by mutual vulnerability and openness._Self-protection mechanisms hinder emotional connection and intimacy._15", "source": "Emotional connection is facilitated by mutual vulnerability and openness.", "target": "Self-protection mechanisms hinder emotional connection and intimacy.", "pair_label": "15", "info": "Mutual exclusivity", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Emotional connection is facilitated by mutual vulnerability and openness._Embarrassment and shame can serve as barriers to emotional intimacy._10", "source": "Emotional connection is facilitated by mutual vulnerability and openness.", "target": "Embarrassment and shame can serve as barriers to emotional intimacy.", "pair_label": "10", "info": "Emotional openness can be hindered by feelings of shame and\nembarrassment.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Emotional connection is facilitated by mutual vulnerability and openness._Unaddressed emotional needs can create distance in relationships._17", "source": "Emotional connection is facilitated by mutual vulnerability and openness.", "target": "Unaddressed emotional needs can create distance in relationships.", "pair_label": "17", "info": "Mutual vulnerability and openness can address emotional\nneeds.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Emotional intimacy is tied to vulnerability and openness in relationships._Emotional vulnerability is a prerequisite for deeper connection and intimacy._22", "source": "Emotional intimacy is tied to vulnerability and openness in relationships.", "target": "Emotional vulnerability is a prerequisite for deeper connection and intimacy.", "pair_label": "22", "info": "Mutual reinforcement", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Emotional intimacy is tied to vulnerability and openness in relationships._Emotional connection is facilitated by mutual vulnerability and openness._20", "source": "Emotional intimacy is tied to vulnerability and openness in relationships.", "target": "Emotional connection is facilitated by mutual vulnerability and openness.", "pair_label": "20", "info": "Mutual reinforcement", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Self-protection mechanisms hinder emotional connection and intimacy._Emotional intimacy is tied to vulnerability and openness in relationships._57", "source": "Self-protection mechanisms hinder emotional connection and intimacy.", "target": "Emotional intimacy is tied to vulnerability and openness in relationships.", "pair_label": "57", "info": "Protective barriers prevent openness.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Self-protection mechanisms hinder emotional connection and intimacy._Emotional vulnerability is a prerequisite for deeper connection and intimacy._59", "source": "Self-protection mechanisms hinder emotional connection and intimacy.", "target": "Emotional vulnerability is a prerequisite for deeper connection and intimacy.", "pair_label": "59", "info": "Self-protection mechanisms directly counteract emotional\nvulnerability.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "The need for control can interfere with emotional vulnerability._Emotional intimacy is tied to vulnerability and openness in relationships._66", "source": "The need for control can interfere with emotional vulnerability.", "target": "Emotional intimacy is tied to vulnerability and openness in relationships.", "pair_label": "66", "info": "Control needs can suppress openness.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "The need for control can interfere with emotional vulnerability._Embarrassment and shame can serve as barriers to emotional intimacy._64", "source": "The need for control can interfere with emotional vulnerability.", "target": "Embarrassment and shame can serve as barriers to emotional intimacy.", "pair_label": "64", "info": "Both processes hinder openness.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "The need for control can interfere with emotional vulnerability._Unresolved emotional issues can impact relationships and intimacy._72", "source": "The need for control can interfere with emotional vulnerability.", "target": "Unresolved emotional issues can impact relationships and intimacy.", "pair_label": "72", "info": "Control can hinder emotional openness, which in turn affects\nemotional intimacy.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "The need for control can interfere with emotional vulnerability._Unaddressed emotional needs can create distance in relationships._71", "source": "The need for control can interfere with emotional vulnerability.", "target": "Unaddressed emotional needs can create distance in relationships.", "pair_label": "71", "info": "Control can mask emotional needs.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Emotional vulnerability is a prerequisite for deeper connection and intimacy._Emotional connection is facilitated by mutual vulnerability and openness._38", "source": "Emotional vulnerability is a prerequisite for deeper connection and intimacy.", "target": "Emotional connection is facilitated by mutual vulnerability and openness.", "pair_label": "38", "info": "Mutual reinforcement", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Unresolved emotional issues can impact relationships and intimacy._Emotional intimacy is tied to vulnerability and openness in relationships._84", "source": "Unresolved emotional issues can impact relationships and intimacy.", "target": "Emotional intimacy is tied to vulnerability and openness in relationships.", "pair_label": "84", "info": "Unresolved emotional issues can block the development of\nemotional intimacy", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Emotional intimacy requires a willingness to be vulnerable and open._Unaddressed emotional needs can create distance in relationships._35", "source": "Emotional intimacy requires a willingness to be vulnerable and open.", "target": "Unaddressed emotional needs can create distance in relationships.", "pair_label": "35", "info": "Vulnerability fosters connection, unmet needs hinder it.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Emotional connection is facilitated by mutual vulnerability and openness._Unresolved emotional issues can impact relationships and intimacy._18", "source": "Emotional connection is facilitated by mutual vulnerability and openness.", "target": "Unresolved emotional issues can impact relationships and intimacy.", "pair_label": "18", "info": "Mutual vulnerability deepens emotional connection, but\nunresolved issues hinder it.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Emotional intimacy is tied to vulnerability and openness in relationships._Self-protection mechanisms hinder emotional connection and intimacy._24", "source": "Emotional intimacy is tied to vulnerability and openness in relationships.", "target": "Self-protection mechanisms hinder emotional connection and intimacy.", "pair_label": "24", "info": "Contrasting goals", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Emotional intimacy is tied to vulnerability and openness in relationships._Emotional intimacy requires a willingness to be vulnerable and open._21", "source": "Emotional intimacy is tied to vulnerability and openness in relationships.", "target": "Emotional intimacy requires a willingness to be vulnerable and open.", "pair_label": "21", "info": "Mutual reinforcement", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Emotional intimacy is tied to vulnerability and openness in relationships._Unaddressed emotional needs can create distance in relationships._26", "source": "Emotional intimacy is tied to vulnerability and openness in relationships.", "target": "Unaddressed emotional needs can create distance in relationships.", "pair_label": "26", "info": "Vulnerability fulfills emotional needs.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Self-protection mechanisms hinder emotional connection and intimacy._Embarrassment and shame can serve as barriers to emotional intimacy._55", "source": "Self-protection mechanisms hinder emotional connection and intimacy.", "target": "Embarrassment and shame can serve as barriers to emotional intimacy.", "pair_label": "55", "info": "Mutually reinforcing defensive strategies.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Self-protection mechanisms hinder emotional connection and intimacy._Emotional intimacy requires a willingness to be vulnerable and open._58", "source": "Self-protection mechanisms hinder emotional connection and intimacy.", "target": "Emotional intimacy requires a willingness to be vulnerable and open.", "pair_label": "58", "info": "Inhibits openness", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Embarrassment and shame can serve as barriers to emotional intimacy._Unresolved emotional issues can impact relationships and intimacy._9", "source": "Embarrassment and shame can serve as barriers to emotional intimacy.", "target": "Unresolved emotional issues can impact relationships and intimacy.", "pair_label": "9", "info": "Emotional barriers.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "The need for control can interfere with emotional vulnerability._Emotional intimacy requires a willingness to be vulnerable and open._67", "source": "The need for control can interfere with emotional vulnerability.", "target": "Emotional intimacy requires a willingness to be vulnerable and open.", "pair_label": "67", "info": "Interferes with openness.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Emotional vulnerability is a prerequisite for deeper connection and intimacy._Emotional intimacy is tied to vulnerability and openness in relationships._39", "source": "Emotional vulnerability is a prerequisite for deeper connection and intimacy.", "target": "Emotional intimacy is tied to vulnerability and openness in relationships.", "pair_label": "39", "info": "Mutual reinforcement", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Emotional vulnerability is a prerequisite for deeper connection and intimacy._Self-protection mechanisms hinder emotional connection and intimacy._42", "source": "Emotional vulnerability is a prerequisite for deeper connection and intimacy.", "target": "Self-protection mechanisms hinder emotional connection and intimacy.", "pair_label": "42", "info": "Conflicting underlying motivations", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Emotional vulnerability is a prerequisite for deeper connection and intimacy._Unresolved emotional issues can impact relationships and intimacy._45", "source": "Emotional vulnerability is a prerequisite for deeper connection and intimacy.", "target": "Unresolved emotional issues can impact relationships and intimacy.", "pair_label": "45", "info": "Shared underlying theme of emotional factors influencing\nrelationships.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Emotional vulnerability is a prerequisite for deeper connection and intimacy._Emotional intimacy requires a willingness to be vulnerable and open._40", "source": "Emotional vulnerability is a prerequisite for deeper connection and intimacy.", "target": "Emotional intimacy requires a willingness to be vulnerable and open.", "pair_label": "40", "info": "Mutual reinforcement.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Unresolved emotional issues can impact relationships and intimacy._Emotional connection is facilitated by mutual vulnerability and openness._83", "source": "Unresolved emotional issues can impact relationships and intimacy.", "target": "Emotional connection is facilitated by mutual vulnerability and openness.", "pair_label": "83", "info": "Unresolved emotional issues hinder mutual vulnerability and\nopenness.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Emotional intimacy requires a willingness to be vulnerable and open._The need for control can interfere with emotional vulnerability._34", "source": "Emotional intimacy requires a willingness to be vulnerable and open.", "target": "The need for control can interfere with emotional vulnerability.", "pair_label": "34", "info": "Control needs block openness", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Emotional intimacy requires a willingness to be vulnerable and open._Emotional vulnerability is a prerequisite for deeper connection and intimacy._31", "source": "Emotional intimacy requires a willingness to be vulnerable and open.", "target": "Emotional vulnerability is a prerequisite for deeper connection and intimacy.", "pair_label": "31", "info": "Mutually reinforcing", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Emotional intimacy requires a willingness to be vulnerable and open._Unresolved emotional issues can impact relationships and intimacy._36", "source": "Emotional intimacy requires a willingness to be vulnerable and open.", "target": "Unresolved emotional issues can impact relationships and intimacy.", "pair_label": "36", "info": "Vulnerability fuels intimacy, but unresolved issues can\nblock it.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Emotional intimacy requires a willingness to be vulnerable and open._Emotional connection is facilitated by mutual vulnerability and openness._29", "source": "Emotional intimacy requires a willingness to be vulnerable and open.", "target": "Emotional connection is facilitated by mutual vulnerability and openness.", "pair_label": "29", "info": "Mutual influence on emotional closeness", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Emotional connection is facilitated by mutual vulnerability and openness._Emotional intimacy is tied to vulnerability and openness in relationships._11", "source": "Emotional connection is facilitated by mutual vulnerability and openness.", "target": "Emotional intimacy is tied to vulnerability and openness in relationships.", "pair_label": "11", "info": "Shared foundation of vulnerability and openness.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}]
+        });
+
+        let tooltipCounter = 0;
+
+        cy.on('tap', 'edge', function(evt) {
+            var edge = evt.target;
+            var pos = evt.renderedPosition;
+            var tooltipId = "tooltip-" + (++tooltipCounter);
+
+            var tooltip = document.createElement("div");
+            tooltip.className = "tooltip";
+            tooltip.id = tooltipId;
+            tooltip.style.left = (pos.x + 20) + "px";
+            tooltip.style.top = (pos.y + 20) + "px";
+
+            var closeBtn = document.createElement("span");
+            closeBtn.className = "close-btn";
+            closeBtn.innerHTML = "&times;";
+            closeBtn.onclick = function () {
+                tooltip.remove();
+            };
+
+            tooltip.innerHTML = "";
+            tooltip.appendChild(closeBtn);
+            var content = document.createElement("div");
+            content.innerHTML = edge.data("info");
+            tooltip.appendChild(content);
+
+            document.body.appendChild(tooltip);
+            makeDraggable(tooltip);
+        });
+
+        function makeDraggable(elmnt) {
+            let offset = { x: 0, y: 0 };
+            let isDragging = false;
+
+            elmnt.addEventListener("mousedown", function (e) {
+                if (e.target.classList.contains("close-btn")) return;
+                isDragging = true;
+                offset.x = e.clientX - elmnt.offsetLeft;
+                offset.y = e.clientY - elmnt.offsetTop;
+                elmnt.style.cursor = "move";
+                e.preventDefault();
+            });
+
+            document.addEventListener("mousemove", function (e) {
+                if (isDragging) {
+                    elmnt.style.left = (e.clientX - offset.x) + "px";
+                    elmnt.style.top = (e.clientY - offset.y) + "px";
+                }
+            });
+
+            document.addEventListener("mouseup", function () {
+                isDragging = false;
+                elmnt.style.cursor = "default";
+            });
+        }
+    </script>
+</body>
+</html>

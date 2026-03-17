@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Interactive Process Network</title>
+    <script src="https://unpkg.com/cytoscape@3.21.1/dist/cytoscape.min.js"></script>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        #cy {
+            width: 100vw;
+            height: 100vh;
+            display: block;
+        }
+        .legend {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: white;
+            border: 1px solid #ccc;
+            padding: 10px;
+            font-family: sans-serif;
+            font-size: 14px;
+            z-index: 10;
+        }
+        .tooltip {
+            position: absolute;
+            background: #fefefe;
+            border: 1px solid #aaa;
+            padding: 10px;
+            font-family: sans-serif;
+            font-size: 13px;
+            max-width: 300px;
+            z-index: 20;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            cursor: default;
+        }
+        .tooltip .close-btn {
+            float: right;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="cy"></div>
+    <div class="legend">
+        <b>Legend</b><br>
+        <span style="color:#e74c3c;">Red</span>: Inhibitory<br>
+        <span style="color:#3498db;">Blue</span>: Excitatory<br>
+        <hr>
+        <b>Dimensions</b><br>
+        🔵 Cognition<br>
+        🟢 Sense of Self<br>
+        🔴 (Overt) Behaviour<br>
+        🟣 Affect<br>
+        🟠 Context/Moderators<br>
+        🟡 Attention<br>
+        ⚪ Biophysiological<br>
+        🟤 Motivation<br>
+        ⚫ Sociocultural
+    </div>
+    <script>
+        var cy = cytoscape({
+            container: document.getElementById('cy'),
+            layout: { name: 'cose' },
+            style: [
+                {
+                    selector: 'node',
+                    style: {
+                        'shape': 'roundrectangle',
+                        'label': 'data(label)',
+                        'text-wrap': 'wrap',
+                        'text-max-width': 120,
+                        'text-valign': 'center',
+                        'text-halign': 'center',
+                        'background-color': '#ffffff',
+                        'border-color': '#000000',
+                        'border-width': 1,
+                        'color': '#000',
+                        'font-size': 14,
+                        'padding': '20px',
+                        'width': 'label',
+                        'height': 'label'
+                    }
+                },
+                {
+                    selector: 'edge',
+                    style: {
+                        'curve-style': 'bezier',
+                        'target-arrow-shape': 'triangle',
+                        'arrow-scale': 1.2,
+                        'label': '',
+                        'font-size': 9,
+                        'text-rotation': 'autorotate',
+                        'text-margin-y': -10,
+                        'line-color': 'data(color)',
+                        'target-arrow-color': 'data(color)',
+                        'width': 'data(width)',
+                        'line-style': 'data(lineStyle)'
+                    }
+                }
+            ],
+            elements: [{"data": {"id": "Fear of social rejection and disapproval from others is a significant barrier to self-expression and assertiveness.", "label": "Fear of social rejection and disapproval from others is a significant barrier to self-expression and assertiveness.\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 64"}}, {"data": {"id": "The need to avoid hurting others' feelings, particularly those of a kind and non-confrontational ex-partner, drives decision-making and behavior.", "label": "The need to avoid hurting others' feelings, particularly those of a kind and non-confrontational ex-partner, drives decision-making and behavior.\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 78"}}, {"data": {"id": "Anxiety and self-doubt are fueled by uncertainty about others' opinions and reactions.", "label": "Anxiety and self-doubt are fueled by uncertainty about others' opinions and reactions.\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 79"}}, {"data": {"id": "A desire for authenticity and openness in political beliefs is constrained by fear of judgment and rejection from others.", "label": "A desire for authenticity and openness in political beliefs is constrained by fear of judgment and rejection from others.\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 79"}}, {"data": {"id": "The client struggles with assertiveness and setting boundaries, particularly in online spaces.", "label": "The client struggles with assertiveness and setting boundaries, particularly in online spaces.\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 79"}}, {"data": {"id": "The client is hesitant to engage in new experiences, such as dancing or skipping, due to feelings of awkwardness and self-consciousness.", "label": "The client is hesitant to engage in new experiences, such as dancing or skipping, due to feelings of awkwardness and self-consciousness.\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udd35\nw = 26"}}, {"data": {"id": "A past experience of hearing damage has created a lasting sensitivity to loud noises and a need for self-protection.", "label": "A past experience of hearing damage has created a lasting sensitivity to loud noises and a need for self-protection.\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 42"}}, {"data": {"id": "The client observes and reflects on their own behavior and the behavior of others, recognizing patterns and areas for personal growth.", "label": "The client observes and reflects on their own behavior and the behavior of others, recognizing patterns and areas for personal growth.\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 49"}}, {"data": {"id": "A past experience of taking swing dancing lessons has created a lasting sense of discomfort and anxiety around physical touch and intimacy with strangers.", "label": "A past experience of taking swing dancing lessons has created a lasting sense of discomfort and anxiety around physical touch and intimacy with strangers.\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udd35\nw = 17"}}, {"data": {"id": "A sense of responsibility and compassion towards others, particularly a kind ex-partner, influences decision-making and behavior.", "label": "A sense of responsibility and compassion towards others, particularly a kind ex-partner, influences decision-making and behavior.\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 78"}}, {"data": {"id": "Fear of social rejection and disapproval from others is a significant barrier to self-expression and assertiveness._The need to avoid hurting others' feelings, particularly those of a kind and non-confrontational ex-partner, drives decision-making and behavior._54", "source": "Fear of social rejection and disapproval from others is a significant barrier to self-expression and assertiveness.", "target": "The need to avoid hurting others' feelings, particularly those of a kind and non-confrontational ex-partner, drives decision-making and behavior.", "pair_label": "54", "info": "Shared underlying fear of negative social outcomes.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Fear of social rejection and disapproval from others is a significant barrier to self-expression and assertiveness._Anxiety and self-doubt are fueled by uncertainty about others' opinions and reactions._50", "source": "Fear of social rejection and disapproval from others is a significant barrier to self-expression and assertiveness.", "target": "Anxiety and self-doubt are fueled by uncertainty about others' opinions and reactions.", "pair_label": "50", "info": "Mutual reinforcement of negative self-perception", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Fear of social rejection and disapproval from others is a significant barrier to self-expression and assertiveness._A desire for authenticity and openness in political beliefs is constrained by fear of judgment and rejection from others._46", "source": "Fear of social rejection and disapproval from others is a significant barrier to self-expression and assertiveness.", "target": "A desire for authenticity and openness in political beliefs is constrained by fear of judgment and rejection from others.", "pair_label": "46", "info": "Shared underlying fear mechanism.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Fear of social rejection and disapproval from others is a significant barrier to self-expression and assertiveness._The client struggles with assertiveness and setting boundaries, particularly in online spaces._53", "source": "Fear of social rejection and disapproval from others is a significant barrier to self-expression and assertiveness.", "target": "The client struggles with assertiveness and setting boundaries, particularly in online spaces.", "pair_label": "53", "info": "Fear of rejection inhibits assertiveness", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "The need to avoid hurting others' feelings, particularly those of a kind and non-confrontational ex-partner, drives decision-making and behavior._Fear of social rejection and disapproval from others is a significant barrier to self-expression and assertiveness._87", "source": "The need to avoid hurting others' feelings, particularly those of a kind and non-confrontational ex-partner, drives decision-making and behavior.", "target": "Fear of social rejection and disapproval from others is a significant barrier to self-expression and assertiveness.", "pair_label": "87", "info": "Both processes are driven by a desire for social harmony and\navoidance of negative social outcomes.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "The need to avoid hurting others' feelings, particularly those of a kind and non-confrontational ex-partner, drives decision-making and behavior._The client struggles with assertiveness and setting boundaries, particularly in online spaces._90", "source": "The need to avoid hurting others' feelings, particularly those of a kind and non-confrontational ex-partner, drives decision-making and behavior.", "target": "The client struggles with assertiveness and setting boundaries, particularly in online spaces.", "pair_label": "90", "info": "Avoiding hurt feelings can suppress assertiveness and\nboundary-setting.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Anxiety and self-doubt are fueled by uncertainty about others' opinions and reactions._Fear of social rejection and disapproval from others is a significant barrier to self-expression and assertiveness._41", "source": "Anxiety and self-doubt are fueled by uncertainty about others' opinions and reactions.", "target": "Fear of social rejection and disapproval from others is a significant barrier to self-expression and assertiveness.", "pair_label": "41", "info": "Mutual reinforcement of social anxiety", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Anxiety and self-doubt are fueled by uncertainty about others' opinions and reactions._A desire for authenticity and openness in political beliefs is constrained by fear of judgment and rejection from others._37", "source": "Anxiety and self-doubt are fueled by uncertainty about others' opinions and reactions.", "target": "A desire for authenticity and openness in political beliefs is constrained by fear of judgment and rejection from others.", "pair_label": "37", "info": "Fear of judgment and rejection from others can suppress\nauthenticity and openness in political beliefs.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Anxiety and self-doubt are fueled by uncertainty about others' opinions and reactions._The client is hesitant to engage in new experiences, such as dancing or skipping, due to feelings of awkwardness and self-consciousness._42", "source": "Anxiety and self-doubt are fueled by uncertainty about others' opinions and reactions.", "target": "The client is hesitant to engage in new experiences, such as dancing or skipping, due to feelings of awkwardness and self-consciousness.", "pair_label": "42", "info": "Uncertainty about others' opinions and reactions fuels\nanxiety and self-doubt, which in turn intensifies feelings\nof awkwardness and self-consciousness, leading to hesitation\nin engaging in new experiences.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "A desire for authenticity and openness in political beliefs is constrained by fear of judgment and rejection from others._Fear of social rejection and disapproval from others is a significant barrier to self-expression and assertiveness._5", "source": "A desire for authenticity and openness in political beliefs is constrained by fear of judgment and rejection from others.", "target": "Fear of social rejection and disapproval from others is a significant barrier to self-expression and assertiveness.", "pair_label": "5", "info": "Shared underlying fear of judgment and rejection.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "A desire for authenticity and openness in political beliefs is constrained by fear of judgment and rejection from others._Anxiety and self-doubt are fueled by uncertainty about others' opinions and reactions._4", "source": "A desire for authenticity and openness in political beliefs is constrained by fear of judgment and rejection from others.", "target": "Anxiety and self-doubt are fueled by uncertainty about others' opinions and reactions.", "pair_label": "4", "info": "Fear of judgment and rejection from others amplifies anxiety\nand self-doubt.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "The client struggles with assertiveness and setting boundaries, particularly in online spaces._Fear of social rejection and disapproval from others is a significant barrier to self-expression and assertiveness._78", "source": "The client struggles with assertiveness and setting boundaries, particularly in online spaces.", "target": "Fear of social rejection and disapproval from others is a significant barrier to self-expression and assertiveness.", "pair_label": "78", "info": "Fear of rejection inhibits assertiveness.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "The client struggles with assertiveness and setting boundaries, particularly in online spaces._Anxiety and self-doubt are fueled by uncertainty about others' opinions and reactions._77", "source": "The client struggles with assertiveness and setting boundaries, particularly in online spaces.", "target": "Anxiety and self-doubt are fueled by uncertainty about others' opinions and reactions.", "pair_label": "77", "info": "Uncertainty about others' opinions can exacerbate\nassertiveness struggles.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "A past experience of hearing damage has created a lasting sensitivity to loud noises and a need for self-protection._The client observes and reflects on their own behavior and the behavior of others, recognizing patterns and areas for personal growth._16", "source": "A past experience of hearing damage has created a lasting sensitivity to loud noises and a need for self-protection.", "target": "The client observes and reflects on their own behavior and the behavior of others, recognizing patterns and areas for personal growth.", "pair_label": "16", "info": "Increased self-awareness and introspection can enhance the\nprotective mechanism", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "The client observes and reflects on their own behavior and the behavior of others, recognizing patterns and areas for personal growth._The client is hesitant to engage in new experiences, such as dancing or skipping, due to feelings of awkwardness and self-consciousness._70", "source": "The client observes and reflects on their own behavior and the behavior of others, recognizing patterns and areas for personal growth.", "target": "The client is hesitant to engage in new experiences, such as dancing or skipping, due to feelings of awkwardness and self-consciousness.", "pair_label": "70", "info": "Self-reflection may heighten awareness of awkwardness.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "The client is hesitant to engage in new experiences, such as dancing or skipping, due to feelings of awkwardness and self-consciousness._Anxiety and self-doubt are fueled by uncertainty about others' opinions and reactions._59", "source": "The client is hesitant to engage in new experiences, such as dancing or skipping, due to feelings of awkwardness and self-consciousness.", "target": "Anxiety and self-doubt are fueled by uncertainty about others' opinions and reactions.", "pair_label": "59", "info": "Fear of social judgment.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "A past experience of taking swing dancing lessons has created a lasting sense of discomfort and anxiety around physical touch and intimacy with strangers._Anxiety and self-doubt are fueled by uncertainty about others' opinions and reactions._22", "source": "A past experience of taking swing dancing lessons has created a lasting sense of discomfort and anxiety around physical touch and intimacy with strangers.", "target": "Anxiety and self-doubt are fueled by uncertainty about others' opinions and reactions.", "pair_label": "22", "info": "Past trauma and anxiety about intimacy can generalize to\nuncertainty about others' opinions.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Fear of social rejection and disapproval from others is a significant barrier to self-expression and assertiveness._The client is hesitant to engage in new experiences, such as dancing or skipping, due to feelings of awkwardness and self-consciousness._51", "source": "Fear of social rejection and disapproval from others is a significant barrier to self-expression and assertiveness.", "target": "The client is hesitant to engage in new experiences, such as dancing or skipping, due to feelings of awkwardness and self-consciousness.", "pair_label": "51", "info": "Fear of rejection inhibits exploration of new experiences.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "A sense of responsibility and compassion towards others, particularly a kind ex-partner, influences decision-making and behavior._The need to avoid hurting others' feelings, particularly those of a kind and non-confrontational ex-partner, drives decision-making and behavior._36", "source": "A sense of responsibility and compassion towards others, particularly a kind ex-partner, influences decision-making and behavior.", "target": "The need to avoid hurting others' feelings, particularly those of a kind and non-confrontational ex-partner, drives decision-making and behavior.", "pair_label": "36", "info": "Shared empathetic concern.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "The need to avoid hurting others' feelings, particularly those of a kind and non-confrontational ex-partner, drives decision-making and behavior._A sense of responsibility and compassion towards others, particularly a kind ex-partner, influences decision-making and behavior._85", "source": "The need to avoid hurting others' feelings, particularly those of a kind and non-confrontational ex-partner, drives decision-making and behavior.", "target": "A sense of responsibility and compassion towards others, particularly a kind ex-partner, influences decision-making and behavior.", "pair_label": "85", "info": "Shared underlying empathetic motivations.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "The client struggles with assertiveness and setting boundaries, particularly in online spaces._The need to avoid hurting others' feelings, particularly those of a kind and non-confrontational ex-partner, drives decision-making and behavior._81", "source": "The client struggles with assertiveness and setting boundaries, particularly in online spaces.", "target": "The need to avoid hurting others' feelings, particularly those of a kind and non-confrontational ex-partner, drives decision-making and behavior.", "pair_label": "81", "info": "Fear of hurting others' feelings suppresses the ability to\nassert oneself.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "A sense of responsibility and compassion towards others, particularly a kind ex-partner, influences decision-making and behavior._The client observes and reflects on their own behavior and the behavior of others, recognizing patterns and areas for personal growth._34", "source": "A sense of responsibility and compassion towards others, particularly a kind ex-partner, influences decision-making and behavior.", "target": "The client observes and reflects on their own behavior and the behavior of others, recognizing patterns and areas for personal growth.", "pair_label": "34", "info": "Compassion enhances self-reflection.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "The client is hesitant to engage in new experiences, such as dancing or skipping, due to feelings of awkwardness and self-consciousness._Fear of social rejection and disapproval from others is a significant barrier to self-expression and assertiveness._60", "source": "The client is hesitant to engage in new experiences, such as dancing or skipping, due to feelings of awkwardness and self-consciousness.", "target": "Fear of social rejection and disapproval from others is a significant barrier to self-expression and assertiveness.", "pair_label": "60", "info": "Fear of rejection reinforces hesitation.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}]
+        });
+
+        let tooltipCounter = 0;
+
+        cy.on('tap', 'edge', function(evt) {
+            var edge = evt.target;
+            var pos = evt.renderedPosition;
+            var tooltipId = "tooltip-" + (++tooltipCounter);
+
+            var tooltip = document.createElement("div");
+            tooltip.className = "tooltip";
+            tooltip.id = tooltipId;
+            tooltip.style.left = (pos.x + 20) + "px";
+            tooltip.style.top = (pos.y + 20) + "px";
+
+            var closeBtn = document.createElement("span");
+            closeBtn.className = "close-btn";
+            closeBtn.innerHTML = "&times;";
+            closeBtn.onclick = function () {
+                tooltip.remove();
+            };
+
+            tooltip.innerHTML = "";
+            tooltip.appendChild(closeBtn);
+            var content = document.createElement("div");
+            content.innerHTML = edge.data("info");
+            tooltip.appendChild(content);
+
+            document.body.appendChild(tooltip);
+            makeDraggable(tooltip);
+        });
+
+        function makeDraggable(elmnt) {
+            let offset = { x: 0, y: 0 };
+            let isDragging = false;
+
+            elmnt.addEventListener("mousedown", function (e) {
+                if (e.target.classList.contains("close-btn")) return;
+                isDragging = true;
+                offset.x = e.clientX - elmnt.offsetLeft;
+                offset.y = e.clientY - elmnt.offsetTop;
+                elmnt.style.cursor = "move";
+                e.preventDefault();
+            });
+
+            document.addEventListener("mousemove", function (e) {
+                if (isDragging) {
+                    elmnt.style.left = (e.clientX - offset.x) + "px";
+                    elmnt.style.top = (e.clientY - offset.y) + "px";
+                }
+            });
+
+            document.addEventListener("mouseup", function () {
+                isDragging = false;
+                elmnt.style.cursor = "default";
+            });
+        }
+    </script>
+</body>
+</html>

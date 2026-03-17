@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Interactive Process Network</title>
+    <script src="https://unpkg.com/cytoscape@3.21.1/dist/cytoscape.min.js"></script>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        #cy {
+            width: 100vw;
+            height: 100vh;
+            display: block;
+        }
+        .legend {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: white;
+            border: 1px solid #ccc;
+            padding: 10px;
+            font-family: sans-serif;
+            font-size: 14px;
+            z-index: 10;
+        }
+        .tooltip {
+            position: absolute;
+            background: #fefefe;
+            border: 1px solid #aaa;
+            padding: 10px;
+            font-family: sans-serif;
+            font-size: 13px;
+            max-width: 300px;
+            z-index: 20;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            cursor: default;
+        }
+        .tooltip .close-btn {
+            float: right;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="cy"></div>
+    <div class="legend">
+        <b>Legend</b><br>
+        <span style="color:#e74c3c;">Red</span>: Inhibitory<br>
+        <span style="color:#3498db;">Blue</span>: Excitatory<br>
+        <hr>
+        <b>Dimensions</b><br>
+        🔵 Cognition<br>
+        🟢 Sense of Self<br>
+        🔴 (Overt) Behaviour<br>
+        🟣 Affect<br>
+        🟠 Context/Moderators<br>
+        🟡 Attention<br>
+        ⚪ Biophysiological<br>
+        🟤 Motivation<br>
+        ⚫ Sociocultural
+    </div>
+    <script>
+        var cy = cytoscape({
+            container: document.getElementById('cy'),
+            layout: { name: 'cose' },
+            style: [
+                {
+                    selector: 'node',
+                    style: {
+                        'shape': 'roundrectangle',
+                        'label': 'data(label)',
+                        'text-wrap': 'wrap',
+                        'text-max-width': 120,
+                        'text-valign': 'center',
+                        'text-halign': 'center',
+                        'background-color': '#ffffff',
+                        'border-color': '#000000',
+                        'border-width': 1,
+                        'color': '#000',
+                        'font-size': 14,
+                        'padding': '20px',
+                        'width': 'label',
+                        'height': 'label'
+                    }
+                },
+                {
+                    selector: 'edge',
+                    style: {
+                        'curve-style': 'bezier',
+                        'target-arrow-shape': 'triangle',
+                        'arrow-scale': 1.2,
+                        'label': '',
+                        'font-size': 9,
+                        'text-rotation': 'autorotate',
+                        'text-margin-y': -10,
+                        'line-color': 'data(color)',
+                        'target-arrow-color': 'data(color)',
+                        'width': 'data(width)',
+                        'line-style': 'data(lineStyle)'
+                    }
+                }
+            ],
+            elements: [{"data": {"id": "Self-blame as a coping mechanism for uncertainty and anxiety", "label": "Self-blame as a coping mechanism for uncertainty and anxiety\n\ud83d\udfe3 \ud83d\udd35 \ud83d\udfe2\nw = 3"}}, {"data": {"id": "Sense of finality as a trigger for rumination and self-blame", "label": "Sense of finality as a trigger for rumination and self-blame\n\ud83d\udd34 \ud83d\udd35\nw = 2"}}, {"data": {"id": "Questioning of self-efficacy in response to uncertainty and anxiety", "label": "Questioning of self-efficacy in response to uncertainty and anxiety\n\ud83d\udd35 \ud83d\udfe2\nw = 2"}}, {"data": {"id": "Self-compassion as a means of addressing guilt and self-blame", "label": "Self-compassion as a means of addressing guilt and self-blame\n\ud83d\udfe3 \ud83d\udfe2\nw = 2"}}, {"data": {"id": "Rumination as a self-soothing behavior in response to perceived finality", "label": "Rumination as a self-soothing behavior in response to perceived finality\n\ud83d\udd34 \ud83d\udfe1 \ud83d\udd35\nw = 2"}}, {"data": {"id": "Avoidance of decision-making due to fear of making the wrong choice", "label": "Avoidance of decision-making due to fear of making the wrong choice\n\ud83d\udd34 \ud83d\udd35 \ud83d\udfe2\nw = 2"}}, {"data": {"id": "Difficulty articulating emotions as a manifestation of unexpressed feelings from the past", "label": "Difficulty articulating emotions as a manifestation of unexpressed feelings from the past\n\ud83d\udfe3 \ud83d\udd35 \ud83d\udfe2\nw = 2"}}, {"data": {"id": "Tension between self-efficacy and perceived competence in decision-making", "label": "Tension between self-efficacy and perceived competence in decision-making\n\ud83d\udd35 \ud83d\udfe2\nw = 2"}}, {"data": {"id": "Rules and routines as a means of coping with uncertainty and anxiety", "label": "Rules and routines as a means of coping with uncertainty and anxiety\n\ud83d\udd35 \ud83d\udfe0\nw = 2"}}, {"data": {"id": "Reduced vulnerability as a potential outcome of disrupting negative feedback loops", "label": "Reduced vulnerability as a potential outcome of disrupting negative feedback loops\n\ud83d\udfe3 \ud83d\udd35 \ud83d\udfe2\nw = 2"}}, {"data": {"id": "Collaborative goal-setting as a means of enhancing motivation and self-efficacy", "label": "Collaborative goal-setting as a means of enhancing motivation and self-efficacy\n\ud83d\udd34 \ud83d\udd35 \u26ab\nw = 2"}}, {"data": {"id": "Self-blame as a coping mechanism for uncertainty and anxiety_Sense of finality as a trigger for rumination and self-blame_79", "source": "Self-blame as a coping mechanism for uncertainty and anxiety", "target": "Sense of finality as a trigger for rumination and self-blame", "pair_label": "79", "info": "Self-blame can intensify when faced with irreversible\nsituations.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Self-blame as a coping mechanism for uncertainty and anxiety_Questioning of self-efficacy in response to uncertainty and anxiety_74", "source": "Self-blame as a coping mechanism for uncertainty and anxiety", "target": "Questioning of self-efficacy in response to uncertainty and anxiety", "pair_label": "74", "info": "Reinforcing negative self-perception.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Self-blame as a coping mechanism for uncertainty and anxiety_Self-compassion as a means of addressing guilt and self-blame_78", "source": "Self-blame as a coping mechanism for uncertainty and anxiety", "target": "Self-compassion as a means of addressing guilt and self-blame", "pair_label": "78", "info": "Self-compassion counters self-blame.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Rumination as a self-soothing behavior in response to perceived finality_Avoidance of decision-making due to fear of making the wrong choice_61", "source": "Rumination as a self-soothing behavior in response to perceived finality", "target": "Avoidance of decision-making due to fear of making the wrong choice", "pair_label": "61", "info": "Rumination can reinforce avoidance of decision-making by\nallowing individuals to temporarily escape the discomfort of\nmaking a choice.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Rumination as a self-soothing behavior in response to perceived finality_Sense of finality as a trigger for rumination and self-blame_69", "source": "Rumination as a self-soothing behavior in response to perceived finality", "target": "Sense of finality as a trigger for rumination and self-blame", "pair_label": "69", "info": "Mutually reinforcing cycle", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty articulating emotions as a manifestation of unexpressed feelings from the past_Rumination as a self-soothing behavior in response to perceived finality_26", "source": "Difficulty articulating emotions as a manifestation of unexpressed feelings from the past", "target": "Rumination as a self-soothing behavior in response to perceived finality", "pair_label": "26", "info": "Unexpressed emotions can fuel rumination as a coping\nmechanism.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty articulating emotions as a manifestation of unexpressed feelings from the past_Avoidance of decision-making due to fear of making the wrong choice_21", "source": "Difficulty articulating emotions as a manifestation of unexpressed feelings from the past", "target": "Avoidance of decision-making due to fear of making the wrong choice", "pair_label": "21", "info": "Past unexpressed emotions can lead to anxiety about making\nwrong decisions, as unresolved feelings may cloud judgment\nand increase self-doubt.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty articulating emotions as a manifestation of unexpressed feelings from the past_Self-compassion as a means of addressing guilt and self-blame_28", "source": "Difficulty articulating emotions as a manifestation of unexpressed feelings from the past", "target": "Self-compassion as a means of addressing guilt and self-blame", "pair_label": "28", "info": "Self-compassion can help alleviate the emotional blockages\nthat make articulating emotions difficult.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between self-efficacy and perceived competence in decision-making_Avoidance of decision-making due to fear of making the wrong choice_101", "source": "Tension between self-efficacy and perceived competence in decision-making", "target": "Avoidance of decision-making due to fear of making the wrong choice", "pair_label": "101", "info": "Self-doubt fuels fear.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between self-efficacy and perceived competence in decision-making_Questioning of self-efficacy in response to uncertainty and anxiety_104", "source": "Tension between self-efficacy and perceived competence in decision-making", "target": "Questioning of self-efficacy in response to uncertainty and anxiety", "pair_label": "104", "info": "Reinforces self-doubt.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Avoidance of decision-making due to fear of making the wrong choice_Tension between self-efficacy and perceived competence in decision-making_10", "source": "Avoidance of decision-making due to fear of making the wrong choice", "target": "Tension between self-efficacy and perceived competence in decision-making", "pair_label": "10", "info": "Fear of making the wrong choice can heighten tension between\nself-efficacy and perceived competence.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Avoidance of decision-making due to fear of making the wrong choice_Questioning of self-efficacy in response to uncertainty and anxiety_3", "source": "Avoidance of decision-making due to fear of making the wrong choice", "target": "Questioning of self-efficacy in response to uncertainty and anxiety", "pair_label": "3", "info": "Fear of making the wrong choice can lead to self-doubt.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Avoidance of decision-making due to fear of making the wrong choice_Rules and routines as a means of coping with uncertainty and anxiety_5", "source": "Avoidance of decision-making due to fear of making the wrong choice", "target": "Rules and routines as a means of coping with uncertainty and anxiety", "pair_label": "5", "info": "Rules and routines provide a sense of control and structure,\nthereby reducing the anxiety associated with decision-making\nuncertainty.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Sense of finality as a trigger for rumination and self-blame_Self-blame as a coping mechanism for uncertainty and anxiety_98", "source": "Sense of finality as a trigger for rumination and self-blame", "target": "Self-blame as a coping mechanism for uncertainty and anxiety", "pair_label": "98", "info": "Reinforces negative thought patterns.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Sense of finality as a trigger for rumination and self-blame_Rumination as a self-soothing behavior in response to perceived finality_97", "source": "Sense of finality as a trigger for rumination and self-blame", "target": "Rumination as a self-soothing behavior in response to perceived finality", "pair_label": "97", "info": "Finality perception intensifies self-blame rumination.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Sense of finality as a trigger for rumination and self-blame_Self-compassion as a means of addressing guilt and self-blame_99", "source": "Sense of finality as a trigger for rumination and self-blame", "target": "Self-compassion as a means of addressing guilt and self-blame", "pair_label": "99", "info": "Counteracts negative self-talk.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Sense of finality as a trigger for rumination and self-blame_Reduced vulnerability as a potential outcome of disrupting negative feedback loops_95", "source": "Sense of finality as a trigger for rumination and self-blame", "target": "Reduced vulnerability as a potential outcome of disrupting negative feedback loops", "pair_label": "95", "info": "Disrupting negative feedback loops can mitigate the sense of\nfinality.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Questioning of self-efficacy in response to uncertainty and anxiety_Self-blame as a coping mechanism for uncertainty and anxiety_37", "source": "Questioning of self-efficacy in response to uncertainty and anxiety", "target": "Self-blame as a coping mechanism for uncertainty and anxiety", "pair_label": "37", "info": "Introspective self-doubt feeds into negative self-\nattribution.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Questioning of self-efficacy in response to uncertainty and anxiety_Tension between self-efficacy and perceived competence in decision-making_40", "source": "Questioning of self-efficacy in response to uncertainty and anxiety", "target": "Tension between self-efficacy and perceived competence in decision-making", "pair_label": "40", "info": "Self-doubt fuels tension.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Questioning of self-efficacy in response to uncertainty and anxiety_Avoidance of decision-making due to fear of making the wrong choice_31", "source": "Questioning of self-efficacy in response to uncertainty and anxiety", "target": "Avoidance of decision-making due to fear of making the wrong choice", "pair_label": "31", "info": "Uncertainty and anxiety can amplify fear of making wrong\nchoices.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Questioning of self-efficacy in response to uncertainty and anxiety_Reduced vulnerability as a potential outcome of disrupting negative feedback loops_34", "source": "Questioning of self-efficacy in response to uncertainty and anxiety", "target": "Reduced vulnerability as a potential outcome of disrupting negative feedback loops", "pair_label": "34", "info": "Self-doubt can be a catalyst for seeking help.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Questioning of self-efficacy in response to uncertainty and anxiety_Collaborative goal-setting as a means of enhancing motivation and self-efficacy_32", "source": "Questioning of self-efficacy in response to uncertainty and anxiety", "target": "Collaborative goal-setting as a means of enhancing motivation and self-efficacy", "pair_label": "32", "info": "Addressing uncertainty and anxiety through collaborative\ngoal-setting enhances self-efficacy.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Self-compassion as a means of addressing guilt and self-blame_Self-blame as a coping mechanism for uncertainty and anxiety_88", "source": "Self-compassion as a means of addressing guilt and self-blame", "target": "Self-blame as a coping mechanism for uncertainty and anxiety", "pair_label": "88", "info": "Self-compassion counters self-blame.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Self-compassion as a means of addressing guilt and self-blame_Sense of finality as a trigger for rumination and self-blame_89", "source": "Self-compassion as a means of addressing guilt and self-blame", "target": "Sense of finality as a trigger for rumination and self-blame", "pair_label": "89", "info": "Self-compassion can mitigate the sense of finality's impact\non rumination and self-blame.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Self-compassion as a means of addressing guilt and self-blame_Reduced vulnerability as a potential outcome of disrupting negative feedback loops_85", "source": "Self-compassion as a means of addressing guilt and self-blame", "target": "Reduced vulnerability as a potential outcome of disrupting negative feedback loops", "pair_label": "85", "info": "Self-compassion can disrupt negative self-talk and feedback\nloops, leading to reduced vulnerability.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Self-compassion as a means of addressing guilt and self-blame_Collaborative goal-setting as a means of enhancing motivation and self-efficacy_82", "source": "Self-compassion as a means of addressing guilt and self-blame", "target": "Collaborative goal-setting as a means of enhancing motivation and self-efficacy", "pair_label": "82", "info": "Self-compassion fosters a positive self-view, enhancing\nreceptivity to collaborative goal-setting.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Rules and routines as a means of coping with uncertainty and anxiety_Avoidance of decision-making due to fear of making the wrong choice_51", "source": "Rules and routines as a means of coping with uncertainty and anxiety", "target": "Avoidance of decision-making due to fear of making the wrong choice", "pair_label": "51", "info": "Rules and routines can reinforce avoidance by providing a\nsense of control and predictability, thereby reducing the\nperceived need to make decisions.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Rules and routines as a means of coping with uncertainty and anxiety_Questioning of self-efficacy in response to uncertainty and anxiety_54", "source": "Rules and routines as a means of coping with uncertainty and anxiety", "target": "Questioning of self-efficacy in response to uncertainty and anxiety", "pair_label": "54", "info": "Rules and routines can provide a sense of control, thereby\nreducing self-doubt.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Reduced vulnerability as a potential outcome of disrupting negative feedback loops_Self-compassion as a means of addressing guilt and self-blame_48", "source": "Reduced vulnerability as a potential outcome of disrupting negative feedback loops", "target": "Self-compassion as a means of addressing guilt and self-blame", "pair_label": "48", "info": "Breaking negative patterns enhances self-kindness.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Collaborative goal-setting as a means of enhancing motivation and self-efficacy_Questioning of self-efficacy in response to uncertainty and anxiety_13", "source": "Collaborative goal-setting as a means of enhancing motivation and self-efficacy", "target": "Questioning of self-efficacy in response to uncertainty and anxiety", "pair_label": "13", "info": "Collaborative goal-setting can reduce uncertainty and\nanxiety, thereby decreasing the likelihood of questioning\nself-efficacy.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}]
+        });
+
+        let tooltipCounter = 0;
+
+        cy.on('tap', 'edge', function(evt) {
+            var edge = evt.target;
+            var pos = evt.renderedPosition;
+            var tooltipId = "tooltip-" + (++tooltipCounter);
+
+            var tooltip = document.createElement("div");
+            tooltip.className = "tooltip";
+            tooltip.id = tooltipId;
+            tooltip.style.left = (pos.x + 20) + "px";
+            tooltip.style.top = (pos.y + 20) + "px";
+
+            var closeBtn = document.createElement("span");
+            closeBtn.className = "close-btn";
+            closeBtn.innerHTML = "&times;";
+            closeBtn.onclick = function () {
+                tooltip.remove();
+            };
+
+            tooltip.innerHTML = "";
+            tooltip.appendChild(closeBtn);
+            var content = document.createElement("div");
+            content.innerHTML = edge.data("info");
+            tooltip.appendChild(content);
+
+            document.body.appendChild(tooltip);
+            makeDraggable(tooltip);
+        });
+
+        function makeDraggable(elmnt) {
+            let offset = { x: 0, y: 0 };
+            let isDragging = false;
+
+            elmnt.addEventListener("mousedown", function (e) {
+                if (e.target.classList.contains("close-btn")) return;
+                isDragging = true;
+                offset.x = e.clientX - elmnt.offsetLeft;
+                offset.y = e.clientY - elmnt.offsetTop;
+                elmnt.style.cursor = "move";
+                e.preventDefault();
+            });
+
+            document.addEventListener("mousemove", function (e) {
+                if (isDragging) {
+                    elmnt.style.left = (e.clientX - offset.x) + "px";
+                    elmnt.style.top = (e.clientY - offset.y) + "px";
+                }
+            });
+
+            document.addEventListener("mouseup", function () {
+                isDragging = false;
+                elmnt.style.cursor = "default";
+            });
+        }
+    </script>
+</body>
+</html>

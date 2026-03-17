@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Interactive Process Network</title>
+    <script src="https://unpkg.com/cytoscape@3.21.1/dist/cytoscape.min.js"></script>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        #cy {
+            width: 100vw;
+            height: 100vh;
+            display: block;
+        }
+        .legend {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: white;
+            border: 1px solid #ccc;
+            padding: 10px;
+            font-family: sans-serif;
+            font-size: 14px;
+            z-index: 10;
+        }
+        .tooltip {
+            position: absolute;
+            background: #fefefe;
+            border: 1px solid #aaa;
+            padding: 10px;
+            font-family: sans-serif;
+            font-size: 13px;
+            max-width: 300px;
+            z-index: 20;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            cursor: default;
+        }
+        .tooltip .close-btn {
+            float: right;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="cy"></div>
+    <div class="legend">
+        <b>Legend</b><br>
+        <span style="color:#e74c3c;">Red</span>: Inhibitory<br>
+        <span style="color:#3498db;">Blue</span>: Excitatory<br>
+        <hr>
+        <b>Dimensions</b><br>
+        🔵 Cognition<br>
+        🟢 Sense of Self<br>
+        🔴 (Overt) Behaviour<br>
+        🟣 Affect<br>
+        🟠 Context/Moderators<br>
+        🟡 Attention<br>
+        ⚪ Biophysiological<br>
+        🟤 Motivation<br>
+        ⚫ Sociocultural
+    </div>
+    <script>
+        var cy = cytoscape({
+            container: document.getElementById('cy'),
+            layout: { name: 'cose' },
+            style: [
+                {
+                    selector: 'node',
+                    style: {
+                        'shape': 'roundrectangle',
+                        'label': 'data(label)',
+                        'text-wrap': 'wrap',
+                        'text-max-width': 120,
+                        'text-valign': 'center',
+                        'text-halign': 'center',
+                        'background-color': '#ffffff',
+                        'border-color': '#000000',
+                        'border-width': 1,
+                        'color': '#000',
+                        'font-size': 14,
+                        'padding': '20px',
+                        'width': 'label',
+                        'height': 'label'
+                    }
+                },
+                {
+                    selector: 'edge',
+                    style: {
+                        'curve-style': 'bezier',
+                        'target-arrow-shape': 'triangle',
+                        'arrow-scale': 1.2,
+                        'label': '',
+                        'font-size': 9,
+                        'text-rotation': 'autorotate',
+                        'text-margin-y': -10,
+                        'line-color': 'data(color)',
+                        'target-arrow-color': 'data(color)',
+                        'width': 'data(width)',
+                        'line-style': 'data(lineStyle)'
+                    }
+                }
+            ],
+            elements: [{"data": {"id": "Tension between self-worth and perceived judgment from others", "label": "Tension between self-worth and perceived judgment from others\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 62"}}, {"data": {"id": "Habitual self-blame as a coping mechanism for feelings of overwhelm", "label": "Habitual self-blame as a coping mechanism for feelings of overwhelm\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 62"}}, {"data": {"id": "Difficulty in acknowledging and accepting relief from anxiety", "label": "Difficulty in acknowledging and accepting relief from anxiety\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 62"}}, {"data": {"id": "Tension between self-worth and perceived judgment from others_Habitual self-blame as a coping mechanism for feelings of overwhelm_6", "source": "Tension between self-worth and perceived judgment from others", "target": "Habitual self-blame as a coping mechanism for feelings of overwhelm", "pair_label": "6", "info": "Self-blame emerges as a maladaptive coping strategy to deal\nwith feelings of inadequacy fueled by perceived judgment.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty in acknowledging and accepting relief from anxiety_Tension between self-worth and perceived judgment from others_2", "source": "Difficulty in acknowledging and accepting relief from anxiety", "target": "Tension between self-worth and perceived judgment from others", "pair_label": "2", "info": "Anxiety relief can be perceived as a threat to self-worth if\nothers judge it as weakness.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty in acknowledging and accepting relief from anxiety_Habitual self-blame as a coping mechanism for feelings of overwhelm_1", "source": "Difficulty in acknowledging and accepting relief from anxiety", "target": "Habitual self-blame as a coping mechanism for feelings of overwhelm", "pair_label": "1", "info": "Perpetuating guilt", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Habitual self-blame as a coping mechanism for feelings of overwhelm_Tension between self-worth and perceived judgment from others_4", "source": "Habitual self-blame as a coping mechanism for feelings of overwhelm", "target": "Tension between self-worth and perceived judgment from others", "pair_label": "4", "info": "Self-blame reinforces negative self-worth.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Habitual self-blame as a coping mechanism for feelings of overwhelm_Difficulty in acknowledging and accepting relief from anxiety_3", "source": "Habitual self-blame as a coping mechanism for feelings of overwhelm", "target": "Difficulty in acknowledging and accepting relief from anxiety", "pair_label": "3", "info": "Self-blame prevents self-compassion and perpetuates negative\nself-talk.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}]
+        });
+
+        let tooltipCounter = 0;
+
+        cy.on('tap', 'edge', function(evt) {
+            var edge = evt.target;
+            var pos = evt.renderedPosition;
+            var tooltipId = "tooltip-" + (++tooltipCounter);
+
+            var tooltip = document.createElement("div");
+            tooltip.className = "tooltip";
+            tooltip.id = tooltipId;
+            tooltip.style.left = (pos.x + 20) + "px";
+            tooltip.style.top = (pos.y + 20) + "px";
+
+            var closeBtn = document.createElement("span");
+            closeBtn.className = "close-btn";
+            closeBtn.innerHTML = "&times;";
+            closeBtn.onclick = function () {
+                tooltip.remove();
+            };
+
+            tooltip.innerHTML = "";
+            tooltip.appendChild(closeBtn);
+            var content = document.createElement("div");
+            content.innerHTML = edge.data("info");
+            tooltip.appendChild(content);
+
+            document.body.appendChild(tooltip);
+            makeDraggable(tooltip);
+        });
+
+        function makeDraggable(elmnt) {
+            let offset = { x: 0, y: 0 };
+            let isDragging = false;
+
+            elmnt.addEventListener("mousedown", function (e) {
+                if (e.target.classList.contains("close-btn")) return;
+                isDragging = true;
+                offset.x = e.clientX - elmnt.offsetLeft;
+                offset.y = e.clientY - elmnt.offsetTop;
+                elmnt.style.cursor = "move";
+                e.preventDefault();
+            });
+
+            document.addEventListener("mousemove", function (e) {
+                if (isDragging) {
+                    elmnt.style.left = (e.clientX - offset.x) + "px";
+                    elmnt.style.top = (e.clientY - offset.y) + "px";
+                }
+            });
+
+            document.addEventListener("mouseup", function () {
+                isDragging = false;
+                elmnt.style.cursor = "default";
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Interactive Process Network</title>
+    <script src="https://unpkg.com/cytoscape@3.21.1/dist/cytoscape.min.js"></script>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        #cy {
+            width: 100vw;
+            height: 100vh;
+            display: block;
+        }
+        .legend {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: white;
+            border: 1px solid #ccc;
+            padding: 10px;
+            font-family: sans-serif;
+            font-size: 14px;
+            z-index: 10;
+        }
+        .tooltip {
+            position: absolute;
+            background: #fefefe;
+            border: 1px solid #aaa;
+            padding: 10px;
+            font-family: sans-serif;
+            font-size: 13px;
+            max-width: 300px;
+            z-index: 20;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            cursor: default;
+        }
+        .tooltip .close-btn {
+            float: right;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="cy"></div>
+    <div class="legend">
+        <b>Legend</b><br>
+        <span style="color:#e74c3c;">Red</span>: Inhibitory<br>
+        <span style="color:#3498db;">Blue</span>: Excitatory<br>
+        <hr>
+        <b>Dimensions</b><br>
+        🔵 Cognition<br>
+        🟢 Sense of Self<br>
+        🔴 (Overt) Behaviour<br>
+        🟣 Affect<br>
+        🟠 Context/Moderators<br>
+        🟡 Attention<br>
+        ⚪ Biophysiological<br>
+        🟤 Motivation<br>
+        ⚫ Sociocultural
+    </div>
+    <script>
+        var cy = cytoscape({
+            container: document.getElementById('cy'),
+            layout: { name: 'cose' },
+            style: [
+                {
+                    selector: 'node',
+                    style: {
+                        'shape': 'roundrectangle',
+                        'label': 'data(label)',
+                        'text-wrap': 'wrap',
+                        'text-max-width': 120,
+                        'text-valign': 'center',
+                        'text-halign': 'center',
+                        'background-color': '#ffffff',
+                        'border-color': '#000000',
+                        'border-width': 1,
+                        'color': '#000',
+                        'font-size': 14,
+                        'padding': '20px',
+                        'width': 'label',
+                        'height': 'label'
+                    }
+                },
+                {
+                    selector: 'edge',
+                    style: {
+                        'curve-style': 'bezier',
+                        'target-arrow-shape': 'triangle',
+                        'arrow-scale': 1.2,
+                        'label': '',
+                        'font-size': 9,
+                        'text-rotation': 'autorotate',
+                        'text-margin-y': -10,
+                        'line-color': 'data(color)',
+                        'target-arrow-color': 'data(color)',
+                        'width': 'data(width)',
+                        'line-style': 'data(lineStyle)'
+                    }
+                }
+            ],
+            elements: [{"data": {"id": "Self-doubt and lack of confidence in others' commitments", "label": "Self-doubt and lack of confidence in others' commitments\n\ud83d\udd35 \u26ab\nw = 4"}}, {"data": {"id": "Avoidance of structured planning due to perceived inflexibility", "label": "Avoidance of structured planning due to perceived inflexibility\n\ud83d\udd34 \ud83d\udd35 \ud83d\udfe0\nw = 4"}}, {"data": {"id": "Emotional regulation challenges in response to significant life changes", "label": "Emotional regulation challenges in response to significant life changes\n\ud83d\udfe3 \ud83d\udd35 \ud83d\udfe0\nw = 4"}}, {"data": {"id": "Emotional reactivity to changes in relationships and living situations", "label": "Emotional reactivity to changes in relationships and living situations\n\ud83d\udd35 \u26ab\nw = 1"}}, {"data": {"id": "Tension between desire for control and uncertainty about the future", "label": "Tension between desire for control and uncertainty about the future\n\ud83d\udd35 \u26ab\nw = 1"}}, {"data": {"id": "Difficulty with setting realistic goals due to uncertainty about the future", "label": "Difficulty with setting realistic goals due to uncertainty about the future\n\ud83d\udd35 \u26ab\nw = 1"}}, {"data": {"id": "Challenges with adapting to new roles and responsibilities", "label": "Challenges with adapting to new roles and responsibilities\n\ud83d\udd35 \u26ab\nw = 1"}}, {"data": {"id": "Fear of loss and adjustment to new life circumstances", "label": "Fear of loss and adjustment to new life circumstances\n\ud83d\udd35 \u26ab\nw = 1"}}, {"data": {"id": "Impact of social support on emotional well-being and stress levels", "label": "Impact of social support on emotional well-being and stress levels\n\ud83d\udd35 \ud83d\udfe0 \ud83d\udfe2\nw = 4"}}, {"data": {"id": "Cognitive dissonance between current and future self", "label": "Cognitive dissonance between current and future self\n\ud83d\udd35 \u26ab\nw = 1"}}, {"data": {"id": "Self-doubt and lack of confidence in others' commitments_Avoidance of structured planning due to perceived inflexibility_73", "source": "Self-doubt and lack of confidence in others' commitments", "target": "Avoidance of structured planning due to perceived inflexibility", "pair_label": "73", "info": "Uncertainty about others' commitments fuels anxiety about\nplanning.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Self-doubt and lack of confidence in others' commitments_Emotional regulation challenges in response to significant life changes_78", "source": "Self-doubt and lack of confidence in others' commitments", "target": "Emotional regulation challenges in response to significant life changes", "pair_label": "78", "info": "Distrust fuels emotional dysregulation", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Self-doubt and lack of confidence in others' commitments_Emotional reactivity to changes in relationships and living situations_77", "source": "Self-doubt and lack of confidence in others' commitments", "target": "Emotional reactivity to changes in relationships and living situations", "pair_label": "77", "info": "Heightened sensitivity to changes due to trust issues.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Self-doubt and lack of confidence in others' commitments_Tension between desire for control and uncertainty about the future_81", "source": "Self-doubt and lack of confidence in others' commitments", "target": "Tension between desire for control and uncertainty about the future", "pair_label": "81", "info": "Doubt fuels uncertainty.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Self-doubt and lack of confidence in others' commitments_Difficulty with setting realistic goals due to uncertainty about the future_76", "source": "Self-doubt and lack of confidence in others' commitments", "target": "Difficulty with setting realistic goals due to uncertainty about the future", "pair_label": "76", "info": "Uncertainty fuels uncertainty.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Avoidance of structured planning due to perceived inflexibility_Difficulty with setting realistic goals due to uncertainty about the future_3", "source": "Avoidance of structured planning due to perceived inflexibility", "target": "Difficulty with setting realistic goals due to uncertainty about the future", "pair_label": "3", "info": "Avoiding structured planning can lead to uncertainty about\nthe future, making it harder to set realistic goals.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Avoidance of structured planning due to perceived inflexibility_Challenges with adapting to new roles and responsibilities_1", "source": "Avoidance of structured planning due to perceived inflexibility", "target": "Challenges with adapting to new roles and responsibilities", "pair_label": "1", "info": "Inflexibility in planning can lead to difficulties in\nadjusting to new roles.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Emotional regulation challenges in response to significant life changes_Fear of loss and adjustment to new life circumstances_51", "source": "Emotional regulation challenges in response to significant life changes", "target": "Fear of loss and adjustment to new life circumstances", "pair_label": "51", "info": "Challenges in emotional regulation can amplify fear of loss\nand difficulties in adjusting to new life circumstances.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Emotional regulation challenges in response to significant life changes_Emotional reactivity to changes in relationships and living situations_50", "source": "Emotional regulation challenges in response to significant life changes", "target": "Emotional reactivity to changes in relationships and living situations", "pair_label": "50", "info": "Shared underlying emotional processing mechanisms.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Emotional regulation challenges in response to significant life changes_Tension between desire for control and uncertainty about the future_54", "source": "Emotional regulation challenges in response to significant life changes", "target": "Tension between desire for control and uncertainty about the future", "pair_label": "54", "info": "Uncertainty fuels emotional dysregulation.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Emotional regulation challenges in response to significant life changes_Difficulty with setting realistic goals due to uncertainty about the future_49", "source": "Emotional regulation challenges in response to significant life changes", "target": "Difficulty with setting realistic goals due to uncertainty about the future", "pair_label": "49", "info": "Uncertainty about the future exacerbates emotional\nregulation challenges, making it harder to set realistic\ngoals.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Emotional regulation challenges in response to significant life changes_Challenges with adapting to new roles and responsibilities_47", "source": "Emotional regulation challenges in response to significant life changes", "target": "Challenges with adapting to new roles and responsibilities", "pair_label": "47", "info": "Increased emotional dysregulation exacerbates difficulties\nin adjusting to new roles and responsibilities.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Impact of social support on emotional well-being and stress levels_Self-doubt and lack of confidence in others' commitments_71", "source": "Impact of social support on emotional well-being and stress levels", "target": "Self-doubt and lack of confidence in others' commitments", "pair_label": "71", "info": "Social support can alleviate self-doubt.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Impact of social support on emotional well-being and stress levels_Emotional regulation challenges in response to significant life changes_69", "source": "Impact of social support on emotional well-being and stress levels", "target": "Emotional regulation challenges in response to significant life changes", "pair_label": "69", "info": "Social support can exacerbate emotional regulation\nchallenges.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Impact of social support on emotional well-being and stress levels_Emotional reactivity to changes in relationships and living situations_68", "source": "Impact of social support on emotional well-being and stress levels", "target": "Emotional reactivity to changes in relationships and living situations", "pair_label": "68", "info": "Social support buffers emotional reactivity.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Fear of loss and adjustment to new life circumstances_Emotional regulation challenges in response to significant life changes_60", "source": "Fear of loss and adjustment to new life circumstances", "target": "Emotional regulation challenges in response to significant life changes", "pair_label": "60", "info": "Fear of loss can intensify emotional dysregulation.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Fear of loss and adjustment to new life circumstances_Emotional reactivity to changes in relationships and living situations_59", "source": "Fear of loss and adjustment to new life circumstances", "target": "Emotional reactivity to changes in relationships and living situations", "pair_label": "59", "info": "Fear of loss can intensify emotional reactivity.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Fear of loss and adjustment to new life circumstances_Tension between desire for control and uncertainty about the future_63", "source": "Fear of loss and adjustment to new life circumstances", "target": "Tension between desire for control and uncertainty about the future", "pair_label": "63", "info": "Fear of loss can amplify uncertainty about the future,\nincreasing tension between the desire for control and the\nuncertainty of future outcomes.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Fear of loss and adjustment to new life circumstances_Challenges with adapting to new roles and responsibilities_56", "source": "Fear of loss and adjustment to new life circumstances", "target": "Challenges with adapting to new roles and responsibilities", "pair_label": "56", "info": "Fear of loss can exacerbate challenges with adapting to new\nroles and responsibilities.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Emotional reactivity to changes in relationships and living situations_Self-doubt and lack of confidence in others' commitments_44", "source": "Emotional reactivity to changes in relationships and living situations", "target": "Self-doubt and lack of confidence in others' commitments", "pair_label": "44", "info": "Heightened emotional sensitivity to changes can fuel self-\ndoubt and mistrust in others' reliability.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Emotional reactivity to changes in relationships and living situations_Emotional regulation challenges in response to significant life changes_41", "source": "Emotional reactivity to changes in relationships and living situations", "target": "Emotional regulation challenges in response to significant life changes", "pair_label": "41", "info": "Increased emotional reactivity can overwhelm regulation\ncapacity.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Emotional reactivity to changes in relationships and living situations_Impact of social support on emotional well-being and stress levels_43", "source": "Emotional reactivity to changes in relationships and living situations", "target": "Impact of social support on emotional well-being and stress levels", "pair_label": "43", "info": "Social support buffers emotional reactivity.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Emotional reactivity to changes in relationships and living situations_Fear of loss and adjustment to new life circumstances_42", "source": "Emotional reactivity to changes in relationships and living situations", "target": "Fear of loss and adjustment to new life circumstances", "pair_label": "42", "info": "Emotional reactivity amplifies fear of loss.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between desire for control and uncertainty about the future_Self-doubt and lack of confidence in others' commitments_90", "source": "Tension between desire for control and uncertainty about the future", "target": "Self-doubt and lack of confidence in others' commitments", "pair_label": "90", "info": "Uncertainty fuels self-doubt.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between desire for control and uncertainty about the future_Avoidance of structured planning due to perceived inflexibility_82", "source": "Tension between desire for control and uncertainty about the future", "target": "Avoidance of structured planning due to perceived inflexibility", "pair_label": "82", "info": "Fear of inflexibility fuels the tension", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between desire for control and uncertainty about the future_Emotional regulation challenges in response to significant life changes_87", "source": "Tension between desire for control and uncertainty about the future", "target": "Emotional regulation challenges in response to significant life changes", "pair_label": "87", "info": "Uncertainty fuels emotional dysregulation.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between desire for control and uncertainty about the future_Fear of loss and adjustment to new life circumstances_88", "source": "Tension between desire for control and uncertainty about the future", "target": "Fear of loss and adjustment to new life circumstances", "pair_label": "88", "info": "Uncertainty fuels fear.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between desire for control and uncertainty about the future_Emotional reactivity to changes in relationships and living situations_86", "source": "Tension between desire for control and uncertainty about the future", "target": "Emotional reactivity to changes in relationships and living situations", "pair_label": "86", "info": "Uncertainty fuels reactivity", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between desire for control and uncertainty about the future_Difficulty with setting realistic goals due to uncertainty about the future_85", "source": "Tension between desire for control and uncertainty about the future", "target": "Difficulty with setting realistic goals due to uncertainty about the future", "pair_label": "85", "info": "Uncertainty fuels tension, which in turn hinders goal\nsetting.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between desire for control and uncertainty about the future_Cognitive dissonance between current and future self_84", "source": "Tension between desire for control and uncertainty about the future", "target": "Cognitive dissonance between current and future self", "pair_label": "84", "info": "Uncertainty about the future can create dissonance between\ncurrent and future self.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between desire for control and uncertainty about the future_Challenges with adapting to new roles and responsibilities_83", "source": "Tension between desire for control and uncertainty about the future", "target": "Challenges with adapting to new roles and responsibilities", "pair_label": "83", "info": "Uncertainty about the future can hinder adaptation to new\nroles and responsibilities.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty with setting realistic goals due to uncertainty about the future_Self-doubt and lack of confidence in others' commitments_35", "source": "Difficulty with setting realistic goals due to uncertainty about the future", "target": "Self-doubt and lack of confidence in others' commitments", "pair_label": "35", "info": "Uncertainty fuels self-doubt.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty with setting realistic goals due to uncertainty about the future_Avoidance of structured planning due to perceived inflexibility_28", "source": "Difficulty with setting realistic goals due to uncertainty about the future", "target": "Avoidance of structured planning due to perceived inflexibility", "pair_label": "28", "info": "Uncertainty fuels avoidance.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty with setting realistic goals due to uncertainty about the future_Emotional regulation challenges in response to significant life changes_32", "source": "Difficulty with setting realistic goals due to uncertainty about the future", "target": "Emotional regulation challenges in response to significant life changes", "pair_label": "32", "info": "Uncertainty undermines planning and goal setting,\nintensifying emotional regulation challenges in response to\nsignificant life changes.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty with setting realistic goals due to uncertainty about the future_Tension between desire for control and uncertainty about the future_36", "source": "Difficulty with setting realistic goals due to uncertainty about the future", "target": "Tension between desire for control and uncertainty about the future", "pair_label": "36", "info": "Uncertainty fuels tension.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Cognitive dissonance between current and future self_Tension between desire for control and uncertainty about the future_27", "source": "Cognitive dissonance between current and future self", "target": "Tension between desire for control and uncertainty about the future", "pair_label": "27", "info": "Dissonance about future self can amplify tension about\ncontrol and uncertainty.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Cognitive dissonance between current and future self_Difficulty with setting realistic goals due to uncertainty about the future_21", "source": "Cognitive dissonance between current and future self", "target": "Difficulty with setting realistic goals due to uncertainty about the future", "pair_label": "21", "info": "Increased dissonance can lead to uncertainty.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Challenges with adapting to new roles and responsibilities_Emotional regulation challenges in response to significant life changes_14", "source": "Challenges with adapting to new roles and responsibilities", "target": "Emotional regulation challenges in response to significant life changes", "pair_label": "14", "info": "Increased stress and uncertainty", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Challenges with adapting to new roles and responsibilities_Fear of loss and adjustment to new life circumstances_15", "source": "Challenges with adapting to new roles and responsibilities", "target": "Fear of loss and adjustment to new life circumstances", "pair_label": "15", "info": "Adapting to new roles and responsibilities can trigger fear\nof loss and adjustment to new life circumstances.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}]
+        });
+
+        let tooltipCounter = 0;
+
+        cy.on('tap', 'edge', function(evt) {
+            var edge = evt.target;
+            var pos = evt.renderedPosition;
+            var tooltipId = "tooltip-" + (++tooltipCounter);
+
+            var tooltip = document.createElement("div");
+            tooltip.className = "tooltip";
+            tooltip.id = tooltipId;
+            tooltip.style.left = (pos.x + 20) + "px";
+            tooltip.style.top = (pos.y + 20) + "px";
+
+            var closeBtn = document.createElement("span");
+            closeBtn.className = "close-btn";
+            closeBtn.innerHTML = "&times;";
+            closeBtn.onclick = function () {
+                tooltip.remove();
+            };
+
+            tooltip.innerHTML = "";
+            tooltip.appendChild(closeBtn);
+            var content = document.createElement("div");
+            content.innerHTML = edge.data("info");
+            tooltip.appendChild(content);
+
+            document.body.appendChild(tooltip);
+            makeDraggable(tooltip);
+        });
+
+        function makeDraggable(elmnt) {
+            let offset = { x: 0, y: 0 };
+            let isDragging = false;
+
+            elmnt.addEventListener("mousedown", function (e) {
+                if (e.target.classList.contains("close-btn")) return;
+                isDragging = true;
+                offset.x = e.clientX - elmnt.offsetLeft;
+                offset.y = e.clientY - elmnt.offsetTop;
+                elmnt.style.cursor = "move";
+                e.preventDefault();
+            });
+
+            document.addEventListener("mousemove", function (e) {
+                if (isDragging) {
+                    elmnt.style.left = (e.clientX - offset.x) + "px";
+                    elmnt.style.top = (e.clientY - offset.y) + "px";
+                }
+            });
+
+            document.addEventListener("mouseup", function () {
+                isDragging = false;
+                elmnt.style.cursor = "default";
+            });
+        }
+    </script>
+</body>
+</html>
