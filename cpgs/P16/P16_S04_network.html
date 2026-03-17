@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Interactive Process Network</title>
+    <script src="https://unpkg.com/cytoscape@3.21.1/dist/cytoscape.min.js"></script>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        #cy {
+            width: 100vw;
+            height: 100vh;
+            display: block;
+        }
+        .legend {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: white;
+            border: 1px solid #ccc;
+            padding: 10px;
+            font-family: sans-serif;
+            font-size: 14px;
+            z-index: 10;
+        }
+        .tooltip {
+            position: absolute;
+            background: #fefefe;
+            border: 1px solid #aaa;
+            padding: 10px;
+            font-family: sans-serif;
+            font-size: 13px;
+            max-width: 300px;
+            z-index: 20;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            cursor: default;
+        }
+        .tooltip .close-btn {
+            float: right;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="cy"></div>
+    <div class="legend">
+        <b>Legend</b><br>
+        <span style="color:#e74c3c;">Red</span>: Inhibitory<br>
+        <span style="color:#3498db;">Blue</span>: Excitatory<br>
+        <hr>
+        <b>Dimensions</b><br>
+        🔵 Cognition<br>
+        🟢 Sense of Self<br>
+        🔴 (Overt) Behaviour<br>
+        🟣 Affect<br>
+        🟠 Context/Moderators<br>
+        🟡 Attention<br>
+        ⚪ Biophysiological<br>
+        🟤 Motivation<br>
+        ⚫ Sociocultural
+    </div>
+    <script>
+        var cy = cytoscape({
+            container: document.getElementById('cy'),
+            layout: { name: 'cose' },
+            style: [
+                {
+                    selector: 'node',
+                    style: {
+                        'shape': 'roundrectangle',
+                        'label': 'data(label)',
+                        'text-wrap': 'wrap',
+                        'text-max-width': 120,
+                        'text-valign': 'center',
+                        'text-halign': 'center',
+                        'background-color': '#ffffff',
+                        'border-color': '#000000',
+                        'border-width': 1,
+                        'color': '#000',
+                        'font-size': 14,
+                        'padding': '20px',
+                        'width': 'label',
+                        'height': 'label'
+                    }
+                },
+                {
+                    selector: 'edge',
+                    style: {
+                        'curve-style': 'bezier',
+                        'target-arrow-shape': 'triangle',
+                        'arrow-scale': 1.2,
+                        'label': '',
+                        'font-size': 9,
+                        'text-rotation': 'autorotate',
+                        'text-margin-y': -10,
+                        'line-color': 'data(color)',
+                        'target-arrow-color': 'data(color)',
+                        'width': 'data(width)',
+                        'line-style': 'data(lineStyle)'
+                    }
+                }
+            ],
+            elements: [{"data": {"id": "Struggling to establish independence from past relationship patterns", "label": "Struggling to establish independence from past relationship patterns\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 5"}}, {"data": {"id": "Difficulty articulating emotions and needs in current relationships", "label": "Difficulty articulating emotions and needs in current relationships\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 5"}}, {"data": {"id": "Tension between self-blame and recognition of shared responsibility in relationship dynamics", "label": "Tension between self-blame and recognition of shared responsibility in relationship dynamics\n\ud83d\udd34 \ud83d\udd35 \ud83d\udfe2\nw = 5"}}, {"data": {"id": "Navigating boundaries and emotional labor in post-breakup interactions", "label": "Navigating boundaries and emotional labor in post-breakup interactions\n\ud83d\udd34 \ud83d\udfe1 \ud83d\udd35\nw = 5"}}, {"data": {"id": "Uncertainty about personal growth and learning from past experiences", "label": "Uncertainty about personal growth and learning from past experiences\n\ud83d\udd34 \ud83d\udd35 \ud83d\udfe2\nw = 5"}}, {"data": {"id": "Intrusive urges and emotional dysregulation in response to triggers", "label": "Intrusive urges and emotional dysregulation in response to triggers\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udd35\nw = 5"}}, {"data": {"id": "Ambivalence about maintaining emotional connection with ex-partner", "label": "Ambivalence about maintaining emotional connection with ex-partner\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 5"}}, {"data": {"id": "Exploring the impact of past relationship dynamics on current emotional experiences", "label": "Exploring the impact of past relationship dynamics on current emotional experiences\n\ud83d\udd34 \ud83d\udd35 \ud83d\udfe0\nw = 5"}}, {"data": {"id": "Challenges in practicing self-compassion and recognizing emotional needs", "label": "Challenges in practicing self-compassion and recognizing emotional needs\n\ud83d\udfe3 \ud83d\udd35 \ud83d\udfe2\nw = 5"}}, {"data": {"id": "Resisting social support and struggling with feelings of isolation", "label": "Resisting social support and struggling with feelings of isolation\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udd35\nw = 5"}}, {"data": {"id": "Struggling to establish independence from past relationship patterns_Difficulty articulating emotions and needs in current relationships_66", "source": "Struggling to establish independence from past relationship patterns", "target": "Difficulty articulating emotions and needs in current relationships", "pair_label": "66", "info": "Past patterns influence current communication.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggling to establish independence from past relationship patterns_Tension between self-blame and recognition of shared responsibility in relationship dynamics_71", "source": "Struggling to establish independence from past relationship patterns", "target": "Tension between self-blame and recognition of shared responsibility in relationship dynamics", "pair_label": "71", "info": "Self-blame and shared responsibility tensions can intensify\nstruggles with independence.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggling to establish independence from past relationship patterns_Navigating boundaries and emotional labor in post-breakup interactions_69", "source": "Struggling to establish independence from past relationship patterns", "target": "Navigating boundaries and emotional labor in post-breakup interactions", "pair_label": "69", "info": "Past patterns influence current boundaries.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggling to establish independence from past relationship patterns_Uncertainty about personal growth and learning from past experiences_72", "source": "Struggling to establish independence from past relationship patterns", "target": "Uncertainty about personal growth and learning from past experiences", "pair_label": "72", "info": "Reflecting on past experiences influences personal growth\nand learning.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggling to establish independence from past relationship patterns_Intrusive urges and emotional dysregulation in response to triggers_68", "source": "Struggling to establish independence from past relationship patterns", "target": "Intrusive urges and emotional dysregulation in response to triggers", "pair_label": "68", "info": "Past patterns trigger urges and dysregulation.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggling to establish independence from past relationship patterns_Ambivalence about maintaining emotional connection with ex-partner_64", "source": "Struggling to establish independence from past relationship patterns", "target": "Ambivalence about maintaining emotional connection with ex-partner", "pair_label": "64", "info": "Past relationship patterns influence emotional connection", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggling to establish independence from past relationship patterns_Exploring the impact of past relationship dynamics on current emotional experiences_67", "source": "Struggling to establish independence from past relationship patterns", "target": "Exploring the impact of past relationship dynamics on current emotional experiences", "pair_label": "67", "info": "Reflecting on past dynamics enhances understanding of\ncurrent emotional responses.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty articulating emotions and needs in current relationships_Struggling to establish independence from past relationship patterns_25", "source": "Difficulty articulating emotions and needs in current relationships", "target": "Struggling to establish independence from past relationship patterns", "pair_label": "25", "info": "Past patterns reinforce current struggles.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty articulating emotions and needs in current relationships_Challenges in practicing self-compassion and recognizing emotional needs_20", "source": "Difficulty articulating emotions and needs in current relationships", "target": "Challenges in practicing self-compassion and recognizing emotional needs", "pair_label": "20", "info": "Linked through emotional awareness and expression.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty articulating emotions and needs in current relationships_Navigating boundaries and emotional labor in post-breakup interactions_23", "source": "Difficulty articulating emotions and needs in current relationships", "target": "Navigating boundaries and emotional labor in post-breakup interactions", "pair_label": "23", "info": "Past difficulties in articulating emotions and needs can\nlead to challenges in navigating boundaries and emotional\nlabor in post-breakup interactions.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty articulating emotions and needs in current relationships_Resisting social support and struggling with feelings of isolation_24", "source": "Difficulty articulating emotions and needs in current relationships", "target": "Resisting social support and struggling with feelings of isolation", "pair_label": "24", "info": "Increased difficulty articulating emotions and needs may\nlead to frustration, causing individuals to resist social\nsupport and feel isolated.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty articulating emotions and needs in current relationships_Intrusive urges and emotional dysregulation in response to triggers_22", "source": "Difficulty articulating emotions and needs in current relationships", "target": "Intrusive urges and emotional dysregulation in response to triggers", "pair_label": "22", "info": "Unexpressed emotions fuel dysregulation.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty articulating emotions and needs in current relationships_Exploring the impact of past relationship dynamics on current emotional experiences_21", "source": "Difficulty articulating emotions and needs in current relationships", "target": "Exploring the impact of past relationship dynamics on current emotional experiences", "pair_label": "21", "info": "Past relationship dynamics can significantly influence\ncurrent emotional experiences and ability to articulate\nemotions and needs.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between self-blame and recognition of shared responsibility in relationship dynamics_Struggling to establish independence from past relationship patterns_80", "source": "Tension between self-blame and recognition of shared responsibility in relationship dynamics", "target": "Struggling to establish independence from past relationship patterns", "pair_label": "80", "info": "Self-blame can reinforce patterns.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between self-blame and recognition of shared responsibility in relationship dynamics_Difficulty articulating emotions and needs in current relationships_75", "source": "Tension between self-blame and recognition of shared responsibility in relationship dynamics", "target": "Difficulty articulating emotions and needs in current relationships", "pair_label": "75", "info": "Increased self-blame in relationships can lead to heightened\nemotional suppression, making it more challenging to\narticulate emotions and needs.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between self-blame and recognition of shared responsibility in relationship dynamics_Challenges in practicing self-compassion and recognizing emotional needs_74", "source": "Tension between self-blame and recognition of shared responsibility in relationship dynamics", "target": "Challenges in practicing self-compassion and recognizing emotional needs", "pair_label": "74", "info": "Self-blame can exacerbate challenges in self-compassion.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between self-blame and recognition of shared responsibility in relationship dynamics_Exploring the impact of past relationship dynamics on current emotional experiences_76", "source": "Tension between self-blame and recognition of shared responsibility in relationship dynamics", "target": "Exploring the impact of past relationship dynamics on current emotional experiences", "pair_label": "76", "info": "Self-blame and shared responsibility tensions can fuel\nexploration of past dynamics.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Challenges in practicing self-compassion and recognizing emotional needs_Difficulty articulating emotions and needs in current relationships_11", "source": "Challenges in practicing self-compassion and recognizing emotional needs", "target": "Difficulty articulating emotions and needs in current relationships", "pair_label": "11", "info": "Self-compassion and emotional awareness facilitate emotional\nexpression.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Challenges in practicing self-compassion and recognizing emotional needs_Intrusive urges and emotional dysregulation in response to triggers_13", "source": "Challenges in practicing self-compassion and recognizing emotional needs", "target": "Intrusive urges and emotional dysregulation in response to triggers", "pair_label": "13", "info": "Lack of self-compassion and unmet emotional needs can\nintensify emotional dysregulation and increase\nsusceptibility to intrusive urges.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Navigating boundaries and emotional labor in post-breakup interactions_Struggling to establish independence from past relationship patterns_52", "source": "Navigating boundaries and emotional labor in post-breakup interactions", "target": "Struggling to establish independence from past relationship patterns", "pair_label": "52", "info": "Both processes are intertwined in the healing journey of a\npost-breakup recovery, as one's ability to navigate\nboundaries and manage emotional labor directly influences\nthe capacity to break free from past relationship patterns.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Navigating boundaries and emotional labor in post-breakup interactions_Resisting social support and struggling with feelings of isolation_51", "source": "Navigating boundaries and emotional labor in post-breakup interactions", "target": "Resisting social support and struggling with feelings of isolation", "pair_label": "51", "info": "Avoiding emotional support can hinder boundary setting.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Navigating boundaries and emotional labor in post-breakup interactions_Intrusive urges and emotional dysregulation in response to triggers_50", "source": "Navigating boundaries and emotional labor in post-breakup interactions", "target": "Intrusive urges and emotional dysregulation in response to triggers", "pair_label": "50", "info": "Post-breakup interactions can trigger intrusive urges.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Navigating boundaries and emotional labor in post-breakup interactions_Ambivalence about maintaining emotional connection with ex-partner_46", "source": "Navigating boundaries and emotional labor in post-breakup interactions", "target": "Ambivalence about maintaining emotional connection with ex-partner", "pair_label": "46", "info": "Navigating boundaries can fuel ambivalence.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Navigating boundaries and emotional labor in post-breakup interactions_Exploring the impact of past relationship dynamics on current emotional experiences_49", "source": "Navigating boundaries and emotional labor in post-breakup interactions", "target": "Exploring the impact of past relationship dynamics on current emotional experiences", "pair_label": "49", "info": "Navigating boundaries post-breakup can trigger exploration\nof past dynamics.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Uncertainty about personal growth and learning from past experiences_Struggling to establish independence from past relationship patterns_89", "source": "Uncertainty about personal growth and learning from past experiences", "target": "Struggling to establish independence from past relationship patterns", "pair_label": "89", "info": "Uncertainty about personal growth can lead to a struggle to\nestablish independence from past relationship patterns.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Uncertainty about personal growth and learning from past experiences_Exploring the impact of past relationship dynamics on current emotional experiences_85", "source": "Uncertainty about personal growth and learning from past experiences", "target": "Exploring the impact of past relationship dynamics on current emotional experiences", "pair_label": "85", "info": "Reflecting on past experiences can inform personal growth.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Resisting social support and struggling with feelings of isolation_Struggling to establish independence from past relationship patterns_61", "source": "Resisting social support and struggling with feelings of isolation", "target": "Struggling to establish independence from past relationship patterns", "pair_label": "61", "info": "Perpetuating past patterns", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Resisting social support and struggling with feelings of isolation_Difficulty articulating emotions and needs in current relationships_57", "source": "Resisting social support and struggling with feelings of isolation", "target": "Difficulty articulating emotions and needs in current relationships", "pair_label": "57", "info": "Resisting social support can exacerbate difficulties in\narticulation.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Resisting social support and struggling with feelings of isolation_Navigating boundaries and emotional labor in post-breakup interactions_60", "source": "Resisting social support and struggling with feelings of isolation", "target": "Navigating boundaries and emotional labor in post-breakup interactions", "pair_label": "60", "info": "Increased emotional labor in post-breakup interactions can\nexacerbate feelings of isolation.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Resisting social support and struggling with feelings of isolation_Intrusive urges and emotional dysregulation in response to triggers_59", "source": "Resisting social support and struggling with feelings of isolation", "target": "Intrusive urges and emotional dysregulation in response to triggers", "pair_label": "59", "info": "Social isolation can exacerbate emotional vulnerability.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Resisting social support and struggling with feelings of isolation_Exploring the impact of past relationship dynamics on current emotional experiences_58", "source": "Resisting social support and struggling with feelings of isolation", "target": "Exploring the impact of past relationship dynamics on current emotional experiences", "pair_label": "58", "info": "Past relationship dynamics can contribute to current\nfeelings of isolation.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Intrusive urges and emotional dysregulation in response to triggers_Struggling to establish independence from past relationship patterns_43", "source": "Intrusive urges and emotional dysregulation in response to triggers", "target": "Struggling to establish independence from past relationship patterns", "pair_label": "43", "info": "Triggers of past relationships can intensify emotional\ndysregulation.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Intrusive urges and emotional dysregulation in response to triggers_Challenges in practicing self-compassion and recognizing emotional needs_38", "source": "Intrusive urges and emotional dysregulation in response to triggers", "target": "Challenges in practicing self-compassion and recognizing emotional needs", "pair_label": "38", "info": "Intrusive urges and emotional dysregulation can overwhelm\nself-compassion and obscure emotional needs.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Intrusive urges and emotional dysregulation in response to triggers_Resisting social support and struggling with feelings of isolation_42", "source": "Intrusive urges and emotional dysregulation in response to triggers", "target": "Resisting social support and struggling with feelings of isolation", "pair_label": "42", "info": "Emotional dysregulation can make individuals withdraw from\nsocial support", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Intrusive urges and emotional dysregulation in response to triggers_Ambivalence about maintaining emotional connection with ex-partner_37", "source": "Intrusive urges and emotional dysregulation in response to triggers", "target": "Ambivalence about maintaining emotional connection with ex-partner", "pair_label": "37", "info": "Triggered emotional dysregulation can intensify conflicted\nfeelings about the ex-partner.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Ambivalence about maintaining emotional connection with ex-partner_Navigating boundaries and emotional labor in post-breakup interactions_5", "source": "Ambivalence about maintaining emotional connection with ex-partner", "target": "Navigating boundaries and emotional labor in post-breakup interactions", "pair_label": "5", "info": "Emotional investment fuels boundary navigation.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Ambivalence about maintaining emotional connection with ex-partner_Intrusive urges and emotional dysregulation in response to triggers_4", "source": "Ambivalence about maintaining emotional connection with ex-partner", "target": "Intrusive urges and emotional dysregulation in response to triggers", "pair_label": "4", "info": "Ambivalence fuels emotional turmoil.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Ambivalence about maintaining emotional connection with ex-partner_Exploring the impact of past relationship dynamics on current emotional experiences_3", "source": "Ambivalence about maintaining emotional connection with ex-partner", "target": "Exploring the impact of past relationship dynamics on current emotional experiences", "pair_label": "3", "info": "Reflecting on past dynamics can intensify emotional\nambivalence.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Exploring the impact of past relationship dynamics on current emotional experiences_Struggling to establish independence from past relationship patterns_34", "source": "Exploring the impact of past relationship dynamics on current emotional experiences", "target": "Struggling to establish independence from past relationship patterns", "pair_label": "34", "info": "Past relationship dynamics influence current emotional\nexperiences, which in turn fuels the struggle for\nindependence.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Exploring the impact of past relationship dynamics on current emotional experiences_Difficulty articulating emotions and needs in current relationships_30", "source": "Exploring the impact of past relationship dynamics on current emotional experiences", "target": "Difficulty articulating emotions and needs in current relationships", "pair_label": "30", "info": "Past relationship dynamics influence current emotional\nexperiences, which in turn affect the ability to articulate\nemotions and needs.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Exploring the impact of past relationship dynamics on current emotional experiences_Challenges in practicing self-compassion and recognizing emotional needs_29", "source": "Exploring the impact of past relationship dynamics on current emotional experiences", "target": "Challenges in practicing self-compassion and recognizing emotional needs", "pair_label": "29", "info": "Past relationship dynamics can influence current emotional\nexperiences, which in turn can affect one's ability to\npractice self-compassion and recognize emotional needs.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Exploring the impact of past relationship dynamics on current emotional experiences_Navigating boundaries and emotional labor in post-breakup interactions_32", "source": "Exploring the impact of past relationship dynamics on current emotional experiences", "target": "Navigating boundaries and emotional labor in post-breakup interactions", "pair_label": "32", "info": "Informing emotional regulation.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Exploring the impact of past relationship dynamics on current emotional experiences_Uncertainty about personal growth and learning from past experiences_36", "source": "Exploring the impact of past relationship dynamics on current emotional experiences", "target": "Uncertainty about personal growth and learning from past experiences", "pair_label": "36", "info": "Past experiences shape perspectives.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Exploring the impact of past relationship dynamics on current emotional experiences_Intrusive urges and emotional dysregulation in response to triggers_31", "source": "Exploring the impact of past relationship dynamics on current emotional experiences", "target": "Intrusive urges and emotional dysregulation in response to triggers", "pair_label": "31", "info": "Past relationship dynamics influence emotional responses to\ntriggers.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Exploring the impact of past relationship dynamics on current emotional experiences_Ambivalence about maintaining emotional connection with ex-partner_28", "source": "Exploring the impact of past relationship dynamics on current emotional experiences", "target": "Ambivalence about maintaining emotional connection with ex-partner", "pair_label": "28", "info": "Reflecting on past dynamics can intensify conflicted\nfeelings about the ex-partner.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Ambivalence about maintaining emotional connection with ex-partner_Struggling to establish independence from past relationship patterns_7", "source": "Ambivalence about maintaining emotional connection with ex-partner", "target": "Struggling to establish independence from past relationship patterns", "pair_label": "7", "info": "Maintaining emotional connection hinders independence.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}]
+        });
+
+        let tooltipCounter = 0;
+
+        cy.on('tap', 'edge', function(evt) {
+            var edge = evt.target;
+            var pos = evt.renderedPosition;
+            var tooltipId = "tooltip-" + (++tooltipCounter);
+
+            var tooltip = document.createElement("div");
+            tooltip.className = "tooltip";
+            tooltip.id = tooltipId;
+            tooltip.style.left = (pos.x + 20) + "px";
+            tooltip.style.top = (pos.y + 20) + "px";
+
+            var closeBtn = document.createElement("span");
+            closeBtn.className = "close-btn";
+            closeBtn.innerHTML = "&times;";
+            closeBtn.onclick = function () {
+                tooltip.remove();
+            };
+
+            tooltip.innerHTML = "";
+            tooltip.appendChild(closeBtn);
+            var content = document.createElement("div");
+            content.innerHTML = edge.data("info");
+            tooltip.appendChild(content);
+
+            document.body.appendChild(tooltip);
+            makeDraggable(tooltip);
+        });
+
+        function makeDraggable(elmnt) {
+            let offset = { x: 0, y: 0 };
+            let isDragging = false;
+
+            elmnt.addEventListener("mousedown", function (e) {
+                if (e.target.classList.contains("close-btn")) return;
+                isDragging = true;
+                offset.x = e.clientX - elmnt.offsetLeft;
+                offset.y = e.clientY - elmnt.offsetTop;
+                elmnt.style.cursor = "move";
+                e.preventDefault();
+            });
+
+            document.addEventListener("mousemove", function (e) {
+                if (isDragging) {
+                    elmnt.style.left = (e.clientX - offset.x) + "px";
+                    elmnt.style.top = (e.clientY - offset.y) + "px";
+                }
+            });
+
+            document.addEventListener("mouseup", function () {
+                isDragging = false;
+                elmnt.style.cursor = "default";
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Interactive Process Network</title>
+    <script src="https://unpkg.com/cytoscape@3.21.1/dist/cytoscape.min.js"></script>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        #cy {
+            width: 100vw;
+            height: 100vh;
+            display: block;
+        }
+        .legend {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: white;
+            border: 1px solid #ccc;
+            padding: 10px;
+            font-family: sans-serif;
+            font-size: 14px;
+            z-index: 10;
+        }
+        .tooltip {
+            position: absolute;
+            background: #fefefe;
+            border: 1px solid #aaa;
+            padding: 10px;
+            font-family: sans-serif;
+            font-size: 13px;
+            max-width: 300px;
+            z-index: 20;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            cursor: default;
+        }
+        .tooltip .close-btn {
+            float: right;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="cy"></div>
+    <div class="legend">
+        <b>Legend</b><br>
+        <span style="color:#e74c3c;">Red</span>: Inhibitory<br>
+        <span style="color:#3498db;">Blue</span>: Excitatory<br>
+        <hr>
+        <b>Dimensions</b><br>
+        🔵 Cognition<br>
+        🟢 Sense of Self<br>
+        🔴 (Overt) Behaviour<br>
+        🟣 Affect<br>
+        🟠 Context/Moderators<br>
+        🟡 Attention<br>
+        ⚪ Biophysiological<br>
+        🟤 Motivation<br>
+        ⚫ Sociocultural
+    </div>
+    <script>
+        var cy = cytoscape({
+            container: document.getElementById('cy'),
+            layout: { name: 'cose' },
+            style: [
+                {
+                    selector: 'node',
+                    style: {
+                        'shape': 'roundrectangle',
+                        'label': 'data(label)',
+                        'text-wrap': 'wrap',
+                        'text-max-width': 120,
+                        'text-valign': 'center',
+                        'text-halign': 'center',
+                        'background-color': '#ffffff',
+                        'border-color': '#000000',
+                        'border-width': 1,
+                        'color': '#000',
+                        'font-size': 14,
+                        'padding': '20px',
+                        'width': 'label',
+                        'height': 'label'
+                    }
+                },
+                {
+                    selector: 'edge',
+                    style: {
+                        'curve-style': 'bezier',
+                        'target-arrow-shape': 'triangle',
+                        'arrow-scale': 1.2,
+                        'label': '',
+                        'font-size': 9,
+                        'text-rotation': 'autorotate',
+                        'text-margin-y': -10,
+                        'line-color': 'data(color)',
+                        'target-arrow-color': 'data(color)',
+                        'width': 'data(width)',
+                        'line-style': 'data(lineStyle)'
+                    }
+                }
+            ],
+            elements: [{"data": {"id": "Worthlessness is a self-reinforcing pattern that exacerbates body image issues.", "label": "Worthlessness is a self-reinforcing pattern that exacerbates body image issues.\n\ud83d\udd35 \ud83d\udfe0\nw = 2"}}, {"data": {"id": "Struggling to change behavior is linked to procrastination and self-blame.", "label": "Struggling to change behavior is linked to procrastination and self-blame.\n\ud83d\udd35\nw = 2"}}, {"data": {"id": "Unhealthy eating and lack of exercise are linked to body image issues and low self-esteem.", "label": "Unhealthy eating and lack of exercise are linked to body image issues and low self-esteem.\n\ud83d\udfe0\nw = 1"}}, {"data": {"id": "Negative self-criticism fuels unhealthy eating and body image difficulties.", "label": "Negative self-criticism fuels unhealthy eating and body image difficulties.\n\ud83d\udfe0 \ud83d\udfe2\nw = 2"}}, {"data": {"id": "Worthlessness and self-blame are key factors in the client's emotional distress.", "label": "Worthlessness and self-blame are key factors in the client's emotional distress.\n\ud83d\udd35 \ud83d\udfe2\nw = 2"}}, {"data": {"id": "Procrastination and self-blame are interconnected, forming a vicious cycle.", "label": "Procrastination and self-blame are interconnected, forming a vicious cycle.\n\ud83d\udd35 \ud83d\udfe2\nw = 2"}}, {"data": {"id": "Struggling to do good is connected to procrastination, self-blame, and body image issues.", "label": "Struggling to do good is connected to procrastination, self-blame, and body image issues.\n\ud83d\udd35\nw = 2"}}, {"data": {"id": "Self-blame and negative self-criticism are bi-directionally related, reinforcing each other.", "label": "Self-blame and negative self-criticism are bi-directionally related, reinforcing each other.\n\ud83d\udfe0 \ud83d\udfe2\nw = 2"}}, {"data": {"id": "Body image issues are closely related to feelings of worthlessness and low self-esteem.", "label": "Body image issues are closely related to feelings of worthlessness and low self-esteem.\n\ud83d\udd35 \ud83d\udfe0\nw = 2"}}, {"data": {"id": "Relationship distress is tied to feelings of worthlessness and self-blame.", "label": "Relationship distress is tied to feelings of worthlessness and self-blame.\n\ud83d\udd35\nw = 2"}}, {"data": {"id": "Worthlessness is a self-reinforcing pattern that exacerbates body image issues._Struggling to change behavior is linked to procrastination and self-blame._87", "source": "Worthlessness is a self-reinforcing pattern that exacerbates body image issues.", "target": "Struggling to change behavior is linked to procrastination and self-blame.", "pair_label": "87", "info": "Reinforcing self-blame", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Worthlessness is a self-reinforcing pattern that exacerbates body image issues._Unhealthy eating and lack of exercise are linked to body image issues and low self-esteem._89", "source": "Worthlessness is a self-reinforcing pattern that exacerbates body image issues.", "target": "Unhealthy eating and lack of exercise are linked to body image issues and low self-esteem.", "pair_label": "89", "info": "Shared underlying factors of low self-esteem and body image\nissues.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Negative self-criticism fuels unhealthy eating and body image difficulties._Worthlessness and self-blame are key factors in the client's emotional distress._17", "source": "Negative self-criticism fuels unhealthy eating and body image difficulties.", "target": "Worthlessness and self-blame are key factors in the client's emotional distress.", "pair_label": "17", "info": "Shared underlying self-devaluation.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Negative self-criticism fuels unhealthy eating and body image difficulties._Unhealthy eating and lack of exercise are linked to body image issues and low self-esteem._16", "source": "Negative self-criticism fuels unhealthy eating and body image difficulties.", "target": "Unhealthy eating and lack of exercise are linked to body image issues and low self-esteem.", "pair_label": "16", "info": "Shared body image difficulties", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Procrastination and self-blame are interconnected, forming a vicious cycle._Struggling to do good is connected to procrastination, self-blame, and body image issues._24", "source": "Procrastination and self-blame are interconnected, forming a vicious cycle.", "target": "Struggling to do good is connected to procrastination, self-blame, and body image issues.", "pair_label": "24", "info": "Shared underlying mechanisms", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Procrastination and self-blame are interconnected, forming a vicious cycle._Worthlessness and self-blame are key factors in the client's emotional distress._26", "source": "Procrastination and self-blame are interconnected, forming a vicious cycle.", "target": "Worthlessness and self-blame are key factors in the client's emotional distress.", "pair_label": "26", "info": "Shared self-blame component.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Self-blame and negative self-criticism are bi-directionally related, reinforcing each other._Worthlessness is a self-reinforcing pattern that exacerbates body image issues._45", "source": "Self-blame and negative self-criticism are bi-directionally related, reinforcing each other.", "target": "Worthlessness is a self-reinforcing pattern that exacerbates body image issues.", "pair_label": "45", "info": "Shared underlying mechanisms of self-perpetuating negative\nself-concept", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Self-blame and negative self-criticism are bi-directionally related, reinforcing each other._Body image issues are closely related to feelings of worthlessness and low self-esteem._37", "source": "Self-blame and negative self-criticism are bi-directionally related, reinforcing each other.", "target": "Body image issues are closely related to feelings of worthlessness and low self-esteem.", "pair_label": "37", "info": "Shared underlying self-perception mechanisms.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Self-blame and negative self-criticism are bi-directionally related, reinforcing each other._Worthlessness and self-blame are key factors in the client's emotional distress._44", "source": "Self-blame and negative self-criticism are bi-directionally related, reinforcing each other.", "target": "Worthlessness and self-blame are key factors in the client's emotional distress.", "pair_label": "44", "info": "Shared self-blame component.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggling to do good is connected to procrastination, self-blame, and body image issues._Worthlessness is a self-reinforcing pattern that exacerbates body image issues._63", "source": "Struggling to do good is connected to procrastination, self-blame, and body image issues.", "target": "Worthlessness is a self-reinforcing pattern that exacerbates body image issues.", "pair_label": "63", "info": "Shared underlying issues of self-perception and body image.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggling to do good is connected to procrastination, self-blame, and body image issues._Self-blame and negative self-criticism are bi-directionally related, reinforcing each other._59", "source": "Struggling to do good is connected to procrastination, self-blame, and body image issues.", "target": "Self-blame and negative self-criticism are bi-directionally related, reinforcing each other.", "pair_label": "59", "info": "Negative self-talk can exacerbate self-blame.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggling to do good is connected to procrastination, self-blame, and body image issues._Worthlessness and self-blame are key factors in the client's emotional distress._62", "source": "Struggling to do good is connected to procrastination, self-blame, and body image issues.", "target": "Worthlessness and self-blame are key factors in the client's emotional distress.", "pair_label": "62", "info": "Self-blame is a common thread.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Worthlessness and self-blame are key factors in the client's emotional distress._Negative self-criticism fuels unhealthy eating and body image difficulties._74", "source": "Worthlessness and self-blame are key factors in the client's emotional distress.", "target": "Negative self-criticism fuels unhealthy eating and body image difficulties.", "pair_label": "74", "info": "Shared underlying negative self-perception.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Worthlessness and self-blame are key factors in the client's emotional distress._Self-blame and negative self-criticism are bi-directionally related, reinforcing each other._77", "source": "Worthlessness and self-blame are key factors in the client's emotional distress.", "target": "Self-blame and negative self-criticism are bi-directionally related, reinforcing each other.", "pair_label": "77", "info": "Reinforcing cycle of self-blame", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Worthlessness and self-blame are key factors in the client's emotional distress._Struggling to do good is connected to procrastination, self-blame, and body image issues._79", "source": "Worthlessness and self-blame are key factors in the client's emotional distress.", "target": "Struggling to do good is connected to procrastination, self-blame, and body image issues.", "pair_label": "79", "info": "Shared self-blame component", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggling to change behavior is linked to procrastination and self-blame._Procrastination and self-blame are interconnected, forming a vicious cycle._48", "source": "Struggling to change behavior is linked to procrastination and self-blame.", "target": "Procrastination and self-blame are interconnected, forming a vicious cycle.", "pair_label": "48", "info": "Shared components reinforce each other.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggling to change behavior is linked to procrastination and self-blame._Self-blame and negative self-criticism are bi-directionally related, reinforcing each other._50", "source": "Struggling to change behavior is linked to procrastination and self-blame.", "target": "Self-blame and negative self-criticism are bi-directionally related, reinforcing each other.", "pair_label": "50", "info": "Self-blame in Process A reinforces negative self-criticism\nin Process B.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggling to change behavior is linked to procrastination and self-blame._Struggling to do good is connected to procrastination, self-blame, and body image issues._51", "source": "Struggling to change behavior is linked to procrastination and self-blame.", "target": "Struggling to do good is connected to procrastination, self-blame, and body image issues.", "pair_label": "51", "info": "Shared underlying factors of procrastination and self-blame", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Worthlessness is a self-reinforcing pattern that exacerbates body image issues._Negative self-criticism fuels unhealthy eating and body image difficulties._83", "source": "Worthlessness is a self-reinforcing pattern that exacerbates body image issues.", "target": "Negative self-criticism fuels unhealthy eating and body image difficulties.", "pair_label": "83", "info": "Shared underlying mechanisms of self-deprecation.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Negative self-criticism fuels unhealthy eating and body image difficulties._Struggling to change behavior is linked to procrastination and self-blame._14", "source": "Negative self-criticism fuels unhealthy eating and body image difficulties.", "target": "Struggling to change behavior is linked to procrastination and self-blame.", "pair_label": "14", "info": "Shared underlying self-blame mechanism", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Negative self-criticism fuels unhealthy eating and body image difficulties._Worthlessness is a self-reinforcing pattern that exacerbates body image issues._18", "source": "Negative self-criticism fuels unhealthy eating and body image difficulties.", "target": "Worthlessness is a self-reinforcing pattern that exacerbates body image issues.", "pair_label": "18", "info": "Shared self-devaluation mechanisms", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Negative self-criticism fuels unhealthy eating and body image difficulties._Body image issues are closely related to feelings of worthlessness and low self-esteem._10", "source": "Negative self-criticism fuels unhealthy eating and body image difficulties.", "target": "Body image issues are closely related to feelings of worthlessness and low self-esteem.", "pair_label": "10", "info": "Shared underlying self-perception issues.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Relationship distress is tied to feelings of worthlessness and self-blame._Self-blame and negative self-criticism are bi-directionally related, reinforcing each other._31", "source": "Relationship distress is tied to feelings of worthlessness and self-blame.", "target": "Self-blame and negative self-criticism are bi-directionally related, reinforcing each other.", "pair_label": "31", "info": "Shared underlying self-negative schema and cognitive\npatterns.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Body image issues are closely related to feelings of worthlessness and low self-esteem._Self-blame and negative self-criticism are bi-directionally related, reinforcing each other._4", "source": "Body image issues are closely related to feelings of worthlessness and low self-esteem.", "target": "Self-blame and negative self-criticism are bi-directionally related, reinforcing each other.", "pair_label": "4", "info": "Reinforcing cycle of self-deprecation.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Body image issues are closely related to feelings of worthlessness and low self-esteem._Worthlessness and self-blame are key factors in the client's emotional distress._8", "source": "Body image issues are closely related to feelings of worthlessness and low self-esteem.", "target": "Worthlessness and self-blame are key factors in the client's emotional distress.", "pair_label": "8", "info": "Shared underlying construct of negative self-perception.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Body image issues are closely related to feelings of worthlessness and low self-esteem._Unhealthy eating and lack of exercise are linked to body image issues and low self-esteem._7", "source": "Body image issues are closely related to feelings of worthlessness and low self-esteem.", "target": "Unhealthy eating and lack of exercise are linked to body image issues and low self-esteem.", "pair_label": "7", "info": "Shared underlying factors.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Self-blame and negative self-criticism are bi-directionally related, reinforcing each other._Negative self-criticism fuels unhealthy eating and body image difficulties._38", "source": "Self-blame and negative self-criticism are bi-directionally related, reinforcing each other.", "target": "Negative self-criticism fuels unhealthy eating and body image difficulties.", "pair_label": "38", "info": "Shared underlying mechanism of negative self-criticism.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Self-blame and negative self-criticism are bi-directionally related, reinforcing each other._Relationship distress is tied to feelings of worthlessness and self-blame._40", "source": "Self-blame and negative self-criticism are bi-directionally related, reinforcing each other.", "target": "Relationship distress is tied to feelings of worthlessness and self-blame.", "pair_label": "40", "info": "Shared underlying self-blame mechanism.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggling to do good is connected to procrastination, self-blame, and body image issues._Struggling to change behavior is linked to procrastination and self-blame._60", "source": "Struggling to do good is connected to procrastination, self-blame, and body image issues.", "target": "Struggling to change behavior is linked to procrastination and self-blame.", "pair_label": "60", "info": "Shared underlying mechanisms of procrastination and self-\nblame.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggling to do good is connected to procrastination, self-blame, and body image issues._Body image issues are closely related to feelings of worthlessness and low self-esteem._55", "source": "Struggling to do good is connected to procrastination, self-blame, and body image issues.", "target": "Body image issues are closely related to feelings of worthlessness and low self-esteem.", "pair_label": "55", "info": "Shared underlying negative self-perception.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Worthlessness and self-blame are key factors in the client's emotional distress._Worthlessness is a self-reinforcing pattern that exacerbates body image issues._81", "source": "Worthlessness and self-blame are key factors in the client's emotional distress.", "target": "Worthlessness is a self-reinforcing pattern that exacerbates body image issues.", "pair_label": "81", "info": "Shared underlying self-concept.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Worthlessness and self-blame are key factors in the client's emotional distress._Relationship distress is tied to feelings of worthlessness and self-blame._76", "source": "Worthlessness and self-blame are key factors in the client's emotional distress.", "target": "Relationship distress is tied to feelings of worthlessness and self-blame.", "pair_label": "76", "info": "Shared underlying emotional mechanisms.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggling to change behavior is linked to procrastination and self-blame._Worthlessness is a self-reinforcing pattern that exacerbates body image issues._54", "source": "Struggling to change behavior is linked to procrastination and self-blame.", "target": "Worthlessness is a self-reinforcing pattern that exacerbates body image issues.", "pair_label": "54", "info": "Negative self-talk.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Worthlessness is a self-reinforcing pattern that exacerbates body image issues._Relationship distress is tied to feelings of worthlessness and self-blame._85", "source": "Worthlessness is a self-reinforcing pattern that exacerbates body image issues.", "target": "Relationship distress is tied to feelings of worthlessness and self-blame.", "pair_label": "85", "info": "Reciprocal reinforcement of negative self-perception.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Worthlessness is a self-reinforcing pattern that exacerbates body image issues._Body image issues are closely related to feelings of worthlessness and low self-esteem._82", "source": "Worthlessness is a self-reinforcing pattern that exacerbates body image issues.", "target": "Body image issues are closely related to feelings of worthlessness and low self-esteem.", "pair_label": "82", "info": "Mutually reinforcing cycle.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Worthlessness is a self-reinforcing pattern that exacerbates body image issues._Self-blame and negative self-criticism are bi-directionally related, reinforcing each other._86", "source": "Worthlessness is a self-reinforcing pattern that exacerbates body image issues.", "target": "Self-blame and negative self-criticism are bi-directionally related, reinforcing each other.", "pair_label": "86", "info": "Reinforces self-criticism", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Worthlessness is a self-reinforcing pattern that exacerbates body image issues._Worthlessness and self-blame are key factors in the client's emotional distress._90", "source": "Worthlessness is a self-reinforcing pattern that exacerbates body image issues.", "target": "Worthlessness and self-blame are key factors in the client's emotional distress.", "pair_label": "90", "info": "Shared underlying construct of worthlessness.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Relationship distress is tied to feelings of worthlessness and self-blame._Worthlessness and self-blame are key factors in the client's emotional distress._35", "source": "Relationship distress is tied to feelings of worthlessness and self-blame.", "target": "Worthlessness and self-blame are key factors in the client's emotional distress.", "pair_label": "35", "info": "Interconnected causes of emotional distress", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Procrastination and self-blame are interconnected, forming a vicious cycle._Struggling to change behavior is linked to procrastination and self-blame._23", "source": "Procrastination and self-blame are interconnected, forming a vicious cycle.", "target": "Struggling to change behavior is linked to procrastination and self-blame.", "pair_label": "23", "info": "Shared underlying mechanisms", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Procrastination and self-blame are interconnected, forming a vicious cycle._Self-blame and negative self-criticism are bi-directionally related, reinforcing each other._22", "source": "Procrastination and self-blame are interconnected, forming a vicious cycle.", "target": "Self-blame and negative self-criticism are bi-directionally related, reinforcing each other.", "pair_label": "22", "info": "Mutual Reinforcement", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Body image issues are closely related to feelings of worthlessness and low self-esteem._Struggling to change behavior is linked to procrastination and self-blame._5", "source": "Body image issues are closely related to feelings of worthlessness and low self-esteem.", "target": "Struggling to change behavior is linked to procrastination and self-blame.", "pair_label": "5", "info": "Negative self-perceptions fuel self-criticism and hinder\nbehavioral change.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Body image issues are closely related to feelings of worthlessness and low self-esteem._Negative self-criticism fuels unhealthy eating and body image difficulties._1", "source": "Body image issues are closely related to feelings of worthlessness and low self-esteem.", "target": "Negative self-criticism fuels unhealthy eating and body image difficulties.", "pair_label": "1", "info": "Reinforcing cycle.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Self-blame and negative self-criticism are bi-directionally related, reinforcing each other._Struggling to change behavior is linked to procrastination and self-blame._41", "source": "Self-blame and negative self-criticism are bi-directionally related, reinforcing each other.", "target": "Struggling to change behavior is linked to procrastination and self-blame.", "pair_label": "41", "info": "Self-blame from Process A reinforces procrastination in\nProcess B, making behavior change more difficult.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Unhealthy eating and lack of exercise are linked to body image issues and low self-esteem._Negative self-criticism fuels unhealthy eating and body image difficulties._65", "source": "Unhealthy eating and lack of exercise are linked to body image issues and low self-esteem.", "target": "Negative self-criticism fuels unhealthy eating and body image difficulties.", "pair_label": "65", "info": "Shared underlying mechanisms", "color": "#3498db", "width": 4, "lineStyle": "solid"}}]
+        });
+
+        let tooltipCounter = 0;
+
+        cy.on('tap', 'edge', function(evt) {
+            var edge = evt.target;
+            var pos = evt.renderedPosition;
+            var tooltipId = "tooltip-" + (++tooltipCounter);
+
+            var tooltip = document.createElement("div");
+            tooltip.className = "tooltip";
+            tooltip.id = tooltipId;
+            tooltip.style.left = (pos.x + 20) + "px";
+            tooltip.style.top = (pos.y + 20) + "px";
+
+            var closeBtn = document.createElement("span");
+            closeBtn.className = "close-btn";
+            closeBtn.innerHTML = "&times;";
+            closeBtn.onclick = function () {
+                tooltip.remove();
+            };
+
+            tooltip.innerHTML = "";
+            tooltip.appendChild(closeBtn);
+            var content = document.createElement("div");
+            content.innerHTML = edge.data("info");
+            tooltip.appendChild(content);
+
+            document.body.appendChild(tooltip);
+            makeDraggable(tooltip);
+        });
+
+        function makeDraggable(elmnt) {
+            let offset = { x: 0, y: 0 };
+            let isDragging = false;
+
+            elmnt.addEventListener("mousedown", function (e) {
+                if (e.target.classList.contains("close-btn")) return;
+                isDragging = true;
+                offset.x = e.clientX - elmnt.offsetLeft;
+                offset.y = e.clientY - elmnt.offsetTop;
+                elmnt.style.cursor = "move";
+                e.preventDefault();
+            });
+
+            document.addEventListener("mousemove", function (e) {
+                if (isDragging) {
+                    elmnt.style.left = (e.clientX - offset.x) + "px";
+                    elmnt.style.top = (e.clientY - offset.y) + "px";
+                }
+            });
+
+            document.addEventListener("mouseup", function () {
+                isDragging = false;
+                elmnt.style.cursor = "default";
+            });
+        }
+    </script>
+</body>
+</html>
