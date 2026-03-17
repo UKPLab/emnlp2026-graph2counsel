@@ -143,7 +143,6 @@ Run `create_qlora_fine-tuning_datasets.ipynb`, updating dataset paths to match y
 Update the base model path and output model path in the relevant script (we used `Llama3-8B-Instruct`), then run:
 ```bash
 deepspeed --num_gpus=num_gpus qlora/graph2counsel_qlora.py
-# or for baselines:
 deepspeed --num_gpus=num_gpus qlora/sqpconv_qlora.py
 deepspeed --num_gpus=num_gpus qlora/magnet_qlora.py
 ```
