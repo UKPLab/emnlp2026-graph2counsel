@@ -64,13 +64,11 @@ graph2counsel/
 ├── therapist_strategies_summary.csv      # csv file containing extracted counselor strategies from real counseling sessions
 │
 ├── configurations/                       # Generation configuration experiments
-│   └── gc_cpg_profile_expanded.py        # Final dataset generation (GC optimal config)
+│   └── gc_cpg_profile_expanded.py        # Final dataset generation (GC CPG+Profile optimal config)
 │
 ├── LLM_judge_evaluation/                 # CTRS and WAI evaluation with LLM-as-a-judge
 │
-├── faithfulness_evaluation/              # Faithfulness of sessions to CPG inputs
-│
-├── evaluation/                           # General evaluation utilities
+├── faithfulness_evaluation/              # Faithfulness of sessions to CPG and profile inputs
 │
 ├── qlora_prompts/                        # Prompts used for QLoRA fine-tuning
 │
