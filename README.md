@@ -35,9 +35,102 @@ source qlora_env/bin/activate
 pip install -r requirements_qlora.txt
 ```
 
-## Getting Started
+## Repository Structure
+```
+graph2counsel/
+│
+├── prompts_system_user/                  # System and user prompts used in configurations and client_profile_generation
+│
+├── Graph_Dicts.ipynb                     # Build KG triples from CPGs
+│
+├── configurations/                       # Generation configuration experiments
+│   └── gc_cpg_profile_expanded.py        # Final dataset generation (GC optimal config)
+│
+├── client_profile_generation/            # Scripts for generating client profiles
+│
+├── LLM_judge_evaluation/                 # CTRS and WAI evaluation with LLM-as-a-judge
+│
+├── faithfulness_evaluation/              # Faithfulness of sessions to CPG inputs
+│
+├── evaluation/                           # General evaluation utilities
+│
+├── qlora_prompts/                        # Prompts used for QLoRA fine-tuning
+│
+├── create_qlora_fine-tuning_datasets.ipynb  # Prepare datasets for QLoRA
+│
+│── graph2counsel_qlora.py                # Fine-tune on Graph2Counsel data
+│── sqpconv_qlora.py                      # Fine-tune on SQPsychConv data
+│── magnet_qlora.py                       # Fine-tune on MAGneT data
+│
+├── CounselBench/                         # Downstream evaluation on CounselBench
+├── CounselingBench/                      # Downstream evaluation on CounselingBench
+│
+├── requirements_inf_eval.txt             # Dependencies for inference & evaluation
+└── requirements_qlora.txt                # Dependencies for QLoRA fine-tuning
+```
 
+## Downloading Data
 
+| Dataset | Link |
+|---|---|
+| **Graph2Counsel** (ours) | Coming soon |
+| **SQPsychConv** (We use Gemma split) | [HuggingFace](https://huggingface.co/collections/AIMH/sqpsychconv) |
+| **CACTUS** | [HuggingFace](https://huggingface.co/datasets/LangAGI-Lab/cactus) |
+| **MAGneT** | [GitHub](https://github.com/UKPLab/arxiv2025-MAGneT) |
+| **CounselBench-Eval** | [HuggingFace](https://huggingface.co/datasets/izi-ano/CounselBench-Eval) |
+| **CounselBench-Adv** | [HuggingFace](https://huggingface.co/datasets/izi-ano/CounselBench-Adv) |
+| **CounselingBench** | [HuggingFace](https://huggingface.co/datasets/ckmjx/CounselingBench) |
+
+Place CounselBench data in the `CounselBench/` directory and CounselingBench data in `CounselingBench/`.
+
+## Reproducing Experiments
+
+Follow these steps in order after setting up your environment and downloading data.
+
+**1. Build CPG Representations**
+
+Run `Graph_Dicts.ipynb` to create `(process_i, relation, process_j)` KG triples from the CPGs. Outputs are saved to `CPG_processed/`.
+
+**2. Generate Client Profiles**
+
+See `client_profile_generation/` for instructions and scripts.
+
+**3. Run Configuration Experiments**
+
+Use files in `configurations/` to experiment with different generation strategies. See the folder README for details. We found the **GC (CPG + Profile)** configuration to be optimal.
+
+**4. Evaluate Generated Sessions**
+
+Use files in `LLM_judge_evaluation/` to score sessions on CTRS and WAI metrics using LLM-as-a-judge. See the folder README for details.
+
+**5. Generate the Final Dataset**
+
+Using the optimal configuration:
+```bash
+python configurations/gc_cpg_profile_expanded.py
+```
+
+**6. Evaluate Faithfulness**
+
+Use files in `faithfulness_evaluation/` to assess how faithfully generated sessions reflect their CPG and profile inputs.
+
+**7. Prepare Fine-tuning Datasets**
+
+Run `create_qlora_fine-tuning_datasets.ipynb`, updating dataset paths to match your download locations.
+
+**8. Run QLoRA Fine-tuning**
+
+Update the base model path and output model path in the relevant script (we used `Llama3-8B-Instruct`), then run:
+```bash
+deepspeed --num_gpus=num_gpus qlora/graph2counsel_qlora.py
+# or for baselines:
+deepspeed --num_gpus=num_gpus qlora/sqpconv_qlora.py
+deepspeed --num_gpus=num_gpus qlora/magnet_qlora.py
+```
+
+**9. Downstream Evaluation**
+
+Use scripts in `CounselBench/` and `CounselingBench/` for benchmark evaluation. See each folder for details.
 
 ## Cite
 
