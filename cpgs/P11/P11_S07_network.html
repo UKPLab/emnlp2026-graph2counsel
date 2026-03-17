@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Interactive Process Network</title>
+    <script src="https://unpkg.com/cytoscape@3.21.1/dist/cytoscape.min.js"></script>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        #cy {
+            width: 100vw;
+            height: 100vh;
+            display: block;
+        }
+        .legend {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: white;
+            border: 1px solid #ccc;
+            padding: 10px;
+            font-family: sans-serif;
+            font-size: 14px;
+            z-index: 10;
+        }
+        .tooltip {
+            position: absolute;
+            background: #fefefe;
+            border: 1px solid #aaa;
+            padding: 10px;
+            font-family: sans-serif;
+            font-size: 13px;
+            max-width: 300px;
+            z-index: 20;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            cursor: default;
+        }
+        .tooltip .close-btn {
+            float: right;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="cy"></div>
+    <div class="legend">
+        <b>Legend</b><br>
+        <span style="color:#e74c3c;">Red</span>: Inhibitory<br>
+        <span style="color:#3498db;">Blue</span>: Excitatory<br>
+        <hr>
+        <b>Dimensions</b><br>
+        🔵 Cognition<br>
+        🟢 Sense of Self<br>
+        🔴 (Overt) Behaviour<br>
+        🟣 Affect<br>
+        🟠 Context/Moderators<br>
+        🟡 Attention<br>
+        ⚪ Biophysiological<br>
+        🟤 Motivation<br>
+        ⚫ Sociocultural
+    </div>
+    <script>
+        var cy = cytoscape({
+            container: document.getElementById('cy'),
+            layout: { name: 'cose' },
+            style: [
+                {
+                    selector: 'node',
+                    style: {
+                        'shape': 'roundrectangle',
+                        'label': 'data(label)',
+                        'text-wrap': 'wrap',
+                        'text-max-width': 120,
+                        'text-valign': 'center',
+                        'text-halign': 'center',
+                        'background-color': '#ffffff',
+                        'border-color': '#000000',
+                        'border-width': 1,
+                        'color': '#000',
+                        'font-size': 14,
+                        'padding': '20px',
+                        'width': 'label',
+                        'height': 'label'
+                    }
+                },
+                {
+                    selector: 'edge',
+                    style: {
+                        'curve-style': 'bezier',
+                        'target-arrow-shape': 'triangle',
+                        'arrow-scale': 1.2,
+                        'label': '',
+                        'font-size': 9,
+                        'text-rotation': 'autorotate',
+                        'text-margin-y': -10,
+                        'line-color': 'data(color)',
+                        'target-arrow-color': 'data(color)',
+                        'width': 'data(width)',
+                        'line-style': 'data(lineStyle)'
+                    }
+                }
+            ],
+            elements: [{"data": {"id": "Tension between desire for control and flexibility in social interactions", "label": "Tension between desire for control and flexibility in social interactions\n\ud83d\udd34 \ud83d\udd35 \ud83d\udfe0\nw = 6"}}, {"data": {"id": "Difficulty articulating feelings and needs in relationships", "label": "Difficulty articulating feelings and needs in relationships\n\ud83d\udd34 \ud83d\udd35 \u26ab\nw = 3"}}, {"data": {"id": "Impact of unmet expectations on emotional experience", "label": "Impact of unmet expectations on emotional experience\n\ud83d\udfe3 \ud83d\udd35\nw = 2"}}, {"data": {"id": "Challenges in managing anxiety and uncertainty in social situations", "label": "Challenges in managing anxiety and uncertainty in social situations\n\ud83d\udfe0\nw = 2"}}, {"data": {"id": "Tendency to overthink and ruminate on social interactions", "label": "Tendency to overthink and ruminate on social interactions\n\ud83d\udd34 \ud83d\udd35\nw = 2"}}, {"data": {"id": "Difficulty in expressing emotions and needs in a clear and assertive manner", "label": "Difficulty in expressing emotions and needs in a clear and assertive manner\n\ud83d\udd34 \ud83d\udd35\nw = 2"}}, {"data": {"id": "Importance of self-reflection and awareness in relationships", "label": "Importance of self-reflection and awareness in relationships\n\ud83d\udd35\nw = 2"}}, {"data": {"id": "Importance of authenticity and vulnerability in relationships", "label": "Importance of authenticity and vulnerability in relationships\n\u26ab\nw = 1"}}, {"data": {"id": "Desire for reassurance and validation in relationships", "label": "Desire for reassurance and validation in relationships\n\ud83d\udd35 \u26ab\nw = 2"}}, {"data": {"id": "Struggle to reconcile past experiences with present relationships", "label": "Struggle to reconcile past experiences with present relationships\n\ud83d\udd35\nw = 1"}}, {"data": {"id": "Tension between desire for control and flexibility in social interactions_Difficulty articulating feelings and needs in relationships_84", "source": "Tension between desire for control and flexibility in social interactions", "target": "Difficulty articulating feelings and needs in relationships", "pair_label": "84", "info": "Increased tension may lead to difficulty articulating\nfeelings and needs.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between desire for control and flexibility in social interactions_Impact of unmet expectations on emotional experience_86", "source": "Tension between desire for control and flexibility in social interactions", "target": "Impact of unmet expectations on emotional experience", "pair_label": "86", "info": "Unmet expectations can heighten tension between control and\nflexibility.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between desire for control and flexibility in social interactions_Challenges in managing anxiety and uncertainty in social situations_82", "source": "Tension between desire for control and flexibility in social interactions", "target": "Challenges in managing anxiety and uncertainty in social situations", "pair_label": "82", "info": "Increased tension fuels anxiety.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between desire for control and flexibility in social interactions_Tendency to overthink and ruminate on social interactions_90", "source": "Tension between desire for control and flexibility in social interactions", "target": "Tendency to overthink and ruminate on social interactions", "pair_label": "90", "info": "Increased tension fuels rumination.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between desire for control and flexibility in social interactions_Difficulty in expressing emotions and needs in a clear and assertive manner_85", "source": "Tension between desire for control and flexibility in social interactions", "target": "Difficulty in expressing emotions and needs in a clear and assertive manner", "pair_label": "85", "info": "Increased tension may lead to difficulty in expressing\nemotions.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between desire for control and flexibility in social interactions_Importance of self-reflection and awareness in relationships_88", "source": "Tension between desire for control and flexibility in social interactions", "target": "Importance of self-reflection and awareness in relationships", "pair_label": "88", "info": "Self-reflection enhances awareness of control needs.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty articulating feelings and needs in relationships_Impact of unmet expectations on emotional experience_22", "source": "Difficulty articulating feelings and needs in relationships", "target": "Impact of unmet expectations on emotional experience", "pair_label": "22", "info": "Unexpressed feelings and needs lead to unmet expectations.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty articulating feelings and needs in relationships_Importance of authenticity and vulnerability in relationships_23", "source": "Difficulty articulating feelings and needs in relationships", "target": "Importance of authenticity and vulnerability in relationships", "pair_label": "23", "info": "Authenticity and vulnerability require articulation of\nfeelings and needs.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty articulating feelings and needs in relationships_Challenges in managing anxiety and uncertainty in social situations_19", "source": "Difficulty articulating feelings and needs in relationships", "target": "Challenges in managing anxiety and uncertainty in social situations", "pair_label": "19", "info": "Social anxiety and uncertainty can exacerbate difficulties\nin articulating feelings and needs.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty articulating feelings and needs in relationships_Tendency to overthink and ruminate on social interactions_26", "source": "Difficulty articulating feelings and needs in relationships", "target": "Tendency to overthink and ruminate on social interactions", "pair_label": "26", "info": "Inability to express feelings and needs can lead to\nincreased rumination.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty articulating feelings and needs in relationships_Desire for reassurance and validation in relationships_20", "source": "Difficulty articulating feelings and needs in relationships", "target": "Desire for reassurance and validation in relationships", "pair_label": "20", "info": "Struggling to articulate feelings and needs can lead to\nincreased desire for reassurance and validation from others.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty articulating feelings and needs in relationships_Difficulty in expressing emotions and needs in a clear and assertive manner_21", "source": "Difficulty articulating feelings and needs in relationships", "target": "Difficulty in expressing emotions and needs in a clear and assertive manner", "pair_label": "21", "info": "Similar underlying communication issues.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty articulating feelings and needs in relationships_Importance of self-reflection and awareness in relationships_24", "source": "Difficulty articulating feelings and needs in relationships", "target": "Importance of self-reflection and awareness in relationships", "pair_label": "24", "info": "Recognizing the importance of self-reflection and awareness\ncan facilitate articulation of feelings and needs.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Impact of unmet expectations on emotional experience_Struggle to reconcile past experiences with present relationships_43", "source": "Impact of unmet expectations on emotional experience", "target": "Struggle to reconcile past experiences with present relationships", "pair_label": "43", "info": "Unmet expectations can intensify struggles to reconcile past\nand present relationships.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Impact of unmet expectations on emotional experience_Challenges in managing anxiety and uncertainty in social situations_37", "source": "Impact of unmet expectations on emotional experience", "target": "Challenges in managing anxiety and uncertainty in social situations", "pair_label": "37", "info": "Unmet expectations can intensify anxiety and uncertainty,\nespecially in social situations.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Impact of unmet expectations on emotional experience_Desire for reassurance and validation in relationships_38", "source": "Impact of unmet expectations on emotional experience", "target": "Desire for reassurance and validation in relationships", "pair_label": "38", "info": "Unmet expectations can heighten the need for reassurance.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggle to reconcile past experiences with present relationships_Difficulty articulating feelings and needs in relationships_66", "source": "Struggle to reconcile past experiences with present relationships", "target": "Difficulty articulating feelings and needs in relationships", "pair_label": "66", "info": "Past relationship patterns influence expression of emotions\nand needs in current relationships.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggle to reconcile past experiences with present relationships_Impact of unmet expectations on emotional experience_68", "source": "Struggle to reconcile past experiences with present relationships", "target": "Impact of unmet expectations on emotional experience", "pair_label": "68", "info": "Past experiences shape expectations.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggle to reconcile past experiences with present relationships_Importance of authenticity and vulnerability in relationships_69", "source": "Struggle to reconcile past experiences with present relationships", "target": "Importance of authenticity and vulnerability in relationships", "pair_label": "69", "info": "Past experiences shape expectations and behaviors in current\nrelationships, making authenticity and vulnerability crucial\nfor reconciliation and growth.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggle to reconcile past experiences with present relationships_Challenges in managing anxiety and uncertainty in social situations_64", "source": "Struggle to reconcile past experiences with present relationships", "target": "Challenges in managing anxiety and uncertainty in social situations", "pair_label": "64", "info": "Past conflicts exacerbate anxiety.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggle to reconcile past experiences with present relationships_Tendency to overthink and ruminate on social interactions_71", "source": "Struggle to reconcile past experiences with present relationships", "target": "Tendency to overthink and ruminate on social interactions", "pair_label": "71", "info": "Past relationship issues can fuel rumination on current\nsocial interactions.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggle to reconcile past experiences with present relationships_Desire for reassurance and validation in relationships_65", "source": "Struggle to reconcile past experiences with present relationships", "target": "Desire for reassurance and validation in relationships", "pair_label": "65", "info": "Past relationship trauma fuels the need for reassurance.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggle to reconcile past experiences with present relationships_Importance of self-reflection and awareness in relationships_70", "source": "Struggle to reconcile past experiences with present relationships", "target": "Importance of self-reflection and awareness in relationships", "pair_label": "70", "info": "Self-reflection facilitates reconciliation.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of authenticity and vulnerability in relationships_Struggle to reconcile past experiences with present relationships_52", "source": "Importance of authenticity and vulnerability in relationships", "target": "Struggle to reconcile past experiences with present relationships", "pair_label": "52", "info": "Past unresolved issues heighten the need for authenticity.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of authenticity and vulnerability in relationships_Desire for reassurance and validation in relationships_47", "source": "Importance of authenticity and vulnerability in relationships", "target": "Desire for reassurance and validation in relationships", "pair_label": "47", "info": "Mutual reinforcement", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of authenticity and vulnerability in relationships_Difficulty in expressing emotions and needs in a clear and assertive manner_49", "source": "Importance of authenticity and vulnerability in relationships", "target": "Difficulty in expressing emotions and needs in a clear and assertive manner", "pair_label": "49", "info": "Authenticity and vulnerability can be hindered by difficulty\nin expressing emotions and needs.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of authenticity and vulnerability in relationships_Importance of self-reflection and awareness in relationships_51", "source": "Importance of authenticity and vulnerability in relationships", "target": "Importance of self-reflection and awareness in relationships", "pair_label": "51", "info": "Mutual reinforcement through introspection and openness.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Challenges in managing anxiety and uncertainty in social situations_Tension between desire for control and flexibility in social interactions_9", "source": "Challenges in managing anxiety and uncertainty in social situations", "target": "Tension between desire for control and flexibility in social interactions", "pair_label": "9", "info": "Anxiety in social situations can amplify the tension between\nthe desire for control and flexibility in interactions.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Challenges in managing anxiety and uncertainty in social situations_Tendency to overthink and ruminate on social interactions_8", "source": "Challenges in managing anxiety and uncertainty in social situations", "target": "Tendency to overthink and ruminate on social interactions", "pair_label": "8", "info": "Anxiety can fuel rumination.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Challenges in managing anxiety and uncertainty in social situations_Desire for reassurance and validation in relationships_1", "source": "Challenges in managing anxiety and uncertainty in social situations", "target": "Desire for reassurance and validation in relationships", "pair_label": "1", "info": "Anxiety fuels the need for reassurance", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tendency to overthink and ruminate on social interactions_Tension between desire for control and flexibility in social interactions_81", "source": "Tendency to overthink and ruminate on social interactions", "target": "Tension between desire for control and flexibility in social interactions", "pair_label": "81", "info": "Overthinking can amplify tension between control and\nflexibility.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tendency to overthink and ruminate on social interactions_Difficulty articulating feelings and needs in relationships_75", "source": "Tendency to overthink and ruminate on social interactions", "target": "Difficulty articulating feelings and needs in relationships", "pair_label": "75", "info": "Overthinking and ruminating can lead to increased anxiety\nand self-doubt, making it harder to articulate feelings and\nneeds.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tendency to overthink and ruminate on social interactions_Struggle to reconcile past experiences with present relationships_80", "source": "Tendency to overthink and ruminate on social interactions", "target": "Struggle to reconcile past experiences with present relationships", "pair_label": "80", "info": "Overthinking past social interactions can hinder\nreconciliation.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tendency to overthink and ruminate on social interactions_Challenges in managing anxiety and uncertainty in social situations_73", "source": "Tendency to overthink and ruminate on social interactions", "target": "Challenges in managing anxiety and uncertainty in social situations", "pair_label": "73", "info": "Overthinking reinforces anxiety", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tendency to overthink and ruminate on social interactions_Desire for reassurance and validation in relationships_74", "source": "Tendency to overthink and ruminate on social interactions", "target": "Desire for reassurance and validation in relationships", "pair_label": "74", "info": "Overthinking and rumination can fuel the need for\nreassurance.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tendency to overthink and ruminate on social interactions_Importance of self-reflection and awareness in relationships_79", "source": "Tendency to overthink and ruminate on social interactions", "target": "Importance of self-reflection and awareness in relationships", "pair_label": "79", "info": "Fosters deeper understanding", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Desire for reassurance and validation in relationships_Difficulty articulating feelings and needs in relationships_11", "source": "Desire for reassurance and validation in relationships", "target": "Difficulty articulating feelings and needs in relationships", "pair_label": "11", "info": "Increases anxiety", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Desire for reassurance and validation in relationships_Impact of unmet expectations on emotional experience_13", "source": "Desire for reassurance and validation in relationships", "target": "Impact of unmet expectations on emotional experience", "pair_label": "13", "info": "Unmet expectations can intensify the desire for reassurance.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Desire for reassurance and validation in relationships_Importance of authenticity and vulnerability in relationships_14", "source": "Desire for reassurance and validation in relationships", "target": "Importance of authenticity and vulnerability in relationships", "pair_label": "14", "info": "Mutual reinforcement of open communication", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Desire for reassurance and validation in relationships_Challenges in managing anxiety and uncertainty in social situations_10", "source": "Desire for reassurance and validation in relationships", "target": "Challenges in managing anxiety and uncertainty in social situations", "pair_label": "10", "info": "Reinforces anxiety", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Desire for reassurance and validation in relationships_Tendency to overthink and ruminate on social interactions_17", "source": "Desire for reassurance and validation in relationships", "target": "Tendency to overthink and ruminate on social interactions", "pair_label": "17", "info": "Fosters rumination", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Desire for reassurance and validation in relationships_Difficulty in expressing emotions and needs in a clear and assertive manner_12", "source": "Desire for reassurance and validation in relationships", "target": "Difficulty in expressing emotions and needs in a clear and assertive manner", "pair_label": "12", "info": "Fosters dependency and passive communication.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty in expressing emotions and needs in a clear and assertive manner_Difficulty articulating feelings and needs in relationships_30", "source": "Difficulty in expressing emotions and needs in a clear and assertive manner", "target": "Difficulty articulating feelings and needs in relationships", "pair_label": "30", "info": "Similar underlying issues", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty in expressing emotions and needs in a clear and assertive manner_Importance of authenticity and vulnerability in relationships_32", "source": "Difficulty in expressing emotions and needs in a clear and assertive manner", "target": "Importance of authenticity and vulnerability in relationships", "pair_label": "32", "info": "Difficulty in expressing emotions can hinder authenticity\nand vulnerability.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty in expressing emotions and needs in a clear and assertive manner_Tendency to overthink and ruminate on social interactions_35", "source": "Difficulty in expressing emotions and needs in a clear and assertive manner", "target": "Tendency to overthink and ruminate on social interactions", "pair_label": "35", "info": "Inability to express emotions effectively may lead to\nanxiety and uncertainty, fostering overthinking about social\ninteractions.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty in expressing emotions and needs in a clear and assertive manner_Desire for reassurance and validation in relationships_29", "source": "Difficulty in expressing emotions and needs in a clear and assertive manner", "target": "Desire for reassurance and validation in relationships", "pair_label": "29", "info": "Fosters dependence on others for emotional validation.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty in expressing emotions and needs in a clear and assertive manner_Importance of self-reflection and awareness in relationships_33", "source": "Difficulty in expressing emotions and needs in a clear and assertive manner", "target": "Importance of self-reflection and awareness in relationships", "pair_label": "33", "info": "Self-reflection and awareness facilitate recognition of\nemotional needs.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of self-reflection and awareness in relationships_Tension between desire for control and flexibility in social interactions_63", "source": "Importance of self-reflection and awareness in relationships", "target": "Tension between desire for control and flexibility in social interactions", "pair_label": "63", "info": "Increased self-awareness can heighten sensitivity to control\ndynamics.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of self-reflection and awareness in relationships_Difficulty articulating feelings and needs in relationships_57", "source": "Importance of self-reflection and awareness in relationships", "target": "Difficulty articulating feelings and needs in relationships", "pair_label": "57", "info": "Self-reflection enhances emotional awareness.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of self-reflection and awareness in relationships_Struggle to reconcile past experiences with present relationships_61", "source": "Importance of self-reflection and awareness in relationships", "target": "Struggle to reconcile past experiences with present relationships", "pair_label": "61", "info": "Self-reflection enhances recognition of past patterns.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of self-reflection and awareness in relationships_Importance of authenticity and vulnerability in relationships_60", "source": "Importance of self-reflection and awareness in relationships", "target": "Importance of authenticity and vulnerability in relationships", "pair_label": "60", "info": "Mutual reinforcement", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of self-reflection and awareness in relationships_Tendency to overthink and ruminate on social interactions_62", "source": "Importance of self-reflection and awareness in relationships", "target": "Tendency to overthink and ruminate on social interactions", "pair_label": "62", "info": "Self-reflection can lead to overthinking.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of self-reflection and awareness in relationships_Difficulty in expressing emotions and needs in a clear and assertive manner_58", "source": "Importance of self-reflection and awareness in relationships", "target": "Difficulty in expressing emotions and needs in a clear and assertive manner", "pair_label": "58", "info": "Lack of self-awareness hinders emotional expression.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}]
+        });
+
+        let tooltipCounter = 0;
+
+        cy.on('tap', 'edge', function(evt) {
+            var edge = evt.target;
+            var pos = evt.renderedPosition;
+            var tooltipId = "tooltip-" + (++tooltipCounter);
+
+            var tooltip = document.createElement("div");
+            tooltip.className = "tooltip";
+            tooltip.id = tooltipId;
+            tooltip.style.left = (pos.x + 20) + "px";
+            tooltip.style.top = (pos.y + 20) + "px";
+
+            var closeBtn = document.createElement("span");
+            closeBtn.className = "close-btn";
+            closeBtn.innerHTML = "&times;";
+            closeBtn.onclick = function () {
+                tooltip.remove();
+            };
+
+            tooltip.innerHTML = "";
+            tooltip.appendChild(closeBtn);
+            var content = document.createElement("div");
+            content.innerHTML = edge.data("info");
+            tooltip.appendChild(content);
+
+            document.body.appendChild(tooltip);
+            makeDraggable(tooltip);
+        });
+
+        function makeDraggable(elmnt) {
+            let offset = { x: 0, y: 0 };
+            let isDragging = false;
+
+            elmnt.addEventListener("mousedown", function (e) {
+                if (e.target.classList.contains("close-btn")) return;
+                isDragging = true;
+                offset.x = e.clientX - elmnt.offsetLeft;
+                offset.y = e.clientY - elmnt.offsetTop;
+                elmnt.style.cursor = "move";
+                e.preventDefault();
+            });
+
+            document.addEventListener("mousemove", function (e) {
+                if (isDragging) {
+                    elmnt.style.left = (e.clientX - offset.x) + "px";
+                    elmnt.style.top = (e.clientY - offset.y) + "px";
+                }
+            });
+
+            document.addEventListener("mouseup", function () {
+                isDragging = false;
+                elmnt.style.cursor = "default";
+            });
+        }
+    </script>
+</body>
+</html>

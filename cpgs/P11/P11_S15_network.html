@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Interactive Process Network</title>
+    <script src="https://unpkg.com/cytoscape@3.21.1/dist/cytoscape.min.js"></script>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        #cy {
+            width: 100vw;
+            height: 100vh;
+            display: block;
+        }
+        .legend {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: white;
+            border: 1px solid #ccc;
+            padding: 10px;
+            font-family: sans-serif;
+            font-size: 14px;
+            z-index: 10;
+        }
+        .tooltip {
+            position: absolute;
+            background: #fefefe;
+            border: 1px solid #aaa;
+            padding: 10px;
+            font-family: sans-serif;
+            font-size: 13px;
+            max-width: 300px;
+            z-index: 20;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            cursor: default;
+        }
+        .tooltip .close-btn {
+            float: right;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="cy"></div>
+    <div class="legend">
+        <b>Legend</b><br>
+        <span style="color:#e74c3c;">Red</span>: Inhibitory<br>
+        <span style="color:#3498db;">Blue</span>: Excitatory<br>
+        <hr>
+        <b>Dimensions</b><br>
+        🔵 Cognition<br>
+        🟢 Sense of Self<br>
+        🔴 (Overt) Behaviour<br>
+        🟣 Affect<br>
+        🟠 Context/Moderators<br>
+        🟡 Attention<br>
+        ⚪ Biophysiological<br>
+        🟤 Motivation<br>
+        ⚫ Sociocultural
+    </div>
+    <script>
+        var cy = cytoscape({
+            container: document.getElementById('cy'),
+            layout: { name: 'cose' },
+            style: [
+                {
+                    selector: 'node',
+                    style: {
+                        'shape': 'roundrectangle',
+                        'label': 'data(label)',
+                        'text-wrap': 'wrap',
+                        'text-max-width': 120,
+                        'text-valign': 'center',
+                        'text-halign': 'center',
+                        'background-color': '#ffffff',
+                        'border-color': '#000000',
+                        'border-width': 1,
+                        'color': '#000',
+                        'font-size': 14,
+                        'padding': '20px',
+                        'width': 'label',
+                        'height': 'label'
+                    }
+                },
+                {
+                    selector: 'edge',
+                    style: {
+                        'curve-style': 'bezier',
+                        'target-arrow-shape': 'triangle',
+                        'arrow-scale': 1.2,
+                        'label': '',
+                        'font-size': 9,
+                        'text-rotation': 'autorotate',
+                        'text-margin-y': -10,
+                        'line-color': 'data(color)',
+                        'target-arrow-color': 'data(color)',
+                        'width': 'data(width)',
+                        'line-style': 'data(lineStyle)'
+                    }
+                }
+            ],
+            elements: [{"data": {"id": "Tension between emotional regulation and assertive communication", "label": "Tension between emotional regulation and assertive communication\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 31"}}, {"data": {"id": "Difficulty articulating emotional needs in relationships", "label": "Difficulty articulating emotional needs in relationships\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 31"}}, {"data": {"id": "Struggling to balance personal values with emotional comfort", "label": "Struggling to balance personal values with emotional comfort\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 31"}}, {"data": {"id": "Challenges in recognizing and expressing emotional boundaries", "label": "Challenges in recognizing and expressing emotional boundaries\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 31"}}, {"data": {"id": "Tendency to prioritize emotional comfort over personal values", "label": "Tendency to prioritize emotional comfort over personal values\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 31"}}, {"data": {"id": "Tension between desire for emotional comfort and need for assertive communication", "label": "Tension between desire for emotional comfort and need for assertive communication\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 31"}}, {"data": {"id": "Struggling to recognize and manage emotional triggers", "label": "Struggling to recognize and manage emotional triggers\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 31"}}, {"data": {"id": "Challenges in maintaining a consistent sense of self across different situations", "label": "Challenges in maintaining a consistent sense of self across different situations\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 31"}}, {"data": {"id": "Tendency to prioritize short-term emotional comfort over long-term personal growth", "label": "Tendency to prioritize short-term emotional comfort over long-term personal growth\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 31"}}, {"data": {"id": "Tension between emotional regulation and assertive communication_Difficulty articulating emotional needs in relationships_84", "source": "Tension between emotional regulation and assertive communication", "target": "Difficulty articulating emotional needs in relationships", "pair_label": "84", "info": "Tension between emotional regulation and assertive\ncommunication can lead to difficulty articulating emotional\nneeds in relationships.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between emotional regulation and assertive communication_Struggling to balance personal values with emotional comfort_86", "source": "Tension between emotional regulation and assertive communication", "target": "Struggling to balance personal values with emotional comfort", "pair_label": "86", "info": "Increased tension in emotional regulation and assertive\ncommunication can amplify the struggle to balance personal\nvalues with emotional comfort.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between emotional regulation and assertive communication_Challenges in recognizing and expressing emotional boundaries_83", "source": "Tension between emotional regulation and assertive communication", "target": "Challenges in recognizing and expressing emotional boundaries", "pair_label": "83", "info": "Linked through emotional awareness and expression.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between emotional regulation and assertive communication_Tendency to prioritize emotional comfort over personal values_88", "source": "Tension between emotional regulation and assertive communication", "target": "Tendency to prioritize emotional comfort over personal values", "pair_label": "88", "info": "Conflict avoidance", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between emotional regulation and assertive communication_Tension between desire for emotional comfort and need for assertive communication_90", "source": "Tension between emotional regulation and assertive communication", "target": "Tension between desire for emotional comfort and need for assertive communication", "pair_label": "90", "info": "Mutually reinforcing conflict", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between emotional regulation and assertive communication_Struggling to recognize and manage emotional triggers_87", "source": "Tension between emotional regulation and assertive communication", "target": "Struggling to recognize and manage emotional triggers", "pair_label": "87", "info": "Impedes effective emotional management.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between emotional regulation and assertive communication_Challenges in maintaining a consistent sense of self across different situations_82", "source": "Tension between emotional regulation and assertive communication", "target": "Challenges in maintaining a consistent sense of self across different situations", "pair_label": "82", "info": "Inconsistent self-presentation can exacerbate emotional\nregulation difficulties.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between emotional regulation and assertive communication_Tendency to prioritize short-term emotional comfort over long-term personal growth_89", "source": "Tension between emotional regulation and assertive communication", "target": "Tendency to prioritize short-term emotional comfort over long-term personal growth", "pair_label": "89", "info": "Conflict avoidance", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty articulating emotional needs in relationships_Tension between emotional regulation and assertive communication_27", "source": "Difficulty articulating emotional needs in relationships", "target": "Tension between emotional regulation and assertive communication", "pair_label": "27", "info": "Inability to articulate needs fuels tension between\nregulation and communication.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty articulating emotional needs in relationships_Struggling to balance personal values with emotional comfort_22", "source": "Difficulty articulating emotional needs in relationships", "target": "Struggling to balance personal values with emotional comfort", "pair_label": "22", "info": "Inability to articulate emotional needs may lead to inner\nconflict.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty articulating emotional needs in relationships_Challenges in recognizing and expressing emotional boundaries_20", "source": "Difficulty articulating emotional needs in relationships", "target": "Challenges in recognizing and expressing emotional boundaries", "pair_label": "20", "info": "One reinforces the other.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty articulating emotional needs in relationships_Tension between desire for emotional comfort and need for assertive communication_26", "source": "Difficulty articulating emotional needs in relationships", "target": "Tension between desire for emotional comfort and need for assertive communication", "pair_label": "26", "info": "Inability to express emotional needs can fuel tension\nbetween seeking comfort and asserting oneself.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty articulating emotional needs in relationships_Struggling to recognize and manage emotional triggers_23", "source": "Difficulty articulating emotional needs in relationships", "target": "Struggling to recognize and manage emotional triggers", "pair_label": "23", "info": "Lack of emotional expression may intensify emotional\nupheaval", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggling to balance personal values with emotional comfort_Tension between emotional regulation and assertive communication_45", "source": "Struggling to balance personal values with emotional comfort", "target": "Tension between emotional regulation and assertive communication", "pair_label": "45", "info": "Value conflicts heighten emotional tension.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggling to balance personal values with emotional comfort_Challenges in recognizing and expressing emotional boundaries_38", "source": "Struggling to balance personal values with emotional comfort", "target": "Challenges in recognizing and expressing emotional boundaries", "pair_label": "38", "info": "Interconnected emotional regulation", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggling to balance personal values with emotional comfort_Tendency to prioritize emotional comfort over personal values_42", "source": "Struggling to balance personal values with emotional comfort", "target": "Tendency to prioritize emotional comfort over personal values", "pair_label": "42", "info": "Prioritizing comfort reinforces imbalance.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggling to balance personal values with emotional comfort_Tension between desire for emotional comfort and need for assertive communication_44", "source": "Struggling to balance personal values with emotional comfort", "target": "Tension between desire for emotional comfort and need for assertive communication", "pair_label": "44", "info": "Conflict amplification", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggling to balance personal values with emotional comfort_Struggling to recognize and manage emotional triggers_41", "source": "Struggling to balance personal values with emotional comfort", "target": "Struggling to recognize and manage emotional triggers", "pair_label": "41", "info": "Heightened emotional discomfort can trigger a struggle to\nbalance personal values.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggling to balance personal values with emotional comfort_Challenges in maintaining a consistent sense of self across different situations_37", "source": "Struggling to balance personal values with emotional comfort", "target": "Challenges in maintaining a consistent sense of self across different situations", "pair_label": "37", "info": "Inconsistent self-presentation", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggling to balance personal values with emotional comfort_Tendency to prioritize short-term emotional comfort over long-term personal growth_43", "source": "Struggling to balance personal values with emotional comfort", "target": "Tendency to prioritize short-term emotional comfort over long-term personal growth", "pair_label": "43", "info": "Conflict between values and comfort drives prioritization.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Challenges in recognizing and expressing emotional boundaries_Tension between emotional regulation and assertive communication_18", "source": "Challenges in recognizing and expressing emotional boundaries", "target": "Tension between emotional regulation and assertive communication", "pair_label": "18", "info": "Linked through emotional awareness and expression.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Challenges in recognizing and expressing emotional boundaries_Difficulty articulating emotional needs in relationships_11", "source": "Challenges in recognizing and expressing emotional boundaries", "target": "Difficulty articulating emotional needs in relationships", "pair_label": "11", "info": "Linked by emotional awareness and expression.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Challenges in recognizing and expressing emotional boundaries_Struggling to balance personal values with emotional comfort_13", "source": "Challenges in recognizing and expressing emotional boundaries", "target": "Struggling to balance personal values with emotional comfort", "pair_label": "13", "info": "Linked by self-awareness and emotional regulation.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Challenges in recognizing and expressing emotional boundaries_Tendency to prioritize emotional comfort over personal values_15", "source": "Challenges in recognizing and expressing emotional boundaries", "target": "Tendency to prioritize emotional comfort over personal values", "pair_label": "15", "info": "Compromising personal values for emotional comfort can stem\nfrom difficulties in setting emotional boundaries.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Challenges in recognizing and expressing emotional boundaries_Tension between desire for emotional comfort and need for assertive communication_17", "source": "Challenges in recognizing and expressing emotional boundaries", "target": "Tension between desire for emotional comfort and need for assertive communication", "pair_label": "17", "info": "Interference with assertive expression", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Challenges in recognizing and expressing emotional boundaries_Struggling to recognize and manage emotional triggers_14", "source": "Challenges in recognizing and expressing emotional boundaries", "target": "Struggling to recognize and manage emotional triggers", "pair_label": "14", "info": "Linked through emotional regulation difficulties", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Challenges in recognizing and expressing emotional boundaries_Challenges in maintaining a consistent sense of self across different situations_10", "source": "Challenges in recognizing and expressing emotional boundaries", "target": "Challenges in maintaining a consistent sense of self across different situations", "pair_label": "10", "info": "Boundary issues can lead to self-identity diffusion.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Challenges in recognizing and expressing emotional boundaries_Tendency to prioritize short-term emotional comfort over long-term personal growth_16", "source": "Challenges in recognizing and expressing emotional boundaries", "target": "Tendency to prioritize short-term emotional comfort over long-term personal growth", "pair_label": "16", "info": "Avoiding emotional discomfort", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tendency to prioritize emotional comfort over personal values_Difficulty articulating emotional needs in relationships_57", "source": "Tendency to prioritize emotional comfort over personal values", "target": "Difficulty articulating emotional needs in relationships", "pair_label": "57", "info": "Prioritizing emotional comfort can lead to suppressed\nemotional expression.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tendency to prioritize emotional comfort over personal values_Struggling to balance personal values with emotional comfort_59", "source": "Tendency to prioritize emotional comfort over personal values", "target": "Struggling to balance personal values with emotional comfort", "pair_label": "59", "info": " Conflict generation", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tendency to prioritize emotional comfort over personal values_Challenges in recognizing and expressing emotional boundaries_56", "source": "Tendency to prioritize emotional comfort over personal values", "target": "Challenges in recognizing and expressing emotional boundaries", "pair_label": "56", "info": "Prioritizing comfort can hinder boundary setting.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tendency to prioritize emotional comfort over personal values_Tension between desire for emotional comfort and need for assertive communication_62", "source": "Tendency to prioritize emotional comfort over personal values", "target": "Tension between desire for emotional comfort and need for assertive communication", "pair_label": "62", "info": "Prioritizing emotional comfort can heighten the tension\nbetween comfort and assertive communication.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tendency to prioritize emotional comfort over personal values_Struggling to recognize and manage emotional triggers_60", "source": "Tendency to prioritize emotional comfort over personal values", "target": "Struggling to recognize and manage emotional triggers", "pair_label": "60", "info": "Prioritizing emotional comfort may hinder self-awareness and\nemotional regulation.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tendency to prioritize emotional comfort over personal values_Tendency to prioritize short-term emotional comfort over long-term personal growth_61", "source": "Tendency to prioritize emotional comfort over personal values", "target": "Tendency to prioritize short-term emotional comfort over long-term personal growth", "pair_label": "61", "info": "Similar prioritization patterns.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between desire for emotional comfort and need for assertive communication_Tension between emotional regulation and assertive communication_81", "source": "Tension between desire for emotional comfort and need for assertive communication", "target": "Tension between emotional regulation and assertive communication", "pair_label": "81", "info": "Shared underlying conflict", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between desire for emotional comfort and need for assertive communication_Difficulty articulating emotional needs in relationships_75", "source": "Tension between desire for emotional comfort and need for assertive communication", "target": "Difficulty articulating emotional needs in relationships", "pair_label": "75", "info": "Tension fuels difficulty.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between desire for emotional comfort and need for assertive communication_Struggling to balance personal values with emotional comfort_77", "source": "Tension between desire for emotional comfort and need for assertive communication", "target": "Struggling to balance personal values with emotional comfort", "pair_label": "77", "info": "Mutually reinforcing conflict", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between desire for emotional comfort and need for assertive communication_Challenges in recognizing and expressing emotional boundaries_74", "source": "Tension between desire for emotional comfort and need for assertive communication", "target": "Challenges in recognizing and expressing emotional boundaries", "pair_label": "74", "info": "Tension between seeking comfort and needing assertiveness\ncan intensify challenges in recognizing and expressing\nemotional boundaries.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between desire for emotional comfort and need for assertive communication_Tendency to prioritize emotional comfort over personal values_79", "source": "Tension between desire for emotional comfort and need for assertive communication", "target": "Tendency to prioritize emotional comfort over personal values", "pair_label": "79", "info": "Reinforces avoidance of assertiveness", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between desire for emotional comfort and need for assertive communication_Struggling to recognize and manage emotional triggers_78", "source": "Tension between desire for emotional comfort and need for assertive communication", "target": "Struggling to recognize and manage emotional triggers", "pair_label": "78", "info": "Increased tension fuels emotional reactivity.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between desire for emotional comfort and need for assertive communication_Tendency to prioritize short-term emotional comfort over long-term personal growth_80", "source": "Tension between desire for emotional comfort and need for assertive communication", "target": "Tendency to prioritize short-term emotional comfort over long-term personal growth", "pair_label": "80", "info": "Reinforces avoidance of assertiveness.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggling to recognize and manage emotional triggers_Tension between emotional regulation and assertive communication_54", "source": "Struggling to recognize and manage emotional triggers", "target": "Tension between emotional regulation and assertive communication", "pair_label": "54", "info": "Emotional dysregulation fuels tension.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggling to recognize and manage emotional triggers_Difficulty articulating emotional needs in relationships_48", "source": "Struggling to recognize and manage emotional triggers", "target": "Difficulty articulating emotional needs in relationships", "pair_label": "48", "info": "Emotional awareness precedes expression.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggling to recognize and manage emotional triggers_Challenges in recognizing and expressing emotional boundaries_47", "source": "Struggling to recognize and manage emotional triggers", "target": "Challenges in recognizing and expressing emotional boundaries", "pair_label": "47", "info": "Increased emotional reactivity", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggling to recognize and manage emotional triggers_Tendency to prioritize emotional comfort over personal values_51", "source": "Struggling to recognize and manage emotional triggers", "target": "Tendency to prioritize emotional comfort over personal values", "pair_label": "51", "info": "Avoiding emotional discomfort can lead to prioritizing\nshort-term emotional relief over long-term values.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggling to recognize and manage emotional triggers_Challenges in maintaining a consistent sense of self across different situations_46", "source": "Struggling to recognize and manage emotional triggers", "target": "Challenges in maintaining a consistent sense of self across different situations", "pair_label": "46", "info": "Emotional dysregulation can lead to inconsistent self-\npresentation.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggling to recognize and manage emotional triggers_Tendency to prioritize short-term emotional comfort over long-term personal growth_52", "source": "Struggling to recognize and manage emotional triggers", "target": "Tendency to prioritize short-term emotional comfort over long-term personal growth", "pair_label": "52", "info": "Avoidance of emotional discomfort", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Challenges in maintaining a consistent sense of self across different situations_Struggling to balance personal values with emotional comfort_4", "source": "Challenges in maintaining a consistent sense of self across different situations", "target": "Struggling to balance personal values with emotional comfort", "pair_label": "4", "info": "Inconsistent self-concept can amplify inner conflict.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Challenges in maintaining a consistent sense of self across different situations_Challenges in recognizing and expressing emotional boundaries_1", "source": "Challenges in maintaining a consistent sense of self across different situations", "target": "Challenges in recognizing and expressing emotional boundaries", "pair_label": "1", "info": "Inconsistent self-concept can amplify difficulties in\nestablishing and asserting emotional boundaries.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tendency to prioritize short-term emotional comfort over long-term personal growth_Struggling to balance personal values with emotional comfort_68", "source": "Tendency to prioritize short-term emotional comfort over long-term personal growth", "target": "Struggling to balance personal values with emotional comfort", "pair_label": "68", "info": "Reinforces conflicting desires", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tendency to prioritize short-term emotional comfort over long-term personal growth_Tendency to prioritize emotional comfort over personal values_70", "source": "Tendency to prioritize short-term emotional comfort over long-term personal growth", "target": "Tendency to prioritize emotional comfort over personal values", "pair_label": "70", "info": "Both prioritize emotional comfort over other considerations.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tendency to prioritize short-term emotional comfort over long-term personal growth_Tension between desire for emotional comfort and need for assertive communication_71", "source": "Tendency to prioritize short-term emotional comfort over long-term personal growth", "target": "Tension between desire for emotional comfort and need for assertive communication", "pair_label": "71", "info": "Prioritizing short-term comfort can heighten tension between\ncomfort and assertive communication.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tendency to prioritize short-term emotional comfort over long-term personal growth_Struggling to recognize and manage emotional triggers_69", "source": "Tendency to prioritize short-term emotional comfort over long-term personal growth", "target": "Struggling to recognize and manage emotional triggers", "pair_label": "69", "info": "Prioritizing short-term comfort can exacerbate emotional\nstruggles.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tendency to prioritize short-term emotional comfort over long-term personal growth_Challenges in maintaining a consistent sense of self across different situations_64", "source": "Tendency to prioritize short-term emotional comfort over long-term personal growth", "target": "Challenges in maintaining a consistent sense of self across different situations", "pair_label": "64", "info": "Prioritizing immediate emotional comfort can hinder self-\nreflection and exploration, leading to a fragmented sense of\nidentity.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}]
+        });
+
+        let tooltipCounter = 0;
+
+        cy.on('tap', 'edge', function(evt) {
+            var edge = evt.target;
+            var pos = evt.renderedPosition;
+            var tooltipId = "tooltip-" + (++tooltipCounter);
+
+            var tooltip = document.createElement("div");
+            tooltip.className = "tooltip";
+            tooltip.id = tooltipId;
+            tooltip.style.left = (pos.x + 20) + "px";
+            tooltip.style.top = (pos.y + 20) + "px";
+
+            var closeBtn = document.createElement("span");
+            closeBtn.className = "close-btn";
+            closeBtn.innerHTML = "&times;";
+            closeBtn.onclick = function () {
+                tooltip.remove();
+            };
+
+            tooltip.innerHTML = "";
+            tooltip.appendChild(closeBtn);
+            var content = document.createElement("div");
+            content.innerHTML = edge.data("info");
+            tooltip.appendChild(content);
+
+            document.body.appendChild(tooltip);
+            makeDraggable(tooltip);
+        });
+
+        function makeDraggable(elmnt) {
+            let offset = { x: 0, y: 0 };
+            let isDragging = false;
+
+            elmnt.addEventListener("mousedown", function (e) {
+                if (e.target.classList.contains("close-btn")) return;
+                isDragging = true;
+                offset.x = e.clientX - elmnt.offsetLeft;
+                offset.y = e.clientY - elmnt.offsetTop;
+                elmnt.style.cursor = "move";
+                e.preventDefault();
+            });
+
+            document.addEventListener("mousemove", function (e) {
+                if (isDragging) {
+                    elmnt.style.left = (e.clientX - offset.x) + "px";
+                    elmnt.style.top = (e.clientY - offset.y) + "px";
+                }
+            });
+
+            document.addEventListener("mouseup", function () {
+                isDragging = false;
+                elmnt.style.cursor = "default";
+            });
+        }
+    </script>
+</body>
+</html>
