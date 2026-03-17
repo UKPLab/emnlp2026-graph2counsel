@@ -14,7 +14,7 @@ We experiment with the following prompting technques:
 * **Base:** Prompt the LLM to produce the counseling session using the given input.
 * **Guided Counseling (GC):** Extract counselor strategies using [paper](https://arxiv.org/abs/2512.05836) and prompt the LLM to produce the counseling session using the extracted counselor strategies and the given input.
 * **GC + Chain-of-Thought (GC+CoT):** Prompt the LLM to produce the counseling session using the extracted counselor strategies and the given input while generating reasoning grounded in guidelines, constraints and input for each dialogue turn.
-* **GC + Multi-Agent (GC+MA):**
+* **GC + Multi-Agent (GC+MA):** Uses two agents with guided counseling. One agent generates an initial session which is critically analyzed by a feedback agent based on guidelines and constraints in the prompts and provides feedback. This feedback is used to regenerate the session.
 
 We find the optimal configuration (combination of input representation and prompting technique) using LLM-as-a-judge evaluation:
 * **CTRS:** Cognitive Therapy Rating Scale is a psychological scale used to measure general and CBT-specific counseling skills.
@@ -178,11 +178,11 @@ Please use the following citation:
 - [vLLM](https://docs.vllm.ai/en/latest/)
 - [HuggingFace](https://huggingface.co/)
 - [LangChain](https://www.langchain.com/)
-- [CACTUS]
-- [SQPsychConv]
-- [MAGneT]
-- [CounselBench]
-- [CounselingBench]
+- [CACTUS](https://aclanthology.org/2024.findings-emnlp.832/)
+- [SQPsychConv](https://arxiv.org/abs/2510.25384)
+- [MAGneT](https://arxiv.org/abs/2509.04183)
+- [CounselBench](https://arxiv.org/abs/2506.08584)
+- [CounselingBench](https://aclanthology.org/2025.findings-naacl.418/)
 
 ## Disclaimer
 
