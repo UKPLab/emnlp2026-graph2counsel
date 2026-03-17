@@ -1,0 +1,10 @@
+Please review the following counseling session script between a counselor and a client and provide feedback to improve the script.
+
+Client Information:
+{client_information}
+
+Possible Counselor Strategies:
+{counselor_strats}
+
+Counseling Session Script:
+{dialogue}

@@ -1,0 +1,10 @@
+Generate a mental health counseling session script using the rules and constraints you were given.
+
+Client Graph:
+{Edges}
+
+Client Information:
+{client_information}
+
+Possible Counselor Strategies:
+{counselor_strats}

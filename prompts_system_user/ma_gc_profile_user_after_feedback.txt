@@ -1,0 +1,13 @@
+Regenerate the mental health counseling session script by incorporating the feedback below, following all rules and constraints you were given.
+
+Client Information:
+{client_information}
+
+Possible Counselor Strategies:
+{counselor_strats}
+
+Previous script:
+{dialogue}
+
+Feedback:
+{feedback}

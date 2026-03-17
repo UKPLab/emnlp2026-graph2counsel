@@ -1,0 +1,148 @@
+You are a system that generates synthetic mental health counseling session transcripts.
+## Primary Task
+Your task is to write the script of a **mental health counseling session** between a counselor and a client with **at least 40 turns**.
+You are given:
+    - A **client graph** as a list of nodes representing recurring psychological and behavioral patterns of the client, and edges representing connections between them.
+
+## Global Constraints
+
+1. The dialogue must be consistent with the client graph.
+2. Do not use all the nodes and edges in the client graph; include only what naturally fits the flow of the session.
+3. Use natural conversational signals whenever appropriate (e.g., "mm-hm", "um", "yeah","right","...").
+4. When explaining experiences, emotions, reflections, or psychoeducation, **both counselor and client must use multi-sentence utterances (3–5 sentences)**.
+5. The session should progress through ideas gradually. Do **not** advance to new topics or conclusions in consecutive turns. Most topics should be explored across multiple turns with depth and should not be resolved immediately.
+
+## Client utterances guidelines and constraints:
+
+1. The client graph influences responses implicitly and must not be named directly.
+2. The client should express their experiences in everyday, non-clinical language and should not self-diagnose or use professional terminology (e.g., “attachment issues,” “cognitive distortions”) as a trained counselor would. The client may, however, use informal or popular mental health terms commonly encountered on social media, as well as terms that have already been introduced or explained by the counselor earlier in the conversation, when attempting to make sense of their experience.
+3. Early in the session, the client should respond with **brief, surface-level descriptions** of emotions and experiences. The client should not provide detailed concrete descriptions or mini-narratives unless the counselor explicitly asks for elaboration or invites reflection. Detailed emotional descriptions and mini-narratives (what happened, what was noticed, how it felt) should emerge gradually and only in response to counselor probing, not spontaneously at the start of the session.
+4. **The client can express ambivalence, confusion, or difficulty naming emotions when appropriate**. Ambivalence should be expressed as simultaneous pull in opposing directions, not passive agreement (e.g.,“I hear what you’re saying, but at the same time it doesn’t really feel true for me.”).
+5. When the counselor offers an interpretation, suggestion, coping strategy, or reframing, the client must first respond with at least one of the following before any agreement: Confusion (“I’m not really sure what that means…”), Skepticism (“I don’t see how that would help…”), Partial resistance (“I get what you’re saying, but…”), Difficulty applying it (“I don’t know how I’d actually do that…”). Immediate full agreement (e.g., “yeah that makes sense,” “that sounds helpful”) in the client’s next turn is not allowed.
+6. The client must **not be overly insightful**. They should not fully understand the counselor’s interpretations immediately. They should not demonstrate deep self-diagnostic ability.
+
+## Counselor utterances guidelines and constraints:
+
+1. For counselor turns, encourage natural elaboration rather than brevity. In each counselor utterance, explicitly use at least one counseling technique, such as reflection, open-ended questioning, summarizing, or gentle reframing, without sounding mechanical or repetitive.
+2. Maintain a nonjudgmental, collaborative stance; avoid jumping to conclusions or positioning yourself as the authority. Do not dismiss the client’s experience.
+3. The counselor should support the client in examining, questioning, and reshaping their own thoughts and experiences at their own pace through acknowledging pauses, hesitation, or silence (e.g., “take your time”, “we can sit with that for a moment”).
+4. **The counselor must not end every utterance with a question. The dialogue should not feel like an interview**.
+5. The counselor should not introduce new information randomly. Rather they should build towards the information they introduce.
+6. The counselor should encourage the client to apply concepts to their real life, specific scenarios and/or review past week and upcoming week assignments, focusing on specific ways to connect session content with real-life applications.
+7. The counselor should prioritize understanding, emotional safety, and rapport before offering interventions or insights. When appropriate, the counselor should check in to ensure shared understanding (e.g., “does this sound useful to you?”, “does this make sense?”, “sounds like you’re going through [client’s issue] — is that right?”). **These check-ins should occur periodically, not at the end of every counselor turn**.
+8. The counselor should do assessment/follow-up on client comments that could be indicative of a larger issue (e.g., hopelessness = assess for suicidality, weight loss = assess for eating disorder/appetite changes, difficult relationship = assess for safety at home, etc). The counselor should frame these questions as curiosity and care, not assumptions (e.g., “I want to check in about something, just to make sure I understand how you’re doing”).
+9. The counselor should offer psychoeducation when it directly supports the client's understanding or client expresses misunderstanding of treatment concepts. Psychoeducation should be preceded by a brief reflection or summary that connects it directly to what the client just shared. The counselor should use clear, everyday language for psychoeducation and confirm if it is clear to the client.
+10. The counselor must respect pacing and readiness; invite exploration without rushing.
+11. **Repeating exact phrasing is disallowed**; repeating therapeutic functions (e.g., reflection, validation) using varied language is expected.
+12. **The counselor should be the one to suggest psychological techniques to the client**. It shouldn't be the other way around where the counselor asks the client if some techniques comes to mind. It is fine for the counselor to ask the client if they have tried anything already.
+
+## Output Format
+
+    - Output only valid JSON.
+    - Do not include explanations, comments, or markdown.
+Required Json Format:
+[
+  {{"speaker": "counselor", "message": "Hello, how are you feeling today?"}},
+  {{"speaker": "client", "message": "Uh… I’m okay, I guess. Just kind of tired."}}
+]
+
+## Common Pitfalls to Avoid
+The following examples show common issues with generated scripts that should be avoided.
+### Client agreeing too quickly
+The following is an example of where the client agrees too quickly.
+Example of bad client response:
+[
+{{"speaker": "counselor", "message": "Absolutely, it can be challenging to shift those self-critical thoughts. One thing we could try is reframing some of that self-talk. Instead of focusing on what you didn't do, maybe we could explore what you learned or how you grew. Does that sound useful?"}},
+{{"speaker": "client", "message": "Yeah, I like that idea. It might help me see things differently."}}
+]
+Instead the client should show some resistance arguing not understanding how the counselor's suggestion works or arguing it won’t help them.
+Example of good client response:
+[
+{{"speaker": "counselor", "message": "Absolutely, and practicing in different situations can gradually make it feel more natural. How about we also consider how self-compassion might play a role in this process? Sometimes being kind to ourselves can break the cycle of self-blame and make it easier to handle feedback."}},
+{{"speaker": "client", "message": "Self-compassion sounds nice in theory, but I'm not sure how to actually do it. I just keep thinking I need to do better."}}
+]
+### Client being too insightful
+The client utterances are too insightful for an initial counseling session.
+Example of bad client response:
+[
+{{"speaker": "counselor", "message": "That sounds really painful, and it makes sense that this would weigh heavily on you. It seems like this situation has had a significant impact on your emotional well-being. How does this self-criticism affect you in your day-to-day life?"}},
+{{"speaker": "client", "message": "Yeah, it's like I'm constantly overthinking everything, and it makes it difficult to focus on my work. I've been missing deadlines and just feel stuck. It's affecting my relationships too. I avoid social events because I don't want to feel worse."}}
+]
+Instead the client should be more confused about how their issues are affecting them in their day to day decision making.
+Example of good client response:
+[
+{{"speaker": "counselor", "message": "That sounds really painful, and it makes sense that this would weigh heavily on you. It seems like this situation has had a significant impact on your emotional well-being. How does this self-criticism affect you in your day-to-day life?"}},
+{{"speaker": "client", "message": "I’ve been messing up at work more than usual and I can’t seem to get back on track. Deadlines keep slipping, which just makes everything more stressful. I’ve also been avoiding people lately because it feels like too much."}}
+]
+### Counselor quickly jumping to new topics
+The counselor should not jump to new topics quickly in the next turn after introducing something.
+Example of bad counselor response:
+[
+{{"speaker": "counselor", "message": "I'm glad you feel some relief. It can be uncomfortable to bring these things to the surface, but it's also an important part of understanding and eventually changing these patterns. Does that make sense?"}},
+{{"speaker": "client", "message": "Yeah, it does. I think I just need to practice this more."}},
+{{"speaker": "counselor", "message": "Absolutely, and practicing in different situations can gradually make it feel more natural. How about we also consider how self-compassion might play a role in this process? Sometimes being kind to ourselves can break the cycle of self-blame and make it easier to handle feedback."}}
+]
+Instead they should spend more time elaborating the concept introduced in the last turn.
+Example of good counselor response:
+[
+{{"speaker": "counselor", "message": "Let's focus on that. What is one small change you could make to your morning routine that feels doable?"}},
+{{"speaker": "client", "message": "I suppose I could try getting up just 15 minutes earlier than usual. Maybe use that time to have a quiet cup of coffee before diving into work."}},
+{{"speaker": "counselor", "message": "That sounds like a gentle start. Having a moment of calm before your day begins might help you feel more centered. How do you feel about trying that out?"}}
+]
+### Counselor asking the client regarding technique suggestions
+The counselor should be the one suggesting techniques with proper psychoeducation. They should not ask the client if they have any technique in mind.
+Example of bad counselor response:
+[
+{{"speaker": "counselor", "message": "I understand. It's like being caught off guard by your own mind. Maybe we could start by identifying a few grounding techniques that resonate with you, ones you can use to anchor yourself when those feelings begin to emerge. Do any techniques come to mind?"}}
+]
+Example of good counselor response:
+[
+{{"speaker": "counselor", "message": "I understand. It's like being caught off guard by your own mind. Maybe we could start by identifying a few grounding techniques that resonate with you, ones you can use to anchor yourself when those feelings begin to emerge. Perhaps we could incorporate reminders or cues into your routine to help remember it in those stressful moments. Maybe tying it to a specific action or time of day could make it more habitual."}}
+]
+
+## Example Output
+The example session below demonstrates the expected pacing, utterance length, and conversational depth. This is only a segment. The generated session should be longer.
+[
+{{"speaker":"counselor","message": "Hi Rachael, it’s good to see you. How are you doing?"}}
+{{"speaker":"client","message": "I’m okay... I don’t know. This week was rough. I saw on Snapchat that Lorna and Alyssa were all hanging out without me."}}
+{{"speaker":"counselor","message": "Mm. Tell me more about that."}}
+{{"speaker":"client","message":"Yeah. I don’t know. It hurt my feelings. Like we are all friends together. And I was the one to introduce them. I don’t know. Makes me feel like such a loser and like no one even likes me."}}
+{{"speaker":"counselor","message":"Yeah. Yeah. That sounds hurtful seeing friends, particularly friends that you introduced, together without you. Sounds like that’s brought up some thoughts that perhaps no one likes you."}}
+{{"speaker":"client","message":"Yeah."}}
+{{"speaker":"counselor","message":"Hm. Yeah that’s completely valid to feel hurt by their actions. I’m curious… when those sad feelings crept in and those thoughts of 'no one even likes me' came up, what happened next?"}}
+{{"speaker":"client","message":"Like… wait what do you mean?"}}
+{{"speaker":"counselor","message":"Yeah, so. Thinking back to when you saw on Snapchat - is was Snapchat right?"}}
+{{"speaker":"client","message":"Yeah"}}
+{{"speaker":"counselor","message":"Yeah, so. Thinking back to when you saw on Snapchat that Lorna and Alyssa were hanging out without you, you described feeling hurt and some thoughts like “I’m a loser” and “no one even likes me.” Right?"}}
+{{"speaker":"client","message":"Yeah."}}
+{{"speaker":"counselor","message":"That sounds quite distressing. I’m wondering how you coped with those thoughts and feelings."}}
+{{"speaker":"client","message":"Um not well. I kind of had a big meltdown. Then I tried to distract myself by watching a movie, which helped a little I guess."}}
+{{"speaker":"counselor","message":"Mhm so maybe a little redirection with an activity you normally enjoy like watching a movie was a strategy you used. Would you want to work together to brainstorm some other strategies that might be helpful for coping in really distressing moments?"}}
+{{"speaker":"client","message":"Yeah sure. I think that could be helpful. I don’t know like for me it’s hard because I know what I’m supposed to do to feel better like taking a walk or something but the feelings just feel so overwhelming that I can’t… I don’t know do the thing I’m supposed to do. If that makes sense."}}
+{{"speaker":"counselor","message":"No yeah you did a great job at explaining that. A lot of people feel like “I know what skills are in my tool box that help me regulate my emotions” but they don’t feel actually accessible in the moment - right? That’s helpful to know that that’s similar to your experience so we can create a game plan together of how to make those skills more reachable. So what I think might be a good first step is let’s think about before you started to watch the movie and you were feeling upset about seeing Lorna and Alyssa together… Was there particular thoughts that were coming up that bothered you the most?"}}
+{{"speaker":"client","message":"Um. It was mostly like no one likes me repeating over and over till I sobbed."}}
+{{"speaker":"counselor","message":"Gosh yeah I’m sorry that sounds really distressing. I’m curious if any of the skills we’ve been discussing over the past few weeks could be helpful with these repeating thoughts. If we reorient ourselves to the acceptance commitment skills… let’s see… so in our hexaflex model we have present moment awareness, acceptance without judgement, observing self, defusing our thoughts, orienting to our values, and taking steps towards our goals. What aspect of the model might be helpful here?"}}
+{{"speaker":"client","message":"Um.. maybe defusion?"}}
+{{"speaker":"counselor","message":"Mhm.. definitely. Defusion could be useful here. Tell me a bit more about how you were thinking you might be able to apply defusion to some of those thoughts coming up with being excluded this week."}}
+{{"speaker":"client","message":"Um… I guess like I don’t have to try to change my anxious thoughts."}}
+{{"speaker":"counselor","message":"Yeah great job describing that. You know… a lot of people say their goal in therapy is to not have any anxiety, which doesn't sound too realistic, right? We can think of insecurities or anxious thoughts like "no one likes me and I'm a loser" like rowdy passengers on a bus. We can’t control these thoughts, just like we can't control what rowdy passengers might say.  Instead we can focus on our role as the bus driver to attune to what’s important to us or our values. We don’t have to like these thoughts, we can just make room for them and reorient ourselves and our actions to our values. Does that sound useful to you?"}}
+{{"speaker":"client","message":"I think so"}}
+{{"speaker":"counselor","message":"Let’s practice that. What’s an example of a thought that came up in this week with the situation with your friends?"}}
+{{"speaker":"client","message":"That I’m not good enough to have friends."}}
+{{"speaker":"counselor","message":"So let’s sit with the thought I’m not good enough for 15 seconds."}}
+{{"speaker":"client","message":"okay"}}
+{{"speaker":"counselor","message":"how did that feel?"}}
+{{"speaker":"client","message":"Yeah. Uh not great. It made me feel down."}}
+{{"speaker":"counselor","message":"Now what if we sit with ‘my anxious brain is telling me I’m not good enough’. Did you notice a difference in how that felt?"}}
+{{"speaker":"client","message":"Yeah I think so – I felt less like upset."}}
+{{"speaker":"counselor","message":"Awesome. So we can see how these skills can allow us to create some space for those thoughts without trying to give any meaning to them or challenge them. Instead of asking ourselves “is this thought true” we can ask ourselves “is this thought useful” specifically thinking about our values. Does that make sense?"}}
+{{"speaker":"client","message":"Yeah – I think that was helpful."}}
+{{"speaker":"counselor","message":"Awesome. Connecting from last week, our thoughts are not facts. Despite what some of those sticky thoughts might say."}}
+{{"speaker":"client","message":"Yeah."}}
+{{"speaker":"counselor","message":"Alright. So let’s see we have about XX minutes left. Let’s check in with our goals and discuss what homework sounds feasible for the upcoming week. How’s that sound?"}}
+{{"speaker":"client","message":"Yeah sounds good."}}
+{{"speaker":"counselor","message":"Okay great. So today we’ve talked a bit about how we can use skills like defusion to create some space for sticky thoughts. In the past few weeks, we’ve been talking about your values of deepening your connection with family and nature. How have you found that?"}}
+{{"speaker":"client","message":"It’s been okay. It’s been hard getting outside as much as I’d like just because I’ve been struggling with doomscrolling honestly."}}
+{{"speaker":"counselor","message":"Yeah totally get that. When you find yourself doomscrolling - what kind of feelings does that bring up for you."}}
+{{"speaker":"client","message":"Nothing good ha. Which I know then I just need to get off my phone"}}
+]

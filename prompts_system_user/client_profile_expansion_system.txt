@@ -1,0 +1,71 @@
+Your task is to generate diverse synthetic client intake forms for mental health counseling sessions. All content must be implicitly grounded in the provided client graph, which encodes recurring psychological and behavioral patterns through nodes and edges.
+
+## Core constraints (must follow strictly):
+
+1. You must generate exactly 10 distinct client intake forms.
+2. Each profile must be unique in:
+    -name, age, gender, background
+    -symptom expression and wording
+    -life history, stressors, and coping attempts
+3. DO NOT copy, paraphrase, or structurally reuse the example profiles.
+4. DO NOT reuse sentence templates, phrasing, or paragraph structure from the examples.
+5. DO NOT repeat any example content, even partially.
+6. DO NOT mention clinical models, diagnoses, or technical psychological terminology.
+7. Write strictly from the client’s perspective, using everyday language.
+8. The graph reflects expert knowledge, but the client is unaware of the graph and should not sound clinically insightful.
+9. Infer content from the graph implicitly, not by naming nodes or edges.
+10. No profile may resemble another in tone, life stage, or narrative arc.
+11. Output must be valid JSON only, with no surrounding text or commentary.
+12. Any violation of formatting or repetition invalidates the output.
+
+## Task
+
+Infer 10 diverse client intake forms based on a client graph. The **client graph** is given as a list of nodes representing recurring psychological and behavioral patterns of the client, and edges representing connections between them.
+
+**Each client intake form must include the following sections**
+
+1. Basic Information
+- name, age, gender, occupation, education, marital status, family details.
+
+2. Presenting Problem
+- What symptoms do you want to discuss?
+- When did the problem/symptoms start?
+- What was the stress level when the problem/symptoms first occurred? (What do you think might be the cause?)
+- How has the problem/symptoms progressed? (Changes over time, aggravating factors, alleviating factors, etc.)
+- Currently, in what situations, how often, and in what patterns do you experience the problem/symptoms?
+- What have you tried to solve the problem/relieve the symptoms?
+
+3. Reason for Seeking Counseling
+- What was the decisive factor that made you decide to seek counseling this time? (If the problem has been long standing, what made you decide to seek counseling now?)
+
+4. Past History (including medical history)
+- Have you experienced similar problems before? Under what circumstances or stress did the problem occur, and what were the patterns? How did you cope?
+- Have you received treatment/counseling for other psychological problems/symptoms? (When, for how long, any medication use, reasons for stopping - improved? stopped on your own due to ineffectiveness? etc.)
+- Do you have any significant physical illnesses?
+
+5. Academic/occupational functioning level (attendance, grades/job performance, etc.)
+- Interpersonal relationships
+- Daily life (including sleep, eating, self-care, etc.)
+- Social Support System
+
+6. Is there anyone you can talk to or get help from when you encounter difficulties or problems?
+
+## Output Format
+    - Output only valid JSON
+    - Do not include any explanation or comments. Just output the profiles.
+
+## Example Output
+The following is only an example of the expected output structure and approximate length. Do not copy any profiles directly.
+
+[
+  {{"profile": "Name: Miguel Alvarez\\n Age: 39\\n Gender: Male\\n Occupation: Truck Driver\\n Education: Vocational School\\n Marital Status: Married\\n Family Details: Wife and two teenage children\\n\\n 2. Presenting Problem\\n I constantly feel on edge and irritable, especially during long drives. The problem started three years ago after a near-fatal accident on the highway. At first, the stress level was extreme—I couldn’t even drive for weeks. Over time, I pushed myself back into work, but the tension never fully went away. Now I experience it daily, particularly on high-traffic routes. I’ve tried deep breathing, music, and coffee breaks, but nothing really works.\\n\\n 3. Reason for Seeking Counseling\\n My wife urged me to seek counseling because the irritability is affecting my relationship with her and the kids.\\n\\n 4. Past History (including medical history)\\n I’ve had mild anxiety during stressful periods before but nothing this severe. Never had counseling before. No major illnesses.\\n\\n 5. Academic/occupational functioning level\\n My job performance has been shaky, sometimes missing deadlines due to anxiety. Interpersonal relationships: Strained at home. Daily life: Sleep is poor, appetite is inconsistent.\\n\\n 6. Social Support System\\n My wife is supportive, though frustrated, and I occasionally talk to a close coworker."}},
+  {{"profile": "Name: Aisha Rahman\\n Age: 22\\n Gender: Female\\n Occupation: University Student\\n Education: Currently pursuing Bachelor's Degree\\n Marital Status: Single\\n Family Details: Lives with parents and younger brother\\n\\n 2. Presenting Problem\\n I experience overwhelming pressure before exams, leading to panic attacks and difficulty concentrating. It started two years ago after failing one midterm. At that time, I felt devastated and ashamed. Since then, the anxiety worsens every exam season. I now dread studying, often procrastinate, and then spiral into self-criticism. I’ve tried meditation apps and cutting caffeine, but the anxiety still hits hard.\\n\\n 3. Reason for Seeking Counseling\\n My most recent exam panic led me to faint in the library, and I realized I can’t keep going like this.\\n\\n 4. Past History (including medical history)\\n I struggled with performance anxiety in high school too, but it was less intense. Never received counseling before. No physical illnesses.\\n\\n 5. Academic/occupational functioning level\\n Grades are average, slipping compared to earlier years. Interpersonal relationships: I avoid group study out of embarrassment. Daily life: Erratic sleep, sometimes skipping meals before exams.\\n\\n 6. Social Support System\\n I talk to my mother sometimes, but I usually hide my stress to avoid worrying my family."}},
+   {{"profile": "Name: Daniel Brooks\\n Age: 54\\n Gender: Male\\n Occupation: High School Teacher\\n Education: Master’s Degree\\n Marital Status: Divorced\\n Family Details: Two adult children living independently\\n\\n 2. Presenting Problem\\n I’ve been feeling empty and unmotivated, like nothing has meaning. It started after my divorce five years ago. At first, I thought it was just grief, but the feelings lingered. Stress was high at the beginning; now it’s more of a numbness. I notice it especially in the evenings and on weekends. I tried joining clubs and exercising, but I drop them quickly.\\n\\n 3. Reason for Seeking Counseling\\n I realized that I’ve been going through the motions for too long, and I want to feel alive again.\\n\\n 4. Past History (including medical history)\\n I experienced mild depression after my mother passed away in my 20s but recovered on my own. No previous counseling. Healthy otherwise.\\n\\n 5. Academic/occupational functioning level\\n My teaching evaluations are stable, though I lack enthusiasm. Interpersonal relationships: Limited social circle. Daily life: Sleep is adequate but unrefreshing, appetite normal.\\n\\n 6. Social Support System\\n I talk occasionally with my daughter, but mostly keep to myself."}},
+  {{"profile": "Generated profile number 4"}},
+  {{"profile": "Generated profile number 5"}},
+  {{"profile": "Generated profile number 6"}},
+  {{"profile": "Generated profile number 7"}},
+  {{"profile": "Generated profile number 8"}},
+  {{"profile": "Generated profile number 9"}},
+  {{"profile": "Generated profile number 10"}}
+]

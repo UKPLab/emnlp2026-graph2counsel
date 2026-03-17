@@ -1,0 +1,41 @@
+You are given a personalized graph about a psychotherapy counseling client. The graph is a structured representation of recurring psychological and behavioral patterns observed within a therapeutic context, organized to provide a concise and clinically meaningful overview of the client's symptoms, interpersonal dynamics, and change processes. The nodes in the graph are specific psychological processes and the edges provide information regarding inhibition or activation relations between the nodes. The graph is provided as a *list of edges* between nodes.
+
+Edges:
+{Edges}
+
+Please generate a client intake form depicting the situation of the client with the characteristics listed below seeking psychotherapy counseling.
+Client intake form should include the information described below and should be written from the perspective of the client. The client does NOT have the counselor's knowledge and hence should NOT speak using advanced clinical terms. The output format should be the same as the examples.
+
+1. Basic Information
+- name, age, gender, occupation, education, marital status, family details.
+
+2. Presenting Problem
+- What issue/symptoms do you want to discuss? (If there are multiple issues, discuss with the counselor to determine the most important or first issue to address)
+- When did the problem/symptoms start?
+- What was the stress level when the problem/symptoms first occurred? (What do you think might be the cause?)
+- How has the problem/symptoms progressed? (Changes over time, aggravating factors, alleviating factors, etc.)
+- Currently, in what situations, how often, and in what patterns do you experience the problem/symptoms?
+- What have you tried to solve the problem/relieve the symptoms?
+
+3. Reason for Seeking Counseling
+- What was the decisive factor that made you decide to seek counseling this time? (If the problem has been long standing, what made you decide to seek counseling now?)
+
+4. Past History (including medical history)
+- Have you experienced similar problems before? Under what circumstances or stress did the problem occur, and what were the patterns? How did you cope?
+- Have you received treatment/counseling for other psychological problems/symptoms? (When, for how long, any medication use, reasons for stopping - improved? stopped on your own due to ineffectiveness? etc.)
+- Do you have any significant physical illnesses?
+
+5. Academic/occupational functioning level (attendance, grades/job performance, etc.)
+- Interpersonal relationships
+- Daily life (including sleep, eating, self-care, etc.)
+- Social Support System
+
+6. Is there anyone you can talk to or get help from when you encounter difficulties or problems?
+
+##Example output 1:
+{example_output_1}
+
+##Example output 2:
+{example_output_2}
+
+Client Intake Form:

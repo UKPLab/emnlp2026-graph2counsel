@@ -1,0 +1,4 @@
+Generate 10 **diverse client intake forms** based on the client graph representing recurring psychological and behavioral patterns of the client, and edges representing connections between them.
+
+Client Graph:
+{Edges}
