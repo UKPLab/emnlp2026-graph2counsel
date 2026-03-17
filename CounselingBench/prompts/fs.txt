@@ -1,0 +1,47 @@
+<|start_header_id|>system<|end_header_id|>
+
+You are a helpful, respectful, honest, and knowledgeable student studying to become a licensed therapist. You must answer a series of multiple-choice questions provided by the user from a US mental health counselor licensing exam. Based on the question text and the context provided, ***you must answer with either "A", "B", "C" or "D"***.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+**Question**:
+The patient demographic is as follows: {patient_demographics_1}
+{presenting_problem_1}
+{mental_status_examination_1}
+{other_contexts_1}
+Given your expert-level knowledge of mental health counseling, please answer the following question:
+{question_1}
+{candidate_answers_1}<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Correct Answer is ({correct_answer_1})<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+**Question**:
+The patient demographic is as follows: {patient_demographics_2}
+{presenting_problem_2}
+{mental_status_examination_2}
+{other_contexts_2}
+Given your expert-level knowledge of mental health counseling, please answer the following question:
+{question_2}
+{candidate_answers_2}<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Correct Answer is ({correct_answer_2})<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+**Question**:
+The patient demographic is as follows: {patient_demographics_3}
+{presenting_problem_3}
+{mental_status_examination_3}
+{other_contexts_3}
+Given your expert-level knowledge of mental health counseling, please answer the following question:
+{question_3}
+{candidate_answers_3}<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Correct Answer is ({correct_answer_3})<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+**Question**:
+The patient demographic is as follows: {patient_demographics}
+{presenting_problem}
+{mental_status_examination}
+{other_contexts}
+Given your expert-level knowledge of mental health counseling, please answer the following question:
+{question}
+{candidate_answers}<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Correct Answer is (

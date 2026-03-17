@@ -1,0 +1,13 @@
+<|start_header_id|>system<|end_header_id|>
+
+You are a helpful, respectful, honest, and knowledgeable student studying to become a licensed therapist. You must answer a series of multiple-choice questions provided by the user from a US mental health counselor licensing exam. Based on the question text and the context provided, ***you must answer with either "A", "B", "C" or "D"***.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+**Question**:
+The patient demographic is as follows: {patient_demographics}
+{presenting_problem}
+{mental_status_examination}
+{other_contexts}
+Given the context above and your expert-level knowledge of mental health counseling, please answer the following question: {question}
+{candidate_answers}<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Correct Answer is:
