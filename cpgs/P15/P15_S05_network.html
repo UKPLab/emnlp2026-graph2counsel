@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Interactive Process Network</title>
+    <script src="https://unpkg.com/cytoscape@3.21.1/dist/cytoscape.min.js"></script>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        #cy {
+            width: 100vw;
+            height: 100vh;
+            display: block;
+        }
+        .legend {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: white;
+            border: 1px solid #ccc;
+            padding: 10px;
+            font-family: sans-serif;
+            font-size: 14px;
+            z-index: 10;
+        }
+        .tooltip {
+            position: absolute;
+            background: #fefefe;
+            border: 1px solid #aaa;
+            padding: 10px;
+            font-family: sans-serif;
+            font-size: 13px;
+            max-width: 300px;
+            z-index: 20;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            cursor: default;
+        }
+        .tooltip .close-btn {
+            float: right;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="cy"></div>
+    <div class="legend">
+        <b>Legend</b><br>
+        <span style="color:#e74c3c;">Red</span>: Inhibitory<br>
+        <span style="color:#3498db;">Blue</span>: Excitatory<br>
+        <hr>
+        <b>Dimensions</b><br>
+        🔵 Cognition<br>
+        🟢 Sense of Self<br>
+        🔴 (Overt) Behaviour<br>
+        🟣 Affect<br>
+        🟠 Context/Moderators<br>
+        🟡 Attention<br>
+        ⚪ Biophysiological<br>
+        🟤 Motivation<br>
+        ⚫ Sociocultural
+    </div>
+    <script>
+        var cy = cytoscape({
+            container: document.getElementById('cy'),
+            layout: { name: 'cose' },
+            style: [
+                {
+                    selector: 'node',
+                    style: {
+                        'shape': 'roundrectangle',
+                        'label': 'data(label)',
+                        'text-wrap': 'wrap',
+                        'text-max-width': 120,
+                        'text-valign': 'center',
+                        'text-halign': 'center',
+                        'background-color': '#ffffff',
+                        'border-color': '#000000',
+                        'border-width': 1,
+                        'color': '#000',
+                        'font-size': 14,
+                        'padding': '20px',
+                        'width': 'label',
+                        'height': 'label'
+                    }
+                },
+                {
+                    selector: 'edge',
+                    style: {
+                        'curve-style': 'bezier',
+                        'target-arrow-shape': 'triangle',
+                        'arrow-scale': 1.2,
+                        'label': '',
+                        'font-size': 9,
+                        'text-rotation': 'autorotate',
+                        'text-margin-y': -10,
+                        'line-color': 'data(color)',
+                        'target-arrow-color': 'data(color)',
+                        'width': 'data(width)',
+                        'line-style': 'data(lineStyle)'
+                    }
+                }
+            ],
+            elements: [{"data": {"id": "Struggling to balance precision with efficiency in documentation", "label": "Struggling to balance precision with efficiency in documentation\n\ud83d\udd34 \ud83d\udfe1 \ud83d\udd35\nw = 19"}}, {"data": {"id": "Pressure to catch every detail in notes", "label": "Pressure to catch every detail in notes\n\ud83d\udd34 \ud83d\udfe1 \ud83d\udd35\nw = 31"}}, {"data": {"id": "Uncertainty about what information is crucial for patient care", "label": "Uncertainty about what information is crucial for patient care\n\ud83d\udd34 \ud83d\udfe1 \ud83d\udd35\nw = 25"}}, {"data": {"id": "Tension between thoroughness and brevity in documentation", "label": "Tension between thoroughness and brevity in documentation\n\ud83d\udd34 \ud83d\udfe1 \ud83d\udd35\nw = 31"}}, {"data": {"id": "The need for a systematic approach to behavioral observations", "label": "The need for a systematic approach to behavioral observations\n\ud83d\udd34 \ud83d\udfe1 \ud83d\udd35\nw = 25"}}, {"data": {"id": "The challenge of integrating new information into existing templates", "label": "The challenge of integrating new information into existing templates\n\ud83d\udd34 \ud83d\udfe1 \ud83d\udd35\nw = 31"}}, {"data": {"id": "The struggle to prioritize tasks and manage time effectively", "label": "The struggle to prioritize tasks and manage time effectively\n\ud83d\udd34 \ud83d\udfe1 \ud83d\udd35\nw = 31"}}, {"data": {"id": "Difficulty articulating the importance of certain details", "label": "Difficulty articulating the importance of certain details\n\ud83d\udd34 \ud83d\udfe1 \ud83d\udd35\nw = 25"}}, {"data": {"id": "The weight of responsibility for patient outcomes", "label": "The weight of responsibility for patient outcomes\n\ud83d\udd34 \ud83d\udfe1 \ud83d\udd35\nw = 25"}}, {"data": {"id": "The importance of considering the patient's perspective in documentation", "label": "The importance of considering the patient's perspective in documentation\n\ud83d\udd34 \ud83d\udfe1 \ud83d\udd35\nw = 25"}}, {"data": {"id": "Struggling to balance precision with efficiency in documentation_Pressure to catch every detail in notes_20", "source": "Struggling to balance precision with efficiency in documentation", "target": "Pressure to catch every detail in notes", "pair_label": "20", "info": "Increased pressure to catch every detail can exacerbate the\nstruggle to balance precision with efficiency.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggling to balance precision with efficiency in documentation_Uncertainty about what information is crucial for patient care_27", "source": "Struggling to balance precision with efficiency in documentation", "target": "Uncertainty about what information is crucial for patient care", "pair_label": "27", "info": "overemphasizing documentation precision may heighten\nuncertainty about essential patient care information.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggling to balance precision with efficiency in documentation_Tension between thoroughness and brevity in documentation_21", "source": "Struggling to balance precision with efficiency in documentation", "target": "Tension between thoroughness and brevity in documentation", "pair_label": "21", "info": "Mutually reinforcing documentation goals", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggling to balance precision with efficiency in documentation_The need for a systematic approach to behavioral observations_24", "source": "Struggling to balance precision with efficiency in documentation", "target": "The need for a systematic approach to behavioral observations", "pair_label": "24", "info": "Enhances thoroughness", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggling to balance precision with efficiency in documentation_The challenge of integrating new information into existing templates_22", "source": "Struggling to balance precision with efficiency in documentation", "target": "The challenge of integrating new information into existing templates", "pair_label": "22", "info": "Increased complexity", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggling to balance precision with efficiency in documentation_The struggle to prioritize tasks and manage time effectively_25", "source": "Struggling to balance precision with efficiency in documentation", "target": "The struggle to prioritize tasks and manage time effectively", "pair_label": "25", "info": "Both processes are interlinked as effective time management\nand prioritization directly impact the ability to balance\nprecision and efficiency in documentation.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty articulating the importance of certain details_Pressure to catch every detail in notes_1", "source": "Difficulty articulating the importance of certain details", "target": "Pressure to catch every detail in notes", "pair_label": "1", "info": "Overemphasis on capturing all details due to difficulty in\nprioritizing.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty articulating the importance of certain details_Uncertainty about what information is crucial for patient care_9", "source": "Difficulty articulating the importance of certain details", "target": "Uncertainty about what information is crucial for patient care", "pair_label": "9", "info": "Lack of clarity in articulation leads to uncertainty about\ncrucial information.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty articulating the importance of certain details_Tension between thoroughness and brevity in documentation_3", "source": "Difficulty articulating the importance of certain details", "target": "Tension between thoroughness and brevity in documentation", "pair_label": "3", "info": "Difficulty in articulation can lead to overemphasis on\ndetails, causing tension between thoroughness and brevity.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Pressure to catch every detail in notes_Struggling to balance precision with efficiency in documentation_11", "source": "Pressure to catch every detail in notes", "target": "Struggling to balance precision with efficiency in documentation", "pair_label": "11", "info": "Overemphasis on detail can hinder efficiency.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Pressure to catch every detail in notes_Uncertainty about what information is crucial for patient care_18", "source": "Pressure to catch every detail in notes", "target": "Uncertainty about what information is crucial for patient care", "pair_label": "18", "info": "Increases anxiety", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Pressure to catch every detail in notes_Tension between thoroughness and brevity in documentation_12", "source": "Pressure to catch every detail in notes", "target": "Tension between thoroughness and brevity in documentation", "pair_label": "12", "info": "Heightened attention to detail increases perceived conflict\nbetween completeness and conciseness.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Pressure to catch every detail in notes_The need for a systematic approach to behavioral observations_15", "source": "Pressure to catch every detail in notes", "target": "The need for a systematic approach to behavioral observations", "pair_label": "15", "info": "Enhances thoroughness", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Pressure to catch every detail in notes_The weight of responsibility for patient outcomes_17", "source": "Pressure to catch every detail in notes", "target": "The weight of responsibility for patient outcomes", "pair_label": "17", "info": "Heightened attention to detail due to sense of\nresponsibility.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Pressure to catch every detail in notes_The struggle to prioritize tasks and manage time effectively_16", "source": "Pressure to catch every detail in notes", "target": "The struggle to prioritize tasks and manage time effectively", "pair_label": "16", "info": "Overemphasis on detail can hinder task prioritization and\ntime management.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Uncertainty about what information is crucial for patient care_Struggling to balance precision with efficiency in documentation_84", "source": "Uncertainty about what information is crucial for patient care", "target": "Struggling to balance precision with efficiency in documentation", "pair_label": "84", "info": "Increased uncertainty about crucial information leads to\nincreased struggle to balance precision and efficiency in\ndocumentation.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Uncertainty about what information is crucial for patient care_Difficulty articulating the importance of certain details_82", "source": "Uncertainty about what information is crucial for patient care", "target": "Difficulty articulating the importance of certain details", "pair_label": "82", "info": "Uncertainty fuels difficulty in articulation.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Uncertainty about what information is crucial for patient care_Pressure to catch every detail in notes_83", "source": "Uncertainty about what information is crucial for patient care", "target": "Pressure to catch every detail in notes", "pair_label": "83", "info": "Increased uncertainty about crucial information leads to\nincreased pressure to document thoroughly.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Uncertainty about what information is crucial for patient care_The need for a systematic approach to behavioral observations_88", "source": "Uncertainty about what information is crucial for patient care", "target": "The need for a systematic approach to behavioral observations", "pair_label": "88", "info": "Uncertainty drives systematic approach", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Uncertainty about what information is crucial for patient care_The weight of responsibility for patient outcomes_90", "source": "Uncertainty about what information is crucial for patient care", "target": "The weight of responsibility for patient outcomes", "pair_label": "90", "info": "Increases anxiety and stress.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between thoroughness and brevity in documentation_Struggling to balance precision with efficiency in documentation_30", "source": "Tension between thoroughness and brevity in documentation", "target": "Struggling to balance precision with efficiency in documentation", "pair_label": "30", "info": "Mutually reinforcing dilemma.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between thoroughness and brevity in documentation_Difficulty articulating the importance of certain details_28", "source": "Tension between thoroughness and brevity in documentation", "target": "Difficulty articulating the importance of certain details", "pair_label": "28", "info": "Increased tension may impede clear articulation.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between thoroughness and brevity in documentation_Pressure to catch every detail in notes_29", "source": "Tension between thoroughness and brevity in documentation", "target": "Pressure to catch every detail in notes", "pair_label": "29", "info": "Heightened attention to detail", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between thoroughness and brevity in documentation_Uncertainty about what information is crucial for patient care_36", "source": "Tension between thoroughness and brevity in documentation", "target": "Uncertainty about what information is crucial for patient care", "pair_label": "36", "info": "Tension between thoroughness and brevity in documentation\ncan amplify uncertainty about what information is crucial\nfor patient care.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between thoroughness and brevity in documentation_The struggle to prioritize tasks and manage time effectively_34", "source": "Tension between thoroughness and brevity in documentation", "target": "The struggle to prioritize tasks and manage time effectively", "pair_label": "34", "info": "Increased tension in documentation can amplify time\nmanagement struggles.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "The need for a systematic approach to behavioral observations_Struggling to balance precision with efficiency in documentation_57", "source": "The need for a systematic approach to behavioral observations", "target": "Struggling to balance precision with efficiency in documentation", "pair_label": "57", "info": "A systematic approach can exacerbate the struggle for\nbalance.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "The need for a systematic approach to behavioral observations_Pressure to catch every detail in notes_56", "source": "The need for a systematic approach to behavioral observations", "target": "Pressure to catch every detail in notes", "pair_label": "56", "info": "Systematic approach drives detailed note-taking.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "The need for a systematic approach to behavioral observations_Tension between thoroughness and brevity in documentation_58", "source": "The need for a systematic approach to behavioral observations", "target": "Tension between thoroughness and brevity in documentation", "pair_label": "58", "info": "Systematic observation often requires detailed\ndocumentation, which can create tension between thoroughness\nand brevity.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "The challenge of integrating new information into existing templates_Struggling to balance precision with efficiency in documentation_39", "source": "The challenge of integrating new information into existing templates", "target": "Struggling to balance precision with efficiency in documentation", "pair_label": "39", "info": "Increased cognitive load due to integration challenges\nexacerbates documentation struggles.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "The challenge of integrating new information into existing templates_Uncertainty about what information is crucial for patient care_45", "source": "The challenge of integrating new information into existing templates", "target": "Uncertainty about what information is crucial for patient care", "pair_label": "45", "info": "Increased uncertainty.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "The challenge of integrating new information into existing templates_The struggle to prioritize tasks and manage time effectively_43", "source": "The challenge of integrating new information into existing templates", "target": "The struggle to prioritize tasks and manage time effectively", "pair_label": "43", "info": "Overwhelm from new information can impede prioritization and\ntime management.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "The weight of responsibility for patient outcomes_Pressure to catch every detail in notes_74", "source": "The weight of responsibility for patient outcomes", "target": "Pressure to catch every detail in notes", "pair_label": "74", "info": "Increased sense of responsibility amplifies the need for\naccuracy.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "The weight of responsibility for patient outcomes_Uncertainty about what information is crucial for patient care_81", "source": "The weight of responsibility for patient outcomes", "target": "Uncertainty about what information is crucial for patient care", "pair_label": "81", "info": "Increases anxiety and hypervigilance", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "The weight of responsibility for patient outcomes_Tension between thoroughness and brevity in documentation_76", "source": "The weight of responsibility for patient outcomes", "target": "Tension between thoroughness and brevity in documentation", "pair_label": "76", "info": "Increased sense of responsibility may heighten tension\nbetween providing thorough documentation and the need for\nbrevity.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "The weight of responsibility for patient outcomes_The need for a systematic approach to behavioral observations_79", "source": "The weight of responsibility for patient outcomes", "target": "The need for a systematic approach to behavioral observations", "pair_label": "79", "info": "Increased sense of responsibility drives the need for\nsystematic observation.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "The weight of responsibility for patient outcomes_The importance of considering the patient's perspective in documentation_78", "source": "The weight of responsibility for patient outcomes", "target": "The importance of considering the patient's perspective in documentation", "pair_label": "78", "info": "Shared focus on patient care and outcomes.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "The struggle to prioritize tasks and manage time effectively_The weight of responsibility for patient outcomes_71", "source": "The struggle to prioritize tasks and manage time effectively", "target": "The weight of responsibility for patient outcomes", "pair_label": "71", "info": "Increased sense of responsibility amplifies prioritization\nstruggles.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "The importance of considering the patient's perspective in documentation_The need for a systematic approach to behavioral observations_51", "source": "The importance of considering the patient's perspective in documentation", "target": "The need for a systematic approach to behavioral observations", "pair_label": "51", "info": "Comprehensive documentation", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "The importance of considering the patient's perspective in documentation_The weight of responsibility for patient outcomes_53", "source": "The importance of considering the patient's perspective in documentation", "target": "The weight of responsibility for patient outcomes", "pair_label": "53", "info": "Documentation informed by patient perspective enhances\naccountability.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}]
+        });
+
+        let tooltipCounter = 0;
+
+        cy.on('tap', 'edge', function(evt) {
+            var edge = evt.target;
+            var pos = evt.renderedPosition;
+            var tooltipId = "tooltip-" + (++tooltipCounter);
+
+            var tooltip = document.createElement("div");
+            tooltip.className = "tooltip";
+            tooltip.id = tooltipId;
+            tooltip.style.left = (pos.x + 20) + "px";
+            tooltip.style.top = (pos.y + 20) + "px";
+
+            var closeBtn = document.createElement("span");
+            closeBtn.className = "close-btn";
+            closeBtn.innerHTML = "&times;";
+            closeBtn.onclick = function () {
+                tooltip.remove();
+            };
+
+            tooltip.innerHTML = "";
+            tooltip.appendChild(closeBtn);
+            var content = document.createElement("div");
+            content.innerHTML = edge.data("info");
+            tooltip.appendChild(content);
+
+            document.body.appendChild(tooltip);
+            makeDraggable(tooltip);
+        });
+
+        function makeDraggable(elmnt) {
+            let offset = { x: 0, y: 0 };
+            let isDragging = false;
+
+            elmnt.addEventListener("mousedown", function (e) {
+                if (e.target.classList.contains("close-btn")) return;
+                isDragging = true;
+                offset.x = e.clientX - elmnt.offsetLeft;
+                offset.y = e.clientY - elmnt.offsetTop;
+                elmnt.style.cursor = "move";
+                e.preventDefault();
+            });
+
+            document.addEventListener("mousemove", function (e) {
+                if (isDragging) {
+                    elmnt.style.left = (e.clientX - offset.x) + "px";
+                    elmnt.style.top = (e.clientY - offset.y) + "px";
+                }
+            });
+
+            document.addEventListener("mouseup", function () {
+                isDragging = false;
+                elmnt.style.cursor = "default";
+            });
+        }
+    </script>
+</body>
+</html>
