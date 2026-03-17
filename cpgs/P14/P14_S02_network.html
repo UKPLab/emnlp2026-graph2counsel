@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Interactive Process Network</title>
+    <script src="https://unpkg.com/cytoscape@3.21.1/dist/cytoscape.min.js"></script>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        #cy {
+            width: 100vw;
+            height: 100vh;
+            display: block;
+        }
+        .legend {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: white;
+            border: 1px solid #ccc;
+            padding: 10px;
+            font-family: sans-serif;
+            font-size: 14px;
+            z-index: 10;
+        }
+        .tooltip {
+            position: absolute;
+            background: #fefefe;
+            border: 1px solid #aaa;
+            padding: 10px;
+            font-family: sans-serif;
+            font-size: 13px;
+            max-width: 300px;
+            z-index: 20;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            cursor: default;
+        }
+        .tooltip .close-btn {
+            float: right;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="cy"></div>
+    <div class="legend">
+        <b>Legend</b><br>
+        <span style="color:#e74c3c;">Red</span>: Inhibitory<br>
+        <span style="color:#3498db;">Blue</span>: Excitatory<br>
+        <hr>
+        <b>Dimensions</b><br>
+        🔵 Cognition<br>
+        🟢 Sense of Self<br>
+        🔴 (Overt) Behaviour<br>
+        🟣 Affect<br>
+        🟠 Context/Moderators<br>
+        🟡 Attention<br>
+        ⚪ Biophysiological<br>
+        🟤 Motivation<br>
+        ⚫ Sociocultural
+    </div>
+    <script>
+        var cy = cytoscape({
+            container: document.getElementById('cy'),
+            layout: { name: 'cose' },
+            style: [
+                {
+                    selector: 'node',
+                    style: {
+                        'shape': 'roundrectangle',
+                        'label': 'data(label)',
+                        'text-wrap': 'wrap',
+                        'text-max-width': 120,
+                        'text-valign': 'center',
+                        'text-halign': 'center',
+                        'background-color': '#ffffff',
+                        'border-color': '#000000',
+                        'border-width': 1,
+                        'color': '#000',
+                        'font-size': 14,
+                        'padding': '20px',
+                        'width': 'label',
+                        'height': 'label'
+                    }
+                },
+                {
+                    selector: 'edge',
+                    style: {
+                        'curve-style': 'bezier',
+                        'target-arrow-shape': 'triangle',
+                        'arrow-scale': 1.2,
+                        'label': '',
+                        'font-size': 9,
+                        'text-rotation': 'autorotate',
+                        'text-margin-y': -10,
+                        'line-color': 'data(color)',
+                        'target-arrow-color': 'data(color)',
+                        'width': 'data(width)',
+                        'line-style': 'data(lineStyle)'
+                    }
+                }
+            ],
+            elements: [{"data": {"id": "Struggle to maintain self-worth independent of external validation", "label": "Struggle to maintain self-worth independent of external validation\n\ud83d\udfe3 \ud83d\udd35\nw = 3"}}, {"data": {"id": "Difficulty articulating feelings due to unexpressed emotions from the past", "label": "Difficulty articulating feelings due to unexpressed emotions from the past\n\ud83d\udfe3 \ud83d\udd35\nw = 2"}}, {"data": {"id": "Tension between value of achievement and self-acceptance", "label": "Tension between value of achievement and self-acceptance\n\ud83d\udd35\nw = 2"}}, {"data": {"id": "Impact of self-blame on emotional regulation and anxiety", "label": "Impact of self-blame on emotional regulation and anxiety\n\ud83d\udd35\nw = 2"}}, {"data": {"id": "Coping mechanisms for managing high expectations and self-criticism", "label": "Coping mechanisms for managing high expectations and self-criticism\n\ud83d\udd35 \ud83d\udfe0\nw = 2"}}, {"data": {"id": "Self-reinforcing cycle of high expectations and anxiety", "label": "Self-reinforcing cycle of high expectations and anxiety\n\ud83d\udd35\nw = 1"}}, {"data": {"id": "Importance of self-compassion in breaking the cycle of self-blame", "label": "Importance of self-compassion in breaking the cycle of self-blame\n\ud83d\udfe3\nw = 1"}}, {"data": {"id": "Exploring the role of self-forgiveness in reducing anxiety", "label": "Exploring the role of self-forgiveness in reducing anxiety\n\ud83d\udd35\nw = 1"}}, {"data": {"id": "Fear of not meeting expectations as a source of motivation", "label": "Fear of not meeting expectations as a source of motivation\n\ud83d\udfe3\nw = 1"}}, {"data": {"id": "Navigating the transition from academic to post-graduation life", "label": "Navigating the transition from academic to post-graduation life\n\ud83d\udd35\nw = 1"}}, {"data": {"id": "Struggle to maintain self-worth independent of external validation_Difficulty articulating feelings due to unexpressed emotions from the past_74", "source": "Struggle to maintain self-worth independent of external validation", "target": "Difficulty articulating feelings due to unexpressed emotions from the past", "pair_label": "74", "info": "Unresolved past emotions can exacerbate self-doubt, making\nit harder to articulate feelings.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggle to maintain self-worth independent of external validation_Tension between value of achievement and self-acceptance_81", "source": "Struggle to maintain self-worth independent of external validation", "target": "Tension between value of achievement and self-acceptance", "pair_label": "81", "info": "Self-worth struggle amplifies tension between achievement\nvalue and self-acceptance.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggle to maintain self-worth independent of external validation_Impact of self-blame on emotional regulation and anxiety_77", "source": "Struggle to maintain self-worth independent of external validation", "target": "Impact of self-blame on emotional regulation and anxiety", "pair_label": "77", "info": "Self-blame exacerbates self-worth struggles.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggle to maintain self-worth independent of external validation_Coping mechanisms for managing high expectations and self-criticism_73", "source": "Struggle to maintain self-worth independent of external validation", "target": "Coping mechanisms for managing high expectations and self-criticism", "pair_label": "73", "info": "Self-worth struggles drive the need for coping mechanisms.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggle to maintain self-worth independent of external validation_Self-reinforcing cycle of high expectations and anxiety_80", "source": "Struggle to maintain self-worth independent of external validation", "target": "Self-reinforcing cycle of high expectations and anxiety", "pair_label": "80", "info": "Reinforces self-doubt", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggle to maintain self-worth independent of external validation_Importance of self-compassion in breaking the cycle of self-blame_78", "source": "Struggle to maintain self-worth independent of external validation", "target": "Importance of self-compassion in breaking the cycle of self-blame", "pair_label": "78", "info": "Self-compassion fosters self-worth.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty articulating feelings due to unexpressed emotions from the past_Struggle to maintain self-worth independent of external validation_17", "source": "Difficulty articulating feelings due to unexpressed emotions from the past", "target": "Struggle to maintain self-worth independent of external validation", "pair_label": "17", "info": "Both are linked through a pattern of unresolved emotional\nissues influencing self-concept.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty articulating feelings due to unexpressed emotions from the past_Coping mechanisms for managing high expectations and self-criticism_10", "source": "Difficulty articulating feelings due to unexpressed emotions from the past", "target": "Coping mechanisms for managing high expectations and self-criticism", "pair_label": "10", "info": "Unresolved past emotions can intensify self-criticism and\nthe need for coping mechanisms.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty articulating feelings due to unexpressed emotions from the past_Importance of self-compassion in breaking the cycle of self-blame_14", "source": "Difficulty articulating feelings due to unexpressed emotions from the past", "target": "Importance of self-compassion in breaking the cycle of self-blame", "pair_label": "14", "info": "Self-compassion facilitates emotional expression.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty articulating feelings due to unexpressed emotions from the past_Exploring the role of self-forgiveness in reducing anxiety_11", "source": "Difficulty articulating feelings due to unexpressed emotions from the past", "target": "Exploring the role of self-forgiveness in reducing anxiety", "pair_label": "11", "info": "Unexpressed emotions can lead to anxiety, and exploring\nself-forgiveness can facilitate emotional expression.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between value of achievement and self-acceptance_Struggle to maintain self-worth independent of external validation_90", "source": "Tension between value of achievement and self-acceptance", "target": "Struggle to maintain self-worth independent of external validation", "pair_label": "90", "info": "Conflicting values fuel self-worth struggles.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between value of achievement and self-acceptance_Coping mechanisms for managing high expectations and self-criticism_82", "source": "Tension between value of achievement and self-acceptance", "target": "Coping mechanisms for managing high expectations and self-criticism", "pair_label": "82", "info": "Tension fuels development of coping mechanisms.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between value of achievement and self-acceptance_Self-reinforcing cycle of high expectations and anxiety_89", "source": "Tension between value of achievement and self-acceptance", "target": "Self-reinforcing cycle of high expectations and anxiety", "pair_label": "89", "info": "Heightened self-expectations fuel anxiety.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between value of achievement and self-acceptance_Fear of not meeting expectations as a source of motivation_85", "source": "Tension between value of achievement and self-acceptance", "target": "Fear of not meeting expectations as a source of motivation", "pair_label": "85", "info": "The tension between valuing achievement and self-acceptance\ncan fuel the fear of not meeting expectations, as\nindividuals may feel compelled to achieve to validate their\nself-worth.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between value of achievement and self-acceptance_Importance of self-compassion in breaking the cycle of self-blame_87", "source": "Tension between value of achievement and self-acceptance", "target": "Importance of self-compassion in breaking the cycle of self-blame", "pair_label": "87", "info": "As individuals strive for self-acceptance amidst the\npressure of achievement, self-compassion is crucial in\nbreaking the cycle of self-blame that often accompanies\nunmet expectations.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Impact of self-blame on emotional regulation and anxiety_Struggle to maintain self-worth independent of external validation_44", "source": "Impact of self-blame on emotional regulation and anxiety", "target": "Struggle to maintain self-worth independent of external validation", "pair_label": "44", "info": "Self-blame reinforces negative self-perception.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Impact of self-blame on emotional regulation and anxiety_Coping mechanisms for managing high expectations and self-criticism_37", "source": "Impact of self-blame on emotional regulation and anxiety", "target": "Coping mechanisms for managing high expectations and self-criticism", "pair_label": "37", "info": "Self-blame can trigger anxiety, which in turn necessitates\nthe use of coping mechanisms to manage high expectations and\nself-criticism.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Impact of self-blame on emotional regulation and anxiety_Self-reinforcing cycle of high expectations and anxiety_43", "source": "Impact of self-blame on emotional regulation and anxiety", "target": "Self-reinforcing cycle of high expectations and anxiety", "pair_label": "43", "info": "Reinforcing feedback loop", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Impact of self-blame on emotional regulation and anxiety_Importance of self-compassion in breaking the cycle of self-blame_41", "source": "Impact of self-blame on emotional regulation and anxiety", "target": "Importance of self-compassion in breaking the cycle of self-blame", "pair_label": "41", "info": "Self-compassion counteracts self-blame.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Impact of self-blame on emotional regulation and anxiety_Exploring the role of self-forgiveness in reducing anxiety_39", "source": "Impact of self-blame on emotional regulation and anxiety", "target": "Exploring the role of self-forgiveness in reducing anxiety", "pair_label": "39", "info": "Self-forgiveness counters self-blame.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Coping mechanisms for managing high expectations and self-criticism_Struggle to maintain self-worth independent of external validation_8", "source": "Coping mechanisms for managing high expectations and self-criticism", "target": "Struggle to maintain self-worth independent of external validation", "pair_label": "8", "info": "Amplifies self-doubt.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Coping mechanisms for managing high expectations and self-criticism_Tension between value of achievement and self-acceptance_9", "source": "Coping mechanisms for managing high expectations and self-criticism", "target": "Tension between value of achievement and self-acceptance", "pair_label": "9", "info": "Addressing self-criticism influences self-acceptance", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Coping mechanisms for managing high expectations and self-criticism_Impact of self-blame on emotional regulation and anxiety_4", "source": "Coping mechanisms for managing high expectations and self-criticism", "target": "Impact of self-blame on emotional regulation and anxiety", "pair_label": "4", "info": "Effective coping mechanisms can mitigate the negative impact\nof self-blame.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Coping mechanisms for managing high expectations and self-criticism_Navigating the transition from academic to post-graduation life_6", "source": "Coping mechanisms for managing high expectations and self-criticism", "target": "Navigating the transition from academic to post-graduation life", "pair_label": "6", "info": "Effective coping mechanisms can facilitate a smoother\ntransition by enhancing resilience and adaptability.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Coping mechanisms for managing high expectations and self-criticism_Self-reinforcing cycle of high expectations and anxiety_7", "source": "Coping mechanisms for managing high expectations and self-criticism", "target": "Self-reinforcing cycle of high expectations and anxiety", "pair_label": "7", "info": "Mitigates escalation.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Coping mechanisms for managing high expectations and self-criticism_Fear of not meeting expectations as a source of motivation_3", "source": "Coping mechanisms for managing high expectations and self-criticism", "target": "Fear of not meeting expectations as a source of motivation", "pair_label": "3", "info": "Coping mechanisms can reduce fear.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Coping mechanisms for managing high expectations and self-criticism_Importance of self-compassion in breaking the cycle of self-blame_5", "source": "Coping mechanisms for managing high expectations and self-criticism", "target": "Importance of self-compassion in breaking the cycle of self-blame", "pair_label": "5", "info": "Self-compassion enhances coping with self-criticism.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Coping mechanisms for managing high expectations and self-criticism_Exploring the role of self-forgiveness in reducing anxiety_2", "source": "Coping mechanisms for managing high expectations and self-criticism", "target": "Exploring the role of self-forgiveness in reducing anxiety", "pair_label": "2", "info": "Self-forgiveness can enhance coping mechanisms by reducing\nself-criticism.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Navigating the transition from academic to post-graduation life_Tension between value of achievement and self-acceptance_63", "source": "Navigating the transition from academic to post-graduation life", "target": "Tension between value of achievement and self-acceptance", "pair_label": "63", "info": "Transition challenges can amplify self-doubt and achievement\npressures.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Navigating the transition from academic to post-graduation life_Coping mechanisms for managing high expectations and self-criticism_55", "source": "Navigating the transition from academic to post-graduation life", "target": "Coping mechanisms for managing high expectations and self-criticism", "pair_label": "55", "info": "Transitioning to post-graduation life often triggers high\nexpectations and self-criticism, necessitating effective\ncoping mechanisms.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Self-reinforcing cycle of high expectations and anxiety_Struggle to maintain self-worth independent of external validation_71", "source": "Self-reinforcing cycle of high expectations and anxiety", "target": "Struggle to maintain self-worth independent of external validation", "pair_label": "71", "info": "Anxiety fuels self-doubt.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Self-reinforcing cycle of high expectations and anxiety_Tension between value of achievement and self-acceptance_72", "source": "Self-reinforcing cycle of high expectations and anxiety", "target": "Tension between value of achievement and self-acceptance", "pair_label": "72", "info": "Anxiety fuels tension.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Self-reinforcing cycle of high expectations and anxiety_Impact of self-blame on emotional regulation and anxiety_68", "source": "Self-reinforcing cycle of high expectations and anxiety", "target": "Impact of self-blame on emotional regulation and anxiety", "pair_label": "68", "info": "Reinforcing cycle amplifies self-blame.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Self-reinforcing cycle of high expectations and anxiety_Coping mechanisms for managing high expectations and self-criticism_64", "source": "Self-reinforcing cycle of high expectations and anxiety", "target": "Coping mechanisms for managing high expectations and self-criticism", "pair_label": "64", "info": "Coping mechanisms counteract the cycle of high expectations\nand anxiety.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Self-reinforcing cycle of high expectations and anxiety_Navigating the transition from academic to post-graduation life_70", "source": "Self-reinforcing cycle of high expectations and anxiety", "target": "Navigating the transition from academic to post-graduation life", "pair_label": "70", "info": "Anxiety fuels uncertainty.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Self-reinforcing cycle of high expectations and anxiety_Fear of not meeting expectations as a source of motivation_67", "source": "Self-reinforcing cycle of high expectations and anxiety", "target": "Fear of not meeting expectations as a source of motivation", "pair_label": "67", "info": "Reinforces motivation through fear.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Self-reinforcing cycle of high expectations and anxiety_Importance of self-compassion in breaking the cycle of self-blame_69", "source": "Self-reinforcing cycle of high expectations and anxiety", "target": "Importance of self-compassion in breaking the cycle of self-blame", "pair_label": "69", "info": "Reduces self-criticism.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Self-reinforcing cycle of high expectations and anxiety_Exploring the role of self-forgiveness in reducing anxiety_66", "source": "Self-reinforcing cycle of high expectations and anxiety", "target": "Exploring the role of self-forgiveness in reducing anxiety", "pair_label": "66", "info": "Self-forgiveness can interrupt the cycle of high\nexpectations and anxiety by reducing self-criticism.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Fear of not meeting expectations as a source of motivation_Struggle to maintain self-worth independent of external validation_35", "source": "Fear of not meeting expectations as a source of motivation", "target": "Struggle to maintain self-worth independent of external validation", "pair_label": "35", "info": "Reinforces self-doubt", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Fear of not meeting expectations as a source of motivation_Tension between value of achievement and self-acceptance_36", "source": "Fear of not meeting expectations as a source of motivation", "target": "Tension between value of achievement and self-acceptance", "pair_label": "36", "info": "Fear drives tension.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Fear of not meeting expectations as a source of motivation_Coping mechanisms for managing high expectations and self-criticism_28", "source": "Fear of not meeting expectations as a source of motivation", "target": "Coping mechanisms for managing high expectations and self-criticism", "pair_label": "28", "info": "Fear motivates the development of coping strategies.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Fear of not meeting expectations as a source of motivation_Self-reinforcing cycle of high expectations and anxiety_34", "source": "Fear of not meeting expectations as a source of motivation", "target": "Self-reinforcing cycle of high expectations and anxiety", "pair_label": "34", "info": "Mutually reinforcing pattern", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of self-compassion in breaking the cycle of self-blame_Struggle to maintain self-worth independent of external validation_53", "source": "Importance of self-compassion in breaking the cycle of self-blame", "target": "Struggle to maintain self-worth independent of external validation", "pair_label": "53", "info": "Self-compassion counters self-blame, which in turn helps\nmaintain self-worth.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of self-compassion in breaking the cycle of self-blame_Difficulty articulating feelings due to unexpressed emotions from the past_47", "source": "Importance of self-compassion in breaking the cycle of self-blame", "target": "Difficulty articulating feelings due to unexpressed emotions from the past", "pair_label": "47", "info": "Self-compassion enhances emotional expression.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of self-compassion in breaking the cycle of self-blame_Tension between value of achievement and self-acceptance_54", "source": "Importance of self-compassion in breaking the cycle of self-blame", "target": "Tension between value of achievement and self-acceptance", "pair_label": "54", "info": "Self-compassion mitigates self-blame, reducing tension\nbetween achievement and self-acceptance.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of self-compassion in breaking the cycle of self-blame_Impact of self-blame on emotional regulation and anxiety_50", "source": "Importance of self-compassion in breaking the cycle of self-blame", "target": "Impact of self-blame on emotional regulation and anxiety", "pair_label": "50", "info": "Self-compassion counters self-blame.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of self-compassion in breaking the cycle of self-blame_Coping mechanisms for managing high expectations and self-criticism_46", "source": "Importance of self-compassion in breaking the cycle of self-blame", "target": "Coping mechanisms for managing high expectations and self-criticism", "pair_label": "46", "info": "Enhances ability to cope.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of self-compassion in breaking the cycle of self-blame_Self-reinforcing cycle of high expectations and anxiety_52", "source": "Importance of self-compassion in breaking the cycle of self-blame", "target": "Self-reinforcing cycle of high expectations and anxiety", "pair_label": "52", "info": "Self-compassion can mitigate the cycle of high expectations\nand anxiety by fostering a kinder, more realistic self-view.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Exploring the role of self-forgiveness in reducing anxiety_Impact of self-blame on emotional regulation and anxiety_22", "source": "Exploring the role of self-forgiveness in reducing anxiety", "target": "Impact of self-blame on emotional regulation and anxiety", "pair_label": "22", "info": "Self-forgiveness counteracts self-blame.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Exploring the role of self-forgiveness in reducing anxiety_Coping mechanisms for managing high expectations and self-criticism_19", "source": "Exploring the role of self-forgiveness in reducing anxiety", "target": "Coping mechanisms for managing high expectations and self-criticism", "pair_label": "19", "info": "Self-forgiveness can enhance coping mechanisms by reducing\nself-criticism.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Exploring the role of self-forgiveness in reducing anxiety_Fear of not meeting expectations as a source of motivation_21", "source": "Exploring the role of self-forgiveness in reducing anxiety", "target": "Fear of not meeting expectations as a source of motivation", "pair_label": "21", "info": "Self-forgiveness can reduce anxiety by mitigating the fear\nof not meeting expectations.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Exploring the role of self-forgiveness in reducing anxiety_Importance of self-compassion in breaking the cycle of self-blame_23", "source": "Exploring the role of self-forgiveness in reducing anxiety", "target": "Importance of self-compassion in breaking the cycle of self-blame", "pair_label": "23", "info": "Mutually reinforcing mechanisms.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}]
+        });
+
+        let tooltipCounter = 0;
+
+        cy.on('tap', 'edge', function(evt) {
+            var edge = evt.target;
+            var pos = evt.renderedPosition;
+            var tooltipId = "tooltip-" + (++tooltipCounter);
+
+            var tooltip = document.createElement("div");
+            tooltip.className = "tooltip";
+            tooltip.id = tooltipId;
+            tooltip.style.left = (pos.x + 20) + "px";
+            tooltip.style.top = (pos.y + 20) + "px";
+
+            var closeBtn = document.createElement("span");
+            closeBtn.className = "close-btn";
+            closeBtn.innerHTML = "&times;";
+            closeBtn.onclick = function () {
+                tooltip.remove();
+            };
+
+            tooltip.innerHTML = "";
+            tooltip.appendChild(closeBtn);
+            var content = document.createElement("div");
+            content.innerHTML = edge.data("info");
+            tooltip.appendChild(content);
+
+            document.body.appendChild(tooltip);
+            makeDraggable(tooltip);
+        });
+
+        function makeDraggable(elmnt) {
+            let offset = { x: 0, y: 0 };
+            let isDragging = false;
+
+            elmnt.addEventListener("mousedown", function (e) {
+                if (e.target.classList.contains("close-btn")) return;
+                isDragging = true;
+                offset.x = e.clientX - elmnt.offsetLeft;
+                offset.y = e.clientY - elmnt.offsetTop;
+                elmnt.style.cursor = "move";
+                e.preventDefault();
+            });
+
+            document.addEventListener("mousemove", function (e) {
+                if (isDragging) {
+                    elmnt.style.left = (e.clientX - offset.x) + "px";
+                    elmnt.style.top = (e.clientY - offset.y) + "px";
+                }
+            });
+
+            document.addEventListener("mouseup", function () {
+                isDragging = false;
+                elmnt.style.cursor = "default";
+            });
+        }
+    </script>
+</body>
+</html>

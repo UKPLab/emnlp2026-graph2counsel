@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Interactive Process Network</title>
+    <script src="https://unpkg.com/cytoscape@3.21.1/dist/cytoscape.min.js"></script>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        #cy {
+            width: 100vw;
+            height: 100vh;
+            display: block;
+        }
+        .legend {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: white;
+            border: 1px solid #ccc;
+            padding: 10px;
+            font-family: sans-serif;
+            font-size: 14px;
+            z-index: 10;
+        }
+        .tooltip {
+            position: absolute;
+            background: #fefefe;
+            border: 1px solid #aaa;
+            padding: 10px;
+            font-family: sans-serif;
+            font-size: 13px;
+            max-width: 300px;
+            z-index: 20;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            cursor: default;
+        }
+        .tooltip .close-btn {
+            float: right;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="cy"></div>
+    <div class="legend">
+        <b>Legend</b><br>
+        <span style="color:#e74c3c;">Red</span>: Inhibitory<br>
+        <span style="color:#3498db;">Blue</span>: Excitatory<br>
+        <hr>
+        <b>Dimensions</b><br>
+        🔵 Cognition<br>
+        🟢 Sense of Self<br>
+        🔴 (Overt) Behaviour<br>
+        🟣 Affect<br>
+        🟠 Context/Moderators<br>
+        🟡 Attention<br>
+        ⚪ Biophysiological<br>
+        🟤 Motivation<br>
+        ⚫ Sociocultural
+    </div>
+    <script>
+        var cy = cytoscape({
+            container: document.getElementById('cy'),
+            layout: { name: 'cose' },
+            style: [
+                {
+                    selector: 'node',
+                    style: {
+                        'shape': 'roundrectangle',
+                        'label': 'data(label)',
+                        'text-wrap': 'wrap',
+                        'text-max-width': 120,
+                        'text-valign': 'center',
+                        'text-halign': 'center',
+                        'background-color': '#ffffff',
+                        'border-color': '#000000',
+                        'border-width': 1,
+                        'color': '#000',
+                        'font-size': 14,
+                        'padding': '20px',
+                        'width': 'label',
+                        'height': 'label'
+                    }
+                },
+                {
+                    selector: 'edge',
+                    style: {
+                        'curve-style': 'bezier',
+                        'target-arrow-shape': 'triangle',
+                        'arrow-scale': 1.2,
+                        'label': '',
+                        'font-size': 9,
+                        'text-rotation': 'autorotate',
+                        'text-margin-y': -10,
+                        'line-color': 'data(color)',
+                        'target-arrow-color': 'data(color)',
+                        'width': 'data(width)',
+                        'line-style': 'data(lineStyle)'
+                    }
+                }
+            ],
+            elements: [{"data": {"id": "Acceptance of complex identity tied to emotional regulation", "label": "Acceptance of complex identity tied to emotional regulation\n\ud83d\udfe3 \ud83d\udd35 \ud83d\udfe4\nw = 4"}}, {"data": {"id": "Fear of being defined by traumatic experiences", "label": "Fear of being defined by traumatic experiences\n\ud83d\udd35 \u26ab\nw = 3"}}, {"data": {"id": "Desire for authenticity in expressing cultural identity", "label": "Desire for authenticity in expressing cultural identity\n\ud83d\udd35 \ud83d\udfe4\nw = 2"}}, {"data": {"id": "Internal conflict between acceptance and avoidance of painful memories", "label": "Internal conflict between acceptance and avoidance of painful memories\n\ud83d\udfe1 \ud83d\udfe4\nw = 1"}}, {"data": {"id": "Importance of self-acceptance in reducing anxiety and increasing comfort with identity", "label": "Importance of self-acceptance in reducing anxiety and increasing comfort with identity\n\ud83d\udd35 \ud83d\udfe2\nw = 1"}}, {"data": {"id": "Avoidance of emotional pain through suppression", "label": "Avoidance of emotional pain through suppression\n\ud83d\udfe1 \ud83d\udd35 \ud83d\udfe4\nw = 2"}}, {"data": {"id": "Difficulty articulating emotions due to fear of judgment", "label": "Difficulty articulating emotions due to fear of judgment\n\ud83d\udfe3 \ud83d\udd35 \ud83d\udfe4\nw = 2"}}, {"data": {"id": "Struggle to reconcile past experiences with present sense of self", "label": "Struggle to reconcile past experiences with present sense of self\n\ud83d\udfe3 \ud83d\udd35\nw = 2"}}, {"data": {"id": "Fear of being pitied or judged by others", "label": "Fear of being pitied or judged by others\n\ud83d\udfe3 \ud83d\udd35\nw = 1"}}, {"data": {"id": "Tension between cultural heritage and personal identity", "label": "Tension between cultural heritage and personal identity\n\ud83d\udfe3 \ud83d\udd35\nw = 3"}}, {"data": {"id": "Acceptance of complex identity tied to emotional regulation_Fear of being defined by traumatic experiences_4", "source": "Acceptance of complex identity tied to emotional regulation", "target": "Fear of being defined by traumatic experiences", "pair_label": "4", "info": "Acceptance of complex identity tied to emotional regulation\ncan reduce the fear of being defined by traumatic\nexperiences.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Acceptance of complex identity tied to emotional regulation_Desire for authenticity in expressing cultural identity_2", "source": "Acceptance of complex identity tied to emotional regulation", "target": "Desire for authenticity in expressing cultural identity", "pair_label": "2", "info": "Embracing complexity fosters authenticity.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Acceptance of complex identity tied to emotional regulation_Internal conflict between acceptance and avoidance of painful memories_7", "source": "Acceptance of complex identity tied to emotional regulation", "target": "Internal conflict between acceptance and avoidance of painful memories", "pair_label": "7", "info": "Increased acceptance of complex identity can trigger\ninternal conflict.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Acceptance of complex identity tied to emotional regulation_Importance of self-acceptance in reducing anxiety and increasing comfort with identity_6", "source": "Acceptance of complex identity tied to emotional regulation", "target": "Importance of self-acceptance in reducing anxiety and increasing comfort with identity", "pair_label": "6", "info": "Mutually reinforcing", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Avoidance of emotional pain through suppression_Fear of being defined by traumatic experiences_13", "source": "Avoidance of emotional pain through suppression", "target": "Fear of being defined by traumatic experiences", "pair_label": "13", "info": "Suppression may intensify fear of being defined by trauma.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Avoidance of emotional pain through suppression_Difficulty articulating emotions due to fear of judgment_12", "source": "Avoidance of emotional pain through suppression", "target": "Difficulty articulating emotions due to fear of judgment", "pair_label": "12", "info": "Suppression of emotions can lead to difficulty in\nidentifying and expressing them, especially when fear of\njudgment is involved.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Avoidance of emotional pain through suppression_Struggle to reconcile past experiences with present sense of self_17", "source": "Avoidance of emotional pain through suppression", "target": "Struggle to reconcile past experiences with present sense of self", "pair_label": "17", "info": "Suppressed emotions delay integration.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Avoidance of emotional pain through suppression_Fear of being pitied or judged by others_14", "source": "Avoidance of emotional pain through suppression", "target": "Fear of being pitied or judged by others", "pair_label": "14", "info": "Avoidance of emotional pain can heighten fear of being\njudged, as suppressed emotions may lead to increased anxiety\nabout being discovered or pitied.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Avoidance of emotional pain through suppression_Internal conflict between acceptance and avoidance of painful memories_16", "source": "Avoidance of emotional pain through suppression", "target": "Internal conflict between acceptance and avoidance of painful memories", "pair_label": "16", "info": "Suppression fuels internal conflict.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Fear of being defined by traumatic experiences_Avoidance of emotional pain through suppression_38", "source": "Fear of being defined by traumatic experiences", "target": "Avoidance of emotional pain through suppression", "pair_label": "38", "info": "Trauma-related fear reinforces suppression of emotional\npain.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Fear of being defined by traumatic experiences_Difficulty articulating emotions due to fear of judgment_40", "source": "Fear of being defined by traumatic experiences", "target": "Difficulty articulating emotions due to fear of judgment", "pair_label": "40", "info": "Fear of being defined by traumatic experiences can reinforce\nthe difficulty in articulating emotions due to fear of\njudgment.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Fear of being defined by traumatic experiences_Struggle to reconcile past experiences with present sense of self_44", "source": "Fear of being defined by traumatic experiences", "target": "Struggle to reconcile past experiences with present sense of self", "pair_label": "44", "info": "Traumatic experiences shape self-perception.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Fear of being defined by traumatic experiences_Fear of being pitied or judged by others_41", "source": "Fear of being defined by traumatic experiences", "target": "Fear of being pitied or judged by others", "pair_label": "41", "info": "Trauma-induced self-concept vulnerability", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Fear of being defined by traumatic experiences_Internal conflict between acceptance and avoidance of painful memories_43", "source": "Fear of being defined by traumatic experiences", "target": "Internal conflict between acceptance and avoidance of painful memories", "pair_label": "43", "info": "Trauma definition fear fuels avoidance.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Fear of being defined by traumatic experiences_Importance of self-acceptance in reducing anxiety and increasing comfort with identity_42", "source": "Fear of being defined by traumatic experiences", "target": "Importance of self-acceptance in reducing anxiety and increasing comfort with identity", "pair_label": "42", "info": "Self-acceptance counters traumatic experience definition.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between cultural heritage and personal identity_Difficulty articulating emotions due to fear of judgment_85", "source": "Tension between cultural heritage and personal identity", "target": "Difficulty articulating emotions due to fear of judgment", "pair_label": "85", "info": "Cultural expectations can exacerbate fear of judgment.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between cultural heritage and personal identity_Struggle to reconcile past experiences with present sense of self_90", "source": "Tension between cultural heritage and personal identity", "target": "Struggle to reconcile past experiences with present sense of self", "pair_label": "90", "info": "Cultural heritage influences personal identity, exacerbating\nthe struggle to reconcile past and present self.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between cultural heritage and personal identity_Desire for authenticity in expressing cultural identity_84", "source": "Tension between cultural heritage and personal identity", "target": "Desire for authenticity in expressing cultural identity", "pair_label": "84", "info": "Tension fuels authenticity.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between cultural heritage and personal identity_Importance of self-acceptance in reducing anxiety and increasing comfort with identity_88", "source": "Tension between cultural heritage and personal identity", "target": "Importance of self-acceptance in reducing anxiety and increasing comfort with identity", "pair_label": "88", "info": "Self-acceptance alleviates tension.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty articulating emotions due to fear of judgment_Avoidance of emotional pain through suppression_29", "source": "Difficulty articulating emotions due to fear of judgment", "target": "Avoidance of emotional pain through suppression", "pair_label": "29", "info": "Fear of judgment can lead to suppression.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty articulating emotions due to fear of judgment_Fear of being defined by traumatic experiences_31", "source": "Difficulty articulating emotions due to fear of judgment", "target": "Fear of being defined by traumatic experiences", "pair_label": "31", "info": "Traumatic experiences can cause emotional overwhelm, leading\nto difficulty articulating emotions and intensifying the\nfear of being defined by those experiences.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty articulating emotions due to fear of judgment_Fear of being pitied or judged by others_32", "source": "Difficulty articulating emotions due to fear of judgment", "target": "Fear of being pitied or judged by others", "pair_label": "32", "info": "Shared underlying fear.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty articulating emotions due to fear of judgment_Internal conflict between acceptance and avoidance of painful memories_34", "source": "Difficulty articulating emotions due to fear of judgment", "target": "Internal conflict between acceptance and avoidance of painful memories", "pair_label": "34", "info": "Fear of judgment can exacerbate avoidance of painful\nmemories.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty articulating emotions due to fear of judgment_Importance of self-acceptance in reducing anxiety and increasing comfort with identity_33", "source": "Difficulty articulating emotions due to fear of judgment", "target": "Importance of self-acceptance in reducing anxiety and increasing comfort with identity", "pair_label": "33", "info": "Self-acceptance reduces fear of judgment, facilitating\nemotional expression.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggle to reconcile past experiences with present sense of self_Acceptance of complex identity tied to emotional regulation_73", "source": "Struggle to reconcile past experiences with present sense of self", "target": "Acceptance of complex identity tied to emotional regulation", "pair_label": "73", "info": "Integration of past and present self-concept enhances\nemotional regulation.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggle to reconcile past experiences with present sense of self_Fear of being defined by traumatic experiences_77", "source": "Struggle to reconcile past experiences with present sense of self", "target": "Fear of being defined by traumatic experiences", "pair_label": "77", "info": "Past experiences shape fear of being defined by trauma.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggle to reconcile past experiences with present sense of self_Tension between cultural heritage and personal identity_81", "source": "Struggle to reconcile past experiences with present sense of self", "target": "Tension between cultural heritage and personal identity", "pair_label": "81", "info": "Past experiences shape cultural heritage and personal\nidentity, leading to tension.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggle to reconcile past experiences with present sense of self_Difficulty articulating emotions due to fear of judgment_76", "source": "Struggle to reconcile past experiences with present sense of self", "target": "Difficulty articulating emotions due to fear of judgment", "pair_label": "76", "info": "Unresolved past experiences can intensify fear of judgment,\nmaking it harder to articulate emotions.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggle to reconcile past experiences with present sense of self_Internal conflict between acceptance and avoidance of painful memories_80", "source": "Struggle to reconcile past experiences with present sense of self", "target": "Internal conflict between acceptance and avoidance of painful memories", "pair_label": "80", "info": "Past experiences fuel internal conflict.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggle to reconcile past experiences with present sense of self_Importance of self-acceptance in reducing anxiety and increasing comfort with identity_79", "source": "Struggle to reconcile past experiences with present sense of self", "target": "Importance of self-acceptance in reducing anxiety and increasing comfort with identity", "pair_label": "79", "info": "Self-acceptance alleviates distress from past experiences.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Desire for authenticity in expressing cultural identity_Acceptance of complex identity tied to emotional regulation_19", "source": "Desire for authenticity in expressing cultural identity", "target": "Acceptance of complex identity tied to emotional regulation", "pair_label": "19", "info": "Embracing authenticity fosters emotional regulation.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Desire for authenticity in expressing cultural identity_Tension between cultural heritage and personal identity_27", "source": "Desire for authenticity in expressing cultural identity", "target": "Tension between cultural heritage and personal identity", "pair_label": "27", "info": "Authentic expression of cultural identity can fuel tension\nbetween heritage and personal identity.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Desire for authenticity in expressing cultural identity_Importance of self-acceptance in reducing anxiety and increasing comfort with identity_24", "source": "Desire for authenticity in expressing cultural identity", "target": "Importance of self-acceptance in reducing anxiety and increasing comfort with identity", "pair_label": "24", "info": "Mutual reinforcement of self-acceptance and authenticity", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Fear of being pitied or judged by others_Avoidance of emotional pain through suppression_47", "source": "Fear of being pitied or judged by others", "target": "Avoidance of emotional pain through suppression", "pair_label": "47", "info": "Fear of being judged can motivate avoidance of emotional\npain.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Fear of being pitied or judged by others_Fear of being defined by traumatic experiences_50", "source": "Fear of being pitied or judged by others", "target": "Fear of being defined by traumatic experiences", "pair_label": "50", "info": "Traumatic experiences can lead to social stigma and\njudgment, thereby fueling fear of being pitied or judged by\nothers.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Fear of being pitied or judged by others_Difficulty articulating emotions due to fear of judgment_49", "source": "Fear of being pitied or judged by others", "target": "Difficulty articulating emotions due to fear of judgment", "pair_label": "49", "info": "Fear of judgment can directly amplify the difficulty in\narticulating emotions.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Fear of being pitied or judged by others_Importance of self-acceptance in reducing anxiety and increasing comfort with identity_51", "source": "Fear of being pitied or judged by others", "target": "Importance of self-acceptance in reducing anxiety and increasing comfort with identity", "pair_label": "51", "info": "Self-acceptance counteracts fear of judgment.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Internal conflict between acceptance and avoidance of painful memories_Acceptance of complex identity tied to emotional regulation_64", "source": "Internal conflict between acceptance and avoidance of painful memories", "target": "Acceptance of complex identity tied to emotional regulation", "pair_label": "64", "info": "Resolving internal conflict facilitates self-acceptance.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Internal conflict between acceptance and avoidance of painful memories_Avoidance of emotional pain through suppression_65", "source": "Internal conflict between acceptance and avoidance of painful memories", "target": "Avoidance of emotional pain through suppression", "pair_label": "65", "info": "Conflict fuels avoidance.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Internal conflict between acceptance and avoidance of painful memories_Fear of being defined by traumatic experiences_68", "source": "Internal conflict between acceptance and avoidance of painful memories", "target": "Fear of being defined by traumatic experiences", "pair_label": "68", "info": "Avoidance of memories can fuel fear of being defined by\ntrauma.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Internal conflict between acceptance and avoidance of painful memories_Difficulty articulating emotions due to fear of judgment_67", "source": "Internal conflict between acceptance and avoidance of painful memories", "target": "Difficulty articulating emotions due to fear of judgment", "pair_label": "67", "info": "Avoidance of painful memories can exacerbate fear of\njudgment, making it harder to articulate emotions.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Internal conflict between acceptance and avoidance of painful memories_Struggle to reconcile past experiences with present sense of self_71", "source": "Internal conflict between acceptance and avoidance of painful memories", "target": "Struggle to reconcile past experiences with present sense of self", "pair_label": "71", "info": "Intensifies self-reflection", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Internal conflict between acceptance and avoidance of painful memories_Importance of self-acceptance in reducing anxiety and increasing comfort with identity_70", "source": "Internal conflict between acceptance and avoidance of painful memories", "target": "Importance of self-acceptance in reducing anxiety and increasing comfort with identity", "pair_label": "70", "info": "Fosters self-awareness", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of self-acceptance in reducing anxiety and increasing comfort with identity_Acceptance of complex identity tied to emotional regulation_55", "source": "Importance of self-acceptance in reducing anxiety and increasing comfort with identity", "target": "Acceptance of complex identity tied to emotional regulation", "pair_label": "55", "info": "Self-acceptance reinforces emotional regulation.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of self-acceptance in reducing anxiety and increasing comfort with identity_Avoidance of emotional pain through suppression_56", "source": "Importance of self-acceptance in reducing anxiety and increasing comfort with identity", "target": "Avoidance of emotional pain through suppression", "pair_label": "56", "info": "Self-acceptance counters avoidance by acknowledging and\naccepting emotional pain.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of self-acceptance in reducing anxiety and increasing comfort with identity_Fear of being defined by traumatic experiences_59", "source": "Importance of self-acceptance in reducing anxiety and increasing comfort with identity", "target": "Fear of being defined by traumatic experiences", "pair_label": "59", "info": "Self-acceptance counters the fear of being defined by\ntrauma.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of self-acceptance in reducing anxiety and increasing comfort with identity_Difficulty articulating emotions due to fear of judgment_58", "source": "Importance of self-acceptance in reducing anxiety and increasing comfort with identity", "target": "Difficulty articulating emotions due to fear of judgment", "pair_label": "58", "info": "Self-acceptance can help reduce fear of judgment", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of self-acceptance in reducing anxiety and increasing comfort with identity_Struggle to reconcile past experiences with present sense of self_62", "source": "Importance of self-acceptance in reducing anxiety and increasing comfort with identity", "target": "Struggle to reconcile past experiences with present sense of self", "pair_label": "62", "info": "Self-acceptance can alleviate struggles with past\nexperiences by promoting a more compassionate understanding\nof one's history.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of self-acceptance in reducing anxiety and increasing comfort with identity_Desire for authenticity in expressing cultural identity_57", "source": "Importance of self-acceptance in reducing anxiety and increasing comfort with identity", "target": "Desire for authenticity in expressing cultural identity", "pair_label": "57", "info": "Mutual reinforcement of self and cultural identity", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of self-acceptance in reducing anxiety and increasing comfort with identity_Fear of being pitied or judged by others_60", "source": "Importance of self-acceptance in reducing anxiety and increasing comfort with identity", "target": "Fear of being pitied or judged by others", "pair_label": "60", "info": "Self-acceptance may reduce fear of judgment by increasing\nself-worth and confidence.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of self-acceptance in reducing anxiety and increasing comfort with identity_Internal conflict between acceptance and avoidance of painful memories_61", "source": "Importance of self-acceptance in reducing anxiety and increasing comfort with identity", "target": "Internal conflict between acceptance and avoidance of painful memories", "pair_label": "61", "info": "Avoidance of painful memories can hinder self-acceptance.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}]
+        });
+
+        let tooltipCounter = 0;
+
+        cy.on('tap', 'edge', function(evt) {
+            var edge = evt.target;
+            var pos = evt.renderedPosition;
+            var tooltipId = "tooltip-" + (++tooltipCounter);
+
+            var tooltip = document.createElement("div");
+            tooltip.className = "tooltip";
+            tooltip.id = tooltipId;
+            tooltip.style.left = (pos.x + 20) + "px";
+            tooltip.style.top = (pos.y + 20) + "px";
+
+            var closeBtn = document.createElement("span");
+            closeBtn.className = "close-btn";
+            closeBtn.innerHTML = "&times;";
+            closeBtn.onclick = function () {
+                tooltip.remove();
+            };
+
+            tooltip.innerHTML = "";
+            tooltip.appendChild(closeBtn);
+            var content = document.createElement("div");
+            content.innerHTML = edge.data("info");
+            tooltip.appendChild(content);
+
+            document.body.appendChild(tooltip);
+            makeDraggable(tooltip);
+        });
+
+        function makeDraggable(elmnt) {
+            let offset = { x: 0, y: 0 };
+            let isDragging = false;
+
+            elmnt.addEventListener("mousedown", function (e) {
+                if (e.target.classList.contains("close-btn")) return;
+                isDragging = true;
+                offset.x = e.clientX - elmnt.offsetLeft;
+                offset.y = e.clientY - elmnt.offsetTop;
+                elmnt.style.cursor = "move";
+                e.preventDefault();
+            });
+
+            document.addEventListener("mousemove", function (e) {
+                if (isDragging) {
+                    elmnt.style.left = (e.clientX - offset.x) + "px";
+                    elmnt.style.top = (e.clientY - offset.y) + "px";
+                }
+            });
+
+            document.addEventListener("mouseup", function () {
+                isDragging = false;
+                elmnt.style.cursor = "default";
+            });
+        }
+    </script>
+</body>
+</html>

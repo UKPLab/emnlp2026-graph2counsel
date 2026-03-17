@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Interactive Process Network</title>
+    <script src="https://unpkg.com/cytoscape@3.21.1/dist/cytoscape.min.js"></script>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        #cy {
+            width: 100vw;
+            height: 100vh;
+            display: block;
+        }
+        .legend {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: white;
+            border: 1px solid #ccc;
+            padding: 10px;
+            font-family: sans-serif;
+            font-size: 14px;
+            z-index: 10;
+        }
+        .tooltip {
+            position: absolute;
+            background: #fefefe;
+            border: 1px solid #aaa;
+            padding: 10px;
+            font-family: sans-serif;
+            font-size: 13px;
+            max-width: 300px;
+            z-index: 20;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            cursor: default;
+        }
+        .tooltip .close-btn {
+            float: right;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="cy"></div>
+    <div class="legend">
+        <b>Legend</b><br>
+        <span style="color:#e74c3c;">Red</span>: Inhibitory<br>
+        <span style="color:#3498db;">Blue</span>: Excitatory<br>
+        <hr>
+        <b>Dimensions</b><br>
+        🔵 Cognition<br>
+        🟢 Sense of Self<br>
+        🔴 (Overt) Behaviour<br>
+        🟣 Affect<br>
+        🟠 Context/Moderators<br>
+        🟡 Attention<br>
+        ⚪ Biophysiological<br>
+        🟤 Motivation<br>
+        ⚫ Sociocultural
+    </div>
+    <script>
+        var cy = cytoscape({
+            container: document.getElementById('cy'),
+            layout: { name: 'cose' },
+            style: [
+                {
+                    selector: 'node',
+                    style: {
+                        'shape': 'roundrectangle',
+                        'label': 'data(label)',
+                        'text-wrap': 'wrap',
+                        'text-max-width': 120,
+                        'text-valign': 'center',
+                        'text-halign': 'center',
+                        'background-color': '#ffffff',
+                        'border-color': '#000000',
+                        'border-width': 1,
+                        'color': '#000',
+                        'font-size': 14,
+                        'padding': '20px',
+                        'width': 'label',
+                        'height': 'label'
+                    }
+                },
+                {
+                    selector: 'edge',
+                    style: {
+                        'curve-style': 'bezier',
+                        'target-arrow-shape': 'triangle',
+                        'arrow-scale': 1.2,
+                        'label': '',
+                        'font-size': 9,
+                        'text-rotation': 'autorotate',
+                        'text-margin-y': -10,
+                        'line-color': 'data(color)',
+                        'target-arrow-color': 'data(color)',
+                        'width': 'data(width)',
+                        'line-style': 'data(lineStyle)'
+                    }
+                }
+            ],
+            elements: [{"data": {"id": "Balancing productivity and self-care through flexible goal-setting.", "label": "Balancing productivity and self-care through flexible goal-setting.\n\ud83d\udd34 \ud83d\udd35\nw = 3"}}, {"data": {"id": "Developing self-awareness of emotional needs and limits.", "label": "Developing self-awareness of emotional needs and limits.\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 3"}}, {"data": {"id": "Shifting from perfectionism to incremental progress.", "label": "Shifting from perfectionism to incremental progress.\n\ud83d\udfe1 \ud83d\udd35 \ud83d\udfe2\nw = 3"}}, {"data": {"id": "Integrating new coping mechanisms and skills into daily life.", "label": "Integrating new coping mechanisms and skills into daily life.\n\ud83d\udd35\nw = 3"}}, {"data": {"id": "Managing stress and anxiety through mindfulness and self-regulation.", "label": "Managing stress and anxiety through mindfulness and self-regulation.\n\ud83d\udd34 \ud83d\udfe1 \u26aa\nw = 3"}}, {"data": {"id": "Adapting to changing circumstances and priorities.", "label": "Adapting to changing circumstances and priorities.\n\ud83d\udfe1 \ud83d\udd35 \ud83d\udfe0\nw = 3"}}, {"data": {"id": "Cultivating a growth mindset in the face of challenges.", "label": "Cultivating a growth mindset in the face of challenges.\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udd35\nw = 3"}}, {"data": {"id": "Navigating the interplay between motivation, self-care, and productivity.", "label": "Navigating the interplay between motivation, self-care, and productivity.\n\ud83d\udfe1 \ud83d\udd35\nw = 3"}}, {"data": {"id": "Recognizing the impact of all-or-nothing thinking on motivation and task initiation.", "label": "Recognizing the impact of all-or-nothing thinking on motivation and task initiation.\n\ud83d\udd35\nw = 3"}}, {"data": {"id": "Balancing productivity and self-care through flexible goal-setting._Developing self-awareness of emotional needs and limits._11", "source": "Balancing productivity and self-care through flexible goal-setting.", "target": "Developing self-awareness of emotional needs and limits.", "pair_label": "11", "info": "Mutual enhancement through self-regulation.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Balancing productivity and self-care through flexible goal-setting._Shifting from perfectionism to incremental progress._16", "source": "Balancing productivity and self-care through flexible goal-setting.", "target": "Shifting from perfectionism to incremental progress.", "pair_label": "16", "info": "Promotes realistic expectations", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Balancing productivity and self-care through flexible goal-setting._Integrating new coping mechanisms and skills into daily life._12", "source": "Balancing productivity and self-care through flexible goal-setting.", "target": "Integrating new coping mechanisms and skills into daily life.", "pair_label": "12", "info": "Enhances resilience and adaptability.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Balancing productivity and self-care through flexible goal-setting._Managing stress and anxiety through mindfulness and self-regulation._13", "source": "Balancing productivity and self-care through flexible goal-setting.", "target": "Managing stress and anxiety through mindfulness and self-regulation.", "pair_label": "13", "info": "Mutually supportive habits", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Balancing productivity and self-care through flexible goal-setting._Adapting to changing circumstances and priorities._9", "source": "Balancing productivity and self-care through flexible goal-setting.", "target": "Adapting to changing circumstances and priorities.", "pair_label": "9", "info": "Mutually supportive", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Balancing productivity and self-care through flexible goal-setting._Cultivating a growth mindset in the face of challenges._10", "source": "Balancing productivity and self-care through flexible goal-setting.", "target": "Cultivating a growth mindset in the face of challenges.", "pair_label": "10", "info": "Adaptive goal-setting fosters resilience.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Balancing productivity and self-care through flexible goal-setting._Navigating the interplay between motivation, self-care, and productivity._14", "source": "Balancing productivity and self-care through flexible goal-setting.", "target": "Navigating the interplay between motivation, self-care, and productivity.", "pair_label": "14", "info": "Mutually supportive.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Recognizing the impact of all-or-nothing thinking on motivation and task initiation._Balancing productivity and self-care through flexible goal-setting._58", "source": "Recognizing the impact of all-or-nothing thinking on motivation and task initiation.", "target": "Balancing productivity and self-care through flexible goal-setting.", "pair_label": "58", "info": "Recognizing all-or-nothing thinking can enhance flexible\ngoal-setting by promoting realistic expectations and self-\ncompassion.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Recognizing the impact of all-or-nothing thinking on motivation and task initiation._Developing self-awareness of emotional needs and limits._60", "source": "Recognizing the impact of all-or-nothing thinking on motivation and task initiation.", "target": "Developing self-awareness of emotional needs and limits.", "pair_label": "60", "info": "Awareness of all-or-nothing thinking can enhance self-\nawareness of emotional needs and limits by recognizing how\nsuch thinking patterns affect emotional regulation and\nboundaries.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Recognizing the impact of all-or-nothing thinking on motivation and task initiation._Shifting from perfectionism to incremental progress._64", "source": "Recognizing the impact of all-or-nothing thinking on motivation and task initiation.", "target": "Shifting from perfectionism to incremental progress.", "pair_label": "64", "info": "Challenging all-or-nothing thinking breaks down\nperfectionistic tendencies.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Recognizing the impact of all-or-nothing thinking on motivation and task initiation._Integrating new coping mechanisms and skills into daily life._61", "source": "Recognizing the impact of all-or-nothing thinking on motivation and task initiation.", "target": "Integrating new coping mechanisms and skills into daily life.", "pair_label": "61", "info": "Enhanced self-awareness", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Recognizing the impact of all-or-nothing thinking on motivation and task initiation._Navigating the interplay between motivation, self-care, and productivity._63", "source": "Recognizing the impact of all-or-nothing thinking on motivation and task initiation.", "target": "Navigating the interplay between motivation, self-care, and productivity.", "pair_label": "63", "info": "Awareness of all-or-nothing thinking enhances understanding\nof its impact on motivation and productivity.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Developing self-awareness of emotional needs and limits._Balancing productivity and self-care through flexible goal-setting._26", "source": "Developing self-awareness of emotional needs and limits.", "target": "Balancing productivity and self-care through flexible goal-setting.", "pair_label": "26", "info": "Self-awareness informs goal-setting.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Developing self-awareness of emotional needs and limits._Shifting from perfectionism to incremental progress._32", "source": "Developing self-awareness of emotional needs and limits.", "target": "Shifting from perfectionism to incremental progress.", "pair_label": "32", "info": "Increased self-awareness of emotional needs and limits\nfacilitates the shift away from perfectionism.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Developing self-awareness of emotional needs and limits._Integrating new coping mechanisms and skills into daily life._28", "source": "Developing self-awareness of emotional needs and limits.", "target": "Integrating new coping mechanisms and skills into daily life.", "pair_label": "28", "info": "Awareness of emotional needs facilitates learning and\napplication of new coping skills.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Developing self-awareness of emotional needs and limits._Managing stress and anxiety through mindfulness and self-regulation._29", "source": "Developing self-awareness of emotional needs and limits.", "target": "Managing stress and anxiety through mindfulness and self-regulation.", "pair_label": "29", "info": "Awareness of emotional needs enhances mindfulness and self-\nregulation.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Developing self-awareness of emotional needs and limits._Navigating the interplay between motivation, self-care, and productivity._30", "source": "Developing self-awareness of emotional needs and limits.", "target": "Navigating the interplay between motivation, self-care, and productivity.", "pair_label": "30", "info": "Self-awareness enhances motivation and self-care.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Shifting from perfectionism to incremental progress._Balancing productivity and self-care through flexible goal-setting._66", "source": "Shifting from perfectionism to incremental progress.", "target": "Balancing productivity and self-care through flexible goal-setting.", "pair_label": "66", "info": "Promotes realistic expectations and adaptability.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Shifting from perfectionism to incremental progress._Recognizing the impact of all-or-nothing thinking on motivation and task initiation._72", "source": "Shifting from perfectionism to incremental progress.", "target": "Recognizing the impact of all-or-nothing thinking on motivation and task initiation.", "pair_label": "72", "info": "Challenging all-or-nothing thinking enhances progress-\noriented mindset.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Shifting from perfectionism to incremental progress._Developing self-awareness of emotional needs and limits._68", "source": "Shifting from perfectionism to incremental progress.", "target": "Developing self-awareness of emotional needs and limits.", "pair_label": "68", "info": "Recognizing emotional needs and limits fosters a growth\nmindset.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Shifting from perfectionism to incremental progress._Integrating new coping mechanisms and skills into daily life._69", "source": "Shifting from perfectionism to incremental progress.", "target": "Integrating new coping mechanisms and skills into daily life.", "pair_label": "69", "info": "Fosters adaptability and resilience.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Shifting from perfectionism to incremental progress._Managing stress and anxiety through mindfulness and self-regulation._70", "source": "Shifting from perfectionism to incremental progress.", "target": "Managing stress and anxiety through mindfulness and self-regulation.", "pair_label": "70", "info": "Reduces self-criticism", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Shifting from perfectionism to incremental progress._Adapting to changing circumstances and priorities._65", "source": "Shifting from perfectionism to incremental progress.", "target": "Adapting to changing circumstances and priorities.", "pair_label": "65", "info": "Flexibility in goal pursuit", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Shifting from perfectionism to incremental progress._Cultivating a growth mindset in the face of challenges._67", "source": "Shifting from perfectionism to incremental progress.", "target": "Cultivating a growth mindset in the face of challenges.", "pair_label": "67", "info": "Fosters resilience and adaptability.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Shifting from perfectionism to incremental progress._Navigating the interplay between motivation, self-care, and productivity._71", "source": "Shifting from perfectionism to incremental progress.", "target": "Navigating the interplay between motivation, self-care, and productivity.", "pair_label": "71", "info": "Fosters a balanced approach to goal achievement.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Integrating new coping mechanisms and skills into daily life._Balancing productivity and self-care through flexible goal-setting._34", "source": "Integrating new coping mechanisms and skills into daily life.", "target": "Balancing productivity and self-care through flexible goal-setting.", "pair_label": "34", "info": "Enhances resilience and adaptability.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Integrating new coping mechanisms and skills into daily life._Developing self-awareness of emotional needs and limits._36", "source": "Integrating new coping mechanisms and skills into daily life.", "target": "Developing self-awareness of emotional needs and limits.", "pair_label": "36", "info": "Enhanced self-awareness facilitates effective coping.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Integrating new coping mechanisms and skills into daily life._Shifting from perfectionism to incremental progress._40", "source": "Integrating new coping mechanisms and skills into daily life.", "target": "Shifting from perfectionism to incremental progress.", "pair_label": "40", "info": "Promotes realistic goals and self-compassion.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Integrating new coping mechanisms and skills into daily life._Managing stress and anxiety through mindfulness and self-regulation._37", "source": "Integrating new coping mechanisms and skills into daily life.", "target": "Managing stress and anxiety through mindfulness and self-regulation.", "pair_label": "37", "info": "Reinforces adaptive response to stress.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Integrating new coping mechanisms and skills into daily life._Adapting to changing circumstances and priorities._33", "source": "Integrating new coping mechanisms and skills into daily life.", "target": "Adapting to changing circumstances and priorities.", "pair_label": "33", "info": "Improves adaptability.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Integrating new coping mechanisms and skills into daily life._Navigating the interplay between motivation, self-care, and productivity._38", "source": "Integrating new coping mechanisms and skills into daily life.", "target": "Navigating the interplay between motivation, self-care, and productivity.", "pair_label": "38", "info": "Effective coping mechanisms enhance motivation and self-\ncare, thereby boosting productivity.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Managing stress and anxiety through mindfulness and self-regulation._Balancing productivity and self-care through flexible goal-setting._42", "source": "Managing stress and anxiety through mindfulness and self-regulation.", "target": "Balancing productivity and self-care through flexible goal-setting.", "pair_label": "42", "info": "Enhances resilience and adaptability.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Managing stress and anxiety through mindfulness and self-regulation._Developing self-awareness of emotional needs and limits._44", "source": "Managing stress and anxiety through mindfulness and self-regulation.", "target": "Developing self-awareness of emotional needs and limits.", "pair_label": "44", "info": "Self-regulation enhances awareness of emotional needs.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Managing stress and anxiety through mindfulness and self-regulation._Integrating new coping mechanisms and skills into daily life._45", "source": "Managing stress and anxiety through mindfulness and self-regulation.", "target": "Integrating new coping mechanisms and skills into daily life.", "pair_label": "45", "info": "Facilitates adoption", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Managing stress and anxiety through mindfulness and self-regulation._Adapting to changing circumstances and priorities._41", "source": "Managing stress and anxiety through mindfulness and self-regulation.", "target": "Adapting to changing circumstances and priorities.", "pair_label": "41", "info": "Regulation enhances adaptability.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Managing stress and anxiety through mindfulness and self-regulation._Navigating the interplay between motivation, self-care, and productivity._46", "source": "Managing stress and anxiety through mindfulness and self-regulation.", "target": "Navigating the interplay between motivation, self-care, and productivity.", "pair_label": "46", "info": "Enhances overall well-being and resilience.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Adapting to changing circumstances and priorities._Balancing productivity and self-care through flexible goal-setting._1", "source": "Adapting to changing circumstances and priorities.", "target": "Balancing productivity and self-care through flexible goal-setting.", "pair_label": "1", "info": "Mutually supportive", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Adapting to changing circumstances and priorities._Shifting from perfectionism to incremental progress._8", "source": "Adapting to changing circumstances and priorities.", "target": "Shifting from perfectionism to incremental progress.", "pair_label": "8", "info": "Flexibility", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Adapting to changing circumstances and priorities._Integrating new coping mechanisms and skills into daily life._4", "source": "Adapting to changing circumstances and priorities.", "target": "Integrating new coping mechanisms and skills into daily life.", "pair_label": "4", "info": "Adapting to change fosters learning and incorporating new\ncoping strategies.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Adapting to changing circumstances and priorities._Managing stress and anxiety through mindfulness and self-regulation._5", "source": "Adapting to changing circumstances and priorities.", "target": "Managing stress and anxiety through mindfulness and self-regulation.", "pair_label": "5", "info": "Adaptation to change can trigger stress, which mindfulness\nand self-regulation can mitigate.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Adapting to changing circumstances and priorities._Navigating the interplay between motivation, self-care, and productivity._6", "source": "Adapting to changing circumstances and priorities.", "target": "Navigating the interplay between motivation, self-care, and productivity.", "pair_label": "6", "info": "Adaptability enhances motivation and productivity.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Cultivating a growth mindset in the face of challenges._Recognizing the impact of all-or-nothing thinking on motivation and task initiation._23", "source": "Cultivating a growth mindset in the face of challenges.", "target": "Recognizing the impact of all-or-nothing thinking on motivation and task initiation.", "pair_label": "23", "info": "Growth mindset counters all-or-nothing thinking.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Cultivating a growth mindset in the face of challenges._Shifting from perfectionism to incremental progress._24", "source": "Cultivating a growth mindset in the face of challenges.", "target": "Shifting from perfectionism to incremental progress.", "pair_label": "24", "info": "Promotes adaptive self-talk and realistic goal-setting.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Cultivating a growth mindset in the face of challenges._Managing stress and anxiety through mindfulness and self-regulation._21", "source": "Cultivating a growth mindset in the face of challenges.", "target": "Managing stress and anxiety through mindfulness and self-regulation.", "pair_label": "21", "info": "Adopting a growth mindset helps manage stress and anxiety.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Cultivating a growth mindset in the face of challenges._Navigating the interplay between motivation, self-care, and productivity._22", "source": "Cultivating a growth mindset in the face of challenges.", "target": "Navigating the interplay between motivation, self-care, and productivity.", "pair_label": "22", "info": "Growth mindset fosters resilience and adaptability,\nenhancing motivation and self-care.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Navigating the interplay between motivation, self-care, and productivity._Balancing productivity and self-care through flexible goal-setting._50", "source": "Navigating the interplay between motivation, self-care, and productivity.", "target": "Balancing productivity and self-care through flexible goal-setting.", "pair_label": "50", "info": "Synergistic enhancement", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Navigating the interplay between motivation, self-care, and productivity._Developing self-awareness of emotional needs and limits._52", "source": "Navigating the interplay between motivation, self-care, and productivity.", "target": "Developing self-awareness of emotional needs and limits.", "pair_label": "52", "info": "Self-awareness enhances motivation and productivity.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Navigating the interplay between motivation, self-care, and productivity._Shifting from perfectionism to incremental progress._56", "source": "Navigating the interplay between motivation, self-care, and productivity.", "target": "Shifting from perfectionism to incremental progress.", "pair_label": "56", "info": "Balancing motivation and self-care enhances the ability to\nadopt incremental progress over perfectionism.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Navigating the interplay between motivation, self-care, and productivity._Integrating new coping mechanisms and skills into daily life._53", "source": "Navigating the interplay between motivation, self-care, and productivity.", "target": "Integrating new coping mechanisms and skills into daily life.", "pair_label": "53", "info": "Effective navigation of motivation, self-care, and\nproductivity facilitates the integration of new coping\nmechanisms and skills.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Navigating the interplay between motivation, self-care, and productivity._Managing stress and anxiety through mindfulness and self-regulation._54", "source": "Navigating the interplay between motivation, self-care, and productivity.", "target": "Managing stress and anxiety through mindfulness and self-regulation.", "pair_label": "54", "info": "Mutually supportive", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Navigating the interplay between motivation, self-care, and productivity._Adapting to changing circumstances and priorities._49", "source": "Navigating the interplay between motivation, self-care, and productivity.", "target": "Adapting to changing circumstances and priorities.", "pair_label": "49", "info": "Reciprocal influence on goal-oriented behavior", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Navigating the interplay between motivation, self-care, and productivity._Cultivating a growth mindset in the face of challenges._51", "source": "Navigating the interplay between motivation, self-care, and productivity.", "target": "Cultivating a growth mindset in the face of challenges.", "pair_label": "51", "info": "Fosters resilience and adaptability.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Integrating new coping mechanisms and skills into daily life._Cultivating a growth mindset in the face of challenges._35", "source": "Integrating new coping mechanisms and skills into daily life.", "target": "Cultivating a growth mindset in the face of challenges.", "pair_label": "35", "info": "Adopting new coping skills reinforces growth mindset by\nenhancing resilience.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Cultivating a growth mindset in the face of challenges._Integrating new coping mechanisms and skills into daily life._20", "source": "Cultivating a growth mindset in the face of challenges.", "target": "Integrating new coping mechanisms and skills into daily life.", "pair_label": "20", "info": "Adopting a growth mindset facilitates learning and\napplication of new skills.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Cultivating a growth mindset in the face of challenges._Adapting to changing circumstances and priorities._17", "source": "Cultivating a growth mindset in the face of challenges.", "target": "Adapting to changing circumstances and priorities.", "pair_label": "17", "info": "Promotes resilience", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Recognizing the impact of all-or-nothing thinking on motivation and task initiation._Cultivating a growth mindset in the face of challenges._59", "source": "Recognizing the impact of all-or-nothing thinking on motivation and task initiation.", "target": "Cultivating a growth mindset in the face of challenges.", "pair_label": "59", "info": "Recognizing all-or-nothing thinking fosters an awareness\nthat enhances the adoption of a growth mindset.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}]
+        });
+
+        let tooltipCounter = 0;
+
+        cy.on('tap', 'edge', function(evt) {
+            var edge = evt.target;
+            var pos = evt.renderedPosition;
+            var tooltipId = "tooltip-" + (++tooltipCounter);
+
+            var tooltip = document.createElement("div");
+            tooltip.className = "tooltip";
+            tooltip.id = tooltipId;
+            tooltip.style.left = (pos.x + 20) + "px";
+            tooltip.style.top = (pos.y + 20) + "px";
+
+            var closeBtn = document.createElement("span");
+            closeBtn.className = "close-btn";
+            closeBtn.innerHTML = "&times;";
+            closeBtn.onclick = function () {
+                tooltip.remove();
+            };
+
+            tooltip.innerHTML = "";
+            tooltip.appendChild(closeBtn);
+            var content = document.createElement("div");
+            content.innerHTML = edge.data("info");
+            tooltip.appendChild(content);
+
+            document.body.appendChild(tooltip);
+            makeDraggable(tooltip);
+        });
+
+        function makeDraggable(elmnt) {
+            let offset = { x: 0, y: 0 };
+            let isDragging = false;
+
+            elmnt.addEventListener("mousedown", function (e) {
+                if (e.target.classList.contains("close-btn")) return;
+                isDragging = true;
+                offset.x = e.clientX - elmnt.offsetLeft;
+                offset.y = e.clientY - elmnt.offsetTop;
+                elmnt.style.cursor = "move";
+                e.preventDefault();
+            });
+
+            document.addEventListener("mousemove", function (e) {
+                if (isDragging) {
+                    elmnt.style.left = (e.clientX - offset.x) + "px";
+                    elmnt.style.top = (e.clientY - offset.y) + "px";
+                }
+            });
+
+            document.addEventListener("mouseup", function () {
+                isDragging = false;
+                elmnt.style.cursor = "default";
+            });
+        }
+    </script>
+</body>
+</html>

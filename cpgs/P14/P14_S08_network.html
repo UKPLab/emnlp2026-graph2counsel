@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Interactive Process Network</title>
+    <script src="https://unpkg.com/cytoscape@3.21.1/dist/cytoscape.min.js"></script>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        #cy {
+            width: 100vw;
+            height: 100vh;
+            display: block;
+        }
+        .legend {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: white;
+            border: 1px solid #ccc;
+            padding: 10px;
+            font-family: sans-serif;
+            font-size: 14px;
+            z-index: 10;
+        }
+        .tooltip {
+            position: absolute;
+            background: #fefefe;
+            border: 1px solid #aaa;
+            padding: 10px;
+            font-family: sans-serif;
+            font-size: 13px;
+            max-width: 300px;
+            z-index: 20;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            cursor: default;
+        }
+        .tooltip .close-btn {
+            float: right;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="cy"></div>
+    <div class="legend">
+        <b>Legend</b><br>
+        <span style="color:#e74c3c;">Red</span>: Inhibitory<br>
+        <span style="color:#3498db;">Blue</span>: Excitatory<br>
+        <hr>
+        <b>Dimensions</b><br>
+        🔵 Cognition<br>
+        🟢 Sense of Self<br>
+        🔴 (Overt) Behaviour<br>
+        🟣 Affect<br>
+        🟠 Context/Moderators<br>
+        🟡 Attention<br>
+        ⚪ Biophysiological<br>
+        🟤 Motivation<br>
+        ⚫ Sociocultural
+    </div>
+    <script>
+        var cy = cytoscape({
+            container: document.getElementById('cy'),
+            layout: { name: 'cose' },
+            style: [
+                {
+                    selector: 'node',
+                    style: {
+                        'shape': 'roundrectangle',
+                        'label': 'data(label)',
+                        'text-wrap': 'wrap',
+                        'text-max-width': 120,
+                        'text-valign': 'center',
+                        'text-halign': 'center',
+                        'background-color': '#ffffff',
+                        'border-color': '#000000',
+                        'border-width': 1,
+                        'color': '#000',
+                        'font-size': 14,
+                        'padding': '20px',
+                        'width': 'label',
+                        'height': 'label'
+                    }
+                },
+                {
+                    selector: 'edge',
+                    style: {
+                        'curve-style': 'bezier',
+                        'target-arrow-shape': 'triangle',
+                        'arrow-scale': 1.2,
+                        'label': '',
+                        'font-size': 9,
+                        'text-rotation': 'autorotate',
+                        'text-margin-y': -10,
+                        'line-color': 'data(color)',
+                        'target-arrow-color': 'data(color)',
+                        'width': 'data(width)',
+                        'line-style': 'data(lineStyle)'
+                    }
+                }
+            ],
+            elements: [{"data": {"id": "Emotional regulation through curiosity and exploration of bodily sensations", "label": "Emotional regulation through curiosity and exploration of bodily sensations\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 3"}}, {"data": {"id": "Impact of past experiences on current emotional responses and behaviors", "label": "Impact of past experiences on current emotional responses and behaviors\n\ud83d\udfe0 \u26ab\nw = 3"}}, {"data": {"id": "Tension between independence and reliance on others for financial support", "label": "Tension between independence and reliance on others for financial support\n\ud83d\udd35 \ud83d\udfe0 \u26ab\nw = 3"}}, {"data": {"id": "Embarrassment and shame related to financial struggles", "label": "Embarrassment and shame related to financial struggles\n\ud83d\udfe3 \ud83d\udd35 \u26ab\nw = 3"}}, {"data": {"id": "Difficulty in asserting personal needs and boundaries", "label": "Difficulty in asserting personal needs and boundaries\n\ud83d\udd34 \ud83d\udd35\nw = 3"}}, {"data": {"id": "Struggling to balance self-care with responsibilities towards others", "label": "Struggling to balance self-care with responsibilities towards others\n\ud83d\udd34 \u26ab\nw = 3"}}, {"data": {"id": "Uncertainty and anxiety about the future and making life decisions", "label": "Uncertainty and anxiety about the future and making life decisions\n\ud83d\udfe1 \ud83d\udfe0 \u26ab\nw = 3"}}, {"data": {"id": "Navigating complex family dynamics and emotional responsibilities", "label": "Navigating complex family dynamics and emotional responsibilities\n\ud83d\udfe3 \ud83d\udfe0 \u26ab\nw = 3"}}, {"data": {"id": "Fear of disappointing or hurting others due to personal circumstances", "label": "Fear of disappointing or hurting others due to personal circumstances\n\ud83d\udfe3 \ud83d\udd35\nw = 3"}}, {"data": {"id": "Self-doubt and fear of failure in achieving personal goals", "label": "Self-doubt and fear of failure in achieving personal goals\n\ud83d\udfe1 \ud83d\udd35 \ud83d\udfe0\nw = 3"}}, {"data": {"id": "Emotional regulation through curiosity and exploration of bodily sensations_Impact of past experiences on current emotional responses and behaviors_22", "source": "Emotional regulation through curiosity and exploration of bodily sensations", "target": "Impact of past experiences on current emotional responses and behaviors", "pair_label": "22", "info": "Curiosity and exploration of bodily sensations can uncover\nand process past experiences, influencing current emotional\nresponses.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between independence and reliance on others for financial support_Embarrassment and shame related to financial struggles_74", "source": "Tension between independence and reliance on others for financial support", "target": "Embarrassment and shame related to financial struggles", "pair_label": "74", "info": "Financial dependence can trigger feelings of shame and\nembarrassment.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between independence and reliance on others for financial support_Difficulty in asserting personal needs and boundaries_73", "source": "Tension between independence and reliance on others for financial support", "target": "Difficulty in asserting personal needs and boundaries", "pair_label": "73", "info": "Financial dependence can amplify anxiety about asserting\nneeds.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between independence and reliance on others for financial support_Struggling to balance self-care with responsibilities towards others_80", "source": "Tension between independence and reliance on others for financial support", "target": "Struggling to balance self-care with responsibilities towards others", "pair_label": "80", "info": "Financial struggles amplify self-care imbalance.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between independence and reliance on others for financial support_Uncertainty and anxiety about the future and making life decisions_81", "source": "Tension between independence and reliance on others for financial support", "target": "Uncertainty and anxiety about the future and making life decisions", "pair_label": "81", "info": "Financial uncertainty fuels anxiety.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Navigating complex family dynamics and emotional responsibilities_Difficulty in asserting personal needs and boundaries_46", "source": "Navigating complex family dynamics and emotional responsibilities", "target": "Difficulty in asserting personal needs and boundaries", "pair_label": "46", "info": "Complex family dynamics can suppress personal assertion.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Navigating complex family dynamics and emotional responsibilities_Impact of past experiences on current emotional responses and behaviors_50", "source": "Navigating complex family dynamics and emotional responsibilities", "target": "Impact of past experiences on current emotional responses and behaviors", "pair_label": "50", "info": "Past experiences shape emotional responses to family\ndynamics.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Navigating complex family dynamics and emotional responsibilities_Struggling to balance self-care with responsibilities towards others_52", "source": "Navigating complex family dynamics and emotional responsibilities", "target": "Struggling to balance self-care with responsibilities towards others", "pair_label": "52", "info": "Increased emotional demands from family dynamics can\nexacerbate self-care challenges.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Navigating complex family dynamics and emotional responsibilities_Fear of disappointing or hurting others due to personal circumstances_49", "source": "Navigating complex family dynamics and emotional responsibilities", "target": "Fear of disappointing or hurting others due to personal circumstances", "pair_label": "49", "info": "Increased emotional responsibilities can amplify fear of\ndisappointing others.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Navigating complex family dynamics and emotional responsibilities_Uncertainty and anxiety about the future and making life decisions_54", "source": "Navigating complex family dynamics and emotional responsibilities", "target": "Uncertainty and anxiety about the future and making life decisions", "pair_label": "54", "info": "Increased stress and emotional burden.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Self-doubt and fear of failure in achieving personal goals_Impact of past experiences on current emotional responses and behaviors_59", "source": "Self-doubt and fear of failure in achieving personal goals", "target": "Impact of past experiences on current emotional responses and behaviors", "pair_label": "59", "info": "Past failures amplify self-doubt.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Self-doubt and fear of failure in achieving personal goals_Uncertainty and anxiety about the future and making life decisions_63", "source": "Self-doubt and fear of failure in achieving personal goals", "target": "Uncertainty and anxiety about the future and making life decisions", "pair_label": "63", "info": "Intensifies anxiety.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Embarrassment and shame related to financial struggles_Self-doubt and fear of failure in achieving personal goals_15", "source": "Embarrassment and shame related to financial struggles", "target": "Self-doubt and fear of failure in achieving personal goals", "pair_label": "15", "info": "Financial struggles can exacerbate feelings of inadequacy,\nfueling self-doubt and fear of failure.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Embarrassment and shame related to financial struggles_Impact of past experiences on current emotional responses and behaviors_13", "source": "Embarrassment and shame related to financial struggles", "target": "Impact of past experiences on current emotional responses and behaviors", "pair_label": "13", "info": "Past experiences of financial struggles can intensify\nfeelings of embarrassment and shame, influencing current\nemotional responses.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Embarrassment and shame related to financial struggles_Fear of disappointing or hurting others due to personal circumstances_12", "source": "Embarrassment and shame related to financial struggles", "target": "Fear of disappointing or hurting others due to personal circumstances", "pair_label": "12", "info": "Intensifies fear of disappointing others.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Embarrassment and shame related to financial struggles_Uncertainty and anxiety about the future and making life decisions_18", "source": "Embarrassment and shame related to financial struggles", "target": "Uncertainty and anxiety about the future and making life decisions", "pair_label": "18", "info": "Financial struggles can exacerbate uncertainty and anxiety\nabout the future.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty in asserting personal needs and boundaries_Tension between independence and reliance on others for financial support_8", "source": "Difficulty in asserting personal needs and boundaries", "target": "Tension between independence and reliance on others for financial support", "pair_label": "8", "info": "Asserting personal needs and boundaries is closely tied to\nestablishing independence, which is hindered by reliance on\nothers for financial support, leading to tension.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty in asserting personal needs and boundaries_Navigating complex family dynamics and emotional responsibilities_5", "source": "Difficulty in asserting personal needs and boundaries", "target": "Navigating complex family dynamics and emotional responsibilities", "pair_label": "5", "info": "Asserting personal needs enhances emotional resilience in\nfamily dynamics.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty in asserting personal needs and boundaries_Self-doubt and fear of failure in achieving personal goals_6", "source": "Difficulty in asserting personal needs and boundaries", "target": "Self-doubt and fear of failure in achieving personal goals", "pair_label": "6", "info": "Lack of assertiveness can lead to unmet needs, reinforcing\nself-doubt and fear of failure.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty in asserting personal needs and boundaries_Struggling to balance self-care with responsibilities towards others_7", "source": "Difficulty in asserting personal needs and boundaries", "target": "Struggling to balance self-care with responsibilities towards others", "pair_label": "7", "info": "Boundary issues fuel self-care imbalances.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty in asserting personal needs and boundaries_Fear of disappointing or hurting others due to personal circumstances_3", "source": "Difficulty in asserting personal needs and boundaries", "target": "Fear of disappointing or hurting others due to personal circumstances", "pair_label": "3", "info": "Asserting personal needs can lead to fear of disappointing\nothers.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Impact of past experiences on current emotional responses and behaviors_Navigating complex family dynamics and emotional responsibilities_41", "source": "Impact of past experiences on current emotional responses and behaviors", "target": "Navigating complex family dynamics and emotional responsibilities", "pair_label": "41", "info": "Past experiences shape emotional responses to family\ndynamics.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Impact of past experiences on current emotional responses and behaviors_Embarrassment and shame related to financial struggles_38", "source": "Impact of past experiences on current emotional responses and behaviors", "target": "Embarrassment and shame related to financial struggles", "pair_label": "38", "info": "Past experiences of financial struggles can amplify feelings\nof embarrassment and shame.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Impact of past experiences on current emotional responses and behaviors_Difficulty in asserting personal needs and boundaries_37", "source": "Impact of past experiences on current emotional responses and behaviors", "target": "Difficulty in asserting personal needs and boundaries", "pair_label": "37", "info": "Past traumas or negative experiences can lead to\ndifficulties in asserting personal needs and boundaries.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggling to balance self-care with responsibilities towards others_Emotional regulation through curiosity and exploration of bodily sensations_66", "source": "Struggling to balance self-care with responsibilities towards others", "target": "Emotional regulation through curiosity and exploration of bodily sensations", "pair_label": "66", "info": "Increased self-awareness and exploration of bodily\nsensations can help individuals better balance self-care\nwith responsibilities towards others.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggling to balance self-care with responsibilities towards others_Navigating complex family dynamics and emotional responsibilities_69", "source": "Struggling to balance self-care with responsibilities towards others", "target": "Navigating complex family dynamics and emotional responsibilities", "pair_label": "69", "info": "Interconnected responsibilities", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggling to balance self-care with responsibilities towards others_Embarrassment and shame related to financial struggles_65", "source": "Struggling to balance self-care with responsibilities towards others", "target": "Embarrassment and shame related to financial struggles", "pair_label": "65", "info": "Neglecting self-care due to prioritizing others may\nexacerbate financial struggles, intensifying embarrassment\nand shame.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggling to balance self-care with responsibilities towards others_Difficulty in asserting personal needs and boundaries_64", "source": "Struggling to balance self-care with responsibilities towards others", "target": "Difficulty in asserting personal needs and boundaries", "pair_label": "64", "info": "Overemphasis on responsibilities often suppresses personal\nneeds expression.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggling to balance self-care with responsibilities towards others_Uncertainty and anxiety about the future and making life decisions_72", "source": "Struggling to balance self-care with responsibilities towards others", "target": "Uncertainty and anxiety about the future and making life decisions", "pair_label": "72", "info": "Increased stress", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Fear of disappointing or hurting others due to personal circumstances_Navigating complex family dynamics and emotional responsibilities_32", "source": "Fear of disappointing or hurting others due to personal circumstances", "target": "Navigating complex family dynamics and emotional responsibilities", "pair_label": "32", "info": "Fear can amplify emotional responsibilities.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Fear of disappointing or hurting others due to personal circumstances_Self-doubt and fear of failure in achieving personal goals_33", "source": "Fear of disappointing or hurting others due to personal circumstances", "target": "Self-doubt and fear of failure in achieving personal goals", "pair_label": "33", "info": "Reinforcing cycle of anxiety and self-criticism.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Fear of disappointing or hurting others due to personal circumstances_Difficulty in asserting personal needs and boundaries_28", "source": "Fear of disappointing or hurting others due to personal circumstances", "target": "Difficulty in asserting personal needs and boundaries", "pair_label": "28", "info": "Reinforcing pattern", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Fear of disappointing or hurting others due to personal circumstances_Struggling to balance self-care with responsibilities towards others_34", "source": "Fear of disappointing or hurting others due to personal circumstances", "target": "Struggling to balance self-care with responsibilities towards others", "pair_label": "34", "info": "Fear of disappointing others can intensify the struggle to\nbalance self-care and responsibilities.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Fear of disappointing or hurting others due to personal circumstances_Uncertainty and anxiety about the future and making life decisions_36", "source": "Fear of disappointing or hurting others due to personal circumstances", "target": "Uncertainty and anxiety about the future and making life decisions", "pair_label": "36", "info": "Fear of disappointing others can amplify uncertainty and\nanxiety about future decisions.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Uncertainty and anxiety about the future and making life decisions_Self-doubt and fear of failure in achieving personal goals_88", "source": "Uncertainty and anxiety about the future and making life decisions", "target": "Self-doubt and fear of failure in achieving personal goals", "pair_label": "88", "info": "Uncertainty and anxiety can intensify self-doubt and fear of\nfailure.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}]
+        });
+
+        let tooltipCounter = 0;
+
+        cy.on('tap', 'edge', function(evt) {
+            var edge = evt.target;
+            var pos = evt.renderedPosition;
+            var tooltipId = "tooltip-" + (++tooltipCounter);
+
+            var tooltip = document.createElement("div");
+            tooltip.className = "tooltip";
+            tooltip.id = tooltipId;
+            tooltip.style.left = (pos.x + 20) + "px";
+            tooltip.style.top = (pos.y + 20) + "px";
+
+            var closeBtn = document.createElement("span");
+            closeBtn.className = "close-btn";
+            closeBtn.innerHTML = "&times;";
+            closeBtn.onclick = function () {
+                tooltip.remove();
+            };
+
+            tooltip.innerHTML = "";
+            tooltip.appendChild(closeBtn);
+            var content = document.createElement("div");
+            content.innerHTML = edge.data("info");
+            tooltip.appendChild(content);
+
+            document.body.appendChild(tooltip);
+            makeDraggable(tooltip);
+        });
+
+        function makeDraggable(elmnt) {
+            let offset = { x: 0, y: 0 };
+            let isDragging = false;
+
+            elmnt.addEventListener("mousedown", function (e) {
+                if (e.target.classList.contains("close-btn")) return;
+                isDragging = true;
+                offset.x = e.clientX - elmnt.offsetLeft;
+                offset.y = e.clientY - elmnt.offsetTop;
+                elmnt.style.cursor = "move";
+                e.preventDefault();
+            });
+
+            document.addEventListener("mousemove", function (e) {
+                if (isDragging) {
+                    elmnt.style.left = (e.clientX - offset.x) + "px";
+                    elmnt.style.top = (e.clientY - offset.y) + "px";
+                }
+            });
+
+            document.addEventListener("mouseup", function () {
+                isDragging = false;
+                elmnt.style.cursor = "default";
+            });
+        }
+    </script>
+</body>
+</html>

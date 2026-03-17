@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Interactive Process Network</title>
+    <script src="https://unpkg.com/cytoscape@3.21.1/dist/cytoscape.min.js"></script>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        #cy {
+            width: 100vw;
+            height: 100vh;
+            display: block;
+        }
+        .legend {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: white;
+            border: 1px solid #ccc;
+            padding: 10px;
+            font-family: sans-serif;
+            font-size: 14px;
+            z-index: 10;
+        }
+        .tooltip {
+            position: absolute;
+            background: #fefefe;
+            border: 1px solid #aaa;
+            padding: 10px;
+            font-family: sans-serif;
+            font-size: 13px;
+            max-width: 300px;
+            z-index: 20;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            cursor: default;
+        }
+        .tooltip .close-btn {
+            float: right;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="cy"></div>
+    <div class="legend">
+        <b>Legend</b><br>
+        <span style="color:#e74c3c;">Red</span>: Inhibitory<br>
+        <span style="color:#3498db;">Blue</span>: Excitatory<br>
+        <hr>
+        <b>Dimensions</b><br>
+        🔵 Cognition<br>
+        🟢 Sense of Self<br>
+        🔴 (Overt) Behaviour<br>
+        🟣 Affect<br>
+        🟠 Context/Moderators<br>
+        🟡 Attention<br>
+        ⚪ Biophysiological<br>
+        🟤 Motivation<br>
+        ⚫ Sociocultural
+    </div>
+    <script>
+        var cy = cytoscape({
+            container: document.getElementById('cy'),
+            layout: { name: 'cose' },
+            style: [
+                {
+                    selector: 'node',
+                    style: {
+                        'shape': 'roundrectangle',
+                        'label': 'data(label)',
+                        'text-wrap': 'wrap',
+                        'text-max-width': 120,
+                        'text-valign': 'center',
+                        'text-halign': 'center',
+                        'background-color': '#ffffff',
+                        'border-color': '#000000',
+                        'border-width': 1,
+                        'color': '#000',
+                        'font-size': 14,
+                        'padding': '20px',
+                        'width': 'label',
+                        'height': 'label'
+                    }
+                },
+                {
+                    selector: 'edge',
+                    style: {
+                        'curve-style': 'bezier',
+                        'target-arrow-shape': 'triangle',
+                        'arrow-scale': 1.2,
+                        'label': '',
+                        'font-size': 9,
+                        'text-rotation': 'autorotate',
+                        'text-margin-y': -10,
+                        'line-color': 'data(color)',
+                        'target-arrow-color': 'data(color)',
+                        'width': 'data(width)',
+                        'line-style': 'data(lineStyle)'
+                    }
+                }
+            ],
+            elements: [{"data": {"id": "Engaging with guilt and blame hinders the client's ability to distinguish between actions driven by genuine care versus obligation.", "label": "Engaging with guilt and blame hinders the client's ability to distinguish between actions driven by genuine care versus obligation.\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 23"}}, {"data": {"id": "Interactions with guilt and blame are tied to the client's behaviors and sense of control.", "label": "Interactions with guilt and blame are tied to the client's behaviors and sense of control.\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 23"}}, {"data": {"id": "Self-compassion is compromised when the client equates their actions with their self-worth.", "label": "Self-compassion is compromised when the client equates their actions with their self-worth.\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 23"}}, {"data": {"id": "The client struggles to differentiate between their intentions and the actual outcomes of their actions.", "label": "The client struggles to differentiate between their intentions and the actual outcomes of their actions.\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 23"}}, {"data": {"id": "Thought patterns of guilt and blame can be overwhelming and lead to avoidance strategies.", "label": "Thought patterns of guilt and blame can be overwhelming and lead to avoidance strategies.\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 23"}}, {"data": {"id": "The client's sense of identity is closely tied to their actions and perceived responsibilities.", "label": "The client's sense of identity is closely tied to their actions and perceived responsibilities.\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 23"}}, {"data": {"id": "Difficulty with emotional regulation leads to self-justification and rationalization of actions.", "label": "Difficulty with emotional regulation leads to self-justification and rationalization of actions.\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 23"}}, {"data": {"id": "The client's perception of others' expectations and needs can lead to feelings of responsibility and subsequent guilt.", "label": "The client's perception of others' expectations and needs can lead to feelings of responsibility and subsequent guilt.\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 23"}}, {"data": {"id": "The client's emotional responses are shaped by their thoughts about others' perceptions and expectations.", "label": "The client's emotional responses are shaped by their thoughts about others' perceptions and expectations.\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 23"}}, {"data": {"id": "Emotional intimacy is influenced by the client's need for control and their perception of others' expectations.", "label": "Emotional intimacy is influenced by the client's need for control and their perception of others' expectations.\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 23"}}, {"data": {"id": "Engaging with guilt and blame hinders the client's ability to distinguish between actions driven by genuine care versus obligation._Interactions with guilt and blame are tied to the client's behaviors and sense of control._21", "source": "Engaging with guilt and blame hinders the client's ability to distinguish between actions driven by genuine care versus obligation.", "target": "Interactions with guilt and blame are tied to the client's behaviors and sense of control.", "pair_label": "21", "info": "Guilt and blame reinforce behaviors.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Engaging with guilt and blame hinders the client's ability to distinguish between actions driven by genuine care versus obligation._Self-compassion is compromised when the client equates their actions with their self-worth._22", "source": "Engaging with guilt and blame hinders the client's ability to distinguish between actions driven by genuine care versus obligation.", "target": "Self-compassion is compromised when the client equates their actions with their self-worth.", "pair_label": "22", "info": "Guilt and blame can lead to self-criticism, which undermines\nself-compassion.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Engaging with guilt and blame hinders the client's ability to distinguish between actions driven by genuine care versus obligation._The client struggles to differentiate between their intentions and the actual outcomes of their actions._23", "source": "Engaging with guilt and blame hinders the client's ability to distinguish between actions driven by genuine care versus obligation.", "target": "The client struggles to differentiate between their intentions and the actual outcomes of their actions.", "pair_label": "23", "info": "Guilt and blame can cloud judgment, making it harder to\ndiscern intentions from outcomes.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Engaging with guilt and blame hinders the client's ability to distinguish between actions driven by genuine care versus obligation._Thought patterns of guilt and blame can be overwhelming and lead to avoidance strategies._27", "source": "Engaging with guilt and blame hinders the client's ability to distinguish between actions driven by genuine care versus obligation.", "target": "Thought patterns of guilt and blame can be overwhelming and lead to avoidance strategies.", "pair_label": "27", "info": "Guilt and blame reinforce avoidance.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Engaging with guilt and blame hinders the client's ability to distinguish between actions driven by genuine care versus obligation._The client's sense of identity is closely tied to their actions and perceived responsibilities._26", "source": "Engaging with guilt and blame hinders the client's ability to distinguish between actions driven by genuine care versus obligation.", "target": "The client's sense of identity is closely tied to their actions and perceived responsibilities.", "pair_label": "26", "info": "Guilt and blame reinforce identity through actions.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty with emotional regulation leads to self-justification and rationalization of actions._The client struggles to differentiate between their intentions and the actual outcomes of their actions._5", "source": "Difficulty with emotional regulation leads to self-justification and rationalization of actions.", "target": "The client struggles to differentiate between their intentions and the actual outcomes of their actions.", "pair_label": "5", "info": "Emotional dysregulation can lead to distorted thinking\npatterns, including self-justification and rationalization,\nwhich in turn can impair the ability to accurately\ndifferentiate between intentions and outcomes.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "The client's perception of others' expectations and needs can lead to feelings of responsibility and subsequent guilt._Engaging with guilt and blame hinders the client's ability to distinguish between actions driven by genuine care versus obligation._66", "source": "The client's perception of others' expectations and needs can lead to feelings of responsibility and subsequent guilt.", "target": "Engaging with guilt and blame hinders the client's ability to distinguish between actions driven by genuine care versus obligation.", "pair_label": "66", "info": "Guilt amplifies self-doubt.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "The client's perception of others' expectations and needs can lead to feelings of responsibility and subsequent guilt._Interactions with guilt and blame are tied to the client's behaviors and sense of control._67", "source": "The client's perception of others' expectations and needs can lead to feelings of responsibility and subsequent guilt.", "target": "Interactions with guilt and blame are tied to the client's behaviors and sense of control.", "pair_label": "67", "info": "Guilt amplifies self-blame.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "The client's perception of others' expectations and needs can lead to feelings of responsibility and subsequent guilt._The client's sense of identity is closely tied to their actions and perceived responsibilities._71", "source": "The client's perception of others' expectations and needs can lead to feelings of responsibility and subsequent guilt.", "target": "The client's sense of identity is closely tied to their actions and perceived responsibilities.", "pair_label": "71", "info": "Shared roots in self-concept and responsibility.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "The client's perception of others' expectations and needs can lead to feelings of responsibility and subsequent guilt._The client's emotional responses are shaped by their thoughts about others' perceptions and expectations._70", "source": "The client's perception of others' expectations and needs can lead to feelings of responsibility and subsequent guilt.", "target": "The client's emotional responses are shaped by their thoughts about others' perceptions and expectations.", "pair_label": "70", "info": "Shared underlying cognitive mechanism", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Interactions with guilt and blame are tied to the client's behaviors and sense of control._Engaging with guilt and blame hinders the client's ability to distinguish between actions driven by genuine care versus obligation._30", "source": "Interactions with guilt and blame are tied to the client's behaviors and sense of control.", "target": "Engaging with guilt and blame hinders the client's ability to distinguish between actions driven by genuine care versus obligation.", "pair_label": "30", "info": "Reinforcing negative self-perception", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Interactions with guilt and blame are tied to the client's behaviors and sense of control._Difficulty with emotional regulation leads to self-justification and rationalization of actions._28", "source": "Interactions with guilt and blame are tied to the client's behaviors and sense of control.", "target": "Difficulty with emotional regulation leads to self-justification and rationalization of actions.", "pair_label": "28", "info": "Guilt and blame can trigger emotional dysregulation.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Interactions with guilt and blame are tied to the client's behaviors and sense of control._The client's perception of others' expectations and needs can lead to feelings of responsibility and subsequent guilt._34", "source": "Interactions with guilt and blame are tied to the client's behaviors and sense of control.", "target": "The client's perception of others' expectations and needs can lead to feelings of responsibility and subsequent guilt.", "pair_label": "34", "info": "Shared guilt dynamics", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Interactions with guilt and blame are tied to the client's behaviors and sense of control._Self-compassion is compromised when the client equates their actions with their self-worth._31", "source": "Interactions with guilt and blame are tied to the client's behaviors and sense of control.", "target": "Self-compassion is compromised when the client equates their actions with their self-worth.", "pair_label": "31", "info": "Guilt and blame can suppress self-compassion.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Interactions with guilt and blame are tied to the client's behaviors and sense of control._The client struggles to differentiate between their intentions and the actual outcomes of their actions._32", "source": "Interactions with guilt and blame are tied to the client's behaviors and sense of control.", "target": "The client struggles to differentiate between their intentions and the actual outcomes of their actions.", "pair_label": "32", "info": "Guilt and blame can intensify when intentions and outcomes\nare confused.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Self-compassion is compromised when the client equates their actions with their self-worth._Engaging with guilt and blame hinders the client's ability to distinguish between actions driven by genuine care versus obligation._39", "source": "Self-compassion is compromised when the client equates their actions with their self-worth.", "target": "Engaging with guilt and blame hinders the client's ability to distinguish between actions driven by genuine care versus obligation.", "pair_label": "39", "info": "Inhibiting self-compassion amplifies guilt and blame.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Self-compassion is compromised when the client equates their actions with their self-worth._The client struggles to differentiate between their intentions and the actual outcomes of their actions._41", "source": "Self-compassion is compromised when the client equates their actions with their self-worth.", "target": "The client struggles to differentiate between their intentions and the actual outcomes of their actions.", "pair_label": "41", "info": "Equating actions with self-worth can lead to an inability to\nseparate intentions from outcomes.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Self-compassion is compromised when the client equates their actions with their self-worth._The client's sense of identity is closely tied to their actions and perceived responsibilities._44", "source": "Self-compassion is compromised when the client equates their actions with their self-worth.", "target": "The client's sense of identity is closely tied to their actions and perceived responsibilities.", "pair_label": "44", "info": "Equating actions with self-worth undermines self-compassion.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "The client struggles to differentiate between their intentions and the actual outcomes of their actions._Engaging with guilt and blame hinders the client's ability to distinguish between actions driven by genuine care versus obligation._48", "source": "The client struggles to differentiate between their intentions and the actual outcomes of their actions.", "target": "Engaging with guilt and blame hinders the client's ability to distinguish between actions driven by genuine care versus obligation.", "pair_label": "48", "info": "Guilt and blame reinforce self-doubt.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "The client struggles to differentiate between their intentions and the actual outcomes of their actions._The client's perception of others' expectations and needs can lead to feelings of responsibility and subsequent guilt._52", "source": "The client struggles to differentiate between their intentions and the actual outcomes of their actions.", "target": "The client's perception of others' expectations and needs can lead to feelings of responsibility and subsequent guilt.", "pair_label": "52", "info": "Confusion in intentions and outcomes can amplify feelings of\nguilt and responsibility due to others' expectations.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "The client struggles to differentiate between their intentions and the actual outcomes of their actions._Self-compassion is compromised when the client equates their actions with their self-worth._50", "source": "The client struggles to differentiate between their intentions and the actual outcomes of their actions.", "target": "Self-compassion is compromised when the client equates their actions with their self-worth.", "pair_label": "50", "info": "Intention-outcome discrepancy fuels self-criticism.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Emotional intimacy is influenced by the client's need for control and their perception of others' expectations._Engaging with guilt and blame hinders the client's ability to distinguish between actions driven by genuine care versus obligation._11", "source": "Emotional intimacy is influenced by the client's need for control and their perception of others' expectations.", "target": "Engaging with guilt and blame hinders the client's ability to distinguish between actions driven by genuine care versus obligation.", "pair_label": "11", "info": "Guilt and blame can reinforce perceptions of obligation,\nundermining genuine emotional intimacy.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Emotional intimacy is influenced by the client's need for control and their perception of others' expectations._The client's emotional responses are shaped by their thoughts about others' perceptions and expectations._15", "source": "Emotional intimacy is influenced by the client's need for control and their perception of others' expectations.", "target": "The client's emotional responses are shaped by their thoughts about others' perceptions and expectations.", "pair_label": "15", "info": "Shared underlying mechanism of perception of others'\nexpectations.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Thought patterns of guilt and blame can be overwhelming and lead to avoidance strategies._Engaging with guilt and blame hinders the client's ability to distinguish between actions driven by genuine care versus obligation._84", "source": "Thought patterns of guilt and blame can be overwhelming and lead to avoidance strategies.", "target": "Engaging with guilt and blame hinders the client's ability to distinguish between actions driven by genuine care versus obligation.", "pair_label": "84", "info": "Avoidance of guilt and blame hinders self-reflection.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Thought patterns of guilt and blame can be overwhelming and lead to avoidance strategies._Difficulty with emotional regulation leads to self-justification and rationalization of actions._82", "source": "Thought patterns of guilt and blame can be overwhelming and lead to avoidance strategies.", "target": "Difficulty with emotional regulation leads to self-justification and rationalization of actions.", "pair_label": "82", "info": "Guilt-based thought patterns can exacerbate emotional\ndysregulation.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "The client's sense of identity is closely tied to their actions and perceived responsibilities._Engaging with guilt and blame hinders the client's ability to distinguish between actions driven by genuine care versus obligation._75", "source": "The client's sense of identity is closely tied to their actions and perceived responsibilities.", "target": "Engaging with guilt and blame hinders the client's ability to distinguish between actions driven by genuine care versus obligation.", "pair_label": "75", "info": "Guilt and blame can distort self-perception.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "The client's sense of identity is closely tied to their actions and perceived responsibilities._The client's perception of others' expectations and needs can lead to feelings of responsibility and subsequent guilt._80", "source": "The client's sense of identity is closely tied to their actions and perceived responsibilities.", "target": "The client's perception of others' expectations and needs can lead to feelings of responsibility and subsequent guilt.", "pair_label": "80", "info": "Shared root in responsibility.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "The client's sense of identity is closely tied to their actions and perceived responsibilities._Self-compassion is compromised when the client equates their actions with their self-worth._77", "source": "The client's sense of identity is closely tied to their actions and perceived responsibilities.", "target": "Self-compassion is compromised when the client equates their actions with their self-worth.", "pair_label": "77", "info": "Overemphasizing actions and responsibilities can undermine\nself-compassion.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "The client's sense of identity is closely tied to their actions and perceived responsibilities._Thought patterns of guilt and blame can be overwhelming and lead to avoidance strategies._81", "source": "The client's sense of identity is closely tied to their actions and perceived responsibilities.", "target": "Thought patterns of guilt and blame can be overwhelming and lead to avoidance strategies.", "pair_label": "81", "info": "Sense of identity tied to responsibilities can be threatened\nby guilt and blame, leading to avoidance.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "The client's emotional responses are shaped by their thoughts about others' perceptions and expectations._Engaging with guilt and blame hinders the client's ability to distinguish between actions driven by genuine care versus obligation._57", "source": "The client's emotional responses are shaped by their thoughts about others' perceptions and expectations.", "target": "Engaging with guilt and blame hinders the client's ability to distinguish between actions driven by genuine care versus obligation.", "pair_label": "57", "info": "Guilt and blame can distort perceptions.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "The client's emotional responses are shaped by their thoughts about others' perceptions and expectations._The client's perception of others' expectations and needs can lead to feelings of responsibility and subsequent guilt._61", "source": "The client's emotional responses are shaped by their thoughts about others' perceptions and expectations.", "target": "The client's perception of others' expectations and needs can lead to feelings of responsibility and subsequent guilt.", "pair_label": "61", "info": "Shared cognitive appraisal of others' expectations", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "The client's emotional responses are shaped by their thoughts about others' perceptions and expectations._Emotional intimacy is influenced by the client's need for control and their perception of others' expectations._56", "source": "The client's emotional responses are shaped by their thoughts about others' perceptions and expectations.", "target": "Emotional intimacy is influenced by the client's need for control and their perception of others' expectations.", "pair_label": "56", "info": "Interconnected expectations.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty with emotional regulation leads to self-justification and rationalization of actions._The client's sense of identity is closely tied to their actions and perceived responsibilities._8", "source": "Difficulty with emotional regulation leads to self-justification and rationalization of actions.", "target": "The client's sense of identity is closely tied to their actions and perceived responsibilities.", "pair_label": "8", "info": "Reinforces sense of self through justification of actions.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "The client struggles to differentiate between their intentions and the actual outcomes of their actions._The client's sense of identity is closely tied to their actions and perceived responsibilities._53", "source": "The client struggles to differentiate between their intentions and the actual outcomes of their actions.", "target": "The client's sense of identity is closely tied to their actions and perceived responsibilities.", "pair_label": "53", "info": "Confusion over intentions and outcomes can intensify\nidentity issues.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Thought patterns of guilt and blame can be overwhelming and lead to avoidance strategies._The client's perception of others' expectations and needs can lead to feelings of responsibility and subsequent guilt._89", "source": "Thought patterns of guilt and blame can be overwhelming and lead to avoidance strategies.", "target": "The client's perception of others' expectations and needs can lead to feelings of responsibility and subsequent guilt.", "pair_label": "89", "info": "Shared underlying guilt dynamics.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Thought patterns of guilt and blame can be overwhelming and lead to avoidance strategies._Self-compassion is compromised when the client equates their actions with their self-worth._86", "source": "Thought patterns of guilt and blame can be overwhelming and lead to avoidance strategies.", "target": "Self-compassion is compromised when the client equates their actions with their self-worth.", "pair_label": "86", "info": "Guilt and blame can suppress self-compassion.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "The client's sense of identity is closely tied to their actions and perceived responsibilities._Interactions with guilt and blame are tied to the client's behaviors and sense of control._76", "source": "The client's sense of identity is closely tied to their actions and perceived responsibilities.", "target": "Interactions with guilt and blame are tied to the client's behaviors and sense of control.", "pair_label": "76", "info": "Identity and responsibility perceptions amplify guilt and\nblame interactions through self-reflection.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Engaging with guilt and blame hinders the client's ability to distinguish between actions driven by genuine care versus obligation._The client's perception of others' expectations and needs can lead to feelings of responsibility and subsequent guilt._25", "source": "Engaging with guilt and blame hinders the client's ability to distinguish between actions driven by genuine care versus obligation.", "target": "The client's perception of others' expectations and needs can lead to feelings of responsibility and subsequent guilt.", "pair_label": "25", "info": "Blame reinforces guilt.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Interactions with guilt and blame are tied to the client's behaviors and sense of control._The client's sense of identity is closely tied to their actions and perceived responsibilities._35", "source": "Interactions with guilt and blame are tied to the client's behaviors and sense of control.", "target": "The client's sense of identity is closely tied to their actions and perceived responsibilities.", "pair_label": "35", "info": "Shared responsibility and self-evaluation mechanisms", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "The client struggles to differentiate between their intentions and the actual outcomes of their actions._Thought patterns of guilt and blame can be overwhelming and lead to avoidance strategies._54", "source": "The client struggles to differentiate between their intentions and the actual outcomes of their actions.", "target": "Thought patterns of guilt and blame can be overwhelming and lead to avoidance strategies.", "pair_label": "54", "info": "Self-blame exacerbates.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Thought patterns of guilt and blame can be overwhelming and lead to avoidance strategies._The client's sense of identity is closely tied to their actions and perceived responsibilities._90", "source": "Thought patterns of guilt and blame can be overwhelming and lead to avoidance strategies.", "target": "The client's sense of identity is closely tied to their actions and perceived responsibilities.", "pair_label": "90", "info": "Guilt and blame reinforce self-identification with negative\nactions.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}]
+        });
+
+        let tooltipCounter = 0;
+
+        cy.on('tap', 'edge', function(evt) {
+            var edge = evt.target;
+            var pos = evt.renderedPosition;
+            var tooltipId = "tooltip-" + (++tooltipCounter);
+
+            var tooltip = document.createElement("div");
+            tooltip.className = "tooltip";
+            tooltip.id = tooltipId;
+            tooltip.style.left = (pos.x + 20) + "px";
+            tooltip.style.top = (pos.y + 20) + "px";
+
+            var closeBtn = document.createElement("span");
+            closeBtn.className = "close-btn";
+            closeBtn.innerHTML = "&times;";
+            closeBtn.onclick = function () {
+                tooltip.remove();
+            };
+
+            tooltip.innerHTML = "";
+            tooltip.appendChild(closeBtn);
+            var content = document.createElement("div");
+            content.innerHTML = edge.data("info");
+            tooltip.appendChild(content);
+
+            document.body.appendChild(tooltip);
+            makeDraggable(tooltip);
+        });
+
+        function makeDraggable(elmnt) {
+            let offset = { x: 0, y: 0 };
+            let isDragging = false;
+
+            elmnt.addEventListener("mousedown", function (e) {
+                if (e.target.classList.contains("close-btn")) return;
+                isDragging = true;
+                offset.x = e.clientX - elmnt.offsetLeft;
+                offset.y = e.clientY - elmnt.offsetTop;
+                elmnt.style.cursor = "move";
+                e.preventDefault();
+            });
+
+            document.addEventListener("mousemove", function (e) {
+                if (isDragging) {
+                    elmnt.style.left = (e.clientX - offset.x) + "px";
+                    elmnt.style.top = (e.clientY - offset.y) + "px";
+                }
+            });
+
+            document.addEventListener("mouseup", function () {
+                isDragging = false;
+                elmnt.style.cursor = "default";
+            });
+        }
+    </script>
+</body>
+</html>
