@@ -9,6 +9,7 @@ This codebase provides the scripts used in the experiments of the 2026 Arxiv pap
 * **Client Psychological Graphs (CPGs):** Structured knowledge graphs encoding relationships among a client's thoughts, emotions, and behaviors, represented as `(process_i, relation, process_j)` triples. CPGs ensure psychological consistency across the generated session.
 * **Client Profile:** Diverse client profiles are generated from CPGs to simulate a wide range of backgrounds, presenting issues, and counseling contexts.
 * **CPG+Profile:** Use both CPG and client profile.
+
 We experiment with the following prompting technques:
 * **Base:** Prompt the LLM to produce the counseling session using the given input.
 * **Guided Counseling (GC):** Extract counselor strategies using [paper](https://arxiv.org/abs/2512.05836) and prompt the LLM to produce the counseling session using the extracted counselor strategies and the given input.
