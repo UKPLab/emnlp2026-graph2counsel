@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Interactive Process Network</title>
+    <script src="https://unpkg.com/cytoscape@3.21.1/dist/cytoscape.min.js"></script>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        #cy {
+            width: 100vw;
+            height: 100vh;
+            display: block;
+        }
+        .legend {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: white;
+            border: 1px solid #ccc;
+            padding: 10px;
+            font-family: sans-serif;
+            font-size: 14px;
+            z-index: 10;
+        }
+        .tooltip {
+            position: absolute;
+            background: #fefefe;
+            border: 1px solid #aaa;
+            padding: 10px;
+            font-family: sans-serif;
+            font-size: 13px;
+            max-width: 300px;
+            z-index: 20;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            cursor: default;
+        }
+        .tooltip .close-btn {
+            float: right;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="cy"></div>
+    <div class="legend">
+        <b>Legend</b><br>
+        <span style="color:#e74c3c;">Red</span>: Inhibitory<br>
+        <span style="color:#3498db;">Blue</span>: Excitatory<br>
+        <hr>
+        <b>Dimensions</b><br>
+        🔵 Cognition<br>
+        🟢 Sense of Self<br>
+        🔴 (Overt) Behaviour<br>
+        🟣 Affect<br>
+        🟠 Context/Moderators<br>
+        🟡 Attention<br>
+        ⚪ Biophysiological<br>
+        🟤 Motivation<br>
+        ⚫ Sociocultural
+    </div>
+    <script>
+        var cy = cytoscape({
+            container: document.getElementById('cy'),
+            layout: { name: 'cose' },
+            style: [
+                {
+                    selector: 'node',
+                    style: {
+                        'shape': 'roundrectangle',
+                        'label': 'data(label)',
+                        'text-wrap': 'wrap',
+                        'text-max-width': 120,
+                        'text-valign': 'center',
+                        'text-halign': 'center',
+                        'background-color': '#ffffff',
+                        'border-color': '#000000',
+                        'border-width': 1,
+                        'color': '#000',
+                        'font-size': 14,
+                        'padding': '20px',
+                        'width': 'label',
+                        'height': 'label'
+                    }
+                },
+                {
+                    selector: 'edge',
+                    style: {
+                        'curve-style': 'bezier',
+                        'target-arrow-shape': 'triangle',
+                        'arrow-scale': 1.2,
+                        'label': '',
+                        'font-size': 9,
+                        'text-rotation': 'autorotate',
+                        'text-margin-y': -10,
+                        'line-color': 'data(color)',
+                        'target-arrow-color': 'data(color)',
+                        'width': 'data(width)',
+                        'line-style': 'data(lineStyle)'
+                    }
+                }
+            ],
+            elements: [{"data": {"id": "Struggling to establish a consistent daily routine due to lack of motivation and procrastination.", "label": "Struggling to establish a consistent daily routine due to lack of motivation and procrastination.\n\ud83d\udd34 \ud83d\udfe1 \u26aa\nw = 60"}}, {"data": {"id": "Difficulty in setting realistic goals and prioritizing tasks effectively.", "label": "Difficulty in setting realistic goals and prioritizing tasks effectively.\n\ud83d\udd34 \ud83d\udfe1 \u26aa\nw = 29"}}, {"data": {"id": "Challenges in maintaining a healthy balance between leisure activities and productive tasks.", "label": "Challenges in maintaining a healthy balance between leisure activities and productive tasks.\n\ud83d\udd34 \ud83d\udfe1 \u26aa\nw = 29"}}, {"data": {"id": "Difficulty in avoiding distractions and staying focused on tasks.", "label": "Difficulty in avoiding distractions and staying focused on tasks.\n\ud83d\udd34 \ud83d\udfe1 \u26aa\nw = 29"}}, {"data": {"id": "Tendency to overcommit and struggle with time management.", "label": "Tendency to overcommit and struggle with time management.\n\ud83d\udd34 \ud83d\udfe1 \u26aa\nw = 29"}}, {"data": {"id": "Importance of developing a system for tracking and organizing tasks and goals.", "label": "Importance of developing a system for tracking and organizing tasks and goals.\n\ud83d\udd34 \ud83d\udfe1 \u26aa\nw = 29"}}, {"data": {"id": "Challenges in managing stress and anxiety related to academic and personal responsibilities.", "label": "Challenges in managing stress and anxiety related to academic and personal responsibilities.\n\ud83d\udd34 \ud83d\udfe1 \u26aa\nw = 29"}}, {"data": {"id": "Struggling to develop a sense of purpose and direction during transitional periods.", "label": "Struggling to develop a sense of purpose and direction during transitional periods.\n\ud83d\udd34 \ud83d\udfe1 \u26aa\nw = 29"}}, {"data": {"id": "Struggling to establish a consistent sleep schedule and morning routine.", "label": "Struggling to establish a consistent sleep schedule and morning routine.\n\ud83d\udd34 \ud83d\udfe1 \u26aa\nw = 29"}}, {"data": {"id": "Importance of self-care and prioritizing physical activity.", "label": "Importance of self-care and prioritizing physical activity.\n\ud83d\udd34 \ud83d\udfe1 \u26aa\nw = 29"}}, {"data": {"id": "Struggling to establish a consistent daily routine due to lack of motivation and procrastination._Difficulty in setting realistic goals and prioritizing tasks effectively._67", "source": "Struggling to establish a consistent daily routine due to lack of motivation and procrastination.", "target": "Difficulty in setting realistic goals and prioritizing tasks effectively.", "pair_label": "67", "info": "Lack of motivation and procrastination can lead to poor goal\nsetting and task prioritization.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggling to establish a consistent daily routine due to lack of motivation and procrastination._Challenges in maintaining a healthy balance between leisure activities and productive tasks._64", "source": "Struggling to establish a consistent daily routine due to lack of motivation and procrastination.", "target": "Challenges in maintaining a healthy balance between leisure activities and productive tasks.", "pair_label": "64", "info": "Lack of motivation and procrastination can lead to poor time\nmanagement.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggling to establish a consistent daily routine due to lack of motivation and procrastination._Difficulty in avoiding distractions and staying focused on tasks._66", "source": "Struggling to establish a consistent daily routine due to lack of motivation and procrastination.", "target": "Difficulty in avoiding distractions and staying focused on tasks.", "pair_label": "66", "info": "Shared underlying issues with self-regulation and executive\nfunctioning.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty in setting realistic goals and prioritizing tasks effectively._Struggling to establish a consistent daily routine due to lack of motivation and procrastination._34", "source": "Difficulty in setting realistic goals and prioritizing tasks effectively.", "target": "Struggling to establish a consistent daily routine due to lack of motivation and procrastination.", "pair_label": "34", "info": "Ineffective goal setting and prioritization can exacerbate\nprocrastination tendencies.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty in setting realistic goals and prioritizing tasks effectively._Tendency to overcommit and struggle with time management._36", "source": "Difficulty in setting realistic goals and prioritizing tasks effectively.", "target": "Tendency to overcommit and struggle with time management.", "pair_label": "36", "info": "Shared underlying issues with task management and planning.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty in setting realistic goals and prioritizing tasks effectively._Importance of developing a system for tracking and organizing tasks and goals._31", "source": "Difficulty in setting realistic goals and prioritizing tasks effectively.", "target": "Importance of developing a system for tracking and organizing tasks and goals.", "pair_label": "31", "info": "Compensatory strategy", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty in setting realistic goals and prioritizing tasks effectively._Challenges in maintaining a healthy balance between leisure activities and productive tasks._28", "source": "Difficulty in setting realistic goals and prioritizing tasks effectively.", "target": "Challenges in maintaining a healthy balance between leisure activities and productive tasks.", "pair_label": "28", "info": "Ineffective goal setting and prioritization can lead to poor\ntime management, exacerbating challenges in balancing\nleisure and productive activities.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty in setting realistic goals and prioritizing tasks effectively._Difficulty in avoiding distractions and staying focused on tasks._30", "source": "Difficulty in setting realistic goals and prioritizing tasks effectively.", "target": "Difficulty in avoiding distractions and staying focused on tasks.", "pair_label": "30", "info": "Shared underlying issues with executive function and self-\nregulation.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty in setting realistic goals and prioritizing tasks effectively._Challenges in managing stress and anxiety related to academic and personal responsibilities._29", "source": "Difficulty in setting realistic goals and prioritizing tasks effectively.", "target": "Challenges in managing stress and anxiety related to academic and personal responsibilities.", "pair_label": "29", "info": "Poor time management fuels stress and anxiety.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty in setting realistic goals and prioritizing tasks effectively._Struggling to develop a sense of purpose and direction during transitional periods._33", "source": "Difficulty in setting realistic goals and prioritizing tasks effectively.", "target": "Struggling to develop a sense of purpose and direction during transitional periods.", "pair_label": "33", "info": "Shared underlying difficulties with self-regulation and\nplanning.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tendency to overcommit and struggle with time management._Struggling to establish a consistent daily routine due to lack of motivation and procrastination._89", "source": "Tendency to overcommit and struggle with time management.", "target": "Struggling to establish a consistent daily routine due to lack of motivation and procrastination.", "pair_label": "89", "info": "Overcommitting leads to chaotic schedules, which in turn can\nfoster procrastination and undermine motivation to establish\nroutines.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tendency to overcommit and struggle with time management._Difficulty in setting realistic goals and prioritizing tasks effectively._85", "source": "Tendency to overcommit and struggle with time management.", "target": "Difficulty in setting realistic goals and prioritizing tasks effectively.", "pair_label": "85", "info": "Overcommitting and poor time management can exacerbate\ndifficulties in setting realistic goals and prioritizing\ntasks effectively.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tendency to overcommit and struggle with time management._Importance of developing a system for tracking and organizing tasks and goals._86", "source": "Tendency to overcommit and struggle with time management.", "target": "Importance of developing a system for tracking and organizing tasks and goals.", "pair_label": "86", "info": "Mitigates overwhelm.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tendency to overcommit and struggle with time management._Challenges in maintaining a healthy balance between leisure activities and productive tasks._82", "source": "Tendency to overcommit and struggle with time management.", "target": "Challenges in maintaining a healthy balance between leisure activities and productive tasks.", "pair_label": "82", "info": "Overcommitting and poor time management can lead to an\nimbalance between leisure and productive activities.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tendency to overcommit and struggle with time management._Struggling to establish a consistent sleep schedule and morning routine._90", "source": "Tendency to overcommit and struggle with time management.", "target": "Struggling to establish a consistent sleep schedule and morning routine.", "pair_label": "90", "info": "Overcommitting leads to irregular sleep patterns.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tendency to overcommit and struggle with time management._Difficulty in avoiding distractions and staying focused on tasks._84", "source": "Tendency to overcommit and struggle with time management.", "target": "Difficulty in avoiding distractions and staying focused on tasks.", "pair_label": "84", "info": "Overcommitting can lead to divided attention and increased\nstress, making it harder to focus on individual tasks.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tendency to overcommit and struggle with time management._Challenges in managing stress and anxiety related to academic and personal responsibilities._83", "source": "Tendency to overcommit and struggle with time management.", "target": "Challenges in managing stress and anxiety related to academic and personal responsibilities.", "pair_label": "83", "info": "Overcommitting exacerbates stress and anxiety.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of developing a system for tracking and organizing tasks and goals._Struggling to establish a consistent daily routine due to lack of motivation and procrastination._43", "source": "Importance of developing a system for tracking and organizing tasks and goals.", "target": "Struggling to establish a consistent daily routine due to lack of motivation and procrastination.", "pair_label": "43", "info": "Developing a task management system can enhance motivation\nby breaking tasks into smaller manageable goals.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of developing a system for tracking and organizing tasks and goals._Difficulty in setting realistic goals and prioritizing tasks effectively._40", "source": "Importance of developing a system for tracking and organizing tasks and goals.", "target": "Difficulty in setting realistic goals and prioritizing tasks effectively.", "pair_label": "40", "info": "Recognizing the importance of task management can mitigate\ndifficulties in goal setting and prioritization.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of developing a system for tracking and organizing tasks and goals._Tendency to overcommit and struggle with time management._45", "source": "Importance of developing a system for tracking and organizing tasks and goals.", "target": "Tendency to overcommit and struggle with time management.", "pair_label": "45", "info": "Mitigates overcommitting.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of developing a system for tracking and organizing tasks and goals._Difficulty in avoiding distractions and staying focused on tasks._39", "source": "Importance of developing a system for tracking and organizing tasks and goals.", "target": "Difficulty in avoiding distractions and staying focused on tasks.", "pair_label": "39", "info": "A system for tracking and organizing tasks and goals can\nhelp mitigate distractions and improve focus.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Challenges in maintaining a healthy balance between leisure activities and productive tasks._Struggling to establish a consistent daily routine due to lack of motivation and procrastination._7", "source": "Challenges in maintaining a healthy balance between leisure activities and productive tasks.", "target": "Struggling to establish a consistent daily routine due to lack of motivation and procrastination.", "pair_label": "7", "info": "Difficulty balancing leisure and productivity can lead to\nprocrastination and hinder routine establishment.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Challenges in maintaining a healthy balance between leisure activities and productive tasks._Difficulty in setting realistic goals and prioritizing tasks effectively._3", "source": "Challenges in maintaining a healthy balance between leisure activities and productive tasks.", "target": "Difficulty in setting realistic goals and prioritizing tasks effectively.", "pair_label": "3", "info": "Inability to balance leisure and work leads to poor goal\nsetting and prioritization.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Challenges in maintaining a healthy balance between leisure activities and productive tasks._Tendency to overcommit and struggle with time management._9", "source": "Challenges in maintaining a healthy balance between leisure activities and productive tasks.", "target": "Tendency to overcommit and struggle with time management.", "pair_label": "9", "info": "Overcommitting exacerbates imbalance.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Challenges in maintaining a healthy balance between leisure activities and productive tasks._Importance of developing a system for tracking and organizing tasks and goals._4", "source": "Challenges in maintaining a healthy balance between leisure activities and productive tasks.", "target": "Importance of developing a system for tracking and organizing tasks and goals.", "pair_label": "4", "info": "Developing a system for tracking and organizing tasks and\ngoals can help alleviate challenges in maintaining a healthy\nbalance between leisure activities and productive tasks.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Challenges in maintaining a healthy balance between leisure activities and productive tasks._Difficulty in avoiding distractions and staying focused on tasks._2", "source": "Challenges in maintaining a healthy balance between leisure activities and productive tasks.", "target": "Difficulty in avoiding distractions and staying focused on tasks.", "pair_label": "2", "info": "Leisure activities can serve as distractions.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Challenges in maintaining a healthy balance between leisure activities and productive tasks._Challenges in managing stress and anxiety related to academic and personal responsibilities._1", "source": "Challenges in maintaining a healthy balance between leisure activities and productive tasks.", "target": "Challenges in managing stress and anxiety related to academic and personal responsibilities.", "pair_label": "1", "info": "Poor time management and imbalance can exacerbate stress and\nanxiety.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggling to establish a consistent sleep schedule and morning routine._Struggling to establish a consistent daily routine due to lack of motivation and procrastination._80", "source": "Struggling to establish a consistent sleep schedule and morning routine.", "target": "Struggling to establish a consistent daily routine due to lack of motivation and procrastination.", "pair_label": "80", "info": "A consistent sleep schedule and morning routine often sets\nthe foundation for daily routines.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty in avoiding distractions and staying focused on tasks._Struggling to establish a consistent daily routine due to lack of motivation and procrastination._25", "source": "Difficulty in avoiding distractions and staying focused on tasks.", "target": "Struggling to establish a consistent daily routine due to lack of motivation and procrastination.", "pair_label": "25", "info": "Difficulty in staying focused amplifies procrastination.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty in avoiding distractions and staying focused on tasks._Difficulty in setting realistic goals and prioritizing tasks effectively._21", "source": "Difficulty in avoiding distractions and staying focused on tasks.", "target": "Difficulty in setting realistic goals and prioritizing tasks effectively.", "pair_label": "21", "info": "Shared underlying issues with executive function and self-\nregulation.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty in avoiding distractions and staying focused on tasks._Importance of developing a system for tracking and organizing tasks and goals._22", "source": "Difficulty in avoiding distractions and staying focused on tasks.", "target": "Importance of developing a system for tracking and organizing tasks and goals.", "pair_label": "22", "info": "Systematization aids focus.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty in avoiding distractions and staying focused on tasks._Challenges in maintaining a healthy balance between leisure activities and productive tasks._19", "source": "Difficulty in avoiding distractions and staying focused on tasks.", "target": "Challenges in maintaining a healthy balance between leisure activities and productive tasks.", "pair_label": "19", "info": "Increased difficulty in staying focused can lead to poor\ntime management and an imbalance between leisure and\nproductive activities.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of self-care and prioritizing physical activity._Challenges in managing stress and anxiety related to academic and personal responsibilities._47", "source": "Importance of self-care and prioritizing physical activity.", "target": "Challenges in managing stress and anxiety related to academic and personal responsibilities.", "pair_label": "47", "info": "Regular physical activity reduces stress and anxiety.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Challenges in managing stress and anxiety related to academic and personal responsibilities._Struggling to establish a consistent daily routine due to lack of motivation and procrastination._16", "source": "Challenges in managing stress and anxiety related to academic and personal responsibilities.", "target": "Struggling to establish a consistent daily routine due to lack of motivation and procrastination.", "pair_label": "16", "info": "Stress and anxiety can exacerbate procrastination and lack\nof motivation, making it harder to establish a daily\nroutine.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Challenges in managing stress and anxiety related to academic and personal responsibilities._Difficulty in setting realistic goals and prioritizing tasks effectively._12", "source": "Challenges in managing stress and anxiety related to academic and personal responsibilities.", "target": "Difficulty in setting realistic goals and prioritizing tasks effectively.", "pair_label": "12", "info": "Increased stress and anxiety can impair cognitive functions\nsuch as planning and decision-making, leading to\ndifficulties in setting realistic goals and prioritizing\ntasks effectively.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Challenges in managing stress and anxiety related to academic and personal responsibilities._Tendency to overcommit and struggle with time management._18", "source": "Challenges in managing stress and anxiety related to academic and personal responsibilities.", "target": "Tendency to overcommit and struggle with time management.", "pair_label": "18", "info": "Overcommitting exacerbates stress and anxiety.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Challenges in managing stress and anxiety related to academic and personal responsibilities._Importance of developing a system for tracking and organizing tasks and goals._13", "source": "Challenges in managing stress and anxiety related to academic and personal responsibilities.", "target": "Importance of developing a system for tracking and organizing tasks and goals.", "pair_label": "13", "info": "Effective task management can reduce stress and anxiety.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Challenges in managing stress and anxiety related to academic and personal responsibilities._Importance of self-care and prioritizing physical activity._14", "source": "Challenges in managing stress and anxiety related to academic and personal responsibilities.", "target": "Importance of self-care and prioritizing physical activity.", "pair_label": "14", "info": "Engaging in self-care and physical activity can help\nalleviate stress and anxiety.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggling to develop a sense of purpose and direction during transitional periods._Struggling to establish a consistent daily routine due to lack of motivation and procrastination._61", "source": "Struggling to develop a sense of purpose and direction during transitional periods.", "target": "Struggling to establish a consistent daily routine due to lack of motivation and procrastination.", "pair_label": "61", "info": "Lack of direction can lead to procrastination and\ninconsistent routines.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggling to develop a sense of purpose and direction during transitional periods._Difficulty in setting realistic goals and prioritizing tasks effectively._58", "source": "Struggling to develop a sense of purpose and direction during transitional periods.", "target": "Difficulty in setting realistic goals and prioritizing tasks effectively.", "pair_label": "58", "info": "Unclear life purpose hinders goal setting and task\nprioritization.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggling to develop a sense of purpose and direction during transitional periods._Importance of developing a system for tracking and organizing tasks and goals._59", "source": "Struggling to develop a sense of purpose and direction during transitional periods.", "target": "Importance of developing a system for tracking and organizing tasks and goals.", "pair_label": "59", "info": "Having a system for tracking and organizing tasks and goals\ncan help alleviate struggles in developing a sense of\npurpose and direction.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggling to establish a consistent daily routine due to lack of motivation and procrastination._Importance of developing a system for tracking and organizing tasks and goals._68", "source": "Struggling to establish a consistent daily routine due to lack of motivation and procrastination.", "target": "Importance of developing a system for tracking and organizing tasks and goals.", "pair_label": "68", "info": "Establishing a routine is facilitated by tracking and\norganizing tasks and goals.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}]
+        });
+
+        let tooltipCounter = 0;
+
+        cy.on('tap', 'edge', function(evt) {
+            var edge = evt.target;
+            var pos = evt.renderedPosition;
+            var tooltipId = "tooltip-" + (++tooltipCounter);
+
+            var tooltip = document.createElement("div");
+            tooltip.className = "tooltip";
+            tooltip.id = tooltipId;
+            tooltip.style.left = (pos.x + 20) + "px";
+            tooltip.style.top = (pos.y + 20) + "px";
+
+            var closeBtn = document.createElement("span");
+            closeBtn.className = "close-btn";
+            closeBtn.innerHTML = "&times;";
+            closeBtn.onclick = function () {
+                tooltip.remove();
+            };
+
+            tooltip.innerHTML = "";
+            tooltip.appendChild(closeBtn);
+            var content = document.createElement("div");
+            content.innerHTML = edge.data("info");
+            tooltip.appendChild(content);
+
+            document.body.appendChild(tooltip);
+            makeDraggable(tooltip);
+        });
+
+        function makeDraggable(elmnt) {
+            let offset = { x: 0, y: 0 };
+            let isDragging = false;
+
+            elmnt.addEventListener("mousedown", function (e) {
+                if (e.target.classList.contains("close-btn")) return;
+                isDragging = true;
+                offset.x = e.clientX - elmnt.offsetLeft;
+                offset.y = e.clientY - elmnt.offsetTop;
+                elmnt.style.cursor = "move";
+                e.preventDefault();
+            });
+
+            document.addEventListener("mousemove", function (e) {
+                if (isDragging) {
+                    elmnt.style.left = (e.clientX - offset.x) + "px";
+                    elmnt.style.top = (e.clientY - offset.y) + "px";
+                }
+            });
+
+            document.addEventListener("mouseup", function () {
+                isDragging = false;
+                elmnt.style.cursor = "default";
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Interactive Process Network</title>
+    <script src="https://unpkg.com/cytoscape@3.21.1/dist/cytoscape.min.js"></script>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        #cy {
+            width: 100vw;
+            height: 100vh;
+            display: block;
+        }
+        .legend {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: white;
+            border: 1px solid #ccc;
+            padding: 10px;
+            font-family: sans-serif;
+            font-size: 14px;
+            z-index: 10;
+        }
+        .tooltip {
+            position: absolute;
+            background: #fefefe;
+            border: 1px solid #aaa;
+            padding: 10px;
+            font-family: sans-serif;
+            font-size: 13px;
+            max-width: 300px;
+            z-index: 20;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            cursor: default;
+        }
+        .tooltip .close-btn {
+            float: right;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="cy"></div>
+    <div class="legend">
+        <b>Legend</b><br>
+        <span style="color:#e74c3c;">Red</span>: Inhibitory<br>
+        <span style="color:#3498db;">Blue</span>: Excitatory<br>
+        <hr>
+        <b>Dimensions</b><br>
+        🔵 Cognition<br>
+        🟢 Sense of Self<br>
+        🔴 (Overt) Behaviour<br>
+        🟣 Affect<br>
+        🟠 Context/Moderators<br>
+        🟡 Attention<br>
+        ⚪ Biophysiological<br>
+        🟤 Motivation<br>
+        ⚫ Sociocultural
+    </div>
+    <script>
+        var cy = cytoscape({
+            container: document.getElementById('cy'),
+            layout: { name: 'cose' },
+            style: [
+                {
+                    selector: 'node',
+                    style: {
+                        'shape': 'roundrectangle',
+                        'label': 'data(label)',
+                        'text-wrap': 'wrap',
+                        'text-max-width': 120,
+                        'text-valign': 'center',
+                        'text-halign': 'center',
+                        'background-color': '#ffffff',
+                        'border-color': '#000000',
+                        'border-width': 1,
+                        'color': '#000',
+                        'font-size': 14,
+                        'padding': '20px',
+                        'width': 'label',
+                        'height': 'label'
+                    }
+                },
+                {
+                    selector: 'edge',
+                    style: {
+                        'curve-style': 'bezier',
+                        'target-arrow-shape': 'triangle',
+                        'arrow-scale': 1.2,
+                        'label': '',
+                        'font-size': 9,
+                        'text-rotation': 'autorotate',
+                        'text-margin-y': -10,
+                        'line-color': 'data(color)',
+                        'target-arrow-color': 'data(color)',
+                        'width': 'data(width)',
+                        'line-style': 'data(lineStyle)'
+                    }
+                }
+            ],
+            elements: [{"data": {"id": "Tension between self-regulation and emotional reactivity in social interactions", "label": "Tension between self-regulation and emotional reactivity in social interactions\n\ud83d\udd34 \u26aa \ud83d\udd35\nw = 11"}}, {"data": {"id": "Difficulty with emotional intimacy due to past trauma", "label": "Difficulty with emotional intimacy due to past trauma\n\ud83d\udd34 \u26aa \ud83d\udd35\nw = 5"}}, {"data": {"id": "Struggle to maintain boundaries with others while still being open and vulnerable", "label": "Struggle to maintain boundaries with others while still being open and vulnerable\n\ud83d\udd34 \ud83d\udd35 \ud83d\udfe0\nw = 5"}}, {"data": {"id": "Importance of self-compassion in managing stress and negative emotions", "label": "Importance of self-compassion in managing stress and negative emotions\n\ud83d\udd35 \ud83d\udfe0 \ud83d\udfe4\nw = 5"}}, {"data": {"id": "Impact of past experiences on current relationships and behaviors", "label": "Impact of past experiences on current relationships and behaviors\n\ud83d\udd34 \ud83d\udd35 \ud83d\udfe0\nw = 4"}}, {"data": {"id": "Importance of mindfulness and self-awareness in managing emotions and behaviors", "label": "Importance of mindfulness and self-awareness in managing emotions and behaviors\n\ud83d\udd35 \ud83d\udfe0 \ud83d\udfe4\nw = 5"}}, {"data": {"id": "Difficulty with assertiveness and expressing needs in relationships", "label": "Difficulty with assertiveness and expressing needs in relationships\n\ud83d\udd34 \ud83d\udd35 \ud83d\udfe0\nw = 5"}}, {"data": {"id": "Sense of identity tied to coping mechanisms for dealing with uncertainty", "label": "Sense of identity tied to coping mechanisms for dealing with uncertainty\n\ud83d\udd34 \ud83d\udd35 \ud83d\udfe0\nw = 4"}}, {"data": {"id": "Tendency to people-please and seek validation from others", "label": "Tendency to people-please and seek validation from others\n\ud83d\udd34 \ud83d\udd35 \ud83d\udfe0\nw = 5"}}, {"data": {"id": "Tension between self-regulation and emotional reactivity in social interactions_Difficulty with emotional intimacy due to past trauma_84", "source": "Tension between self-regulation and emotional reactivity in social interactions", "target": "Difficulty with emotional intimacy due to past trauma", "pair_label": "84", "info": "Past trauma heightens emotional reactivity, making self-\nregulation more challenging in social interactions, thereby\nexacerbating difficulties with emotional intimacy.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between self-regulation and emotional reactivity in social interactions_Struggle to maintain boundaries with others while still being open and vulnerable_89", "source": "Tension between self-regulation and emotional reactivity in social interactions", "target": "Struggle to maintain boundaries with others while still being open and vulnerable", "pair_label": "89", "info": "Tension in social interactions can limit openness and\nvulnerability, making it harder to maintain healthy\nboundaries.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between self-regulation and emotional reactivity in social interactions_Importance of self-compassion in managing stress and negative emotions_87", "source": "Tension between self-regulation and emotional reactivity in social interactions", "target": "Importance of self-compassion in managing stress and negative emotions", "pair_label": "87", "info": "Self-compassion enhances self-regulation.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between self-regulation and emotional reactivity in social interactions_Impact of past experiences on current relationships and behaviors_85", "source": "Tension between self-regulation and emotional reactivity in social interactions", "target": "Impact of past experiences on current relationships and behaviors", "pair_label": "85", "info": "Past experiences shape self-regulation strategies and\nemotional reactivity in social interactions.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between self-regulation and emotional reactivity in social interactions_Importance of mindfulness and self-awareness in managing emotions and behaviors_86", "source": "Tension between self-regulation and emotional reactivity in social interactions", "target": "Importance of mindfulness and self-awareness in managing emotions and behaviors", "pair_label": "86", "info": "Mutual reinforcement in emotional regulation.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty with emotional intimacy due to past trauma_Tension between self-regulation and emotional reactivity in social interactions_27", "source": "Difficulty with emotional intimacy due to past trauma", "target": "Tension between self-regulation and emotional reactivity in social interactions", "pair_label": "27", "info": "Trauma-induced intimacy issues may heighten reactivity.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty with emotional intimacy due to past trauma_Struggle to maintain boundaries with others while still being open and vulnerable_25", "source": "Difficulty with emotional intimacy due to past trauma", "target": "Struggle to maintain boundaries with others while still being open and vulnerable", "pair_label": "25", "info": "Trauma can lead to difficulty in setting and maintaining\nhealthy emotional boundaries.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty with emotional intimacy due to past trauma_Importance of self-compassion in managing stress and negative emotions_23", "source": "Difficulty with emotional intimacy due to past trauma", "target": "Importance of self-compassion in managing stress and negative emotions", "pair_label": "23", "info": "Healing past trauma through self-compassion", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty with emotional intimacy due to past trauma_Impact of past experiences on current relationships and behaviors_21", "source": "Difficulty with emotional intimacy due to past trauma", "target": "Impact of past experiences on current relationships and behaviors", "pair_label": "21", "info": "Past trauma directly influences current relationship\ndynamics.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty with emotional intimacy due to past trauma_Difficulty with assertiveness and expressing needs in relationships_20", "source": "Difficulty with emotional intimacy due to past trauma", "target": "Difficulty with assertiveness and expressing needs in relationships", "pair_label": "20", "info": "Past trauma can lead to fear of rejection or abandonment,\ncausing individuals to struggle with expressing their needs\nand asserting themselves in relationships.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty with emotional intimacy due to past trauma_Importance of mindfulness and self-awareness in managing emotions and behaviors_22", "source": "Difficulty with emotional intimacy due to past trauma", "target": "Importance of mindfulness and self-awareness in managing emotions and behaviors", "pair_label": "22", "info": "Trauma may trigger increased emotional awareness.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Sense of identity tied to coping mechanisms for dealing with uncertainty_Importance of self-compassion in managing stress and negative emotions_60", "source": "Sense of identity tied to coping mechanisms for dealing with uncertainty", "target": "Importance of self-compassion in managing stress and negative emotions", "pair_label": "60", "info": "Coping with uncertainty via self-compassion", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Sense of identity tied to coping mechanisms for dealing with uncertainty_Impact of past experiences on current relationships and behaviors_58", "source": "Sense of identity tied to coping mechanisms for dealing with uncertainty", "target": "Impact of past experiences on current relationships and behaviors", "pair_label": "58", "info": "Past experiences shape coping mechanisms.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Sense of identity tied to coping mechanisms for dealing with uncertainty_Importance of mindfulness and self-awareness in managing emotions and behaviors_59", "source": "Sense of identity tied to coping mechanisms for dealing with uncertainty", "target": "Importance of mindfulness and self-awareness in managing emotions and behaviors", "pair_label": "59", "info": "Identity influences self-awareness", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggle to maintain boundaries with others while still being open and vulnerable_Tension between self-regulation and emotional reactivity in social interactions_72", "source": "Struggle to maintain boundaries with others while still being open and vulnerable", "target": "Tension between self-regulation and emotional reactivity in social interactions", "pair_label": "72", "info": "Difficulty in setting boundaries can amplify emotional\nreactivity in social situations.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggle to maintain boundaries with others while still being open and vulnerable_Difficulty with emotional intimacy due to past trauma_66", "source": "Struggle to maintain boundaries with others while still being open and vulnerable", "target": "Difficulty with emotional intimacy due to past trauma", "pair_label": "66", "info": "Past trauma can lead to difficulties in setting healthy\nboundaries.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggle to maintain boundaries with others while still being open and vulnerable_Impact of past experiences on current relationships and behaviors_67", "source": "Struggle to maintain boundaries with others while still being open and vulnerable", "target": "Impact of past experiences on current relationships and behaviors", "pair_label": "67", "info": "Past experiences shape boundary-setting behaviors.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggle to maintain boundaries with others while still being open and vulnerable_Tendency to people-please and seek validation from others_71", "source": "Struggle to maintain boundaries with others while still being open and vulnerable", "target": "Tendency to people-please and seek validation from others", "pair_label": "71", "info": "Lack of boundaries facilitates people-pleasing.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggle to maintain boundaries with others while still being open and vulnerable_Difficulty with assertiveness and expressing needs in relationships_65", "source": "Struggle to maintain boundaries with others while still being open and vulnerable", "target": "Difficulty with assertiveness and expressing needs in relationships", "pair_label": "65", "info": "Interconnected challenges in setting limits and expressing\nneeds.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggle to maintain boundaries with others while still being open and vulnerable_Importance of mindfulness and self-awareness in managing emotions and behaviors_68", "source": "Struggle to maintain boundaries with others while still being open and vulnerable", "target": "Importance of mindfulness and self-awareness in managing emotions and behaviors", "pair_label": "68", "info": "Mindfulness and self-awareness are crucial for recognizing\nand maintaining healthy boundaries.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of self-compassion in managing stress and negative emotions_Tension between self-regulation and emotional reactivity in social interactions_54", "source": "Importance of self-compassion in managing stress and negative emotions", "target": "Tension between self-regulation and emotional reactivity in social interactions", "pair_label": "54", "info": "Self-compassion can reduce emotional reactivity.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of self-compassion in managing stress and negative emotions_Difficulty with emotional intimacy due to past trauma_48", "source": "Importance of self-compassion in managing stress and negative emotions", "target": "Difficulty with emotional intimacy due to past trauma", "pair_label": "48", "info": "Self-compassion helps mitigate the impact of trauma on\nemotional intimacy.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of self-compassion in managing stress and negative emotions_Sense of identity tied to coping mechanisms for dealing with uncertainty_51", "source": "Importance of self-compassion in managing stress and negative emotions", "target": "Sense of identity tied to coping mechanisms for dealing with uncertainty", "pair_label": "51", "info": "Self-compassion influences identity formation through\nadaptive coping.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of self-compassion in managing stress and negative emotions_Importance of mindfulness and self-awareness in managing emotions and behaviors_50", "source": "Importance of self-compassion in managing stress and negative emotions", "target": "Importance of mindfulness and self-awareness in managing emotions and behaviors", "pair_label": "50", "info": "Mutually reinforcing", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Impact of past experiences on current relationships and behaviors_Difficulty with emotional intimacy due to past trauma_30", "source": "Impact of past experiences on current relationships and behaviors", "target": "Difficulty with emotional intimacy due to past trauma", "pair_label": "30", "info": "Past experiences shape attachment styles and emotional\nregulation, influencing intimacy.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Impact of past experiences on current relationships and behaviors_Sense of identity tied to coping mechanisms for dealing with uncertainty_33", "source": "Impact of past experiences on current relationships and behaviors", "target": "Sense of identity tied to coping mechanisms for dealing with uncertainty", "pair_label": "33", "info": "Past experiences shape coping mechanisms, which in turn\ninfluence sense of identity.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Impact of past experiences on current relationships and behaviors_Struggle to maintain boundaries with others while still being open and vulnerable_34", "source": "Impact of past experiences on current relationships and behaviors", "target": "Struggle to maintain boundaries with others while still being open and vulnerable", "pair_label": "34", "info": "Past experiences inform current boundary setting.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Impact of past experiences on current relationships and behaviors_Difficulty with assertiveness and expressing needs in relationships_29", "source": "Impact of past experiences on current relationships and behaviors", "target": "Difficulty with assertiveness and expressing needs in relationships", "pair_label": "29", "info": "Past experiences shape current relationship dynamics and\nbehaviors, including assertiveness and expression of needs.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Impact of past experiences on current relationships and behaviors_Importance of mindfulness and self-awareness in managing emotions and behaviors_31", "source": "Impact of past experiences on current relationships and behaviors", "target": "Importance of mindfulness and self-awareness in managing emotions and behaviors", "pair_label": "31", "info": "Past experiences inform self-awareness, enhancing\nmindfulness.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tendency to people-please and seek validation from others_Tension between self-regulation and emotional reactivity in social interactions_81", "source": "Tendency to people-please and seek validation from others", "target": "Tension between self-regulation and emotional reactivity in social interactions", "pair_label": "81", "info": "Amplifies emotional reactivity", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tendency to people-please and seek validation from others_Struggle to maintain boundaries with others while still being open and vulnerable_80", "source": "Tendency to people-please and seek validation from others", "target": "Struggle to maintain boundaries with others while still being open and vulnerable", "pair_label": "80", "info": "People-pleasing can lead to overcommitting and difficulty\nsetting limits.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tendency to people-please and seek validation from others_Difficulty with assertiveness and expressing needs in relationships_74", "source": "Tendency to people-please and seek validation from others", "target": "Difficulty with assertiveness and expressing needs in relationships", "pair_label": "74", "info": "People-pleasing reinforces avoidance of assertive behavior.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty with assertiveness and expressing needs in relationships_Tension between self-regulation and emotional reactivity in social interactions_18", "source": "Difficulty with assertiveness and expressing needs in relationships", "target": "Tension between self-regulation and emotional reactivity in social interactions", "pair_label": "18", "info": "Assertiveness difficulties can heighten emotional\nreactivity.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty with assertiveness and expressing needs in relationships_Difficulty with emotional intimacy due to past trauma_11", "source": "Difficulty with assertiveness and expressing needs in relationships", "target": "Difficulty with emotional intimacy due to past trauma", "pair_label": "11", "info": "Past trauma may have led to the development of assertiveness\nissues, which in turn can hinder emotional intimacy.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty with assertiveness and expressing needs in relationships_Struggle to maintain boundaries with others while still being open and vulnerable_16", "source": "Difficulty with assertiveness and expressing needs in relationships", "target": "Struggle to maintain boundaries with others while still being open and vulnerable", "pair_label": "16", "info": "Linked through self-expression and interpersonal dynamics.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty with assertiveness and expressing needs in relationships_Importance of self-compassion in managing stress and negative emotions_14", "source": "Difficulty with assertiveness and expressing needs in relationships", "target": "Importance of self-compassion in managing stress and negative emotions", "pair_label": "14", "info": "Assertiveness and self-compassion are interlinked as\nassertive expression of needs can foster self-compassion by\npromoting self-care and self-worth.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty with assertiveness and expressing needs in relationships_Impact of past experiences on current relationships and behaviors_12", "source": "Difficulty with assertiveness and expressing needs in relationships", "target": "Impact of past experiences on current relationships and behaviors", "pair_label": "12", "info": "Past experiences shape assertiveness", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty with assertiveness and expressing needs in relationships_Tendency to people-please and seek validation from others_17", "source": "Difficulty with assertiveness and expressing needs in relationships", "target": "Tendency to people-please and seek validation from others", "pair_label": "17", "info": "Compensatory behavior", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of mindfulness and self-awareness in managing emotions and behaviors_Tension between self-regulation and emotional reactivity in social interactions_45", "source": "Importance of mindfulness and self-awareness in managing emotions and behaviors", "target": "Tension between self-regulation and emotional reactivity in social interactions", "pair_label": "45", "info": "Mindfulness and self-awareness can reduce tension between\nself-regulation and emotional reactivity.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of mindfulness and self-awareness in managing emotions and behaviors_Sense of identity tied to coping mechanisms for dealing with uncertainty_42", "source": "Importance of mindfulness and self-awareness in managing emotions and behaviors", "target": "Sense of identity tied to coping mechanisms for dealing with uncertainty", "pair_label": "42", "info": "Self-awareness informs identity.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of mindfulness and self-awareness in managing emotions and behaviors_Importance of self-compassion in managing stress and negative emotions_41", "source": "Importance of mindfulness and self-awareness in managing emotions and behaviors", "target": "Importance of self-compassion in managing stress and negative emotions", "pair_label": "41", "info": "Mutually reinforcing", "color": "#3498db", "width": 4, "lineStyle": "solid"}}]
+        });
+
+        let tooltipCounter = 0;
+
+        cy.on('tap', 'edge', function(evt) {
+            var edge = evt.target;
+            var pos = evt.renderedPosition;
+            var tooltipId = "tooltip-" + (++tooltipCounter);
+
+            var tooltip = document.createElement("div");
+            tooltip.className = "tooltip";
+            tooltip.id = tooltipId;
+            tooltip.style.left = (pos.x + 20) + "px";
+            tooltip.style.top = (pos.y + 20) + "px";
+
+            var closeBtn = document.createElement("span");
+            closeBtn.className = "close-btn";
+            closeBtn.innerHTML = "&times;";
+            closeBtn.onclick = function () {
+                tooltip.remove();
+            };
+
+            tooltip.innerHTML = "";
+            tooltip.appendChild(closeBtn);
+            var content = document.createElement("div");
+            content.innerHTML = edge.data("info");
+            tooltip.appendChild(content);
+
+            document.body.appendChild(tooltip);
+            makeDraggable(tooltip);
+        });
+
+        function makeDraggable(elmnt) {
+            let offset = { x: 0, y: 0 };
+            let isDragging = false;
+
+            elmnt.addEventListener("mousedown", function (e) {
+                if (e.target.classList.contains("close-btn")) return;
+                isDragging = true;
+                offset.x = e.clientX - elmnt.offsetLeft;
+                offset.y = e.clientY - elmnt.offsetTop;
+                elmnt.style.cursor = "move";
+                e.preventDefault();
+            });
+
+            document.addEventListener("mousemove", function (e) {
+                if (isDragging) {
+                    elmnt.style.left = (e.clientX - offset.x) + "px";
+                    elmnt.style.top = (e.clientY - offset.y) + "px";
+                }
+            });
+
+            document.addEventListener("mouseup", function () {
+                isDragging = false;
+                elmnt.style.cursor = "default";
+            });
+        }
+    </script>
+</body>
+</html>

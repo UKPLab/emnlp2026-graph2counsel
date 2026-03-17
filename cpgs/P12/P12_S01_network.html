@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Interactive Process Network</title>
+    <script src="https://unpkg.com/cytoscape@3.21.1/dist/cytoscape.min.js"></script>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        #cy {
+            width: 100vw;
+            height: 100vh;
+            display: block;
+        }
+        .legend {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: white;
+            border: 1px solid #ccc;
+            padding: 10px;
+            font-family: sans-serif;
+            font-size: 14px;
+            z-index: 10;
+        }
+        .tooltip {
+            position: absolute;
+            background: #fefefe;
+            border: 1px solid #aaa;
+            padding: 10px;
+            font-family: sans-serif;
+            font-size: 13px;
+            max-width: 300px;
+            z-index: 20;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            cursor: default;
+        }
+        .tooltip .close-btn {
+            float: right;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="cy"></div>
+    <div class="legend">
+        <b>Legend</b><br>
+        <span style="color:#e74c3c;">Red</span>: Inhibitory<br>
+        <span style="color:#3498db;">Blue</span>: Excitatory<br>
+        <hr>
+        <b>Dimensions</b><br>
+        🔵 Cognition<br>
+        🟢 Sense of Self<br>
+        🔴 (Overt) Behaviour<br>
+        🟣 Affect<br>
+        🟠 Context/Moderators<br>
+        🟡 Attention<br>
+        ⚪ Biophysiological<br>
+        🟤 Motivation<br>
+        ⚫ Sociocultural
+    </div>
+    <script>
+        var cy = cytoscape({
+            container: document.getElementById('cy'),
+            layout: { name: 'cose' },
+            style: [
+                {
+                    selector: 'node',
+                    style: {
+                        'shape': 'roundrectangle',
+                        'label': 'data(label)',
+                        'text-wrap': 'wrap',
+                        'text-max-width': 120,
+                        'text-valign': 'center',
+                        'text-halign': 'center',
+                        'background-color': '#ffffff',
+                        'border-color': '#000000',
+                        'border-width': 1,
+                        'color': '#000',
+                        'font-size': 14,
+                        'padding': '20px',
+                        'width': 'label',
+                        'height': 'label'
+                    }
+                },
+                {
+                    selector: 'edge',
+                    style: {
+                        'curve-style': 'bezier',
+                        'target-arrow-shape': 'triangle',
+                        'arrow-scale': 1.2,
+                        'label': '',
+                        'font-size': 9,
+                        'text-rotation': 'autorotate',
+                        'text-margin-y': -10,
+                        'line-color': 'data(color)',
+                        'target-arrow-color': 'data(color)',
+                        'width': 'data(width)',
+                        'line-style': 'data(lineStyle)'
+                    }
+                }
+            ],
+            elements: [{"data": {"id": "Struggling to initiate tasks due to fear of not meeting expectations", "label": "Struggling to initiate tasks due to fear of not meeting expectations\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 31"}}, {"data": {"id": "Tendency to procrastinate and prioritize short-term avoidance over long-term goals", "label": "Tendency to procrastinate and prioritize short-term avoidance over long-term goals\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 31"}}, {"data": {"id": "Self-criticism and guilt related to perceived lack of productivity", "label": "Self-criticism and guilt related to perceived lack of productivity\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 31"}}, {"data": {"id": "Tension between creative aspirations and self-doubt", "label": "Tension between creative aspirations and self-doubt\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 31"}}, {"data": {"id": "Sense of disconnection from others due to feelings of shame and inadequacy", "label": "Sense of disconnection from others due to feelings of shame and inadequacy\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 31"}}, {"data": {"id": "Difficulty with self-regulation of attention and focus", "label": "Difficulty with self-regulation of attention and focus\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 31"}}, {"data": {"id": "Impact of past trauma on current cognitive and emotional functioning", "label": "Impact of past trauma on current cognitive and emotional functioning\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 31"}}, {"data": {"id": "Desire for external validation and support to overcome internal struggles", "label": "Desire for external validation and support to overcome internal struggles\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 31"}}, {"data": {"id": "Difficulty with emotional regulation and mood management", "label": "Difficulty with emotional regulation and mood management\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 31"}}, {"data": {"id": "Avoidance of emotional intimacy due to fear of rejection or abandonment", "label": "Avoidance of emotional intimacy due to fear of rejection or abandonment\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 31"}}, {"data": {"id": "Struggling to initiate tasks due to fear of not meeting expectations_Tendency to procrastinate and prioritize short-term avoidance over long-term goals_71", "source": "Struggling to initiate tasks due to fear of not meeting expectations", "target": "Tendency to procrastinate and prioritize short-term avoidance over long-term goals", "pair_label": "71", "info": "Fear of not meeting expectations fuels avoidance behaviors.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggling to initiate tasks due to fear of not meeting expectations_Self-criticism and guilt related to perceived lack of productivity_69", "source": "Struggling to initiate tasks due to fear of not meeting expectations", "target": "Self-criticism and guilt related to perceived lack of productivity", "pair_label": "69", "info": "Fear of not meeting expectations fuels self-criticism.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggling to initiate tasks due to fear of not meeting expectations_Tension between creative aspirations and self-doubt_72", "source": "Struggling to initiate tasks due to fear of not meeting expectations", "target": "Tension between creative aspirations and self-doubt", "pair_label": "72", "info": "Fears of not meeting expectations can fuel self-doubt.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggling to initiate tasks due to fear of not meeting expectations_Sense of disconnection from others due to feelings of shame and inadequacy_70", "source": "Struggling to initiate tasks due to fear of not meeting expectations", "target": "Sense of disconnection from others due to feelings of shame and inadequacy", "pair_label": "70", "info": "Fear of not meeting expectations can lead to feelings of\ninadequacy, which in turn can cause individuals to withdraw\nsocially, leading to a sense of disconnection from others.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty with self-regulation of attention and focus_Tendency to procrastinate and prioritize short-term avoidance over long-term goals_35", "source": "Difficulty with self-regulation of attention and focus", "target": "Tendency to procrastinate and prioritize short-term avoidance over long-term goals", "pair_label": "35", "info": "Impaired focus leads to avoidance.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty with self-regulation of attention and focus_Impact of past trauma on current cognitive and emotional functioning_31", "source": "Difficulty with self-regulation of attention and focus", "target": "Impact of past trauma on current cognitive and emotional functioning", "pair_label": "31", "info": "Trauma can disrupt attentional control.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tendency to procrastinate and prioritize short-term avoidance over long-term goals_Struggling to initiate tasks due to fear of not meeting expectations_80", "source": "Tendency to procrastinate and prioritize short-term avoidance over long-term goals", "target": "Struggling to initiate tasks due to fear of not meeting expectations", "pair_label": "80", "info": "Procrastination can exacerbate fear of not meeting\nexpectations.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tendency to procrastinate and prioritize short-term avoidance over long-term goals_Difficulty with self-regulation of attention and focus_76", "source": "Tendency to procrastinate and prioritize short-term avoidance over long-term goals", "target": "Difficulty with self-regulation of attention and focus", "pair_label": "76", "info": "Procrastination often involves difficulty in focusing on\ntasks due to short-term avoidance strategies.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tendency to procrastinate and prioritize short-term avoidance over long-term goals_Self-criticism and guilt related to perceived lack of productivity_78", "source": "Tendency to procrastinate and prioritize short-term avoidance over long-term goals", "target": "Self-criticism and guilt related to perceived lack of productivity", "pair_label": "78", "info": "Procrastination often leads to self-criticism and guilt due\nto unmet expectations and perceived lack of productivity.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Self-criticism and guilt related to perceived lack of productivity_Struggling to initiate tasks due to fear of not meeting expectations_52", "source": "Self-criticism and guilt related to perceived lack of productivity", "target": "Struggling to initiate tasks due to fear of not meeting expectations", "pair_label": "52", "info": "Reinforcing cycle of negative self-talk and fear of failure.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Self-criticism and guilt related to perceived lack of productivity_Tendency to procrastinate and prioritize short-term avoidance over long-term goals_53", "source": "Self-criticism and guilt related to perceived lack of productivity", "target": "Tendency to procrastinate and prioritize short-term avoidance over long-term goals", "pair_label": "53", "info": "Self-criticism fuels avoidance.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Self-criticism and guilt related to perceived lack of productivity_Desire for external validation and support to overcome internal struggles_47", "source": "Self-criticism and guilt related to perceived lack of productivity", "target": "Desire for external validation and support to overcome internal struggles", "pair_label": "47", "info": "Self-doubt fuels seeking validation.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Self-criticism and guilt related to perceived lack of productivity_Difficulty with emotional regulation and mood management_48", "source": "Self-criticism and guilt related to perceived lack of productivity", "target": "Difficulty with emotional regulation and mood management", "pair_label": "48", "info": "Increases stress and emotional intensity", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Self-criticism and guilt related to perceived lack of productivity_Sense of disconnection from others due to feelings of shame and inadequacy_51", "source": "Self-criticism and guilt related to perceived lack of productivity", "target": "Sense of disconnection from others due to feelings of shame and inadequacy", "pair_label": "51", "info": "Self-criticism and guilt can intensify feelings of shame and\ninadequacy, leading to increased disconnection from others.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Impact of past trauma on current cognitive and emotional functioning_Struggling to initiate tasks due to fear of not meeting expectations_43", "source": "Impact of past trauma on current cognitive and emotional functioning", "target": "Struggling to initiate tasks due to fear of not meeting expectations", "pair_label": "43", "info": "Past trauma can create heightened self-criticism and fear of\nfailure, leading to increased anxiety about meeting\nexpectations.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Impact of past trauma on current cognitive and emotional functioning_Difficulty with self-regulation of attention and focus_40", "source": "Impact of past trauma on current cognitive and emotional functioning", "target": "Difficulty with self-regulation of attention and focus", "pair_label": "40", "info": "Trauma can disrupt normal cognitive and emotional processes,\nleading to difficulties in self-regulation.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Impact of past trauma on current cognitive and emotional functioning_Self-criticism and guilt related to perceived lack of productivity_41", "source": "Impact of past trauma on current cognitive and emotional functioning", "target": "Self-criticism and guilt related to perceived lack of productivity", "pair_label": "41", "info": "Past trauma can lead to negative self-talk and self-blame,\nexacerbating self-criticism and guilt.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Impact of past trauma on current cognitive and emotional functioning_Desire for external validation and support to overcome internal struggles_38", "source": "Impact of past trauma on current cognitive and emotional functioning", "target": "Desire for external validation and support to overcome internal struggles", "pair_label": "38", "info": "Past trauma can intensify the desire for external validation\nto compensate for feelings of inadequacy and low self-worth.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Impact of past trauma on current cognitive and emotional functioning_Avoidance of emotional intimacy due to fear of rejection or abandonment_37", "source": "Impact of past trauma on current cognitive and emotional functioning", "target": "Avoidance of emotional intimacy due to fear of rejection or abandonment", "pair_label": "37", "info": "Past trauma can intensify fear of rejection or abandonment,\nleading to avoidance of emotional intimacy.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Impact of past trauma on current cognitive and emotional functioning_Difficulty with emotional regulation and mood management_39", "source": "Impact of past trauma on current cognitive and emotional functioning", "target": "Difficulty with emotional regulation and mood management", "pair_label": "39", "info": "Trauma can disrupt emotional processing, leading to\ndifficulties in regulation and mood management.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Impact of past trauma on current cognitive and emotional functioning_Sense of disconnection from others due to feelings of shame and inadequacy_42", "source": "Impact of past trauma on current cognitive and emotional functioning", "target": "Sense of disconnection from others due to feelings of shame and inadequacy", "pair_label": "42", "info": "Trauma can lead to shame and inadequacy, causing\ndisconnection.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Desire for external validation and support to overcome internal struggles_Struggling to initiate tasks due to fear of not meeting expectations_16", "source": "Desire for external validation and support to overcome internal struggles", "target": "Struggling to initiate tasks due to fear of not meeting expectations", "pair_label": "16", "info": "Fear of not meeting expectations can amplify the need for\nexternal validation.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Desire for external validation and support to overcome internal struggles_Tendency to procrastinate and prioritize short-term avoidance over long-term goals_17", "source": "Desire for external validation and support to overcome internal struggles", "target": "Tendency to procrastinate and prioritize short-term avoidance over long-term goals", "pair_label": "17", "info": "Seeking external validation can distract from internal\nstruggles, leading to procrastination.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Desire for external validation and support to overcome internal struggles_Tension between creative aspirations and self-doubt_18", "source": "Desire for external validation and support to overcome internal struggles", "target": "Tension between creative aspirations and self-doubt", "pair_label": "18", "info": "Validation sought to alleviate self-doubt", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Desire for external validation and support to overcome internal struggles_Difficulty with emotional regulation and mood management_11", "source": "Desire for external validation and support to overcome internal struggles", "target": "Difficulty with emotional regulation and mood management", "pair_label": "11", "info": "External validation can temporarily alleviate emotional\ndistress, but may hinder development of internal regulation\nskills.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Desire for external validation and support to overcome internal struggles_Sense of disconnection from others due to feelings of shame and inadequacy_15", "source": "Desire for external validation and support to overcome internal struggles", "target": "Sense of disconnection from others due to feelings of shame and inadequacy", "pair_label": "15", "info": "Seeking external validation can exacerbate feelings of\ndisconnection due to shame and inadequacy.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between creative aspirations and self-doubt_Struggling to initiate tasks due to fear of not meeting expectations_89", "source": "Tension between creative aspirations and self-doubt", "target": "Struggling to initiate tasks due to fear of not meeting expectations", "pair_label": "89", "info": "Self-doubt fuels fear of not meeting expectations.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between creative aspirations and self-doubt_Tendency to procrastinate and prioritize short-term avoidance over long-term goals_90", "source": "Tension between creative aspirations and self-doubt", "target": "Tendency to procrastinate and prioritize short-term avoidance over long-term goals", "pair_label": "90", "info": "Self-doubt fuels avoidance.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between creative aspirations and self-doubt_Self-criticism and guilt related to perceived lack of productivity_87", "source": "Tension between creative aspirations and self-doubt", "target": "Self-criticism and guilt related to perceived lack of productivity", "pair_label": "87", "info": "Self-doubt fuels self-criticism.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between creative aspirations and self-doubt_Desire for external validation and support to overcome internal struggles_83", "source": "Tension between creative aspirations and self-doubt", "target": "Desire for external validation and support to overcome internal struggles", "pair_label": "83", "info": "Enhances motivation to seek validation.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Avoidance of emotional intimacy due to fear of rejection or abandonment_Impact of past trauma on current cognitive and emotional functioning_4", "source": "Avoidance of emotional intimacy due to fear of rejection or abandonment", "target": "Impact of past trauma on current cognitive and emotional functioning", "pair_label": "4", "info": "Past trauma can intensify fear of rejection.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Avoidance of emotional intimacy due to fear of rejection or abandonment_Difficulty with emotional regulation and mood management_2", "source": "Avoidance of emotional intimacy due to fear of rejection or abandonment", "target": "Difficulty with emotional regulation and mood management", "pair_label": "2", "info": "Avoiding emotional intimacy can lead to unprocessed\nemotions, exacerbating difficulties with emotional\nregulation and mood management.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Avoidance of emotional intimacy due to fear of rejection or abandonment_Sense of disconnection from others due to feelings of shame and inadequacy_6", "source": "Avoidance of emotional intimacy due to fear of rejection or abandonment", "target": "Sense of disconnection from others due to feelings of shame and inadequacy", "pair_label": "6", "info": "Fear of rejection and abandonment can lead to avoidance of\nemotional intimacy, which in turn can exacerbate feelings of\nshame and inadequacy, resulting in a sense of disconnection\nfrom others.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty with emotional regulation and mood management_Tendency to procrastinate and prioritize short-term avoidance over long-term goals_26", "source": "Difficulty with emotional regulation and mood management", "target": "Tendency to procrastinate and prioritize short-term avoidance over long-term goals", "pair_label": "26", "info": "Avoidance of emotional discomfort.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty with emotional regulation and mood management_Self-criticism and guilt related to perceived lack of productivity_23", "source": "Difficulty with emotional regulation and mood management", "target": "Self-criticism and guilt related to perceived lack of productivity", "pair_label": "23", "info": "Emotional dysregulation can intensify self-criticism.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty with emotional regulation and mood management_Impact of past trauma on current cognitive and emotional functioning_22", "source": "Difficulty with emotional regulation and mood management", "target": "Impact of past trauma on current cognitive and emotional functioning", "pair_label": "22", "info": "Past trauma can exacerbate emotional dysregulation.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty with emotional regulation and mood management_Desire for external validation and support to overcome internal struggles_20", "source": "Difficulty with emotional regulation and mood management", "target": "Desire for external validation and support to overcome internal struggles", "pair_label": "20", "info": "Seeking external validation can be a coping mechanism for\nemotional dysregulation.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty with emotional regulation and mood management_Avoidance of emotional intimacy due to fear of rejection or abandonment_19", "source": "Difficulty with emotional regulation and mood management", "target": "Avoidance of emotional intimacy due to fear of rejection or abandonment", "pair_label": "19", "info": "Emotional dysregulation can heighten fear and vulnerability.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty with emotional regulation and mood management_Sense of disconnection from others due to feelings of shame and inadequacy_24", "source": "Difficulty with emotional regulation and mood management", "target": "Sense of disconnection from others due to feelings of shame and inadequacy", "pair_label": "24", "info": "Emotional dysregulation fuels feelings of shame and\ninadequacy, leading to disconnection.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Sense of disconnection from others due to feelings of shame and inadequacy_Struggling to initiate tasks due to fear of not meeting expectations_61", "source": "Sense of disconnection from others due to feelings of shame and inadequacy", "target": "Struggling to initiate tasks due to fear of not meeting expectations", "pair_label": "61", "info": "Shame and inadequacy can amplify fear of not meeting\nexpectations.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Sense of disconnection from others due to feelings of shame and inadequacy_Tendency to procrastinate and prioritize short-term avoidance over long-term goals_62", "source": "Sense of disconnection from others due to feelings of shame and inadequacy", "target": "Tendency to procrastinate and prioritize short-term avoidance over long-term goals", "pair_label": "62", "info": "Avoidance of social interactions and long-term goals is a\ncoping mechanism for feelings of shame and inadequacy.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Sense of disconnection from others due to feelings of shame and inadequacy_Self-criticism and guilt related to perceived lack of productivity_60", "source": "Sense of disconnection from others due to feelings of shame and inadequacy", "target": "Self-criticism and guilt related to perceived lack of productivity", "pair_label": "60", "info": "Self-perceived inadequacy fuels further self-criticism.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Sense of disconnection from others due to feelings of shame and inadequacy_Impact of past trauma on current cognitive and emotional functioning_59", "source": "Sense of disconnection from others due to feelings of shame and inadequacy", "target": "Impact of past trauma on current cognitive and emotional functioning", "pair_label": "59", "info": "Trauma can exacerbate shame and inadequacy, leading to\ndisconnection.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Sense of disconnection from others due to feelings of shame and inadequacy_Desire for external validation and support to overcome internal struggles_56", "source": "Sense of disconnection from others due to feelings of shame and inadequacy", "target": "Desire for external validation and support to overcome internal struggles", "pair_label": "56", "info": "Compensatory seeking of validation", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Sense of disconnection from others due to feelings of shame and inadequacy_Avoidance of emotional intimacy due to fear of rejection or abandonment_55", "source": "Sense of disconnection from others due to feelings of shame and inadequacy", "target": "Avoidance of emotional intimacy due to fear of rejection or abandonment", "pair_label": "55", "info": "Shame and inadequacy fuel fear of rejection, driving\navoidance.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Sense of disconnection from others due to feelings of shame and inadequacy_Difficulty with emotional regulation and mood management_57", "source": "Sense of disconnection from others due to feelings of shame and inadequacy", "target": "Difficulty with emotional regulation and mood management", "pair_label": "57", "info": "Shame and inadequacy can intensify emotional dysregulation.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}]
+        });
+
+        let tooltipCounter = 0;
+
+        cy.on('tap', 'edge', function(evt) {
+            var edge = evt.target;
+            var pos = evt.renderedPosition;
+            var tooltipId = "tooltip-" + (++tooltipCounter);
+
+            var tooltip = document.createElement("div");
+            tooltip.className = "tooltip";
+            tooltip.id = tooltipId;
+            tooltip.style.left = (pos.x + 20) + "px";
+            tooltip.style.top = (pos.y + 20) + "px";
+
+            var closeBtn = document.createElement("span");
+            closeBtn.className = "close-btn";
+            closeBtn.innerHTML = "&times;";
+            closeBtn.onclick = function () {
+                tooltip.remove();
+            };
+
+            tooltip.innerHTML = "";
+            tooltip.appendChild(closeBtn);
+            var content = document.createElement("div");
+            content.innerHTML = edge.data("info");
+            tooltip.appendChild(content);
+
+            document.body.appendChild(tooltip);
+            makeDraggable(tooltip);
+        });
+
+        function makeDraggable(elmnt) {
+            let offset = { x: 0, y: 0 };
+            let isDragging = false;
+
+            elmnt.addEventListener("mousedown", function (e) {
+                if (e.target.classList.contains("close-btn")) return;
+                isDragging = true;
+                offset.x = e.clientX - elmnt.offsetLeft;
+                offset.y = e.clientY - elmnt.offsetTop;
+                elmnt.style.cursor = "move";
+                e.preventDefault();
+            });
+
+            document.addEventListener("mousemove", function (e) {
+                if (isDragging) {
+                    elmnt.style.left = (e.clientX - offset.x) + "px";
+                    elmnt.style.top = (e.clientY - offset.y) + "px";
+                }
+            });
+
+            document.addEventListener("mouseup", function () {
+                isDragging = false;
+                elmnt.style.cursor = "default";
+            });
+        }
+    </script>
+</body>
+</html>

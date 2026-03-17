@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Interactive Process Network</title>
+    <script src="https://unpkg.com/cytoscape@3.21.1/dist/cytoscape.min.js"></script>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        #cy {
+            width: 100vw;
+            height: 100vh;
+            display: block;
+        }
+        .legend {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: white;
+            border: 1px solid #ccc;
+            padding: 10px;
+            font-family: sans-serif;
+            font-size: 14px;
+            z-index: 10;
+        }
+        .tooltip {
+            position: absolute;
+            background: #fefefe;
+            border: 1px solid #aaa;
+            padding: 10px;
+            font-family: sans-serif;
+            font-size: 13px;
+            max-width: 300px;
+            z-index: 20;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            cursor: default;
+        }
+        .tooltip .close-btn {
+            float: right;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="cy"></div>
+    <div class="legend">
+        <b>Legend</b><br>
+        <span style="color:#e74c3c;">Red</span>: Inhibitory<br>
+        <span style="color:#3498db;">Blue</span>: Excitatory<br>
+        <hr>
+        <b>Dimensions</b><br>
+        🔵 Cognition<br>
+        🟢 Sense of Self<br>
+        🔴 (Overt) Behaviour<br>
+        🟣 Affect<br>
+        🟠 Context/Moderators<br>
+        🟡 Attention<br>
+        ⚪ Biophysiological<br>
+        🟤 Motivation<br>
+        ⚫ Sociocultural
+    </div>
+    <script>
+        var cy = cytoscape({
+            container: document.getElementById('cy'),
+            layout: { name: 'cose' },
+            style: [
+                {
+                    selector: 'node',
+                    style: {
+                        'shape': 'roundrectangle',
+                        'label': 'data(label)',
+                        'text-wrap': 'wrap',
+                        'text-max-width': 120,
+                        'text-valign': 'center',
+                        'text-halign': 'center',
+                        'background-color': '#ffffff',
+                        'border-color': '#000000',
+                        'border-width': 1,
+                        'color': '#000',
+                        'font-size': 14,
+                        'padding': '20px',
+                        'width': 'label',
+                        'height': 'label'
+                    }
+                },
+                {
+                    selector: 'edge',
+                    style: {
+                        'curve-style': 'bezier',
+                        'target-arrow-shape': 'triangle',
+                        'arrow-scale': 1.2,
+                        'label': '',
+                        'font-size': 9,
+                        'text-rotation': 'autorotate',
+                        'text-margin-y': -10,
+                        'line-color': 'data(color)',
+                        'target-arrow-color': 'data(color)',
+                        'width': 'data(width)',
+                        'line-style': 'data(lineStyle)'
+                    }
+                }
+            ],
+            elements: [{"data": {"id": "Tension between desire for independence and family obligations", "label": "Tension between desire for independence and family obligations\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udd35\nw = 10"}}, {"data": {"id": "Importance of family relationships and legacy in career choices", "label": "Importance of family relationships and legacy in career choices\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udd35\nw = 13"}}, {"data": {"id": "Conflict between personal happiness and family expectations", "label": "Conflict between personal happiness and family expectations\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udd35\nw = 9"}}, {"data": {"id": "Sense of responsibility to support family members", "label": "Sense of responsibility to support family members\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udd35\nw = 13"}}, {"data": {"id": "Importance of autonomy and freedom in career choices", "label": "Importance of autonomy and freedom in career choices\n\ud83d\udd34 \ud83d\udd35 \ud83d\udfe0\nw = 8"}}, {"data": {"id": "Difficulty in balancing personal and family values", "label": "Difficulty in balancing personal and family values\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udd35\nw = 9"}}, {"data": {"id": "Self-worth tied to educational and career achievements", "label": "Self-worth tied to educational and career achievements\n\ud83d\udd34 \ud83d\udd35 \ud83d\udfe0\nw = 11"}}, {"data": {"id": "Fear of being stuck in a dead-end job without opportunities for growth", "label": "Fear of being stuck in a dead-end job without opportunities for growth\n\ud83d\udd34 \ud83d\udd35 \ud83d\udfe0\nw = 5"}}, {"data": {"id": "Drive for self-improvement and personal growth", "label": "Drive for self-improvement and personal growth\n\ud83d\udd34 \ud83d\udd35 \ud83d\udfe0\nw = 11"}}, {"data": {"id": "Anxiety about future career prospects and financial security", "label": "Anxiety about future career prospects and financial security\n\ud83d\udd34 \ud83d\udd35 \ud83d\udfe0\nw = 8"}}, {"data": {"id": "Tension between desire for independence and family obligations_Importance of family relationships and legacy in career choices_88", "source": "Tension between desire for independence and family obligations", "target": "Importance of family relationships and legacy in career choices", "pair_label": "88", "info": "Mutual influence on personal values and life goals.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between desire for independence and family obligations_Conflict between personal happiness and family expectations_83", "source": "Tension between desire for independence and family obligations", "target": "Conflict between personal happiness and family expectations", "pair_label": "83", "info": "Shared underlying values and expectations.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between desire for independence and family obligations_Sense of responsibility to support family members_90", "source": "Tension between desire for independence and family obligations", "target": "Sense of responsibility to support family members", "pair_label": "90", "info": "Increases sense of duty", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between desire for independence and family obligations_Importance of autonomy and freedom in career choices_87", "source": "Tension between desire for independence and family obligations", "target": "Importance of autonomy and freedom in career choices", "pair_label": "87", "info": "Reinforces desire for autonomy", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between desire for independence and family obligations_Difficulty in balancing personal and family values_84", "source": "Tension between desire for independence and family obligations", "target": "Difficulty in balancing personal and family values", "pair_label": "84", "info": "Conflicting desires amplify value conflicts.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Self-worth tied to educational and career achievements_Fear of being stuck in a dead-end job without opportunities for growth_68", "source": "Self-worth tied to educational and career achievements", "target": "Fear of being stuck in a dead-end job without opportunities for growth", "pair_label": "68", "info": "Linked through self-worth validation.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Self-worth tied to educational and career achievements_Drive for self-improvement and personal growth_67", "source": "Self-worth tied to educational and career achievements", "target": "Drive for self-improvement and personal growth", "pair_label": "67", "info": "Reinforcing pursuits.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Self-worth tied to educational and career achievements_Anxiety about future career prospects and financial security_64", "source": "Self-worth tied to educational and career achievements", "target": "Anxiety about future career prospects and financial security", "pair_label": "64", "info": "High expectations and pressure to succeed can fuel anxiety.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Self-worth tied to educational and career achievements_Importance of autonomy and freedom in career choices_69", "source": "Self-worth tied to educational and career achievements", "target": "Importance of autonomy and freedom in career choices", "pair_label": "69", "info": "Autonomy supports self-worth.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Self-worth tied to educational and career achievements_Difficulty in balancing personal and family values_66", "source": "Self-worth tied to educational and career achievements", "target": "Difficulty in balancing personal and family values", "pair_label": "66", "info": "Increases conflict.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Fear of being stuck in a dead-end job without opportunities for growth_Self-worth tied to educational and career achievements_43", "source": "Fear of being stuck in a dead-end job without opportunities for growth", "target": "Self-worth tied to educational and career achievements", "pair_label": "43", "info": "Fear reinforces negative self-image.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Fear of being stuck in a dead-end job without opportunities for growth_Drive for self-improvement and personal growth_40", "source": "Fear of being stuck in a dead-end job without opportunities for growth", "target": "Drive for self-improvement and personal growth", "pair_label": "40", "info": "Motivates escape from stagnation.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Fear of being stuck in a dead-end job without opportunities for growth_Sense of responsibility to support family members_44", "source": "Fear of being stuck in a dead-end job without opportunities for growth", "target": "Sense of responsibility to support family members", "pair_label": "44", "info": "Fear of being stuck may be suppressed by sense of\nresponsibility to support family members.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Fear of being stuck in a dead-end job without opportunities for growth_Anxiety about future career prospects and financial security_37", "source": "Fear of being stuck in a dead-end job without opportunities for growth", "target": "Anxiety about future career prospects and financial security", "pair_label": "37", "info": "Fear fuels anxiety.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Fear of being stuck in a dead-end job without opportunities for growth_Importance of autonomy and freedom in career choices_41", "source": "Fear of being stuck in a dead-end job without opportunities for growth", "target": "Importance of autonomy and freedom in career choices", "pair_label": "41", "info": "Desire for autonomy fuels fear of stagnation.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of family relationships and legacy in career choices_Tension between desire for independence and family obligations_63", "source": "Importance of family relationships and legacy in career choices", "target": "Tension between desire for independence and family obligations", "pair_label": "63", "info": "Conflicting desires", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of family relationships and legacy in career choices_Conflict between personal happiness and family expectations_56", "source": "Importance of family relationships and legacy in career choices", "target": "Conflict between personal happiness and family expectations", "pair_label": "56", "info": "Family expectations can amplify conflict.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of family relationships and legacy in career choices_Sense of responsibility to support family members_62", "source": "Importance of family relationships and legacy in career choices", "target": "Sense of responsibility to support family members", "pair_label": "62", "info": "Family legacy motivates support", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Conflict between personal happiness and family expectations_Tension between desire for independence and family obligations_18", "source": "Conflict between personal happiness and family expectations", "target": "Tension between desire for independence and family obligations", "pair_label": "18", "info": "Mutually reinforcing desires", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Conflict between personal happiness and family expectations_Importance of family relationships and legacy in career choices_15", "source": "Conflict between personal happiness and family expectations", "target": "Importance of family relationships and legacy in career choices", "pair_label": "15", "info": "Family expectations influencing personal happiness can\namplify the importance of family relationships and legacy in\ncareer choices.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Conflict between personal happiness and family expectations_Sense of responsibility to support family members_17", "source": "Conflict between personal happiness and family expectations", "target": "Sense of responsibility to support family members", "pair_label": "17", "info": "Increases sense of duty", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Conflict between personal happiness and family expectations_Importance of autonomy and freedom in career choices_14", "source": "Conflict between personal happiness and family expectations", "target": "Importance of autonomy and freedom in career choices", "pair_label": "14", "info": "Pursuing autonomy and freedom in career choices can amplify\nthe conflict between personal happiness and family\nexpectations.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Conflict between personal happiness and family expectations_Difficulty in balancing personal and family values_11", "source": "Conflict between personal happiness and family expectations", "target": "Difficulty in balancing personal and family values", "pair_label": "11", "info": "Interconnected values and happiness", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Drive for self-improvement and personal growth_Self-worth tied to educational and career achievements_34", "source": "Drive for self-improvement and personal growth", "target": "Self-worth tied to educational and career achievements", "pair_label": "34", "info": "Shared pursuit of excellence fuels both processes", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Drive for self-improvement and personal growth_Fear of being stuck in a dead-end job without opportunities for growth_31", "source": "Drive for self-improvement and personal growth", "target": "Fear of being stuck in a dead-end job without opportunities for growth", "pair_label": "31", "info": "Mutual reinforcement of motivation and anxiety", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Drive for self-improvement and personal growth_Importance of autonomy and freedom in career choices_32", "source": "Drive for self-improvement and personal growth", "target": "Importance of autonomy and freedom in career choices", "pair_label": "32", "info": "Autonomy supports exploration and fulfillment.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Sense of responsibility to support family members_Tension between desire for independence and family obligations_81", "source": "Sense of responsibility to support family members", "target": "Tension between desire for independence and family obligations", "pair_label": "81", "info": "Increases inner conflict", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Sense of responsibility to support family members_Fear of being stuck in a dead-end job without opportunities for growth_77", "source": "Sense of responsibility to support family members", "target": "Fear of being stuck in a dead-end job without opportunities for growth", "pair_label": "77", "info": "Increases anxiety about job security.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Sense of responsibility to support family members_Importance of family relationships and legacy in career choices_79", "source": "Sense of responsibility to support family members", "target": "Importance of family relationships and legacy in career choices", "pair_label": "79", "info": "Motivation amplifies prioritization", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Sense of responsibility to support family members_Conflict between personal happiness and family expectations_74", "source": "Sense of responsibility to support family members", "target": "Conflict between personal happiness and family expectations", "pair_label": "74", "info": "Amplifies inner conflict", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Sense of responsibility to support family members_Anxiety about future career prospects and financial security_73", "source": "Sense of responsibility to support family members", "target": "Anxiety about future career prospects and financial security", "pair_label": "73", "info": "Increased sense of responsibility amplifies anxiety about\nfuture career prospects and financial security.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Anxiety about future career prospects and financial security_Self-worth tied to educational and career achievements_7", "source": "Anxiety about future career prospects and financial security", "target": "Self-worth tied to educational and career achievements", "pair_label": "7", "info": "Increases self-doubt.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Anxiety about future career prospects and financial security_Fear of being stuck in a dead-end job without opportunities for growth_4", "source": "Anxiety about future career prospects and financial security", "target": "Fear of being stuck in a dead-end job without opportunities for growth", "pair_label": "4", "info": "Anxiety about future career prospects fuels fear of being\nstuck.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Anxiety about future career prospects and financial security_Sense of responsibility to support family members_8", "source": "Anxiety about future career prospects and financial security", "target": "Sense of responsibility to support family members", "pair_label": "8", "info": "Increased anxiety about career prospects can amplify the\nsense of responsibility to support family members.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of autonomy and freedom in career choices_Tension between desire for independence and family obligations_54", "source": "Importance of autonomy and freedom in career choices", "target": "Tension between desire for independence and family obligations", "pair_label": "54", "info": "Conflicting values and responsibilities.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of autonomy and freedom in career choices_Self-worth tied to educational and career achievements_52", "source": "Importance of autonomy and freedom in career choices", "target": "Self-worth tied to educational and career achievements", "pair_label": "52", "info": "Autonomy and self-worth are intertwined.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of autonomy and freedom in career choices_Fear of being stuck in a dead-end job without opportunities for growth_50", "source": "Importance of autonomy and freedom in career choices", "target": "Fear of being stuck in a dead-end job without opportunities for growth", "pair_label": "50", "info": "Autonomy and freedom in career choices can amplify fear of\nbeing stuck in a dead-end job.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of autonomy and freedom in career choices_Drive for self-improvement and personal growth_49", "source": "Importance of autonomy and freedom in career choices", "target": "Drive for self-improvement and personal growth", "pair_label": "49", "info": "Autonomy fosters growth", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty in balancing personal and family values_Tension between desire for independence and family obligations_27", "source": "Difficulty in balancing personal and family values", "target": "Tension between desire for independence and family obligations", "pair_label": "27", "info": "Values conflict", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty in balancing personal and family values_Importance of family relationships and legacy in career choices_24", "source": "Difficulty in balancing personal and family values", "target": "Importance of family relationships and legacy in career choices", "pair_label": "24", "info": "Values influence priorities.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty in balancing personal and family values_Conflict between personal happiness and family expectations_20", "source": "Difficulty in balancing personal and family values", "target": "Conflict between personal happiness and family expectations", "pair_label": "20", "info": "Shared underlying values conflict", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty in balancing personal and family values_Sense of responsibility to support family members_26", "source": "Difficulty in balancing personal and family values", "target": "Sense of responsibility to support family members", "pair_label": "26", "info": "Increased sense of responsibility to support family members\ncan amplify the difficulty in balancing personal and family\nvalues.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}]
+        });
+
+        let tooltipCounter = 0;
+
+        cy.on('tap', 'edge', function(evt) {
+            var edge = evt.target;
+            var pos = evt.renderedPosition;
+            var tooltipId = "tooltip-" + (++tooltipCounter);
+
+            var tooltip = document.createElement("div");
+            tooltip.className = "tooltip";
+            tooltip.id = tooltipId;
+            tooltip.style.left = (pos.x + 20) + "px";
+            tooltip.style.top = (pos.y + 20) + "px";
+
+            var closeBtn = document.createElement("span");
+            closeBtn.className = "close-btn";
+            closeBtn.innerHTML = "&times;";
+            closeBtn.onclick = function () {
+                tooltip.remove();
+            };
+
+            tooltip.innerHTML = "";
+            tooltip.appendChild(closeBtn);
+            var content = document.createElement("div");
+            content.innerHTML = edge.data("info");
+            tooltip.appendChild(content);
+
+            document.body.appendChild(tooltip);
+            makeDraggable(tooltip);
+        });
+
+        function makeDraggable(elmnt) {
+            let offset = { x: 0, y: 0 };
+            let isDragging = false;
+
+            elmnt.addEventListener("mousedown", function (e) {
+                if (e.target.classList.contains("close-btn")) return;
+                isDragging = true;
+                offset.x = e.clientX - elmnt.offsetLeft;
+                offset.y = e.clientY - elmnt.offsetTop;
+                elmnt.style.cursor = "move";
+                e.preventDefault();
+            });
+
+            document.addEventListener("mousemove", function (e) {
+                if (isDragging) {
+                    elmnt.style.left = (e.clientX - offset.x) + "px";
+                    elmnt.style.top = (e.clientY - offset.y) + "px";
+                }
+            });
+
+            document.addEventListener("mouseup", function () {
+                isDragging = false;
+                elmnt.style.cursor = "default";
+            });
+        }
+    </script>
+</body>
+</html>

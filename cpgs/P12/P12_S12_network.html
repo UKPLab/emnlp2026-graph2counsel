@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Interactive Process Network</title>
+    <script src="https://unpkg.com/cytoscape@3.21.1/dist/cytoscape.min.js"></script>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        #cy {
+            width: 100vw;
+            height: 100vh;
+            display: block;
+        }
+        .legend {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: white;
+            border: 1px solid #ccc;
+            padding: 10px;
+            font-family: sans-serif;
+            font-size: 14px;
+            z-index: 10;
+        }
+        .tooltip {
+            position: absolute;
+            background: #fefefe;
+            border: 1px solid #aaa;
+            padding: 10px;
+            font-family: sans-serif;
+            font-size: 13px;
+            max-width: 300px;
+            z-index: 20;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            cursor: default;
+        }
+        .tooltip .close-btn {
+            float: right;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="cy"></div>
+    <div class="legend">
+        <b>Legend</b><br>
+        <span style="color:#e74c3c;">Red</span>: Inhibitory<br>
+        <span style="color:#3498db;">Blue</span>: Excitatory<br>
+        <hr>
+        <b>Dimensions</b><br>
+        🔵 Cognition<br>
+        🟢 Sense of Self<br>
+        🔴 (Overt) Behaviour<br>
+        🟣 Affect<br>
+        🟠 Context/Moderators<br>
+        🟡 Attention<br>
+        ⚪ Biophysiological<br>
+        🟤 Motivation<br>
+        ⚫ Sociocultural
+    </div>
+    <script>
+        var cy = cytoscape({
+            container: document.getElementById('cy'),
+            layout: { name: 'cose' },
+            style: [
+                {
+                    selector: 'node',
+                    style: {
+                        'shape': 'roundrectangle',
+                        'label': 'data(label)',
+                        'text-wrap': 'wrap',
+                        'text-max-width': 120,
+                        'text-valign': 'center',
+                        'text-halign': 'center',
+                        'background-color': '#ffffff',
+                        'border-color': '#000000',
+                        'border-width': 1,
+                        'color': '#000',
+                        'font-size': 14,
+                        'padding': '20px',
+                        'width': 'label',
+                        'height': 'label'
+                    }
+                },
+                {
+                    selector: 'edge',
+                    style: {
+                        'curve-style': 'bezier',
+                        'target-arrow-shape': 'triangle',
+                        'arrow-scale': 1.2,
+                        'label': '',
+                        'font-size': 9,
+                        'text-rotation': 'autorotate',
+                        'text-margin-y': -10,
+                        'line-color': 'data(color)',
+                        'target-arrow-color': 'data(color)',
+                        'width': 'data(width)',
+                        'line-style': 'data(lineStyle)'
+                    }
+                }
+            ],
+            elements: [{"data": {"id": "Tension between self-expectations and perceived expectations of others", "label": "Tension between self-expectations and perceived expectations of others\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 52"}}, {"data": {"id": "Self-worth struggles with feelings of inadequacy and perfectionism", "label": "Self-worth struggles with feelings of inadequacy and perfectionism\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 52"}}, {"data": {"id": "Coping mechanisms for dealing with stress and anxiety", "label": "Coping mechanisms for dealing with stress and anxiety\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 52"}}, {"data": {"id": "Importance of setting boundaries for emotional and physical well-being", "label": "Importance of setting boundaries for emotional and physical well-being\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 52"}}, {"data": {"id": "Fear of not meeting expectations and fear of failure", "label": "Fear of not meeting expectations and fear of failure\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 52"}}, {"data": {"id": "Importance of self-compassion and understanding in personal growth", "label": "Importance of self-compassion and understanding in personal growth\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 52"}}, {"data": {"id": "Navigating complex emotions and conflicting values", "label": "Navigating complex emotions and conflicting values\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 52"}}, {"data": {"id": "Impact of past experiences on current relationships and behaviors", "label": "Impact of past experiences on current relationships and behaviors\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 52"}}, {"data": {"id": "Difficulty in acknowledging and expressing emotions due to past experiences", "label": "Difficulty in acknowledging and expressing emotions due to past experiences\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 52"}}, {"data": {"id": "Struggle to balance self-care with responsibilities and obligations", "label": "Struggle to balance self-care with responsibilities and obligations\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 52"}}, {"data": {"id": "Tension between self-expectations and perceived expectations of others_Self-worth struggles with feelings of inadequacy and perfectionism_89", "source": "Tension between self-expectations and perceived expectations of others", "target": "Self-worth struggles with feelings of inadequacy and perfectionism", "pair_label": "89", "info": "Reinforces self-doubt.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between self-expectations and perceived expectations of others_Coping mechanisms for dealing with stress and anxiety_82", "source": "Tension between self-expectations and perceived expectations of others", "target": "Coping mechanisms for dealing with stress and anxiety", "pair_label": "82", "info": "Tension triggers coping response", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between self-expectations and perceived expectations of others_Importance of setting boundaries for emotional and physical well-being_87", "source": "Tension between self-expectations and perceived expectations of others", "target": "Importance of setting boundaries for emotional and physical well-being", "pair_label": "87", "info": "Recognizing the tension between self-expectations and\nothers' expectations can motivate setting boundaries.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between self-expectations and perceived expectations of others_Fear of not meeting expectations and fear of failure_84", "source": "Tension between self-expectations and perceived expectations of others", "target": "Fear of not meeting expectations and fear of failure", "pair_label": "84", "info": "Heightened anxiety and self-doubt.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between self-expectations and perceived expectations of others_Importance of self-compassion and understanding in personal growth_86", "source": "Tension between self-expectations and perceived expectations of others", "target": "Importance of self-compassion and understanding in personal growth", "pair_label": "86", "info": "Mitigates Inner Conflict", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between self-expectations and perceived expectations of others_Navigating complex emotions and conflicting values_88", "source": "Tension between self-expectations and perceived expectations of others", "target": "Navigating complex emotions and conflicting values", "pair_label": "88", "info": "Heightened emotional conflict.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Self-worth struggles with feelings of inadequacy and perfectionism_Tension between self-expectations and perceived expectations of others_72", "source": "Self-worth struggles with feelings of inadequacy and perfectionism", "target": "Tension between self-expectations and perceived expectations of others", "pair_label": "72", "info": "Self-worth struggles can fuel tension between self-\nexpectations and perceived expectations of others.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Self-worth struggles with feelings of inadequacy and perfectionism_Coping mechanisms for dealing with stress and anxiety_64", "source": "Self-worth struggles with feelings of inadequacy and perfectionism", "target": "Coping mechanisms for dealing with stress and anxiety", "pair_label": "64", "info": "Individuals struggling with self-worth may employ coping\nmechanisms to manage stress and anxiety stemming from their\nfeelings of inadequacy.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Self-worth struggles with feelings of inadequacy and perfectionism_Importance of setting boundaries for emotional and physical well-being_69", "source": "Self-worth struggles with feelings of inadequacy and perfectionism", "target": "Importance of setting boundaries for emotional and physical well-being", "pair_label": "69", "info": "Establishing boundaries can help mitigate feelings of\ninadequacy.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Self-worth struggles with feelings of inadequacy and perfectionism_Fear of not meeting expectations and fear of failure_66", "source": "Self-worth struggles with feelings of inadequacy and perfectionism", "target": "Fear of not meeting expectations and fear of failure", "pair_label": "66", "info": "Reinforces anxiety and self-doubt", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Self-worth struggles with feelings of inadequacy and perfectionism_Impact of past experiences on current relationships and behaviors_67", "source": "Self-worth struggles with feelings of inadequacy and perfectionism", "target": "Impact of past experiences on current relationships and behaviors", "pair_label": "67", "info": "Past experiences shape self-worth.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Self-worth struggles with feelings of inadequacy and perfectionism_Importance of self-compassion and understanding in personal growth_68", "source": "Self-worth struggles with feelings of inadequacy and perfectionism", "target": "Importance of self-compassion and understanding in personal growth", "pair_label": "68", "info": "Self-compassion fosters resilience against inadequacy and\nperfectionism.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Self-worth struggles with feelings of inadequacy and perfectionism_Navigating complex emotions and conflicting values_70", "source": "Self-worth struggles with feelings of inadequacy and perfectionism", "target": "Navigating complex emotions and conflicting values", "pair_label": "70", "info": "Emotional struggles intensify.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty in acknowledging and expressing emotions due to past experiences_Self-worth struggles with feelings of inadequacy and perfectionism_16", "source": "Difficulty in acknowledging and expressing emotions due to past experiences", "target": "Self-worth struggles with feelings of inadequacy and perfectionism", "pair_label": "16", "info": "Past emotional suppression can intensify self-doubt and\nperfectionistic tendencies.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty in acknowledging and expressing emotions due to past experiences_Coping mechanisms for dealing with stress and anxiety_10", "source": "Difficulty in acknowledging and expressing emotions due to past experiences", "target": "Coping mechanisms for dealing with stress and anxiety", "pair_label": "10", "info": "Emotional suppression can lead to maladaptive coping\nstrategies.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty in acknowledging and expressing emotions due to past experiences_Impact of past experiences on current relationships and behaviors_12", "source": "Difficulty in acknowledging and expressing emotions due to past experiences", "target": "Impact of past experiences on current relationships and behaviors", "pair_label": "12", "info": "Past emotional suppression influences current relational\ndynamics.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty in acknowledging and expressing emotions due to past experiences_Importance of self-compassion and understanding in personal growth_13", "source": "Difficulty in acknowledging and expressing emotions due to past experiences", "target": "Importance of self-compassion and understanding in personal growth", "pair_label": "13", "info": "Emotional expression fosters self-compassion.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty in acknowledging and expressing emotions due to past experiences_Navigating complex emotions and conflicting values_15", "source": "Difficulty in acknowledging and expressing emotions due to past experiences", "target": "Navigating complex emotions and conflicting values", "pair_label": "15", "info": "Past emotional suppression can intensify emotional\ncomplexity.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Coping mechanisms for dealing with stress and anxiety_Importance of setting boundaries for emotional and physical well-being_5", "source": "Coping mechanisms for dealing with stress and anxiety", "target": "Importance of setting boundaries for emotional and physical well-being", "pair_label": "5", "info": "Setting boundaries supports positive coping strategies.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Coping mechanisms for dealing with stress and anxiety_Impact of past experiences on current relationships and behaviors_3", "source": "Coping mechanisms for dealing with stress and anxiety", "target": "Impact of past experiences on current relationships and behaviors", "pair_label": "3", "info": "Influences perception of current experiences", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Coping mechanisms for dealing with stress and anxiety_Importance of self-compassion and understanding in personal growth_4", "source": "Coping mechanisms for dealing with stress and anxiety", "target": "Importance of self-compassion and understanding in personal growth", "pair_label": "4", "info": "Self-compassion enhances stress resilience.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Coping mechanisms for dealing with stress and anxiety_Navigating complex emotions and conflicting values_6", "source": "Coping mechanisms for dealing with stress and anxiety", "target": "Navigating complex emotions and conflicting values", "pair_label": "6", "info": "Effective coping mechanisms facilitate emotional regulation\nand value clarification.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of setting boundaries for emotional and physical well-being_Tension between self-expectations and perceived expectations of others_54", "source": "Importance of setting boundaries for emotional and physical well-being", "target": "Tension between self-expectations and perceived expectations of others", "pair_label": "54", "info": "Setting boundaries can reduce tension by clarifying\nexpectations.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of setting boundaries for emotional and physical well-being_Self-worth struggles with feelings of inadequacy and perfectionism_52", "source": "Importance of setting boundaries for emotional and physical well-being", "target": "Self-worth struggles with feelings of inadequacy and perfectionism", "pair_label": "52", "info": "Boundaries protect against excessive self-criticism.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of setting boundaries for emotional and physical well-being_Coping mechanisms for dealing with stress and anxiety_46", "source": "Importance of setting boundaries for emotional and physical well-being", "target": "Coping mechanisms for dealing with stress and anxiety", "pair_label": "46", "info": "Boundaries enhance resilience.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of setting boundaries for emotional and physical well-being_Struggle to balance self-care with responsibilities and obligations_53", "source": "Importance of setting boundaries for emotional and physical well-being", "target": "Struggle to balance self-care with responsibilities and obligations", "pair_label": "53", "info": "Enhances self-awareness", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of setting boundaries for emotional and physical well-being_Importance of self-compassion and understanding in personal growth_50", "source": "Importance of setting boundaries for emotional and physical well-being", "target": "Importance of self-compassion and understanding in personal growth", "pair_label": "50", "info": "Boundaries support self-compassion.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of setting boundaries for emotional and physical well-being_Navigating complex emotions and conflicting values_51", "source": "Importance of setting boundaries for emotional and physical well-being", "target": "Navigating complex emotions and conflicting values", "pair_label": "51", "info": "Boundary setting enables effective emotional regulation.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Fear of not meeting expectations and fear of failure_Tension between self-expectations and perceived expectations of others_27", "source": "Fear of not meeting expectations and fear of failure", "target": "Tension between self-expectations and perceived expectations of others", "pair_label": "27", "info": "Amplifies self-expectations", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Fear of not meeting expectations and fear of failure_Self-worth struggles with feelings of inadequacy and perfectionism_25", "source": "Fear of not meeting expectations and fear of failure", "target": "Self-worth struggles with feelings of inadequacy and perfectionism", "pair_label": "25", "info": "Reinforces self-doubt", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Fear of not meeting expectations and fear of failure_Coping mechanisms for dealing with stress and anxiety_19", "source": "Fear of not meeting expectations and fear of failure", "target": "Coping mechanisms for dealing with stress and anxiety", "pair_label": "19", "info": "Fear drives coping.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Fear of not meeting expectations and fear of failure_Importance of self-compassion and understanding in personal growth_22", "source": "Fear of not meeting expectations and fear of failure", "target": "Importance of self-compassion and understanding in personal growth", "pair_label": "22", "info": "Self-compassion mitigates fear.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Fear of not meeting expectations and fear of failure_Navigating complex emotions and conflicting values_24", "source": "Fear of not meeting expectations and fear of failure", "target": "Navigating complex emotions and conflicting values", "pair_label": "24", "info": "Increases emotional turmoil", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Impact of past experiences on current relationships and behaviors_Self-worth struggles with feelings of inadequacy and perfectionism_34", "source": "Impact of past experiences on current relationships and behaviors", "target": "Self-worth struggles with feelings of inadequacy and perfectionism", "pair_label": "34", "info": "Past experiences shape self-perception.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Impact of past experiences on current relationships and behaviors_Difficulty in acknowledging and expressing emotions due to past experiences_29", "source": "Impact of past experiences on current relationships and behaviors", "target": "Difficulty in acknowledging and expressing emotions due to past experiences", "pair_label": "29", "info": "Past experiences shape emotional expression and behavior.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Impact of past experiences on current relationships and behaviors_Coping mechanisms for dealing with stress and anxiety_28", "source": "Impact of past experiences on current relationships and behaviors", "target": "Coping mechanisms for dealing with stress and anxiety", "pair_label": "28", "info": "Past experiences shape coping mechanisms.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Impact of past experiences on current relationships and behaviors_Importance of self-compassion and understanding in personal growth_31", "source": "Impact of past experiences on current relationships and behaviors", "target": "Importance of self-compassion and understanding in personal growth", "pair_label": "31", "info": "Past experiences shape self-perception, influencing self-\ncompassion.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Impact of past experiences on current relationships and behaviors_Navigating complex emotions and conflicting values_33", "source": "Impact of past experiences on current relationships and behaviors", "target": "Navigating complex emotions and conflicting values", "pair_label": "33", "info": "Past experiences shape emotional responses to complex\nsituations.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggle to balance self-care with responsibilities and obligations_Tension between self-expectations and perceived expectations of others_81", "source": "Struggle to balance self-care with responsibilities and obligations", "target": "Tension between self-expectations and perceived expectations of others", "pair_label": "81", "info": "Self-care struggles can stem from conflicting internal and\nexternal expectations.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggle to balance self-care with responsibilities and obligations_Self-worth struggles with feelings of inadequacy and perfectionism_80", "source": "Struggle to balance self-care with responsibilities and obligations", "target": "Self-worth struggles with feelings of inadequacy and perfectionism", "pair_label": "80", "info": "Neglecting self-care can exacerbate feelings of inadequacy.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggle to balance self-care with responsibilities and obligations_Coping mechanisms for dealing with stress and anxiety_73", "source": "Struggle to balance self-care with responsibilities and obligations", "target": "Coping mechanisms for dealing with stress and anxiety", "pair_label": "73", "info": "Increased self-care struggles amplify the need for effective\ncoping mechanisms.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggle to balance self-care with responsibilities and obligations_Importance of setting boundaries for emotional and physical well-being_78", "source": "Struggle to balance self-care with responsibilities and obligations", "target": "Importance of setting boundaries for emotional and physical well-being", "pair_label": "78", "info": "Enables Prioritization", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggle to balance self-care with responsibilities and obligations_Importance of self-compassion and understanding in personal growth_77", "source": "Struggle to balance self-care with responsibilities and obligations", "target": "Importance of self-compassion and understanding in personal growth", "pair_label": "77", "info": "Self-care struggles necessitate self-compassion.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of self-compassion and understanding in personal growth_Tension between self-expectations and perceived expectations of others_45", "source": "Importance of self-compassion and understanding in personal growth", "target": "Tension between self-expectations and perceived expectations of others", "pair_label": "45", "info": "High self-compassion buffers against tension from\nconflicting expectations.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of self-compassion and understanding in personal growth_Self-worth struggles with feelings of inadequacy and perfectionism_43", "source": "Importance of self-compassion and understanding in personal growth", "target": "Self-worth struggles with feelings of inadequacy and perfectionism", "pair_label": "43", "info": "Self-compassion counters inadequacy.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of self-compassion and understanding in personal growth_Coping mechanisms for dealing with stress and anxiety_37", "source": "Importance of self-compassion and understanding in personal growth", "target": "Coping mechanisms for dealing with stress and anxiety", "pair_label": "37", "info": "Self-compassion enhances resilience.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of self-compassion and understanding in personal growth_Importance of setting boundaries for emotional and physical well-being_41", "source": "Importance of self-compassion and understanding in personal growth", "target": "Importance of setting boundaries for emotional and physical well-being", "pair_label": "41", "info": "Compassion fosters self-awareness that helps set healthy\nboundaries.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of self-compassion and understanding in personal growth_Fear of not meeting expectations and fear of failure_39", "source": "Importance of self-compassion and understanding in personal growth", "target": "Fear of not meeting expectations and fear of failure", "pair_label": "39", "info": "Self-compassion mitigates fear.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of self-compassion and understanding in personal growth_Impact of past experiences on current relationships and behaviors_40", "source": "Importance of self-compassion and understanding in personal growth", "target": "Impact of past experiences on current relationships and behaviors", "pair_label": "40", "info": "Self-compassion fosters resilience and understanding of past\nexperiences.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of self-compassion and understanding in personal growth_Navigating complex emotions and conflicting values_42", "source": "Importance of self-compassion and understanding in personal growth", "target": "Navigating complex emotions and conflicting values", "pair_label": "42", "info": "Facilitates emotional regulation", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Navigating complex emotions and conflicting values_Tension between self-expectations and perceived expectations of others_63", "source": "Navigating complex emotions and conflicting values", "target": "Tension between self-expectations and perceived expectations of others", "pair_label": "63", "info": "Increased emotional complexity can heighten self-expectation\ndiscrepancies.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Navigating complex emotions and conflicting values_Self-worth struggles with feelings of inadequacy and perfectionism_61", "source": "Navigating complex emotions and conflicting values", "target": "Self-worth struggles with feelings of inadequacy and perfectionism", "pair_label": "61", "info": "Navigating complex emotions can intensify self-worth\nstruggles.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Navigating complex emotions and conflicting values_Difficulty in acknowledging and expressing emotions due to past experiences_56", "source": "Navigating complex emotions and conflicting values", "target": "Difficulty in acknowledging and expressing emotions due to past experiences", "pair_label": "56", "info": "Past experiences can hinder emotional awareness and\nexpression, complicating the navigation of complex emotions\nand values.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Navigating complex emotions and conflicting values_Coping mechanisms for dealing with stress and anxiety_55", "source": "Navigating complex emotions and conflicting values", "target": "Coping mechanisms for dealing with stress and anxiety", "pair_label": "55", "info": "Effective navigation enhances coping.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Navigating complex emotions and conflicting values_Importance of setting boundaries for emotional and physical well-being_60", "source": "Navigating complex emotions and conflicting values", "target": "Importance of setting boundaries for emotional and physical well-being", "pair_label": "60", "info": "Boundary setting is a crucial skill for managing complex\nemotions and conflicting values.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Navigating complex emotions and conflicting values_Fear of not meeting expectations and fear of failure_57", "source": "Navigating complex emotions and conflicting values", "target": "Fear of not meeting expectations and fear of failure", "pair_label": "57", "info": "Heightened emotional complexity can amplify fear", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Navigating complex emotions and conflicting values_Impact of past experiences on current relationships and behaviors_58", "source": "Navigating complex emotions and conflicting values", "target": "Impact of past experiences on current relationships and behaviors", "pair_label": "58", "info": "Past experiences shape emotional responses and value\nsystems, influencing current relationships and behaviors.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Navigating complex emotions and conflicting values_Struggle to balance self-care with responsibilities and obligations_62", "source": "Navigating complex emotions and conflicting values", "target": "Struggle to balance self-care with responsibilities and obligations", "pair_label": "62", "info": "Increased emotional complexity can heighten the struggle to\nbalance self-care and responsibilities.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Navigating complex emotions and conflicting values_Importance of self-compassion and understanding in personal growth_59", "source": "Navigating complex emotions and conflicting values", "target": "Importance of self-compassion and understanding in personal growth", "pair_label": "59", "info": "Facilitates emotional resilience", "color": "#3498db", "width": 4, "lineStyle": "solid"}}]
+        });
+
+        let tooltipCounter = 0;
+
+        cy.on('tap', 'edge', function(evt) {
+            var edge = evt.target;
+            var pos = evt.renderedPosition;
+            var tooltipId = "tooltip-" + (++tooltipCounter);
+
+            var tooltip = document.createElement("div");
+            tooltip.className = "tooltip";
+            tooltip.id = tooltipId;
+            tooltip.style.left = (pos.x + 20) + "px";
+            tooltip.style.top = (pos.y + 20) + "px";
+
+            var closeBtn = document.createElement("span");
+            closeBtn.className = "close-btn";
+            closeBtn.innerHTML = "&times;";
+            closeBtn.onclick = function () {
+                tooltip.remove();
+            };
+
+            tooltip.innerHTML = "";
+            tooltip.appendChild(closeBtn);
+            var content = document.createElement("div");
+            content.innerHTML = edge.data("info");
+            tooltip.appendChild(content);
+
+            document.body.appendChild(tooltip);
+            makeDraggable(tooltip);
+        });
+
+        function makeDraggable(elmnt) {
+            let offset = { x: 0, y: 0 };
+            let isDragging = false;
+
+            elmnt.addEventListener("mousedown", function (e) {
+                if (e.target.classList.contains("close-btn")) return;
+                isDragging = true;
+                offset.x = e.clientX - elmnt.offsetLeft;
+                offset.y = e.clientY - elmnt.offsetTop;
+                elmnt.style.cursor = "move";
+                e.preventDefault();
+            });
+
+            document.addEventListener("mousemove", function (e) {
+                if (isDragging) {
+                    elmnt.style.left = (e.clientX - offset.x) + "px";
+                    elmnt.style.top = (e.clientY - offset.y) + "px";
+                }
+            });
+
+            document.addEventListener("mouseup", function () {
+                isDragging = false;
+                elmnt.style.cursor = "default";
+            });
+        }
+    </script>
+</body>
+</html>

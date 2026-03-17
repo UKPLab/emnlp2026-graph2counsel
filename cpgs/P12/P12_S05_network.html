@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Interactive Process Network</title>
+    <script src="https://unpkg.com/cytoscape@3.21.1/dist/cytoscape.min.js"></script>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        #cy {
+            width: 100vw;
+            height: 100vh;
+            display: block;
+        }
+        .legend {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: white;
+            border: 1px solid #ccc;
+            padding: 10px;
+            font-family: sans-serif;
+            font-size: 14px;
+            z-index: 10;
+        }
+        .tooltip {
+            position: absolute;
+            background: #fefefe;
+            border: 1px solid #aaa;
+            padding: 10px;
+            font-family: sans-serif;
+            font-size: 13px;
+            max-width: 300px;
+            z-index: 20;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            cursor: default;
+        }
+        .tooltip .close-btn {
+            float: right;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="cy"></div>
+    <div class="legend">
+        <b>Legend</b><br>
+        <span style="color:#e74c3c;">Red</span>: Inhibitory<br>
+        <span style="color:#3498db;">Blue</span>: Excitatory<br>
+        <hr>
+        <b>Dimensions</b><br>
+        🔵 Cognition<br>
+        🟢 Sense of Self<br>
+        🔴 (Overt) Behaviour<br>
+        🟣 Affect<br>
+        🟠 Context/Moderators<br>
+        🟡 Attention<br>
+        ⚪ Biophysiological<br>
+        🟤 Motivation<br>
+        ⚫ Sociocultural
+    </div>
+    <script>
+        var cy = cytoscape({
+            container: document.getElementById('cy'),
+            layout: { name: 'cose' },
+            style: [
+                {
+                    selector: 'node',
+                    style: {
+                        'shape': 'roundrectangle',
+                        'label': 'data(label)',
+                        'text-wrap': 'wrap',
+                        'text-max-width': 120,
+                        'text-valign': 'center',
+                        'text-halign': 'center',
+                        'background-color': '#ffffff',
+                        'border-color': '#000000',
+                        'border-width': 1,
+                        'color': '#000',
+                        'font-size': 14,
+                        'padding': '20px',
+                        'width': 'label',
+                        'height': 'label'
+                    }
+                },
+                {
+                    selector: 'edge',
+                    style: {
+                        'curve-style': 'bezier',
+                        'target-arrow-shape': 'triangle',
+                        'arrow-scale': 1.2,
+                        'label': '',
+                        'font-size': 9,
+                        'text-rotation': 'autorotate',
+                        'text-margin-y': -10,
+                        'line-color': 'data(color)',
+                        'target-arrow-color': 'data(color)',
+                        'width': 'data(width)',
+                        'line-style': 'data(lineStyle)'
+                    }
+                }
+            ],
+            elements: [{"data": {"id": "Tension between desire for personal fulfillment and sense of responsibility to family.", "label": "Tension between desire for personal fulfillment and sense of responsibility to family.\n\ud83d\udfe3 \ud83d\udfe1 \ud83d\udd35\nw = 24"}}, {"data": {"id": "Self-identity tied to multiple roles and responsibilities.", "label": "Self-identity tied to multiple roles and responsibilities.\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 61"}}, {"data": {"id": "Struggle to balance short-term and long-term goals and priorities.", "label": "Struggle to balance short-term and long-term goals and priorities.\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 47"}}, {"data": {"id": "Sense of guilt and obligation to others influencing decision-making.", "label": "Sense of guilt and obligation to others influencing decision-making.\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 47"}}, {"data": {"id": "Importance of self-care and personal growth in managing stress and anxiety.", "label": "Importance of self-care and personal growth in managing stress and anxiety.\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 47"}}, {"data": {"id": "Challenge in navigating conflicting values and priorities.", "label": "Challenge in navigating conflicting values and priorities.\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 47"}}, {"data": {"id": "Difficulty in articulating emotions and needs due to past experiences.", "label": "Difficulty in articulating emotions and needs due to past experiences.\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 61"}}, {"data": {"id": "Difficulty in disengaging from negative thought patterns and emotions.", "label": "Difficulty in disengaging from negative thought patterns and emotions.\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 47"}}, {"data": {"id": "Desire for control and preparedness in the face of uncertainty.", "label": "Desire for control and preparedness in the face of uncertainty.\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 47"}}, {"data": {"id": "Fear of missing out on important life events and experiences.", "label": "Fear of missing out on important life events and experiences.\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udfe1\nw = 47"}}, {"data": {"id": "Tension between desire for personal fulfillment and sense of responsibility to family._Self-identity tied to multiple roles and responsibilities._88", "source": "Tension between desire for personal fulfillment and sense of responsibility to family.", "target": "Self-identity tied to multiple roles and responsibilities.", "pair_label": "88", "info": "Interconnected roles and responsibilities shape identity", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between desire for personal fulfillment and sense of responsibility to family._Struggle to balance short-term and long-term goals and priorities._90", "source": "Tension between desire for personal fulfillment and sense of responsibility to family.", "target": "Struggle to balance short-term and long-term goals and priorities.", "pair_label": "90", "info": "Conflicting desires and responsibilities amplify the\nchallenge of balancing immediate and future objectives.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between desire for personal fulfillment and sense of responsibility to family._Sense of guilt and obligation to others influencing decision-making._89", "source": "Tension between desire for personal fulfillment and sense of responsibility to family.", "target": "Sense of guilt and obligation to others influencing decision-making.", "pair_label": "89", "info": "Shared roots in conflicting motivations.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between desire for personal fulfillment and sense of responsibility to family._Importance of self-care and personal growth in managing stress and anxiety._87", "source": "Tension between desire for personal fulfillment and sense of responsibility to family.", "target": "Importance of self-care and personal growth in managing stress and anxiety.", "pair_label": "87", "info": "Self-care and personal growth can alleviate tension by\naligning personal fulfillment with family responsibilities.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between desire for personal fulfillment and sense of responsibility to family._Challenge in navigating conflicting values and priorities._82", "source": "Tension between desire for personal fulfillment and sense of responsibility to family.", "target": "Challenge in navigating conflicting values and priorities.", "pair_label": "82", "info": "Shared underlying conflict", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty in articulating emotions and needs due to past experiences._Difficulty in disengaging from negative thought patterns and emotions._21", "source": "Difficulty in articulating emotions and needs due to past experiences.", "target": "Difficulty in disengaging from negative thought patterns and emotions.", "pair_label": "21", "info": "Past experiences can reinforce negative thought patterns.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty in articulating emotions and needs due to past experiences._Importance of self-care and personal growth in managing stress and anxiety._23", "source": "Difficulty in articulating emotions and needs due to past experiences.", "target": "Importance of self-care and personal growth in managing stress and anxiety.", "pair_label": "23", "info": "Recognizing the importance of self-care and personal growth\ncan motivate individuals to overcome past difficulties in\narticulating their emotions and needs.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Self-identity tied to multiple roles and responsibilities._Tension between desire for personal fulfillment and sense of responsibility to family._63", "source": "Self-identity tied to multiple roles and responsibilities.", "target": "Tension between desire for personal fulfillment and sense of responsibility to family.", "pair_label": "63", "info": "Identity tied to multiple roles can amplify tension between\npersonal desires and responsibilities.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Self-identity tied to multiple roles and responsibilities._Desire for control and preparedness in the face of uncertainty._56", "source": "Self-identity tied to multiple roles and responsibilities.", "target": "Desire for control and preparedness in the face of uncertainty.", "pair_label": "56", "info": "Multiple roles and responsibilities can foster a sense of\ncontrol and preparedness.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Self-identity tied to multiple roles and responsibilities._Difficulty in disengaging from negative thought patterns and emotions._58", "source": "Self-identity tied to multiple roles and responsibilities.", "target": "Difficulty in disengaging from negative thought patterns and emotions.", "pair_label": "58", "info": "Multiple roles can distract from rumination.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Self-identity tied to multiple roles and responsibilities._Importance of self-care and personal growth in managing stress and anxiety._60", "source": "Self-identity tied to multiple roles and responsibilities.", "target": "Importance of self-care and personal growth in managing stress and anxiety.", "pair_label": "60", "info": "Self-identity can be a source of stress if not managed.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Self-identity tied to multiple roles and responsibilities._Challenge in navigating conflicting values and priorities._55", "source": "Self-identity tied to multiple roles and responsibilities.", "target": "Challenge in navigating conflicting values and priorities.", "pair_label": "55", "info": "Increased complexity", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Fear of missing out on important life events and experiences._Tension between desire for personal fulfillment and sense of responsibility to family._45", "source": "Fear of missing out on important life events and experiences.", "target": "Tension between desire for personal fulfillment and sense of responsibility to family.", "pair_label": "45", "info": "FOMO can amplify tension between personal desires and family\nresponsibilities.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Fear of missing out on important life events and experiences._Desire for control and preparedness in the face of uncertainty._38", "source": "Fear of missing out on important life events and experiences.", "target": "Desire for control and preparedness in the face of uncertainty.", "pair_label": "38", "info": "Fear drives the need for control.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggle to balance short-term and long-term goals and priorities._Challenge in navigating conflicting values and priorities._73", "source": "Struggle to balance short-term and long-term goals and priorities.", "target": "Challenge in navigating conflicting values and priorities.", "pair_label": "73", "info": "Influences conflict intensification.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Sense of guilt and obligation to others influencing decision-making._Tension between desire for personal fulfillment and sense of responsibility to family._72", "source": "Sense of guilt and obligation to others influencing decision-making.", "target": "Tension between desire for personal fulfillment and sense of responsibility to family.", "pair_label": "72", "info": "Increases conflict", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Sense of guilt and obligation to others influencing decision-making._Self-identity tied to multiple roles and responsibilities._70", "source": "Sense of guilt and obligation to others influencing decision-making.", "target": "Self-identity tied to multiple roles and responsibilities.", "pair_label": "70", "info": "Sense of responsibility reinforces role identity.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Desire for control and preparedness in the face of uncertainty._Fear of missing out on important life events and experiences._13", "source": "Desire for control and preparedness in the face of uncertainty.", "target": "Fear of missing out on important life events and experiences.", "pair_label": "13", "info": "Preparedness fuels FOMO.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty in disengaging from negative thought patterns and emotions._Desire for control and preparedness in the face of uncertainty._29", "source": "Difficulty in disengaging from negative thought patterns and emotions.", "target": "Desire for control and preparedness in the face of uncertainty.", "pair_label": "29", "info": "Reinforcing cycle of rumination and hypervigilance.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty in disengaging from negative thought patterns and emotions._Importance of self-care and personal growth in managing stress and anxiety._32", "source": "Difficulty in disengaging from negative thought patterns and emotions.", "target": "Importance of self-care and personal growth in managing stress and anxiety.", "pair_label": "32", "info": "Self-care and personal growth are crucial for managing\nnegative thought patterns and emotions.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of self-care and personal growth in managing stress and anxiety._Difficulty in articulating emotions and needs due to past experiences._48", "source": "Importance of self-care and personal growth in managing stress and anxiety.", "target": "Difficulty in articulating emotions and needs due to past experiences.", "pair_label": "48", "info": "Past experiences can hinder self-care efforts by making it\nhard to identify and express emotional needs.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of self-care and personal growth in managing stress and anxiety._Self-identity tied to multiple roles and responsibilities._51", "source": "Importance of self-care and personal growth in managing stress and anxiety.", "target": "Self-identity tied to multiple roles and responsibilities.", "pair_label": "51", "info": "Self-care enhances self-identity", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of self-care and personal growth in managing stress and anxiety._Desire for control and preparedness in the face of uncertainty._47", "source": "Importance of self-care and personal growth in managing stress and anxiety.", "target": "Desire for control and preparedness in the face of uncertainty.", "pair_label": "47", "info": "Self-care and personal growth enhance resilience, which in\nturn fuels the desire for control and preparedness.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Importance of self-care and personal growth in managing stress and anxiety._Difficulty in disengaging from negative thought patterns and emotions._49", "source": "Importance of self-care and personal growth in managing stress and anxiety.", "target": "Difficulty in disengaging from negative thought patterns and emotions.", "pair_label": "49", "info": "Self-care and personal growth can help mitigate negative\nthought patterns.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Challenge in navigating conflicting values and priorities._Tension between desire for personal fulfillment and sense of responsibility to family._9", "source": "Challenge in navigating conflicting values and priorities.", "target": "Tension between desire for personal fulfillment and sense of responsibility to family.", "pair_label": "9", "info": "Conflicting values and priorities can directly fuel tension\nbetween personal desires and family responsibilities.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Challenge in navigating conflicting values and priorities._Struggle to balance short-term and long-term goals and priorities._8", "source": "Challenge in navigating conflicting values and priorities.", "target": "Struggle to balance short-term and long-term goals and priorities.", "pair_label": "8", "info": "Conflicting values hinder prioritization.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}]
+        });
+
+        let tooltipCounter = 0;
+
+        cy.on('tap', 'edge', function(evt) {
+            var edge = evt.target;
+            var pos = evt.renderedPosition;
+            var tooltipId = "tooltip-" + (++tooltipCounter);
+
+            var tooltip = document.createElement("div");
+            tooltip.className = "tooltip";
+            tooltip.id = tooltipId;
+            tooltip.style.left = (pos.x + 20) + "px";
+            tooltip.style.top = (pos.y + 20) + "px";
+
+            var closeBtn = document.createElement("span");
+            closeBtn.className = "close-btn";
+            closeBtn.innerHTML = "&times;";
+            closeBtn.onclick = function () {
+                tooltip.remove();
+            };
+
+            tooltip.innerHTML = "";
+            tooltip.appendChild(closeBtn);
+            var content = document.createElement("div");
+            content.innerHTML = edge.data("info");
+            tooltip.appendChild(content);
+
+            document.body.appendChild(tooltip);
+            makeDraggable(tooltip);
+        });
+
+        function makeDraggable(elmnt) {
+            let offset = { x: 0, y: 0 };
+            let isDragging = false;
+
+            elmnt.addEventListener("mousedown", function (e) {
+                if (e.target.classList.contains("close-btn")) return;
+                isDragging = true;
+                offset.x = e.clientX - elmnt.offsetLeft;
+                offset.y = e.clientY - elmnt.offsetTop;
+                elmnt.style.cursor = "move";
+                e.preventDefault();
+            });
+
+            document.addEventListener("mousemove", function (e) {
+                if (isDragging) {
+                    elmnt.style.left = (e.clientX - offset.x) + "px";
+                    elmnt.style.top = (e.clientY - offset.y) + "px";
+                }
+            });
+
+            document.addEventListener("mouseup", function () {
+                isDragging = false;
+                elmnt.style.cursor = "default";
+            });
+        }
+    </script>
+</body>
+</html>

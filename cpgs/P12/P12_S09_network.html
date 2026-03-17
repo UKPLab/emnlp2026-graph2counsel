@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Interactive Process Network</title>
+    <script src="https://unpkg.com/cytoscape@3.21.1/dist/cytoscape.min.js"></script>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        #cy {
+            width: 100vw;
+            height: 100vh;
+            display: block;
+        }
+        .legend {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: white;
+            border: 1px solid #ccc;
+            padding: 10px;
+            font-family: sans-serif;
+            font-size: 14px;
+            z-index: 10;
+        }
+        .tooltip {
+            position: absolute;
+            background: #fefefe;
+            border: 1px solid #aaa;
+            padding: 10px;
+            font-family: sans-serif;
+            font-size: 13px;
+            max-width: 300px;
+            z-index: 20;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            cursor: default;
+        }
+        .tooltip .close-btn {
+            float: right;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="cy"></div>
+    <div class="legend">
+        <b>Legend</b><br>
+        <span style="color:#e74c3c;">Red</span>: Inhibitory<br>
+        <span style="color:#3498db;">Blue</span>: Excitatory<br>
+        <hr>
+        <b>Dimensions</b><br>
+        🔵 Cognition<br>
+        🟢 Sense of Self<br>
+        🔴 (Overt) Behaviour<br>
+        🟣 Affect<br>
+        🟠 Context/Moderators<br>
+        🟡 Attention<br>
+        ⚪ Biophysiological<br>
+        🟤 Motivation<br>
+        ⚫ Sociocultural
+    </div>
+    <script>
+        var cy = cytoscape({
+            container: document.getElementById('cy'),
+            layout: { name: 'cose' },
+            style: [
+                {
+                    selector: 'node',
+                    style: {
+                        'shape': 'roundrectangle',
+                        'label': 'data(label)',
+                        'text-wrap': 'wrap',
+                        'text-max-width': 120,
+                        'text-valign': 'center',
+                        'text-halign': 'center',
+                        'background-color': '#ffffff',
+                        'border-color': '#000000',
+                        'border-width': 1,
+                        'color': '#000',
+                        'font-size': 14,
+                        'padding': '20px',
+                        'width': 'label',
+                        'height': 'label'
+                    }
+                },
+                {
+                    selector: 'edge',
+                    style: {
+                        'curve-style': 'bezier',
+                        'target-arrow-shape': 'triangle',
+                        'arrow-scale': 1.2,
+                        'label': '',
+                        'font-size': 9,
+                        'text-rotation': 'autorotate',
+                        'text-margin-y': -10,
+                        'line-color': 'data(color)',
+                        'target-arrow-color': 'data(color)',
+                        'width': 'data(width)',
+                        'line-style': 'data(lineStyle)'
+                    }
+                }
+            ],
+            elements: [{"data": {"id": "Struggling to articulate feelings due to past unexpressed emotions", "label": "Struggling to articulate feelings due to past unexpressed emotions\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udd35\nw = 4"}}, {"data": {"id": "Difficulty with emotional intimacy due to fear of vulnerability", "label": "Difficulty with emotional intimacy due to fear of vulnerability\n\ud83d\udfe3 \ud83d\udd35 \ud83d\udfe2\nw = 4"}}, {"data": {"id": "Tension between desire for self-expression and fear of rejection", "label": "Tension between desire for self-expression and fear of rejection\n\ud83d\udd35 \ud83d\udfe0 \ud83d\udfe2\nw = 3"}}, {"data": {"id": "Impact of past bullying on current self-perception", "label": "Impact of past bullying on current self-perception\n\ud83d\udd35 \ud83d\udfe0 \ud83d\udfe4\nw = 3"}}, {"data": {"id": "Yearning for validation and understanding from others", "label": "Yearning for validation and understanding from others\n\ud83d\udd35 \ud83d\udfe2\nw = 3"}}, {"data": {"id": "Inner conflict between current and past selves", "label": "Inner conflict between current and past selves\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udd35\nw = 3"}}, {"data": {"id": "Fear of emotional connection hindering personal growth", "label": "Fear of emotional connection hindering personal growth\n\ud83d\udfe3 \ud83d\udd35 \ud83d\udfe2\nw = 3"}}, {"data": {"id": "Desire for empowerment and self-advocacy", "label": "Desire for empowerment and self-advocacy\n\ud83d\udd35 \ud83d\udfe0 \ud83d\udfe2\nw = 3"}}, {"data": {"id": "Difficulty in accessing and expressing emotions from the past", "label": "Difficulty in accessing and expressing emotions from the past\n\ud83d\udd34 \ud83d\udfe3 \ud83d\udd35\nw = 3"}}, {"data": {"id": "Nostalgia for a past sense of security and comfort", "label": "Nostalgia for a past sense of security and comfort\n\ud83d\udfe0\nw = 2"}}, {"data": {"id": "Struggling to articulate feelings due to past unexpressed emotions_Difficulty with emotional intimacy due to fear of vulnerability_66", "source": "Struggling to articulate feelings due to past unexpressed emotions", "target": "Difficulty with emotional intimacy due to fear of vulnerability", "pair_label": "66", "info": "Past unexpressed emotions can lead to fear of vulnerability.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggling to articulate feelings due to past unexpressed emotions_Tension between desire for self-expression and fear of rejection_71", "source": "Struggling to articulate feelings due to past unexpressed emotions", "target": "Tension between desire for self-expression and fear of rejection", "pair_label": "71", "info": "Past unexpressed emotions fuel fear of rejection,\nintensifying the tension.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggling to articulate feelings due to past unexpressed emotions_Impact of past bullying on current self-perception_68", "source": "Struggling to articulate feelings due to past unexpressed emotions", "target": "Impact of past bullying on current self-perception", "pair_label": "68", "info": "Past bullying can lead to unexpressed emotions, which in\nturn can affect current self-perception.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggling to articulate feelings due to past unexpressed emotions_Yearning for validation and understanding from others_72", "source": "Struggling to articulate feelings due to past unexpressed emotions", "target": "Yearning for validation and understanding from others", "pair_label": "72", "info": "Unexpressed emotions can intensify the need for external\nvalidation.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggling to articulate feelings due to past unexpressed emotions_Inner conflict between current and past selves_69", "source": "Struggling to articulate feelings due to past unexpressed emotions", "target": "Inner conflict between current and past selves", "pair_label": "69", "info": "Unexpressed emotions fuel inner conflict.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggling to articulate feelings due to past unexpressed emotions_Fear of emotional connection hindering personal growth_67", "source": "Struggling to articulate feelings due to past unexpressed emotions", "target": "Fear of emotional connection hindering personal growth", "pair_label": "67", "info": "Unexpressed emotions amplify fear of emotional connection.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggling to articulate feelings due to past unexpressed emotions_Desire for empowerment and self-advocacy_64", "source": "Struggling to articulate feelings due to past unexpressed emotions", "target": "Desire for empowerment and self-advocacy", "pair_label": "64", "info": "Unexpressed emotions can fuel a desire for empowerment.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggling to articulate feelings due to past unexpressed emotions_Difficulty in accessing and expressing emotions from the past_65", "source": "Struggling to articulate feelings due to past unexpressed emotions", "target": "Difficulty in accessing and expressing emotions from the past", "pair_label": "65", "info": "Past unexpressed emotions can intensify current emotional\nstruggles.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty with emotional intimacy due to fear of vulnerability_Struggling to articulate feelings due to past unexpressed emotions_25", "source": "Difficulty with emotional intimacy due to fear of vulnerability", "target": "Struggling to articulate feelings due to past unexpressed emotions", "pair_label": "25", "info": "Fear of vulnerability can lead to unexpressed emotions.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty with emotional intimacy due to fear of vulnerability_Fear of emotional connection hindering personal growth_21", "source": "Difficulty with emotional intimacy due to fear of vulnerability", "target": "Fear of emotional connection hindering personal growth", "pair_label": "21", "info": "Mutually reinforcing fears.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty with emotional intimacy due to fear of vulnerability_Nostalgia for a past sense of security and comfort_24", "source": "Difficulty with emotional intimacy due to fear of vulnerability", "target": "Nostalgia for a past sense of security and comfort", "pair_label": "24", "info": "Avoidance of emotional intimacy due to fear of vulnerability\nmay lead to nostalgia for past comfort as a coping\nmechanism.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty with emotional intimacy due to fear of vulnerability_Difficulty in accessing and expressing emotions from the past_20", "source": "Difficulty with emotional intimacy due to fear of vulnerability", "target": "Difficulty in accessing and expressing emotions from the past", "pair_label": "20", "info": "Fear of vulnerability can lead to suppressed emotional\nexpression.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between desire for self-expression and fear of rejection_Struggling to articulate feelings due to past unexpressed emotions_80", "source": "Tension between desire for self-expression and fear of rejection", "target": "Struggling to articulate feelings due to past unexpressed emotions", "pair_label": "80", "info": "Fear of rejection can intensify past emotional suppression.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between desire for self-expression and fear of rejection_Difficulty with emotional intimacy due to fear of vulnerability_75", "source": "Tension between desire for self-expression and fear of rejection", "target": "Difficulty with emotional intimacy due to fear of vulnerability", "pair_label": "75", "info": "Fear of rejection fuels fear of vulnerability.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between desire for self-expression and fear of rejection_Yearning for validation and understanding from others_81", "source": "Tension between desire for self-expression and fear of rejection", "target": "Yearning for validation and understanding from others", "pair_label": "81", "info": "Fear of rejection fuels the need for validation.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between desire for self-expression and fear of rejection_Inner conflict between current and past selves_78", "source": "Tension between desire for self-expression and fear of rejection", "target": "Inner conflict between current and past selves", "pair_label": "78", "info": "Fear of rejection can prevent embracing changes in self,\nthus stalling inner growth.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between desire for self-expression and fear of rejection_Desire for empowerment and self-advocacy_73", "source": "Tension between desire for self-expression and fear of rejection", "target": "Desire for empowerment and self-advocacy", "pair_label": "73", "info": "Self-expression fosters empowerment", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between desire for self-expression and fear of rejection_Difficulty in accessing and expressing emotions from the past_74", "source": "Tension between desire for self-expression and fear of rejection", "target": "Difficulty in accessing and expressing emotions from the past", "pair_label": "74", "info": "Fear of rejection can suppress emotional expression.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Impact of past bullying on current self-perception_Struggling to articulate feelings due to past unexpressed emotions_43", "source": "Impact of past bullying on current self-perception", "target": "Struggling to articulate feelings due to past unexpressed emotions", "pair_label": "43", "info": "Past bullying can lead to suppressed emotions.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Impact of past bullying on current self-perception_Difficulty with emotional intimacy due to fear of vulnerability_39", "source": "Impact of past bullying on current self-perception", "target": "Difficulty with emotional intimacy due to fear of vulnerability", "pair_label": "39", "info": "Past bullying can lead to negative self-perception,\nincreasing fear of vulnerability and difficulty with\nemotional intimacy.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Impact of past bullying on current self-perception_Tension between desire for self-expression and fear of rejection_44", "source": "Impact of past bullying on current self-perception", "target": "Tension between desire for self-expression and fear of rejection", "pair_label": "44", "info": "Past bullying can intensify fear of rejection, thereby\nheightening tension between self-expression and fear of\nrejection.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Impact of past bullying on current self-perception_Yearning for validation and understanding from others_45", "source": "Impact of past bullying on current self-perception", "target": "Yearning for validation and understanding from others", "pair_label": "45", "info": "Past bullying can lead to negative self-perception,\nincreasing the desire for external validation.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Impact of past bullying on current self-perception_Inner conflict between current and past selves_41", "source": "Impact of past bullying on current self-perception", "target": "Inner conflict between current and past selves", "pair_label": "41", "info": "Past bullying can intensify inner conflict by creating a\ndisconnect between the past and current self.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Impact of past bullying on current self-perception_Fear of emotional connection hindering personal growth_40", "source": "Impact of past bullying on current self-perception", "target": "Fear of emotional connection hindering personal growth", "pair_label": "40", "info": "Past bullying can lead to negative self-perception, which in\nturn may cause fear of emotional connection due to fear of\nrejection or further harm.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Impact of past bullying on current self-perception_Desire for empowerment and self-advocacy_37", "source": "Impact of past bullying on current self-perception", "target": "Desire for empowerment and self-advocacy", "pair_label": "37", "info": "Past bullying can lead to a strong desire for empowerment\nand self-advocacy as a means of overcoming negative self-\nperception.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Impact of past bullying on current self-perception_Difficulty in accessing and expressing emotions from the past_38", "source": "Impact of past bullying on current self-perception", "target": "Difficulty in accessing and expressing emotions from the past", "pair_label": "38", "info": "Past bullying can lead to emotional numbing as a defense\nmechanism.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Yearning for validation and understanding from others_Tension between desire for self-expression and fear of rejection_90", "source": "Yearning for validation and understanding from others", "target": "Tension between desire for self-expression and fear of rejection", "pair_label": "90", "info": "Fosters vulnerability.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Yearning for validation and understanding from others_Impact of past bullying on current self-perception_86", "source": "Yearning for validation and understanding from others", "target": "Impact of past bullying on current self-perception", "pair_label": "86", "info": "Past bullying can intensify the need for validation.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Inner conflict between current and past selves_Struggling to articulate feelings due to past unexpressed emotions_52", "source": "Inner conflict between current and past selves", "target": "Struggling to articulate feelings due to past unexpressed emotions", "pair_label": "52", "info": "Unresolved past emotions can fuel inner conflict.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Inner conflict between current and past selves_Difficulty with emotional intimacy due to fear of vulnerability_48", "source": "Inner conflict between current and past selves", "target": "Difficulty with emotional intimacy due to fear of vulnerability", "pair_label": "48", "info": "Past self-concept influences fear of emotional exposure.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Inner conflict between current and past selves_Tension between desire for self-expression and fear of rejection_53", "source": "Inner conflict between current and past selves", "target": "Tension between desire for self-expression and fear of rejection", "pair_label": "53", "info": "Past self influences fear of rejection.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Inner conflict between current and past selves_Fear of emotional connection hindering personal growth_49", "source": "Inner conflict between current and past selves", "target": "Fear of emotional connection hindering personal growth", "pair_label": "49", "info": "Past self's unresolved emotional issues fuel fear of\nemotional connection.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Inner conflict between current and past selves_Desire for empowerment and self-advocacy_46", "source": "Inner conflict between current and past selves", "target": "Desire for empowerment and self-advocacy", "pair_label": "46", "info": "Self-awareness of past limitations fuels desire for\nempowerment.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Inner conflict between current and past selves_Difficulty in accessing and expressing emotions from the past_47", "source": "Inner conflict between current and past selves", "target": "Difficulty in accessing and expressing emotions from the past", "pair_label": "47", "info": "Increased emotional awareness", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Fear of emotional connection hindering personal growth_Struggling to articulate feelings due to past unexpressed emotions_34", "source": "Fear of emotional connection hindering personal growth", "target": "Struggling to articulate feelings due to past unexpressed emotions", "pair_label": "34", "info": "Fear of emotional connection can intensify struggles with\narticulating feelings.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Fear of emotional connection hindering personal growth_Difficulty with emotional intimacy due to fear of vulnerability_30", "source": "Fear of emotional connection hindering personal growth", "target": "Difficulty with emotional intimacy due to fear of vulnerability", "pair_label": "30", "info": "Fear of emotional connection reinforces fear of\nvulnerability.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Fear of emotional connection hindering personal growth_Tension between desire for self-expression and fear of rejection_35", "source": "Fear of emotional connection hindering personal growth", "target": "Tension between desire for self-expression and fear of rejection", "pair_label": "35", "info": "Fear of emotional connection can intensify fear of\nrejection.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Fear of emotional connection hindering personal growth_Impact of past bullying on current self-perception_31", "source": "Fear of emotional connection hindering personal growth", "target": "Impact of past bullying on current self-perception", "pair_label": "31", "info": "Past bullying can instill a fear of emotional connection.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Fear of emotional connection hindering personal growth_Yearning for validation and understanding from others_36", "source": "Fear of emotional connection hindering personal growth", "target": "Yearning for validation and understanding from others", "pair_label": "36", "info": "Underlying need for validation can exacerbate fear, as fear\nof rejection fuels avoidance of connection.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Fear of emotional connection hindering personal growth_Difficulty in accessing and expressing emotions from the past_29", "source": "Fear of emotional connection hindering personal growth", "target": "Difficulty in accessing and expressing emotions from the past", "pair_label": "29", "info": "Avoidance due to fear of emotional connection can prevent\nprocessing of past emotions.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Desire for empowerment and self-advocacy_Tension between desire for self-expression and fear of rejection_8", "source": "Desire for empowerment and self-advocacy", "target": "Tension between desire for self-expression and fear of rejection", "pair_label": "8", "info": "Seeking empowerment amplifies the internal conflict around\nself-expression.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Desire for empowerment and self-advocacy_Impact of past bullying on current self-perception_4", "source": "Desire for empowerment and self-advocacy", "target": "Impact of past bullying on current self-perception", "pair_label": "4", "info": "Empowerment often arises as a response to past\nvictimization.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty in accessing and expressing emotions from the past_Struggling to articulate feelings due to past unexpressed emotions_16", "source": "Difficulty in accessing and expressing emotions from the past", "target": "Struggling to articulate feelings due to past unexpressed emotions", "pair_label": "16", "info": "Past unexpressed emotions directly hinder current emotional\narticulation.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty in accessing and expressing emotions from the past_Difficulty with emotional intimacy due to fear of vulnerability_11", "source": "Difficulty in accessing and expressing emotions from the past", "target": "Difficulty with emotional intimacy due to fear of vulnerability", "pair_label": "11", "info": "Unresolved past emotions can fuel fear of vulnerability.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty in accessing and expressing emotions from the past_Impact of past bullying on current self-perception_13", "source": "Difficulty in accessing and expressing emotions from the past", "target": "Impact of past bullying on current self-perception", "pair_label": "13", "info": "Past bullying can lead to emotional repression.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty in accessing and expressing emotions from the past_Inner conflict between current and past selves_14", "source": "Difficulty in accessing and expressing emotions from the past", "target": "Inner conflict between current and past selves", "pair_label": "14", "info": "Unresolved past emotions fuel inner conflict.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty in accessing and expressing emotions from the past_Fear of emotional connection hindering personal growth_12", "source": "Difficulty in accessing and expressing emotions from the past", "target": "Fear of emotional connection hindering personal growth", "pair_label": "12", "info": "Past unexpressed emotions fuel fear of emotional connection.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}]
+        });
+
+        let tooltipCounter = 0;
+
+        cy.on('tap', 'edge', function(evt) {
+            var edge = evt.target;
+            var pos = evt.renderedPosition;
+            var tooltipId = "tooltip-" + (++tooltipCounter);
+
+            var tooltip = document.createElement("div");
+            tooltip.className = "tooltip";
+            tooltip.id = tooltipId;
+            tooltip.style.left = (pos.x + 20) + "px";
+            tooltip.style.top = (pos.y + 20) + "px";
+
+            var closeBtn = document.createElement("span");
+            closeBtn.className = "close-btn";
+            closeBtn.innerHTML = "&times;";
+            closeBtn.onclick = function () {
+                tooltip.remove();
+            };
+
+            tooltip.innerHTML = "";
+            tooltip.appendChild(closeBtn);
+            var content = document.createElement("div");
+            content.innerHTML = edge.data("info");
+            tooltip.appendChild(content);
+
+            document.body.appendChild(tooltip);
+            makeDraggable(tooltip);
+        });
+
+        function makeDraggable(elmnt) {
+            let offset = { x: 0, y: 0 };
+            let isDragging = false;
+
+            elmnt.addEventListener("mousedown", function (e) {
+                if (e.target.classList.contains("close-btn")) return;
+                isDragging = true;
+                offset.x = e.clientX - elmnt.offsetLeft;
+                offset.y = e.clientY - elmnt.offsetTop;
+                elmnt.style.cursor = "move";
+                e.preventDefault();
+            });
+
+            document.addEventListener("mousemove", function (e) {
+                if (isDragging) {
+                    elmnt.style.left = (e.clientX - offset.x) + "px";
+                    elmnt.style.top = (e.clientY - offset.y) + "px";
+                }
+            });
+
+            document.addEventListener("mouseup", function () {
+                isDragging = false;
+                elmnt.style.cursor = "default";
+            });
+        }
+    </script>
+</body>
+</html>

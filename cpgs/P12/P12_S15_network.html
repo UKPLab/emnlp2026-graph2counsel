@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Interactive Process Network</title>
+    <script src="https://unpkg.com/cytoscape@3.21.1/dist/cytoscape.min.js"></script>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        #cy {
+            width: 100vw;
+            height: 100vh;
+            display: block;
+        }
+        .legend {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: white;
+            border: 1px solid #ccc;
+            padding: 10px;
+            font-family: sans-serif;
+            font-size: 14px;
+            z-index: 10;
+        }
+        .tooltip {
+            position: absolute;
+            background: #fefefe;
+            border: 1px solid #aaa;
+            padding: 10px;
+            font-family: sans-serif;
+            font-size: 13px;
+            max-width: 300px;
+            z-index: 20;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            cursor: default;
+        }
+        .tooltip .close-btn {
+            float: right;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="cy"></div>
+    <div class="legend">
+        <b>Legend</b><br>
+        <span style="color:#e74c3c;">Red</span>: Inhibitory<br>
+        <span style="color:#3498db;">Blue</span>: Excitatory<br>
+        <hr>
+        <b>Dimensions</b><br>
+        🔵 Cognition<br>
+        🟢 Sense of Self<br>
+        🔴 (Overt) Behaviour<br>
+        🟣 Affect<br>
+        🟠 Context/Moderators<br>
+        🟡 Attention<br>
+        ⚪ Biophysiological<br>
+        🟤 Motivation<br>
+        ⚫ Sociocultural
+    </div>
+    <script>
+        var cy = cytoscape({
+            container: document.getElementById('cy'),
+            layout: { name: 'cose' },
+            style: [
+                {
+                    selector: 'node',
+                    style: {
+                        'shape': 'roundrectangle',
+                        'label': 'data(label)',
+                        'text-wrap': 'wrap',
+                        'text-max-width': 120,
+                        'text-valign': 'center',
+                        'text-halign': 'center',
+                        'background-color': '#ffffff',
+                        'border-color': '#000000',
+                        'border-width': 1,
+                        'color': '#000',
+                        'font-size': 14,
+                        'padding': '20px',
+                        'width': 'label',
+                        'height': 'label'
+                    }
+                },
+                {
+                    selector: 'edge',
+                    style: {
+                        'curve-style': 'bezier',
+                        'target-arrow-shape': 'triangle',
+                        'arrow-scale': 1.2,
+                        'label': '',
+                        'font-size': 9,
+                        'text-rotation': 'autorotate',
+                        'text-margin-y': -10,
+                        'line-color': 'data(color)',
+                        'target-arrow-color': 'data(color)',
+                        'width': 'data(width)',
+                        'line-style': 'data(lineStyle)'
+                    }
+                }
+            ],
+            elements: [{"data": {"id": "Struggling to maintain self-care due to external expectations", "label": "Struggling to maintain self-care due to external expectations\n\ud83d\udd34 \ud83d\udd35 \ud83d\udfe0\nw = 5"}}, {"data": {"id": "Tension between desire for self-improvement and fear of external judgment", "label": "Tension between desire for self-improvement and fear of external judgment\n\ud83d\udfe1 \u26aa \ud83d\udd35\nw = 4"}}, {"data": {"id": "Guilt associated with prioritizing personal needs over others", "label": "Guilt associated with prioritizing personal needs over others\n\ud83d\udfe3 \ud83d\udd35\nw = 4"}}, {"data": {"id": "Difficulty with emotional regulation and self-compassion", "label": "Difficulty with emotional regulation and self-compassion\n\ud83d\udfe1 \ud83d\udd35\nw = 3"}}, {"data": {"id": "Struggle to maintain a sense of identity and self-worth in the face of criticism", "label": "Struggle to maintain a sense of identity and self-worth in the face of criticism\n\ud83d\udfe3 \ud83d\udd35 \ud83d\udfe4\nw = 4"}}, {"data": {"id": "Recognizing the importance of internal validation over external recognition", "label": "Recognizing the importance of internal validation over external recognition\n\ud83d\udfe3 \ud83d\udd35 \ud83d\udfe0\nw = 4"}}, {"data": {"id": "Navigating the challenge of balancing personal growth with external expectations", "label": "Navigating the challenge of balancing personal growth with external expectations\n\ud83d\udfe1 \u26aa \ud83d\udd35\nw = 4"}}, {"data": {"id": "Exploring the relationship between physical health and mental well-being", "label": "Exploring the relationship between physical health and mental well-being\n\ud83d\udd34 \ud83d\udfe1 \u26aa\nw = 4"}}, {"data": {"id": "Difficulty articulating feelings due to unexpressed emotions from the past", "label": "Difficulty articulating feelings due to unexpressed emotions from the past\n\ud83d\udfe3 \ud83d\udd35 \ud83d\udfe0\nw = 5"}}, {"data": {"id": "Impact of past bullying on current self-perception and behavior", "label": "Impact of past bullying on current self-perception and behavior\n\ud83d\udfe3 \ud83d\udd35 \ud83d\udfe0\nw = 4"}}, {"data": {"id": "Struggling to maintain self-care due to external expectations_Tension between desire for self-improvement and fear of external judgment_81", "source": "Struggling to maintain self-care due to external expectations", "target": "Tension between desire for self-improvement and fear of external judgment", "pair_label": "81", "info": "External expectations exacerbate self-doubt.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggling to maintain self-care due to external expectations_Guilt associated with prioritizing personal needs over others_76", "source": "Struggling to maintain self-care due to external expectations", "target": "Guilt associated with prioritizing personal needs over others", "pair_label": "76", "info": "Internal conflict", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggling to maintain self-care due to external expectations_Difficulty with emotional regulation and self-compassion_74", "source": "Struggling to maintain self-care due to external expectations", "target": "Difficulty with emotional regulation and self-compassion", "pair_label": "74", "info": "External pressures can exacerbate emotional dysregulation.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggling to maintain self-care due to external expectations_Struggle to maintain a sense of identity and self-worth in the face of criticism_80", "source": "Struggling to maintain self-care due to external expectations", "target": "Struggle to maintain a sense of identity and self-worth in the face of criticism", "pair_label": "80", "info": "External expectations can erode self-care, leading to\nidentity and self-worth struggles.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggling to maintain self-care due to external expectations_Recognizing the importance of internal validation over external recognition_79", "source": "Struggling to maintain self-care due to external expectations", "target": "Recognizing the importance of internal validation over external recognition", "pair_label": "79", "info": "Self-care is hindered by external pressures, but recognizing\ninternal validation can counteract this.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggling to maintain self-care due to external expectations_Navigating the challenge of balancing personal growth with external expectations_78", "source": "Struggling to maintain self-care due to external expectations", "target": "Navigating the challenge of balancing personal growth with external expectations", "pair_label": "78", "info": "Interconnected goals and pressures.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggling to maintain self-care due to external expectations_Exploring the relationship between physical health and mental well-being_75", "source": "Struggling to maintain self-care due to external expectations", "target": "Exploring the relationship between physical health and mental well-being", "pair_label": "75", "info": "Recognizing impact of neglecting self-care.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty articulating feelings due to unexpressed emotions from the past_Impact of past bullying on current self-perception and behavior_4", "source": "Difficulty articulating feelings due to unexpressed emotions from the past", "target": "Impact of past bullying on current self-perception and behavior", "pair_label": "4", "info": "Past bullying can lead to unexpressed emotions, which in\nturn, can cause difficulty articulating feelings.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty articulating feelings due to unexpressed emotions from the past_Difficulty with emotional regulation and self-compassion_1", "source": "Difficulty articulating feelings due to unexpressed emotions from the past", "target": "Difficulty with emotional regulation and self-compassion", "pair_label": "1", "info": "Past unexpressed emotions can intensify current emotional\ndysregulation.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty articulating feelings due to unexpressed emotions from the past_Struggle to maintain a sense of identity and self-worth in the face of criticism_7", "source": "Difficulty articulating feelings due to unexpressed emotions from the past", "target": "Struggle to maintain a sense of identity and self-worth in the face of criticism", "pair_label": "7", "info": "Unresolved past emotions can hinder self-expression, leading\nto increased vulnerability to criticism and challenges in\nmaintaining self-worth.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between desire for self-improvement and fear of external judgment_Struggling to maintain self-care due to external expectations_90", "source": "Tension between desire for self-improvement and fear of external judgment", "target": "Struggling to maintain self-care due to external expectations", "pair_label": "90", "info": "Fear of external judgment amplifies struggle to maintain\nself-care.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between desire for self-improvement and fear of external judgment_Impact of past bullying on current self-perception and behavior_86", "source": "Tension between desire for self-improvement and fear of external judgment", "target": "Impact of past bullying on current self-perception and behavior", "pair_label": "86", "info": "Past bullying can amplify fear of external judgment, thereby\nincreasing tension.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between desire for self-improvement and fear of external judgment_Difficulty with emotional regulation and self-compassion_83", "source": "Tension between desire for self-improvement and fear of external judgment", "target": "Difficulty with emotional regulation and self-compassion", "pair_label": "83", "info": "Self-criticism and fear of judgment can exacerbate emotional\ndysregulation.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between desire for self-improvement and fear of external judgment_Struggle to maintain a sense of identity and self-worth in the face of criticism_89", "source": "Tension between desire for self-improvement and fear of external judgment", "target": "Struggle to maintain a sense of identity and self-worth in the face of criticism", "pair_label": "89", "info": "Self-improvement efforts are often hindered by fear of\nexternal judgment, which can lead to struggles with identity\nand self-worth.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between desire for self-improvement and fear of external judgment_Recognizing the importance of internal validation over external recognition_88", "source": "Tension between desire for self-improvement and fear of external judgment", "target": "Recognizing the importance of internal validation over external recognition", "pair_label": "88", "info": "Catalyzes self-awareness", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Guilt associated with prioritizing personal needs over others_Struggling to maintain self-care due to external expectations_35", "source": "Guilt associated with prioritizing personal needs over others", "target": "Struggling to maintain self-care due to external expectations", "pair_label": "35", "info": "Guilt reinforces struggle.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Guilt associated with prioritizing personal needs over others_Difficulty with emotional regulation and self-compassion_29", "source": "Guilt associated with prioritizing personal needs over others", "target": "Difficulty with emotional regulation and self-compassion", "pair_label": "29", "info": "Prioritizing others over oneself can lead to suppressed\nemotions and self-neglect, exacerbating difficulties with\nemotional regulation and self-compassion.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Guilt associated with prioritizing personal needs over others_Struggle to maintain a sense of identity and self-worth in the face of criticism_34", "source": "Guilt associated with prioritizing personal needs over others", "target": "Struggle to maintain a sense of identity and self-worth in the face of criticism", "pair_label": "34", "info": "Prioritizing personal needs can lead to feelings of guilt,\nwhich may heighten sensitivity to criticism and make it more\nchallenging to maintain a sense of identity and self-worth.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Impact of past bullying on current self-perception and behavior_Struggling to maintain self-care due to external expectations_44", "source": "Impact of past bullying on current self-perception and behavior", "target": "Struggling to maintain self-care due to external expectations", "pair_label": "44", "info": "Past bullying can lead to negative self-perception,\nincreasing vulnerability to external expectations and self-\ncare struggles.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Impact of past bullying on current self-perception and behavior_Difficulty articulating feelings due to unexpressed emotions from the past_37", "source": "Impact of past bullying on current self-perception and behavior", "target": "Difficulty articulating feelings due to unexpressed emotions from the past", "pair_label": "37", "info": "Past bullying can lead to unresolved emotions, which in turn\ncan make it difficult for individuals to articulate their\nfeelings.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Impact of past bullying on current self-perception and behavior_Tension between desire for self-improvement and fear of external judgment_45", "source": "Impact of past bullying on current self-perception and behavior", "target": "Tension between desire for self-improvement and fear of external judgment", "pair_label": "45", "info": "Past bullying can intensify the fear of external judgment,\nthereby heightening the tension between the desire for self-\nimprovement and the fear of being judged.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Impact of past bullying on current self-perception and behavior_Difficulty with emotional regulation and self-compassion_38", "source": "Impact of past bullying on current self-perception and behavior", "target": "Difficulty with emotional regulation and self-compassion", "pair_label": "38", "info": "Past bullying can lead to negative self-perception, which in\nturn can exacerbate difficulties with emotional regulation\nand self-compassion.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Impact of past bullying on current self-perception and behavior_Struggle to maintain a sense of identity and self-worth in the face of criticism_43", "source": "Impact of past bullying on current self-perception and behavior", "target": "Struggle to maintain a sense of identity and self-worth in the face of criticism", "pair_label": "43", "info": "Past bullying can lead to a lasting negative self-image,\nmaking it challenging to maintain self-worth in the face of\ncriticism.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Impact of past bullying on current self-perception and behavior_Recognizing the importance of internal validation over external recognition_42", "source": "Impact of past bullying on current self-perception and behavior", "target": "Recognizing the importance of internal validation over external recognition", "pair_label": "42", "info": "Past bullying can lead to a greater need for internal\nvalidation.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty with emotional regulation and self-compassion_Struggling to maintain self-care due to external expectations_17", "source": "Difficulty with emotional regulation and self-compassion", "target": "Struggling to maintain self-care due to external expectations", "pair_label": "17", "info": "External expectations can exacerbate emotional\ndysregulation.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty with emotional regulation and self-compassion_Difficulty articulating feelings due to unexpressed emotions from the past_10", "source": "Difficulty with emotional regulation and self-compassion", "target": "Difficulty articulating feelings due to unexpressed emotions from the past", "pair_label": "10", "info": "Unprocessed emotions hinder emotional awareness and\nexpression.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty with emotional regulation and self-compassion_Guilt associated with prioritizing personal needs over others_12", "source": "Difficulty with emotional regulation and self-compassion", "target": "Guilt associated with prioritizing personal needs over others", "pair_label": "12", "info": "Self-criticism and emotional dysregulation can exacerbate\nfeelings of guilt.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty with emotional regulation and self-compassion_Impact of past bullying on current self-perception and behavior_13", "source": "Difficulty with emotional regulation and self-compassion", "target": "Impact of past bullying on current self-perception and behavior", "pair_label": "13", "info": "Past bullying can exacerbate emotional dysregulation and\nreduce self-compassion.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Difficulty with emotional regulation and self-compassion_Struggle to maintain a sense of identity and self-worth in the face of criticism_16", "source": "Difficulty with emotional regulation and self-compassion", "target": "Struggle to maintain a sense of identity and self-worth in the face of criticism", "pair_label": "16", "info": "Emotional dysregulation can exacerbate self-doubt and\nundermine self-worth.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggle to maintain a sense of identity and self-worth in the face of criticism_Tension between desire for self-improvement and fear of external judgment_72", "source": "Struggle to maintain a sense of identity and self-worth in the face of criticism", "target": "Tension between desire for self-improvement and fear of external judgment", "pair_label": "72", "info": "Criticism can exacerbate self-doubt, fueling the tension\nbetween self-improvement and fear of judgment.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggle to maintain a sense of identity and self-worth in the face of criticism_Impact of past bullying on current self-perception and behavior_68", "source": "Struggle to maintain a sense of identity and self-worth in the face of criticism", "target": "Impact of past bullying on current self-perception and behavior", "pair_label": "68", "info": "Past bullying can significantly erode self-worth, making one\nmore vulnerable to criticism.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggle to maintain a sense of identity and self-worth in the face of criticism_Difficulty with emotional regulation and self-compassion_65", "source": "Struggle to maintain a sense of identity and self-worth in the face of criticism", "target": "Difficulty with emotional regulation and self-compassion", "pair_label": "65", "info": "Criticism can exacerbate emotional dysregulation and reduce\nself-compassion.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggle to maintain a sense of identity and self-worth in the face of criticism_Navigating the challenge of balancing personal growth with external expectations_69", "source": "Struggle to maintain a sense of identity and self-worth in the face of criticism", "target": "Navigating the challenge of balancing personal growth with external expectations", "pair_label": "69", "info": "Criticism can trigger self-doubt, making it harder to\nbalance personal growth with external expectations.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Recognizing the importance of internal validation over external recognition_Impact of past bullying on current self-perception and behavior_59", "source": "Recognizing the importance of internal validation over external recognition", "target": "Impact of past bullying on current self-perception and behavior", "pair_label": "59", "info": "Lessens the negative impact", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Recognizing the importance of internal validation over external recognition_Difficulty with emotional regulation and self-compassion_56", "source": "Recognizing the importance of internal validation over external recognition", "target": "Difficulty with emotional regulation and self-compassion", "pair_label": "56", "info": "Internal validation can reduce emotional turmoil.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Recognizing the importance of internal validation over external recognition_Navigating the challenge of balancing personal growth with external expectations_60", "source": "Recognizing the importance of internal validation over external recognition", "target": "Navigating the challenge of balancing personal growth with external expectations", "pair_label": "60", "info": "Fosters resilience", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Navigating the challenge of balancing personal growth with external expectations_Struggling to maintain self-care due to external expectations_53", "source": "Navigating the challenge of balancing personal growth with external expectations", "target": "Struggling to maintain self-care due to external expectations", "pair_label": "53", "info": "External expectations can exacerbate self-care struggles.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Navigating the challenge of balancing personal growth with external expectations_Guilt associated with prioritizing personal needs over others_49", "source": "Navigating the challenge of balancing personal growth with external expectations", "target": "Guilt associated with prioritizing personal needs over others", "pair_label": "49", "info": "Prioritizing personal growth may lead to feelings of guilt.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Navigating the challenge of balancing personal growth with external expectations_Struggle to maintain a sense of identity and self-worth in the face of criticism_52", "source": "Navigating the challenge of balancing personal growth with external expectations", "target": "Struggle to maintain a sense of identity and self-worth in the face of criticism", "pair_label": "52", "info": "External expectations can exacerbate self-doubt and identity\nstruggles.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Navigating the challenge of balancing personal growth with external expectations_Recognizing the importance of internal validation over external recognition_51", "source": "Navigating the challenge of balancing personal growth with external expectations", "target": "Recognizing the importance of internal validation over external recognition", "pair_label": "51", "info": "Mutual reinforcement in prioritizing self-awareness and\nautonomy.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Tension between desire for self-improvement and fear of external judgment_Navigating the challenge of balancing personal growth with external expectations_87", "source": "Tension between desire for self-improvement and fear of external judgment", "target": "Navigating the challenge of balancing personal growth with external expectations", "pair_label": "87", "info": "Mutual influence in internal conflict and external\npressures.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Struggle to maintain a sense of identity and self-worth in the face of criticism_Recognizing the importance of internal validation over external recognition_70", "source": "Struggle to maintain a sense of identity and self-worth in the face of criticism", "target": "Recognizing the importance of internal validation over external recognition", "pair_label": "70", "info": "Self-awareness of struggles with criticism fosters\nrecognition of internal validation.", "color": "#3498db", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Recognizing the importance of internal validation over external recognition_Struggling to maintain self-care due to external expectations_62", "source": "Recognizing the importance of internal validation over external recognition", "target": "Struggling to maintain self-care due to external expectations", "pair_label": "62", "info": "Internal validation counters external pressure.", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}, {"data": {"id": "Recognizing the importance of internal validation over external recognition_Struggle to maintain a sense of identity and self-worth in the face of criticism_61", "source": "Recognizing the importance of internal validation over external recognition", "target": "Struggle to maintain a sense of identity and self-worth in the face of criticism", "pair_label": "61", "info": "Self-acceptance", "color": "#e74c3c", "width": 4, "lineStyle": "solid"}}]
+        });
+
+        let tooltipCounter = 0;
+
+        cy.on('tap', 'edge', function(evt) {
+            var edge = evt.target;
+            var pos = evt.renderedPosition;
+            var tooltipId = "tooltip-" + (++tooltipCounter);
+
+            var tooltip = document.createElement("div");
+            tooltip.className = "tooltip";
+            tooltip.id = tooltipId;
+            tooltip.style.left = (pos.x + 20) + "px";
+            tooltip.style.top = (pos.y + 20) + "px";
+
+            var closeBtn = document.createElement("span");
+            closeBtn.className = "close-btn";
+            closeBtn.innerHTML = "&times;";
+            closeBtn.onclick = function () {
+                tooltip.remove();
+            };
+
+            tooltip.innerHTML = "";
+            tooltip.appendChild(closeBtn);
+            var content = document.createElement("div");
+            content.innerHTML = edge.data("info");
+            tooltip.appendChild(content);
+
+            document.body.appendChild(tooltip);
+            makeDraggable(tooltip);
+        });
+
+        function makeDraggable(elmnt) {
+            let offset = { x: 0, y: 0 };
+            let isDragging = false;
+
+            elmnt.addEventListener("mousedown", function (e) {
+                if (e.target.classList.contains("close-btn")) return;
+                isDragging = true;
+                offset.x = e.clientX - elmnt.offsetLeft;
+                offset.y = e.clientY - elmnt.offsetTop;
+                elmnt.style.cursor = "move";
+                e.preventDefault();
+            });
+
+            document.addEventListener("mousemove", function (e) {
+                if (isDragging) {
+                    elmnt.style.left = (e.clientX - offset.x) + "px";
+                    elmnt.style.top = (e.clientY - offset.y) + "px";
+                }
+            });
+
+            document.addEventListener("mouseup", function () {
+                isDragging = false;
+                elmnt.style.cursor = "default";
+            });
+        }
+    </script>
+</body>
+</html>
