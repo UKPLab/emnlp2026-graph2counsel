@@ -37,7 +37,9 @@ def random_integers_excluding(start, end, exclude, count=3):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        description="Run therapy sessions in parallel.")
+        description="Get few-shot CoT responses in CounselingBench.")
+    parser.add_argument("-m","--model_path", type=str, default=".",
+                        help="Path to fine-tuned model weights.")
     parser.add_argument("-o_labels","--output_file_labels", type=str, default=".",
                         help="File to save the session results.")
     parser.add_argument("-o_reasons","--output_file_reasons", type=str, default=".",
