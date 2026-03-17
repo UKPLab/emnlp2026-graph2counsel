@@ -32,8 +32,8 @@ if __name__ == "__main__":
         description="Get responses for CounselBench-Eval.")
     parser.add_argument("-m","--model_path", type=str, default=".",
                         help="Path to fine-tuned model weights")
-    parser.add_argument("-o","--output_dir", type=str, default=".",
-                        help="Directory to save the session results.")
+    parser.add_argument("-o","--output_file", type=str, default=".",
+                        help="File to save the session results.")
 
     args = parser.parse_args()
 
@@ -56,5 +56,5 @@ if __name__ == "__main__":
             prompt = prompt_template.format(user_query=question)
             response = generate(prompt,args.model_path)
             output_all.append({"question":question,"response": response})
-    with open(args.output_dir, "w") as f:
+    with open(args.output_file, "w") as f:
         json.dump(output_all, f)
