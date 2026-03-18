@@ -6,7 +6,7 @@
 
 ## Dataset and Model
 
-Our dataset and model can be downloaded [here](https://huggingface.co/collections/UKPLab/graph2counsel).
+Our dataset and model can be downloaded [here](https://huggingface.co/collections/UKPLab/graph2counsel). The dataset can also be downloaded at [TUdatalib](https://tudatalib.ulb.tu-darmstadt.de/handle/tudatalib/5071)
 
 ## Summary
 This codebase provides the scripts used in the experiments of the 2026 Arxiv paper "**Graph2Counsel: Generating Synthetic Counseling Sessions from Client Psychological Graphs**". Here, we generate synthetic counseling session data using Graph2Counsel, a novel framework that grounds session generation in structured psychological representations of clients. Graph2Counsel experiments with three input representations and four prompting techniques. We experiment with the following input representations:
@@ -93,7 +93,7 @@ graph2counsel/
 
 | Dataset | Link |
 |---|---|
-| **Graph2Counsel** (ours) | [HuggingFace](https://huggingface.co/datasets/UKPLab/Graph2Counsel)/[TUDataLib](https://tudatalib.ulb.tu-darmstadt.de/handle/tudatalib/5071) |
+| **Graph2Counsel** (ours) | [HuggingFace](https://huggingface.co/datasets/UKPLab/Graph2Counsel)/[TUdatalib](https://tudatalib.ulb.tu-darmstadt.de/handle/tudatalib/5071) |
 | **SQPsychConv** (We use Gemma split) | [HuggingFace](https://huggingface.co/collections/AIMH/sqpsychconv) |
 | **CACTUS** | [HuggingFace](https://huggingface.co/datasets/LangAGI-Lab/cactus) |
 | **MAGneT** | [GitHub](https://github.com/UKPLab/arxiv2025-MAGneT) |
