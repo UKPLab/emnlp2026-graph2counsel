@@ -96,7 +96,7 @@ graph2counsel/
 | **Graph2Counsel** (ours) | [HuggingFace](https://huggingface.co/datasets/UKPLab/Graph2Counsel)/[TUdatalib](https://tudatalib.ulb.tu-darmstadt.de/handle/tudatalib/5071) |
 | **SQPsychConv** (We use Gemma split) | [HuggingFace](https://huggingface.co/collections/AIMH/sqpsychconv) |
 | **CACTUS** | [HuggingFace](https://huggingface.co/datasets/LangAGI-Lab/cactus) |
-| **MAGneT** | [GitHub](https://github.com/UKPLab/arxiv2025-MAGneT) |
+| **MAGneT** | [HuggingFace](https://huggingface.co/datasets/UKPLab/MAGneT)/[TUdatalib](https://tudatalib.ulb.tu-darmstadt.de/handle/tudatalib/5072) |
 | **CounselBench-Eval** | [HuggingFace](https://huggingface.co/datasets/izi-ano/CounselBench-Eval) |
 | **CounselBench-Adv** | [HuggingFace](https://huggingface.co/datasets/izi-ano/CounselBench-Adv) |
 | **CounselingBench** | [HuggingFace](https://huggingface.co/datasets/ckmjx/CounselingBench) |
