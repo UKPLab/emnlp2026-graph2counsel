@@ -160,16 +160,14 @@ Use scripts in `CounselBench/` and `CounselingBench/` for benchmark evaluation. 
 Please use the following citation:
 
 ```
-@InProceedings{smith:20xx:CONFERENCE_TITLE,
-  author    = {Smith, John},
-  title     = {My Paper Title},
-  booktitle = {Proceedings of the 20XX Conference on XXXX},
-  month     = mmm,
-  year      = {20xx},
-  address   = {Gotham City, USA},
-  publisher = {Association for XXX},
-  pages     = {XXXX--XXXX},
-  url       = {http://xxxx.xxx}
+@misc{mandal2026graph2counselclinicallygroundedsynthetic,
+      title={Graph2Counsel: Clinically Grounded Synthetic Counseling Dialogue Generation from Client Psychological Graphs}, 
+      author={Aishik Mandal and Hiba Arnaout and Clarissa W. Ong and Juliet Bockhorst and Kate Sheehan and Rachael Moldow and Tanmoy Chakraborty and Iryna Gurevych},
+      year={2026},
+      eprint={2604.20382},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2604.20382}, 
 }
 ```
 
