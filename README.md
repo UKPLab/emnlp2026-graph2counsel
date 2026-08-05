@@ -27,8 +27,9 @@ We find the optimal configuration (combination of input representation and promp
 Once the optimal configuration is found we use the following evaluations:
 * **Faithfulness:** Measures how faithfully the generated session reflects the input CPG in terms of the client's thoughts, emotions, and behaviors.
 * **Downstream Evaluation:** We QLoRA fine-tune an open source model (Llama3-8B-Instruct in our case) and evaluate them on [CounselBench](https://arxiv.org/abs/2506.08584) and [CounselingBench](https://aclanthology.org/2025.findings-naacl.418/)
+* **Therapy-Eval:** A multi-turn evaluation framework that simulates realistic counseling sessions between a Llama3-8B-Instruct client agent (role-played from 100 character cards sampled from [Eeyore](https://arxiv.org/abs/2306.09742)) and each fine-tuned counselor model, then scores the resulting sessions with GPT-4o as an LLM judge on specificity, authenticity, counselor competence, conversational flow, and safety.
 
-> **Abstract:** Rising demand for mental health support has increased interest in using Large Language Models (LLMs) for counseling. However, adapting LLMs to this high-risk safety-critical domain is hindered by the scarcity of real-world counseling data due to privacy constraints. Synthetic datasets provide a promising alternative, but existing approaches often rely on unstructured or semi-structured text inputs and overlook structural dependencies between a client's cognitive, emotional, and behavioral states, often producing psychologically inconsistent interactions and reducing data realism and quality. We introduce Graph2Counsel, a framework for generating synthetic counseling sessions grounded in Client Psychological Graphs (CPGs) that encode relationships among clients’ thoughts, emotions, and behaviors. Graph2Counsel employs a structured prompting pipeline guided by counselor strategies and CPG, and explores prompting strategies including CoT and Multi-Agent Feedback. Graph2Counsel produces 760 sessions from 76 CPGs across diverse client profiles. In expert evaluation, our dataset outperforms prior datasets on specificity, counselor competence, authenticity, conversational flow, and safety, with substantial inter-annotator agreement (Krippendorff's $\alpha$ = 0.70). Fine-tuning an open-source model on this dataset improves performance on CounselingBench and CounselBench, showing downstream utility.
+> **Abstract:** Rising demand for mental health support has increased interest in using Large Language Models (LLMs) for counseling, but adapting them to this safety-critical domain is hindered by limited real-world data due to privacy constraints. Synthetic datasets provide a promising alternative, but existing approaches often rely on unstructured or semi-structured text inputs and overlook structural dependencies between a client's cognitive, emotional, and behavioral states, leading to psychologically inconsistent and less realistic interactions. We introduce Graph2Counsel, a framework for generating synthetic counseling sessions grounded in Client Psychological Graphs (CPGs) that encode relationships among clients’ thoughts, emotions, and behaviors. Graph2Counsel uses a structured prompting pipeline guided by counselor strategies and CPG, and explores prompting strategies including CoT and Multi-Agent Feedback. It produces 760 sessions from 76 CPGs across diverse client profiles. In expert evaluation, our dataset outperforms prior datasets on specificity, counselor competence, authenticity, conversational flow, and safety (Krippendorff's $\alpha$ = 0.70). Fine-tuning an open-source model on this dataset improves performance on several metrics on CounselingBench and CounselBench, while matching baselines on others. We further introduce Therapy-Eval, a multi-turn evaluation framework, and demonstrate the effectiveness of our fine-tuned model in realistic therapeutic conversations.We also make our code and data public.
 
 Contact person: [Aishik Mandal](mailto:aishik.mandal@tu-darmstadt.de) 
 
@@ -84,6 +85,7 @@ graph2counsel/
 │
 ├── CounselBench/                         # Downstream evaluation on CounselBench
 ├── CounselingBench/                      # Downstream evaluation on CounselingBench
+├── Therapy-Eval/                         # LLM-as-a-judge eval of fine-tuned models on realistic multi-turn role-play conversations
 │
 ├── requirements_inf_eval.txt             # Dependencies for inference & evaluation
 └── requirements_qlora.txt                # Dependencies for QLoRA fine-tuning
@@ -100,6 +102,7 @@ graph2counsel/
 | **CounselBench-Eval** | [HuggingFace](https://huggingface.co/datasets/izi-ano/CounselBench-Eval) |
 | **CounselBench-Adv** | [HuggingFace](https://huggingface.co/datasets/izi-ano/CounselBench-Adv) |
 | **CounselingBench** | [HuggingFace](https://huggingface.co/datasets/ckmjx/CounselingBench) |
+| **Eeyore** | [HuggingFace](https://huggingface.co/datasets/liusiyang/eeyore_profile) |
 
 Place CounselBench data in the `CounselBench/` directory and CounselingBench data in `CounselingBench/`.
 
@@ -155,6 +158,10 @@ deepspeed --num_gpus=num_gpus qlora/magnet_qlora.py
 
 Use scripts in `CounselBench/` and `CounselingBench/` for benchmark evaluation. See each folder for details.
 
+**11. Therapy-Eval**
+
+Use `Therapy-Eval/generate-sessions.py` to role-play sessions between a Llama3-8B-Instruct client agent and each fine-tuned counselor checkpoint, then score them with `Therapy-Eval/therapy-eval-gpt4o.py` on specificity, authenticity, competence, flow, and safety. See the folder for details.
+
 ## Cite
 
 Please use the following citation:
@@ -182,6 +189,7 @@ Please use the following citation:
 - [MAGneT](https://arxiv.org/abs/2509.04183)
 - [CounselBench](https://arxiv.org/abs/2506.08584)
 - [CounselingBench](https://aclanthology.org/2025.findings-naacl.418/)
+- [Eeyore](https://aclanthology.org/2025.findings-acl.707/)
 
 ## Disclaimer
 
