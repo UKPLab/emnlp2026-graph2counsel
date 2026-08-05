@@ -13,8 +13,7 @@ character card (100 cards sampled from Eeyore), holds a multi-turn conversation 
 ---
 
 ### `data/eeyore.json`
-100 client profiles (`{"profile": "..."}`) used to seed the client role-play, sampled
-from the Eeyore dataset (Liu et al., 2025).
+100 client profiles (`{"profile": "..."}`) used to seed the client role-play, sampled from the Eeyore dataset.
 
 ### `prompts/`
 Contains the GPT-4o judge prompt for each of the five Therapy-Eval criteria
