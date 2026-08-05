@@ -62,7 +62,3 @@ python therapy-eval-gpt4o.py -i results/therapy_final/graph2counsel.json -o scor
 
 Results are written to `<output_dir>/<input_stem>_results.json`, with a
 `{"score": ..., "justification": ...}` entry per criterion per session.
-
-If this folder is merged into the main Graph2Counsel repo, it can instead run inside the
-repo's existing `inf_env` (see `requirements_inf_eval.txt`), which already covers these
-dependencies.
