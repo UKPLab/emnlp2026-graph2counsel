@@ -1,15 +1,6 @@
 # Therapy-Eval
 
-Therapy-Eval is a multi-turn counseling evaluation framework introduced in
-[Graph2Counsel](./Graph2Counsel.pdf). A locally-hosted LLM role-plays a therapy client
-seeded from a real client profile (100 profiles drawn from
-[Eeyore](https://arxiv.org/abs/2306.09742)), holds a multi-turn conversation with a
-counselor model under test, and the resulting session is then scored by GPT-4o as an
-LLM judge on five criteria: **specificity, authenticity, competence, flow, and safety**.
-
-This folder is meant to sit alongside the other evaluation components in the
-[Graph2Counsel repo](https://github.com/UKPLab/arxiv2026-graph2counsel) (e.g.
-`LLM_judge_evaluation/CTRS`, `faithfulness_evaluation`) as a `Therapy-Eval/` component.
+Therapy-Eval is a multi-turn counseling evaluation framework. A locally-hosted LLM role-plays a therapy client seeded from a real client profile (100 profiles drawn from [Eeyore](https://arxiv.org/abs/2306.09742)), holds a multi-turn conversation with a counselor model under test, and the resulting session is then scored by GPT-4o as an LLM judge on five criteria: **specificity, authenticity, competence, flow, and safety**.
 
 ## Workflow
 
@@ -76,13 +67,3 @@ python therapy-eval-gpt4o.py -i results/therapy_final/graph2counsel.json -o scor
 
 Results are written to `<output_dir>/<input_stem>_results.json`, with a
 `{"score": ..., "justification": ...}` entry per criterion per session.
-
-## Setup
-
-```bash
-pip install -r requirements.txt
-```
-
-If this folder is merged into the main Graph2Counsel repo, it can instead run inside the
-repo's existing `inf_env` (see `requirements_inf_eval.txt`), which already covers these
-dependencies.
