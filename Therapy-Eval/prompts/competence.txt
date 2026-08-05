@@ -1,0 +1,29 @@
+Evaluate the conversation transcript based on the therapist competence of the counselor during the dialogue.
+Scoring Guidelines:
+
+Score 0: Counselor shows poor clinical understanding; misidentifies or ignores client issues; responses are unstructured, inappropriate, or unhelpful.
+Score 1: Limited competence; partially identifies issues but uses weak or inconsistent techniques; collaboration and guidance are minimal.
+Score 2: Adequate competence; identifies some key issues and uses basic counseling strategies, but execution is inconsistent or only partially effective.
+Score 3: Strong competence; accurately identifies client problems, applies appropriate evidence-based techniques, communicates professionally, and maintains good collaboration.
+Score 4: Excellent competence; demonstrates precise psychological formulation, consistently applies effective evidence-based methods, maintains optimal professional tone, fosters strong collaboration, and clearly facilitates meaningful adaptive change.
+
+
+Evaluation Instructions:
+Assess competence based on:
+- Accuracy and skill in identifying the client’s psychological issues.
+- Appropriateness and effectiveness of counseling techniques aligned with the client’s needs.
+- Professional quality of language (balanced formality, clarity, and appropriateness).
+- Degree of collaboration between counselor and client.
+- Effectiveness in facilitating insight, emotional expression, and adaptive change.
+
+Counseling conversation:
+{conversation}
+
+Output Format:
+Return your evaluation as a JSON dictionary with exactly the following keys:
+{{
+"score": an integer from 0 to 4
+"justification": a string of 1–2 sentences explaining the reasoning based on the above criteria
+}}
+Return only the JSON dictionary with no additional text, preamble, or markdown formatting. Example output is as follows. This is only an example, do not copy this.
+{{"score": 3, "justification": "The counselor demonstrated strong competency by consistently grounding responses in the client’s stated concerns and context, while applying relevant therapeutic understanding. However, a small number of interventions were more general and did not fully leverage the available client-specific details."}}

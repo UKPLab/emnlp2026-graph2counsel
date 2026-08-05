@@ -1,0 +1,27 @@
+Evaluate the conversation transcript based on the authenticity of the counselor’s responses.
+Scoring Guidelines:
+
+Score 0: Counselor responses feel artificial, scripted, or detached; little to no evidence of genuine engagement, empathy, or acceptance.
+Score 1: Limited authenticity; occasional surface-level empathy or warmth, but responses are mostly mechanical or professionally performative.
+Score 2: Some genuine engagement and empathy are present, but inconsistently expressed or partially superficial.
+Score 3: Counselor generally appears genuine and congruent; shows consistent warmth, acceptance, and reasonably accurate empathy.
+Score 4: Counselor responses are deeply authentic, fully congruent, consistently warm and non-judgmental, and demonstrate highly accurate and sensitive empathy throughout.
+
+
+Evaluation Instructions:
+Assess authenticity based on:
+- The counselor’s genuineness and self-congruence (absence of a purely scripted/professional façade).
+- The degree of unconditional positive regard (warm, accepting, non-judgmental stance).
+- The accuracy and quality of empathic understanding and its communication.
+
+Counseling conversation:
+{conversation}
+
+Output Format:
+Return your evaluation as a JSON dictionary with exactly the following keys:
+{{
+"score": an integer from 0 to 4
+"justification": a string of 1–2 sentences explaining the reasoning based on the above criteria
+}}
+Return only the JSON dictionary with no additional text, preamble, or markdown formatting. Example output is as follows. This is only an example, do not copy this.
+{{"score": 3, "justification": "The counselor occasionally anchored responses in the client’s specific concerns and context, but several replies still relied on more generalized therapeutic language rather than consistently reflecting a fully individualized, in-the-moment engagement."}}

@@ -1,0 +1,28 @@
+Evaluate the conversation transcript based on the overall coherence, smoothness, naturalness, and human-likeness of the dialogue flow.
+Scoring Guidelines:
+
+Score 0: Conversation is disjointed, incoherent, or robotic; turns do not connect meaningfully.
+Score 1: Limited flow; frequent awkward transitions, unnatural phrasing, or weak continuity between turns.
+Score 2: Generally understandable flow, but noticeable inconsistencies, occasional awkwardness, or uneven transitions.
+Score 3: Smooth and coherent dialogue; natural turn-taking with only minor lapses in flow or phrasing.
+Score 4: Highly natural, fluid, and human-like conversation; excellent coherence, seamless transitions, and strong conversational continuity throughout.
+
+
+Evaluation Instructions:
+Assess based on:
+- Coherence between consecutive turns.
+- Smoothness of transitions and conversational continuity.
+- Naturalness and human-likeness of dialogue phrasing.
+- Overall flow quality across the full transcript.
+
+Counseling conversation:
+{conversation}
+
+Output Format:
+Return your evaluation as a JSON dictionary with exactly the following keys:
+{{
+"score": an integer from 0 to 4
+"justification": a string of 1–2 sentences explaining the reasoning based on the above criteria
+}}
+Return only the JSON dictionary with no additional text, preamble, or markdown formatting. Example output is as follows. This is only an example, do not copy this.
+{{"score": 3, "justification": "The dialogue generally flows well, with the counselor often tying responses back to the client’s specific concerns and context. However, there are a few moments where the responses feel more generic, which slightly reduces the overall conversational continuity."}}

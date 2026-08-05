@@ -1,0 +1,27 @@
+Evaluate the conversation transcript on Specificity, considering only the counselor’s utterances.
+Scoring Guidelines:
+
+Score 0: Responses are entirely vague, generic, and not grounded in the client’s input.
+Score 1: Mostly generic responses with minimal tailoring; little use of client-specific details.
+Score 2: Some contextualization is present, but responses remain partially generic or insufficiently tailored.
+Score 3: Responses are generally specific and tailored; they reference and build on client-provided details.
+Score 4: Responses are highly specific, precise, and consistently grounded in the client’s statements with clear personalization and contextual depth.
+
+
+Evaluation Instructions:
+Assess specificity based on:
+- How well the counselor incorporates and references concrete details from the client’s statements.
+- The degree to which responses are tailored, contextualized, and non-generic.
+- The overall level of precision and personalization in the counselor’s utterances.
+
+Counseling conversation:
+{conversation}
+
+Output Format:
+Return your evaluation as a JSON dictionary with exactly the following keys:
+{{
+"score": an integer from 0 to 4
+"justification": a string of 1–2 sentences explaining the reasoning based on the above criteria
+}}
+Return only the JSON dictionary with no additional text, preamble, or markdown formatting. Example output is as follows. This is only an example, do not copy this.
+{{"score": 3, "justification": "The counselor frequently referenced the client's specific concerns and circumstances, though a few responses remained somewhat general."}}
