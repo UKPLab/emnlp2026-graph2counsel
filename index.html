@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Graph2Counsel: Clinically Grounded Synthetic Counseling Dialogue Generation from Client Psychological Graphs">
+    <meta property="og:title" content="Graph2Counsel"/>
+    <meta property="og:description" content="Clinically Grounded Synthetic Counseling Dialogue Generation from Client Psychological Graphs"/>
+    <meta property="og:image" content="static/images/figure1-framework.png"/>
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="keywords" content="counseling, mental health, synthetic data, LLM, client psychological graphs, Graph2Counsel, Therapy-Eval">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Graph2Counsel</title>
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+    <link rel="stylesheet" href="static/css/bulma.min.css">
+    <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <link rel="stylesheet" href="static/css/index.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script defer src="static/js/fontawesome.all.min.js"></script>
+    <script src="static/js/bulma-carousel.min.js"></script>
+    <script src="static/js/bulma-slider.min.js"></script>
+    <script src="static/js/index.js"></script>
+</head>
+<body>
+
+<section class="hero">
+    <div class="hero-body">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered">
+                <div class="column has-text-centered">
+                    <h2 class="title is-2 publication-title">Graph2Counsel</h2>
+                    <h3 class="title is-4 publication-title" style="font-weight: 400;">
+                        Clinically Grounded Synthetic Counseling Dialogue Generation from Client Psychological Graphs
+                    </h3>
+                    <div class="is-size-5 publication-authors">
+                        <span class="author-block"><a href="https://jitaishik.github.io/" target="_blank">Aishik Mandal</a><sup>1,2,3</sup>,</span>
+                        <span class="author-block"><a href="https://hibaarnaout.com/" target="_blank">Hiba Arnaout</a><sup>1</sup>,</span>
+                        <span class="author-block">Clarissa W. Ong<sup>6</sup>,</span>
+                        <span class="author-block">Juliet Bockhorst<sup>6</sup>,</span>
+                        <span class="author-block">Kate Sheehan<sup>7</sup>,</span>
+                        <span class="author-block">Rachael Moldow<sup>6</sup>,</span>
+                        <span class="author-block"><a href="https://tanmoychak.com/" target="_blank">Tanmoy Chakraborty</a><sup>4,5</sup>,</span>
+                        <span class="author-block"><a href="https://www.informatik.tu-darmstadt.de/ukp/ukp_home/head_ukp/index.en.jsp" target="_blank">Iryna Gurevych</a><sup>1,2,3</sup></span>
+                    </div>
+
+                    <div class="is-size-6 publication-authors">
+                        <span class="author-block"><sup>1</sup><a href="https://www.ukp.tu-darmstadt.de/" target="_blank">UKP Lab</a>, Dept. of Computer Science &amp; Hessian Center for AI (hessian.AI), <a href="https://www.tu-darmstadt.de/" target="_blank">TU Darmstadt</a></span><br>
+                        <span class="author-block"><sup>2</sup>Zuse School ELIZA &nbsp;·&nbsp; <sup>3</sup>National Research Center for Applied Cybersecurity ATHENE</span><br>
+                        <span class="author-block"><sup>4</sup>Indian Institute of Technology Delhi &nbsp;·&nbsp; <sup>5</sup>Yardi School of Artificial Intelligence</span><br>
+                        <span class="author-block"><sup>6</sup>University of Louisville &nbsp;·&nbsp; <sup>7</sup>University of Toledo</span>
+                    </div>
+
+                    <div class="is-size-5 publication-venue" style="margin-top: 0.75rem;">arXiv Preprint 2026</div>
+
+                    <div class="column has-text-centered">
+                        <div class="publication-links">
+                            <span class="link-block">
+                <a href="https://arxiv.org/abs/2604.20382" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                <span>Paper</span>
+              </a>
+            </span>
+                            <span class="link-block">
+                <a href="https://github.com/UKPLab/arxiv2026-graph2counsel" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                <span class="icon"><i class="fab fa-github"></i></span>
+                <span>Code</span>
+              </a>
+            </span>
+                            <span class="link-block">
+                <a href="https://arxiv.org/abs/2604.20382" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                <span class="icon"><i class="ai ai-arxiv"></i></span>
+                <span>arXiv</span>
+              </a>
+            </span>
+                            <span class="link-block">
+                <a href="https://huggingface.co/collections/UKPLab/graph2counsel" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                <span class="icon"><i class="fas fa-database"></i></span>
+                <span>Data (HuggingFace)</span>
+              </a>
+            </span>
+                            <span class="link-block">
+                <a href="https://tudatalib.ulb.tu-darmstadt.de/handle/tudatalib/5071" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                <span class="icon"><i class="fas fa-database"></i></span>
+                <span>Data (TUdatalib)</span>
+              </a>
+            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Abstract -->
+<section class="section hero is-light">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+                <h3 class="title is-3">Abstract</h3>
+                <div class="content has-text-justified">
+                    <p>
+                        Rising demand for mental health support has increased interest in using Large Language Models
+                        (LLMs) for counseling, but adapting them to this safety-critical domain is hindered by limited
+                        real-world data due to privacy constraints. Synthetic datasets provide a promising alternative,
+                        but existing approaches often rely on unstructured or semi-structured text inputs and overlook
+                        structural dependencies between a client's cognitive, emotional, and behavioral states, leading
+                        to psychologically inconsistent and less realistic interactions. We introduce
+                        <strong>Graph2Counsel</strong>, a framework for generating synthetic counseling sessions
+                        grounded in <strong>Client Psychological Graphs (CPGs)</strong> that encode relationships among
+                        clients' thoughts, emotions, and behaviors. Graph2Counsel uses a structured prompting pipeline
+                        guided by counselor strategies and CPG, and explores prompting strategies including CoT and
+                        Multi-Agent Feedback. It produces <strong>760 sessions from 76 CPGs</strong> across diverse
+                        client profiles. In expert evaluation, our dataset outperforms prior datasets on specificity,
+                        counselor competence, authenticity, conversational flow, and safety (Krippendorff's &alpha; =
+                        0.70). Fine-tuning an open-source model on this dataset improves performance on several
+                        metrics on CounselingBench and CounselBench, while matching baselines on others. We further
+                        introduce <strong>Therapy-Eval</strong>, a multi-turn evaluation framework, and demonstrate the
+                        effectiveness of our fine-tuned model in realistic therapeutic conversations. We also make our
+                        code and data public.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Overview -->
+<section class="section">
+    <div class="container is-max-desktop">
+        <h3 class="title is-3 has-text-left mb-6">We present Graph2Counsel!</h3>
+        <figure class="paper-figure mb-6">
+            <img src="static/images/figure1-framework.png" alt="Graph2Counsel framework: extracting a Client Psychological Graph from a real therapy transcript and using it to generate diverse synthetic counseling sessions." style="width: 100%; height: auto;">
+        </figure>
+        <div class="content has-text-left">
+            <p>
+                <strong>Graph2Counsel</strong> generates <strong>clinically grounded synthetic counseling
+                dialogues</strong> 🧠 by conditioning generation on
+                <span class="highlight">Client Psychological Graphs (CPGs)</span>, structured representations
+                of a client's thoughts, emotions, and behaviors extracted from real therapy transcripts.
+            </p>
+            <h4>🕸️ Structured, Not Just Text</h4>
+            <p>
+                Unlike prior synthetic counseling datasets that rely on unstructured demographics, symptom
+                lists, or free-text client profiles, CPGs represent psychological processes as nodes and their
+                functional relationships (e.g., <em>excites</em>, <em>inhibits</em>) as edges, capturing
+                dependencies that text-centric methods overlook.
+            </p>
+            <h4>🧪 760 Sessions from 76 Real-Session CPGs</h4>
+            <p>
+                We explore three input representations (CPG, CPG-derived profile, and their combination) and
+                four prompting techniques (Base, Guided Counseling, GC+CoT, GC+Multi-Agent), grounding
+                generation in counselor strategies extracted from the same real sessions the CPGs come from.
+            </p>
+            <h4>🏅 Expert-Validated Gains</h4>
+            <p>
+                Four licensed clinicians rank Graph2Counsel highest against existing synthetic counseling
+                datasets on <span class="highlight">specificity, counselor competence, authenticity,
+                conversational flow, and safety</span>, with substantial inter-annotator agreement
+                (Krippendorff's &alpha; = 0.70).
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Method / dataset details -->
+<section class="section">
+    <div class="container is-max-desktop">
+        <h3 class="title is-3 has-text-left mb-6">How Graph2Counsel generates sessions</h3>
+        <div class="container is-max-desktop mb-6">
+            <h4 class="title is-4 has-text-left mb-6">Generation pipeline</h4>
+            <figure class="paper-figure mb-6">
+                <img src="static/images/figure2-pipeline.png" alt="Graph2Counsel pipeline: input representation, prompting techniques, fine-tuning, and evaluation." style="width: 100%; height: auto;">
+            </figure>
+            <div class="content has-text-left">
+                <p><strong>(1)</strong> We construct three <strong>input representations</strong> from each Client
+                    Psychological Graph (CPG): the CPG alone, a CPG-derived client profile, and the two combined.</p>
+                <p><strong>(2)</strong> We prompt GPT-4o with one of four <strong>prompting techniques</strong>:
+                    Base, Guided Counseling (using counselor strategies extracted from real sessions), GC +
+                    Chain-of-Thought, and GC + Multi-Agent, to generate a synthetic counseling session.</p>
+                <p><strong>(3)</strong> The resulting sessions are used to <strong>QLoRA fine-tune</strong>
+                    Llama3-8B-Instruct.</p>
+                <p><strong>(4)</strong> The fine-tuned model is <strong>evaluated</strong> on CounselBench and
+                    CounselingBench, and dialogue quality is assessed through CTRS, WAI, expert evaluation, and
+                    faithfulness to inputs.</p>
+            </div>
+        </div>
+        <div class="container is-max-desktop mb-6">
+            <h4 class="title is-4 has-text-left mb-6">
+                🗂️ A new dataset: 760 synthetic sessions, 76 CPGs, expert-validated.
+            </h4>
+            <div class="results-table-wrapper">
+                <table class="table is-bordered">
+                    <thead>
+                    <tr>
+                        <th>Method</th>
+                        <th>Therapy Modality (Type)</th>
+                        <th>Input</th>
+                        <th>Contextual Modeling</th>
+                        <th>Avg. Turns</th>
+                        <th>Size</th>
+                        <th>Expert Eval.</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Psych8k</td><td>Unspecified</td><td>Real counseling dialogues</td><td>text-based</td><td>2.00</td><td>8,187</td><td>✗</td>
+                    </tr>
+                    <tr>
+                        <td>MDD-5k</td><td>Diagnosis</td><td>Real client profiles</td><td>text-based</td><td>53.60</td><td>5,000</td><td>✓</td>
+                    </tr>
+                    <tr>
+                        <td>CPsyCoun</td><td>Unspecified</td><td>Online counseling dialogues</td><td>text-based</td><td>17.40</td><td>3,134</td><td>✗</td>
+                    </tr>
+                    <tr>
+                        <td>CACTUS</td><td>Cognitive behavioral therapy</td><td>Crowdsourced simulated client profiles</td><td>text-based</td><td>33.20</td><td>31,577</td><td>✓</td>
+                    </tr>
+                    <tr>
+                        <td>MAGneT</td><td>Cognitive behavioral therapy</td><td>Crowdsourced simulated client profiles</td><td>text-based</td><td>42.00</td><td>442</td><td>✓</td>
+                    </tr>
+                    <tr>
+                        <td>SQPsychConv</td><td>Cognitive behavioral therapy</td><td>Structured questionnaires from real clients</td><td>text-based</td><td>33.98</td><td>2,090</td><td>✓</td>
+                    </tr>
+                    <tr class="best-row">
+                        <td><strong>Graph2Counsel (ours)</strong></td><td>Process-based (meta-framework)</td><td>CPGs from real sessions and graph-based client profiles</td><td>text+graph-based</td><td>40.12</td><td><strong>760</strong></td><td>✓</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Expert evaluation -->
+<section class="section">
+    <div class="container is-max-desktop">
+        <h3 class="title is-3 has-text-left mb-6">Expert evaluation: Graph2Counsel ranks first on every metric</h3>
+        <div class="content has-text-left">
+            <p>
+                Four licensed clinicians compared Graph2Counsel against CACTUS, MAGneT, and SQPsychConv on
+                specificity, counselor competence, authenticity, conversational flow, and the percentage of unsafe
+                sessions.
+            </p>
+        </div>
+        <div class="results-table-wrapper">
+            <table class="table is-bordered">
+                <thead>
+                <tr>
+                    <th>Dataset</th><th>Spec. (rank↓)</th><th>Compet. (rank↓)</th><th>Authent. (rank↓)</th><th>Unsafe sessions % (↓)</th><th>Flow (rank↓)</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr><td>CACTUS</td><td>2.41</td><td>2.39</td><td><u>2.22</u></td><td>3.0</td><td><u>2.00</u></td></tr>
+                <tr><td>MAGneT</td><td>3.97</td><td>3.98</td><td>3.99</td><td><u>1.0</u></td><td>3.99</td></tr>
+                <tr><td>SQPsychConv</td><td><u>1.84</u></td><td><u>1.97</u></td><td>2.37</td><td><u>1.0</u></td><td>2.53</td></tr>
+                <tr class="best-row"><td><strong>Graph2Counsel</strong></td><td><strong>1.79</strong></td><td><strong>1.67</strong></td><td><strong>1.43</strong></td><td><strong>0.5</strong></td><td><strong>1.48</strong></td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="content">
+            <p>
+                Graph2Counsel also improves downstream utility: fine-tuning Llama3-8B-Instruct on our dataset
+                (<strong>Llama3-G2C</strong>) achieves an overall score of <strong>4.29</strong> on
+                <a href="https://arxiv.org/abs/2506.08584" target="_blank">CounselBench-Eval</a> versus 4.12 for the
+                best baseline (+4.25%), while also performing best on empathy and specificity and matching or beating
+                baselines on medical advice avoidance, factual consistency, and toxicity. On
+                <a href="https://aclanthology.org/2025.findings-naacl.418/" target="_blank">CounselingBench</a>,
+                Llama3-G2C leads reasoning-chain evaluations across most metrics.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Therapy-Eval -->
+<section class="section">
+    <div class="container is-max-desktop">
+        <h3 class="title is-3 has-text-left mb-6">Therapy-Eval: realistic multi-turn evaluation</h3>
+        <div class="content">
+            <p>
+                Existing counseling benchmarks are limited to multiple-choice questions or single-turn responses.
+                To bridge this gap, we introduce <strong>Therapy-Eval</strong>, a multi-turn evaluation framework
+                inspired by ESC-Eval. A Llama3-8B-Instruct client agent, instantiated via 100 character cards sampled
+                from Eeyore, role-plays a therapy client against each fine-tuned counselor model until client
+                satisfaction or a maximum of 40 turns. The resulting sessions are scored by GPT-4o as an LLM judge on
+                <span class="highlight">specificity, authenticity, counselor competence, conversational flow, and
+                safety</span>.
+            </p>
+        </div>
+        <div class="results-table-wrapper">
+            <table class="table is-bordered">
+                <thead>
+                <tr>
+                    <th>Model</th><th>Spec. (↑)</th><th>Compet. (↑)</th><th>Authent. (↑)</th><th>Safety (↑)</th><th>Flow (↑)</th><th>Average (↑)</th><th>Turns</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr><td>CAMEL (CACTUS)</td><td>3.47</td><td>3.22</td><td>3.24</td><td>4.00</td><td>3.95</td><td>3.58</td><td>29.98</td></tr>
+                <tr><td>Llama3-MAG</td><td>3.27</td><td>3.10</td><td>2.69</td><td><u>3.86</u></td><td>3.39</td><td>3.26</td><td><strong>35.61</strong></td></tr>
+                <tr><td>Llama3-SQP</td><td><u>3.73</u></td><td><u>3.48</u></td><td><strong>3.77</strong></td><td>4.00</td><td>4.00</td><td><u>3.80</u></td><td>22.56</td></tr>
+                <tr class="best-row"><td><strong>Llama3-G2C</strong></td><td><strong>3.81</strong></td><td><strong>3.52</strong></td><td><u>3.72</u></td><td>4.00</td><td>4.00</td><td><strong>3.81</strong></td><td><u>30.57</u></td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="content">
+            <p>
+                Llama3-G2C and Llama3-SQP achieve similar overall scores, but Llama3-G2C sustains much longer,
+                higher-quality conversations (30.57 vs. 22.56 turns), evidence that CPG-grounded fine-tuning helps
+                the model stay engaged over extended, realistic conversations rather than just single exchanges.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- BibTeX -->
+<section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+        <h2 class="title">BibTeX</h2>
+        <pre><code>@misc{mandal2026graph2counselclinicallygroundedsynthetic,
+      title={Graph2Counsel: Clinically Grounded Synthetic Counseling Dialogue Generation from Client Psychological Graphs},
+      author={Aishik Mandal and Hiba Arnaout and Clarissa W. Ong and Juliet Bockhorst and Kate Sheehan and Rachael Moldow and Tanmoy Chakraborty and Iryna Gurevych},
+      year={2026},
+      eprint={2604.20382},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2604.20382},
+}</code></pre>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <div class="columns is-centered">
+            <div class="column is-8">
+                <div class="content has-text-centered">
+                    <p>
+                        This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a>,
+                        which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
