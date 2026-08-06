@@ -1,0 +1,95 @@
+body {
+  font-family: 'Noto Sans', sans-serif;
+}
+
+.publication-title {
+  font-family: 'Google Sans', sans-serif;
+}
+
+.publication-authors {
+  font-family: 'Google Sans', sans-serif;
+}
+
+.publication-authors a {
+  color: hsl(353, 86%, 53%) !important;
+}
+
+.publication-authors a:hover {
+  text-decoration: underline;
+}
+
+.publication-venue {
+  color: #555;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: bold;
+}
+
+.teaser .hero-body {
+  padding-top: 0;
+  padding-bottom: 2rem;
+}
+
+.author-block {
+  display: inline-block;
+}
+
+.link-block a {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.highlight {
+  background: rgba(238, 32, 56, 0.12);
+  padding: 0 0.3em;
+  border-radius: 3px;
+}
+
+.section h3.title,
+.section h4.title {
+  color: #1f2933;
+}
+
+figure.paper-figure {
+  text-align: center;
+}
+
+figure.paper-figure figcaption {
+  color: #666;
+  font-size: 0.95rem;
+  margin-top: 0.75rem;
+}
+
+.results-table-wrapper {
+  overflow-x: auto;
+  margin-bottom: 2.5rem;
+}
+
+.results-table-wrapper table {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.results-table-wrapper th {
+  text-align: center !important;
+  white-space: nowrap;
+}
+
+.results-table-wrapper td {
+  text-align: center !important;
+}
+
+.results-table-wrapper td:first-child,
+.results-table-wrapper th:first-child {
+  text-align: left !important;
+}
+
+tr.best-row {
+  background-color: rgba(238, 32, 56, 0.08);
+}
+
+.footer .icon-link {
+  font-size: 25px;
+  color: #000;
+}
