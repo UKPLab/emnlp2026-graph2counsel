@@ -4,6 +4,12 @@
 
 # Graph2Counsel: Clinically Grounded Synthetic Counseling Dialogue Generation from Client Psychological Graphs
 
+## Paper and Webpage
+
+📄 [Paper](https://arxiv.org/abs/2604.20382)
+<br>
+🌐 [Webpage](https://ukplab.github.io/arxiv2026-graph2counsel/)
+
 ## Dataset and Model
 
 Our dataset and model can be downloaded [here](https://huggingface.co/collections/UKPLab/graph2counsel). The dataset can also be downloaded at [TUdatalib](https://tudatalib.ulb.tu-darmstadt.de/handle/tudatalib/5071)
