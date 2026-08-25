@@ -8,7 +8,7 @@
 
 📄 [Paper](https://arxiv.org/abs/2604.20382)
 <br>
-🌐 [Webpage](https://ukplab.github.io/arxiv2026-graph2counsel/)
+🌐 [Webpage](https://ukplab.github.io/emnlp2026-graph2counsel/)
 
 ## Dataset and Model
 
