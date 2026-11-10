@@ -173,14 +173,30 @@ Use `Therapy-Eval/generate-sessions.py` to role-play sessions between a Llama3-8
 Please use the following citation:
 
 ```
-@misc{mandal2026graph2counselclinicallygroundedsynthetic,
-      title={Graph2Counsel: Clinically Grounded Synthetic Counseling Dialogue Generation from Client Psychological Graphs}, 
-      author={Aishik Mandal and Hiba Arnaout and Clarissa W. Ong and Juliet Bockhorst and Kate Sheehan and Rachael Moldow and Tanmoy Chakraborty and Iryna Gurevych},
-      year={2026},
-      eprint={2604.20382},
-      archivePrefix={arXiv},
-      primaryClass={cs.CL},
-      url={https://arxiv.org/abs/2604.20382}, 
+@inproceedings{mandal-etal-2026-graph2counsel,
+    title = "{G}raph2{C}ounsel: Clinically Grounded Synthetic Counseling Dialogue Generation from Client Psychological Graphs",
+    author = "Mandal, Aishik  and
+      Arnaout, Hiba  and
+      Ong, Clarissa W.  and
+      Bockhorst, Juliet  and
+      Sheehan, Kate  and
+      Moldow, Rachael  and
+      Chakraborty, Tanmoy  and
+      Gurevych, Iryna",
+    editor = "Lee, Hung-Yi  and
+      Dev, Sunipa  and
+      Li, Junyi Jessy  and
+      Elliott, Desmond",
+    booktitle = "Proceedings of the 2026 Conference on Empirical Methods in Natural Language Processing",
+    month = oct,
+    year = "2026",
+    address = "Budapest, Hungary",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2026.emnlp-main.85/",
+    doi = "10.18653/2026.emnlp-main.85",
+    pages = "1953--2012",
+    ISBN = "979-8-89176-459-0",
+    abstract = "Rising demand for mental health support has increased interest in using Large Language Models (LLMs) for counseling, but adapting them to this safety-critical domain is hindered by limited real-world data due to privacy constraints. Synthetic datasets provide a promising alternative, but existing approaches often rely on unstructured or semi-structured text inputs and overlook structural dependencies between a client{'}s cognitive, emotional, and behavioral states, leading to psychologically inconsistent and less realistic interactions. We introduce Graph2Counsel, a framework for generating synthetic counseling sessions grounded in Client Psychological Graphs (CPGs) that encode relationships among clients' thoughts, emotions, and behaviors. Graph2Counsel uses a structured prompting pipeline guided by counselor strategies and CPG, and explores prompting strategies including CoT and Multi-Agent Feedback. It produces 760 sessions from 76 CPGs across diverse client profiles. In expert evaluation, our dataset outperforms prior datasets on specificity, counselor competence, authenticity, conversational flow, and safety (Krippendorff{'}s $\alpha$ = 0.70). Fine-tuning an open-source model on this dataset improves performance on several metrics on CounselingBench and CounselBench, while matching baselines on others. We further introduce Therapy-Eval, a multi-turn evaluation framework, and demonstrate the effectiveness of our fine-tuned model in realistic therapeutic conversations. We make our code, data and fine-tuned model public."
 }
 ```
 
