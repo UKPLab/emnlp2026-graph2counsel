@@ -6,7 +6,7 @@
 
 ## Paper and Webpage
 
-📄 [Paper](https://arxiv.org/abs/2604.20382)
+📄 [Paper](https://aclanthology.org/2026.emnlp-main.85/)
 <br>
 🌐 [Webpage](https://ukplab.github.io/emnlp2026-graph2counsel/)
 
@@ -15,7 +15,7 @@
 Our dataset and model can be downloaded [here](https://huggingface.co/collections/UKPLab/graph2counsel). The dataset can also be downloaded at [TUdatalib](https://tudatalib.ulb.tu-darmstadt.de/handle/tudatalib/5071)
 
 ## Summary
-This codebase provides the scripts used in the experiments of the 2026 Arxiv paper "**Graph2Counsel: Generating Synthetic Counseling Sessions from Client Psychological Graphs**". Here, we generate synthetic counseling session data using Graph2Counsel, a novel framework that grounds session generation in structured psychological representations of clients. Graph2Counsel experiments with three input representations and four prompting techniques. We experiment with the following input representations:
+This codebase provides the scripts used in the experiments of the 2026 EMNLP paper "**Graph2Counsel: Generating Synthetic Counseling Sessions from Client Psychological Graphs**". Here, we generate synthetic counseling session data using Graph2Counsel, a novel framework that grounds session generation in structured psychological representations of clients. Graph2Counsel experiments with three input representations and four prompting techniques. We experiment with the following input representations:
 * **Client Psychological Graphs (CPGs):** Structured knowledge graphs encoding relationships among a client's thoughts, emotions, and behaviors, represented as `(process_i, relation, process_j)` triples. CPGs ensure psychological consistency across the generated session.
 * **Client Profile:** Diverse client profiles are generated from CPGs to simulate a wide range of backgrounds, presenting issues, and counseling contexts.
 * **CPG+Profile:** Use both CPG and client profile.
